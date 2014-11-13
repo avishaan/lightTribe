@@ -14,11 +14,7 @@ module.exports = function(){
         apiURI : "http://localhost",
         expressPort: 3000,
         loggerLevel: 'info',
-        appName: 'Sugar Log',
-        twilio: {
-          account: 'AC4cf0172f0bedf21a77bf8eb9f9b04e81',
-          auth: '839e808172431164cd539c1c9597637b'
-        }
+        appName: 'Reviewly'
       };
     case "dev":
     case "development":
@@ -27,11 +23,7 @@ module.exports = function(){
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
         loggerLevel: 'info',
-        appName: 'Sugar Log',
-        twilio: {
-          account: process.env.TWILIO_ACCOUNT,
-          auth: process.env.TWILIO_AUTH
-        }
+        appName: 'Reviewly'
       };
     case "test":
     case "testing":
@@ -40,11 +32,7 @@ module.exports = function(){
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
         loggerLevel: 'debug',
-        appName: 'Sugar Log',
-        twilio: {
-          account: process.env.TWILIO_ACCOUNT,
-          auth: process.env.TWILIO_AUTH
-        }
+        appName: 'Reviewly'
       };
     case "prod":
     case "production":
@@ -53,11 +41,7 @@ module.exports = function(){
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
         loggerLevel: 'debug',
-        appName: 'Sugar Log',
-        twilio: {
-          account: process.env.TWILIO_ACCOUNT,
-          auth: process.env.TWILIO_AUTH
-        }
+        appName: 'Reviewly'
       };
     default:
       throw new Error("Environment Not Recognized");
