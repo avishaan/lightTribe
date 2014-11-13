@@ -13,46 +13,7 @@ var swaggerValidator = swaggerTools.middleware.v2.swaggerValidator;
 var db = require('./dbs/db');
 var config = require('./config.js');
 var logger = require('./loggers/logger.js');
-var twilio = require('twilio');
 var express = require('express');
-
-
-// Twilio Client information
-//var client = new twilio.RestClient(config.twilio.account, config.twilio.auth);
-var client = twilio(config.twilio.account, config.twilio.auth);
-
-//Send an SMS text message
-//client.sendMessage({
-//
-//  //to:'+16268889069', // Any number Twilio can deliver to
-//  to: '+15136526845',
-//  from: '+15102579338', // A number you bought from Twilio and can use for outbound communication
-//  body: 'Welcome to Sugar Log' // body of the SMS message
-//
-//}, function(err, responseData) { //this function is executed when a response is received from Twilio
-//
-//  if (!err) { // "err" is an error received during the request, if any
-//    // "responseData" is a JavaScript object containing data received from Twilio.
-//    // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-//    // http://www.twilio.com/docs/api/rest/sending-sms#example-1
-//    console.log(responseData.from); // outputs "+14506667788"
-//    console.log(responseData.body); // outputs "word to your mother."
-//  } else {
-//    console.log('There was some sort of error');
-//    console.error(err);
-//  }
-//});
-//
-//client.sms.messages.list(function(err, data) {
-//  if (!err && data && data.length){
-//    data.smss.forEach(function(sms) {
-//        console.log(sms.To);
-//        console.log(sms.Body);
-//    });
-//  } else {
-//    console.error(err);
-//  }
-//});
 
 
 // Serve up static front end part of the app

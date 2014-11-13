@@ -1,7 +1,7 @@
 {
-  "name": "sugar-log",
+  "name": "Reviewly",
   "version": "0.0.1",
-  "description": "Sugar Log API",
+  "description": "Reviewly API",
   "main": "app.js",
   "keywords": [
     "swagger",
@@ -22,7 +22,6 @@
     "express": "^4.10.1",
     "winston": "^0.8.1",
     "supervisor": "^0.6.0",
-    "twilio": "^1.7.0",
     "async": "^0.9.0"
   },
   "scripts": {
