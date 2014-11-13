@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sugar Log",
+    "description": "Keep track of your glucose levels",
+    "version": "0.1"
+  },
+  "host": "localhost:3000",
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/v1/phone/{pid}": {
+      "get": {
+        "x-swagger-router-controller": "measurement",
+        "operationId": "readMeasurements",
+        "tags": ["/measurements"],
+        "description": "Return all the measurements for a specific phone/user",
+        "parameters": [
+        {
+          "name": "pid",
+          "in": "path",
+          "description": "Phone number of the user",
+          "required": true,
+          "type": "string"
+        }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "Ok"
+            }
+          }
+        }
+      }
+    },
+    "/v1/sms": {
+      "post": {
+        "x-swagger-router-controller": "sms",
+        "operationId": "receiveSMS",
+        "tags": ["/sms"],
+        "description": "Get incoming SMS from Messaging Service",
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "Ok"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ok": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "Error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    }
+  }
+}
+

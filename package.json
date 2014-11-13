@@ -1,0 +1,48 @@
+{
+  "name": "sugar-log",
+  "version": "0.0.1",
+  "description": "Sugar Log API",
+  "main": "app.js",
+  "keywords": [
+    "swagger",
+    "swagger-tools",
+    "sugar-log"
+  ],
+  "license": "Private",
+  "private": true,
+  "bin": {
+    "swagger-tools": "./bin/swagger-tools"
+  },
+  "dependencies": {
+    "body-parser": "^1.9.0",
+    "parseurl": "^1.3.0",
+    "qs": "^2.2.4",
+    "swagger-tools": "^0.6.6",
+    "mongoose": "^3.8.17",
+    "express": "^4.10.1",
+    "winston": "^0.8.1",
+    "supervisor": "^0.6.0",
+    "twilio": "^1.7.0",
+    "async": "^0.9.0"
+  },
+  "scripts": {
+    "start": "./node_modules/supervisor/lib/cli-wrapper.js --ignore specs,coverages,README.md app.js",
+    "debugstart": "./node_modules/supervisor/lib/cli-wrapper.js --ignore specs,coverage,README.md  --debug app.js",
+    "debugbrkstart": "./node_modules/supervisor/lib/cli-wrapper.js --ignore specs,coverage,README.md  --debug-brk app.js",
+    "validateSwagger": "./node_modules/swagger-tools/bin/swagger-tools validate api/swagger.json",
+    "seed": "node ./seeds/seedDB.js",
+    "test": "./node_modules/jasmine-node/bin/jasmine-node --autotest --config NODE_ENV local --growl --color --watch ./specs --captureExceptions --verbose specs",
+    "debugtest": "node --debug=5859 node_modules/jasmine-node/lib/jasmine-node/cli.js --verbose --config NODE_ENV local specs",
+    "debugbrktest": "node --debug-brk=5859 node_modules/jasmine-node/lib/jasmine-node/cli.js --verbose --captureExceptions --config NODE_ENV local specs",
+    "coverIntegration": "./node_modules/istanbul/lib/cli.js cover --report none --dir coverages/integration app.js",
+    "coverUnit": "./node_modules/istanbul/lib/cli.js cover --report none --dir coverages/unit ./node_modules/jasmine-node/bin/jasmine-node -- --verbose --captureExceptions --config NODE_ENV local specs",
+    "report": "./node_modules/istanbul/lib/cli.js report --dir coverages/ && open ./coverages/lcov-report/index.html"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "superagent": "^0.20.0",
+    "istanbul": "^0.3.2",
+    "rewire": "^2.1.0",
+    "xml2js": "^0.4.4"
+  }
+}
