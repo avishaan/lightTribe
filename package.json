@@ -25,9 +25,9 @@
     "async": "^0.9.0"
   },
   "scripts": {
-    "start": "./node_modules/supervisor/lib/cli-wrapper.js --ignore specs,coverages,README.md app.js",
-    "debugstart": "./node_modules/supervisor/lib/cli-wrapper.js --ignore specs,coverage,README.md  --debug app.js",
-    "debugbrkstart": "./node_modules/supervisor/lib/cli-wrapper.js --ignore specs,coverage,README.md  --debug-brk app.js",
+    "start": "./node_modules/supervisor/lib/cli-wrapper.js -e json --ignore specs,coverages,README.md app.js",
+    "debugstart": "./node_modules/supervisor/lib/cli-wrapper.js -e json --ignore specs,coverage,README.md  --debug app.js",
+    "debugbrkstart": "./node_modules/supervisor/lib/cli-wrapper.js -e json --ignore specs,coverage,README.md  --debug-brk app.js",
     "validateSwagger": "./node_modules/swagger-tools/bin/swagger-tools validate api/swagger.json",
     "seed": "node ./seeds/seedDB.js",
     "test": "./node_modules/jasmine-node/bin/jasmine-node --autotest --config NODE_ENV local --growl --color --watch ./specs --captureExceptions --verbose specs",
