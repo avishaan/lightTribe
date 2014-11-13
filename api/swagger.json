@@ -15,17 +15,17 @@
   ],
   "basePath": "/api",
   "paths": {
-    "/v1/phone/{pid}": {
+    "/v1/reviews/{rid}": {
       "get": {
-        "x-swagger-router-controller": "measurement",
-        "operationId": "readMeasurements",
-        "tags": ["/measurements"],
-        "description": "Return all the measurements for a specific phone/user",
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readReview",
+        "tags": ["review"],
+        "description": "Read a specific review by id",
         "parameters": [
         {
-          "name": "pid",
+          "name": "rid",
           "in": "path",
-          "description": "Phone number of the user",
+          "description": "Review ID",
           "required": true,
           "type": "string"
         }
@@ -40,18 +40,18 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "Ok"
+              "$ref": "Review"
             }
           }
         }
       }
     },
-    "/v1/sms": {
+    "/v1/reviews": {
       "post": {
-        "x-swagger-router-controller": "sms",
-        "operationId": "receiveSMS",
-        "tags": ["/sms"],
-        "description": "Get incoming SMS from Messaging Service",
+        "x-swagger-router-controller": "reviews",
+        "operationId": "createReview",
+        "tags": ["reviews"],
+        "description": "Create a new review",
         "responses": {
           "default": {
             "description": "Invalid request.",
@@ -70,6 +70,32 @@
     }
   },
   "definitions": {
+    "Review": {
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "required": ["company"]
+    },
     "Ok": {
       "properties": {
         "message": {
