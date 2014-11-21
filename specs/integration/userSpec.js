@@ -30,4 +30,18 @@ describe("A user", function() {
       done();
     });
   });
+  it("should be able to access protected data", function(done) {
+    agent
+    .post(URL + '/users')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: 'testUser',
+      password: 'testPassword',
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      done();
+    });
+  });
 });
