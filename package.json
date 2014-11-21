@@ -22,7 +22,8 @@
     "express": "^4.10.1",
     "winston": "^0.8.1",
     "supervisor": "^0.6.0",
-    "async": "^0.9.0"
+    "async": "^0.9.0",
+    "morgan": "^1.5.0"
   },
   "scripts": {
     "start": "./node_modules/supervisor/lib/cli-wrapper.js -e json,js --ignore specs,coverages,README.md app.js",

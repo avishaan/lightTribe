@@ -14,10 +14,12 @@ var db = require('./dbs/db');
 var config = require('./config.js');
 var logger = require('./loggers/logger.js');
 var express = require('express');
+var morgan = require('morgan');
 
 
 // Serve up static front end part of the app
 app.use(express.static(__dirname + '/public'));
+app.use(morgan('dev'));
 
 // swaggerMetadata configuration
 var options = {
