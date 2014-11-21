@@ -13,7 +13,7 @@ describe("A user", function() {
     fixture.deleteDB(function(err, user){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
-      // then seed the db with a user
+      done();
     });
   });
   it("should be able to register", function(done) {
@@ -27,6 +27,7 @@ describe("A user", function() {
     })
     .end(function(res){
       expect(res.status).toEqual(200);
+      done();
     });
   });
 });
