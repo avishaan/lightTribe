@@ -1,15 +1,12 @@
 var agent = require('superagent');
 var config = require("../../config.js");
-var sms = require("../../controllers/sms.js");
-var xml2js = require('xml2js');
-var parser = xml2js.parseString;
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
-describe("A registered user interested in deleting their information", function() {
+xdescribe("A registered user interested in deleting their information", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){

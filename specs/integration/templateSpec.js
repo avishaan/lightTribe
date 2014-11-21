@@ -13,7 +13,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 //var song_obj = require('../src/Song.js');
 //var helper = require('./SpecHelper.js');
 
-describe("A registered user interested in deleting their information", function() {
+xdescribe("A registered user interested in deleting their information", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){
