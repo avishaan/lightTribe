@@ -67,6 +67,28 @@
           }
         }
       }
+    },
+    "/v1/users": {
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "registerUser",
+        "tags": ["users"],
+        "description": "Register a new user",
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "Ok"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
