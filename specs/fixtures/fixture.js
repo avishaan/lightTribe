@@ -2,8 +2,9 @@ var db = require('./../../dbs/db.js');
 var User = require('./../../models/user.js');
 var async = require('async');
 
-// have a consistent number when necessary
-var phone = '+18001231234'
+// have a consistent user when necessary
+var username = 'tester';
+var password = 'password';
 
 module.exports.deleteDB = function(cb){
   User.remove({}, function(err, user){
@@ -12,7 +13,8 @@ module.exports.deleteDB = function(cb){
 };
 module.exports.seedUser = function(cb){
   User.create({
-    phone: phone
+    username: username,
+    password: password
   }, function(err, user){
     cb(err, user);
   });
