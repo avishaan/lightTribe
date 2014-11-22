@@ -68,6 +68,11 @@ app.use(function (req, res, next) {
 // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
 app.use(swaggerMetadata(swaggerDoc));
 
+// Check if authentication is required
+app.use(function(req, res, next){
+  debugger;
+});
+
 // Validate Swagger requests
 app.use(swaggerValidator());
 

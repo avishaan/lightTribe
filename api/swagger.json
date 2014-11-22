@@ -13,12 +13,22 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "basicAuth": ["password"]
+    }
+  ],
   "basePath": "/api",
   "paths": {
     "/v1/reviews/{rid}": {
       "get": {
         "x-swagger-router-controller": "reviews",
         "operationId": "readReview",
+        "security": [
+          {
+            "basicAuth": ["password"]
+          }
+        ],
         "tags": ["review"],
         "description": "Read a specific review by id",
         "parameters": [
@@ -88,7 +98,37 @@
             }
           }
         }
+      },
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "profile",
+        "tags": ["users"],
+        "description": "Read profile of single user",
+        "security": [
+          {
+            "basicAuth": ["password"]
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "Ok"
+            }
+          }
+        }
       }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
     }
   },
   "definitions": {
