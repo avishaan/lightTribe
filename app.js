@@ -70,7 +70,7 @@ app.use(swaggerMetadata(swaggerDoc));
 
 // Check if authentication is required
 app.use(function(req, res, next){
-  debugger;
+
 });
 
 // Validate Swagger requests
