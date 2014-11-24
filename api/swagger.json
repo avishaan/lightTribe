@@ -79,6 +79,17 @@
         "operationId": "registerUser",
         "tags": ["users"],
         "description": "Register a new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "The user information for registration",
+            "required": true,
+            "schema": {
+              "$ref": "UserRegistration"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": "Invalid request.",
@@ -152,6 +163,16 @@
         }
       },
       "required": ["company"]
+    },
+    "UserRegistration": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
     },
     "Ok": {
       "properties": {

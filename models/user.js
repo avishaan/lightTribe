@@ -11,7 +11,35 @@ var userSchema = new mongoose.Schema({
   password: { type: String },
 });
 /**
- * Check password for a user
+ * Create a new user
+ * @param {object} details of the user being created
+ * @config {string} username of the user
+ * @config {string} password of the user
+ * @param {function} cb
+ * @config {object} user instance user doc instance incase you need it
+ * @config {object} err Passed Error
+ */
+userSchema.statics.createUser = function(options, cb) {
+  var username = options.username;
+  var password = options.password;
+
+  // check the user exists
+  User
+  .create({
+    username: username,
+    password: password
+  }, function(err, user){
+    if (!err && user){
+      cb(null, user);
+    } else {
+      err.clientMsg = 'could not register user';
+      cb(err);
+    }
+  });
+};
+
+/**
+ * Check authentication for a user
  * @param {object} details of the user whose password is being checked
  * @config {string} username of the user
  * @config {string} password of the user
