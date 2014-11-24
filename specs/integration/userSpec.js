@@ -33,7 +33,7 @@ describe("A user", function() {
   it("should be able to access protected data", function(done) {
     agent
     .get(URL + '/users')
-    .auth('admin', 'admin')
+    .auth('testUser', 'testPassword')
     //.get('http://localhost:3000/api/v1/templates')
     .end(function(res){
       expect(res.status).toEqual(200);

@@ -15,10 +15,41 @@ var config = require('./config.js');
 var logger = require('./loggers/logger.js');
 var express = require('express');
 var morgan = require('morgan');
+var passport = require('passport');
+var BasicStrategy = require('passport-http').BasicStrategy;
 
+
+// Use the BasicStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, a username and password), and invoke a callback
+//   with a user object.
+passport.use(new BasicStrategy({
+},
+function(username, password, done) {
+  // asynchronous verification, for effect...
+  return done(null, {
+    username: 'test',
+    password: 'password'
+  });
+  // process.nextTick(function () {
+
+  //   // Find the user by username.  If there is no user with the given
+  //   // username, or the password is not correct, set the user to `false` to
+  //   // indicate failure.  Otherwise, return the authenticated `user`.
+  //   findByUsername(username, function(err, user) {
+  //     if (err) { return done(err); }
+  //     if (!user) { return done(null, false); }
+  //     if (user.password != password) { return done(null, false); }
+  //     return done(null, user);
+  //   })
+  // });
+}));
+
+app.use(passport.initialize());
 
 // Serve up static front end part of the app
 app.use(express.static(__dirname + '/public'));
+// morgan after means we don't get the logs for the public routes
 app.use(morgan('dev'));
 
 // swaggerMetadata configuration
@@ -70,7 +101,13 @@ app.use(swaggerMetadata(swaggerDoc));
 
 // Check if authentication is required
 app.use(function(req, res, next){
-
+  // check security only on routes that have the security object defined
+  // TODO better way for swagger security
+  if (req.swagger.swaggerObject.securityDefinitions && req.swagger.swaggerObject.securityDefinitions.basicAuth){
+    return passport.authenticate('basic', { session: false })(req, res, next);
+  } else {
+    return next();
+  }
 });
 
 // Validate Swagger requests
