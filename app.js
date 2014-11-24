@@ -112,6 +112,9 @@ app.use(function (req, res, next) {
 // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
 app.use(swaggerMetadata(swaggerDoc));
 
+// Serve the Swagger documents and Swagger UI
+app.use(swaggerUi(swaggerDoc));
+
 // Check if authentication is required
 app.use(function(req, res, next){
   // check security only on routes that have the security object defined
@@ -129,9 +132,6 @@ app.use(swaggerValidator());
 
 // Route validated requests to appropriate controller
 app.use(swaggerRouter(options));
-
-// Serve the Swagger documents and Swagger UI
-app.use(swaggerUi(swaggerDoc));
 
 // Start the server
 app.listen(config.expressPort, function () {
