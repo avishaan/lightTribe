@@ -16,6 +16,7 @@ var logger = require('./loggers/logger.js');
 var express = require('express');
 var morgan = require('morgan');
 var passport = require('passport');
+var User = require('./models/user.js');
 var BasicStrategy = require('passport-http').BasicStrategy;
 
 
@@ -26,11 +27,23 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 passport.use(new BasicStrategy({
 },
 function(username, password, done) {
-  // asynchronous verification, for effect...
-  return done(null, {
-    username: 'test',
-    password: 'password'
+  debugger;
+  User.checkAuthentication({
+    username: username,
+    password: password
+  }, function(err, user){
+    debugger;
+    if (!err){
+      return done(null, user);
+    } else {
+      return done(err);
+    }
   });
+  // asynchronous verification, for effect...
+  //return done(null, {
+  //  username: 'test',
+  //  password: 'password'
+  //});
   // process.nextTick(function () {
 
   //   // Find the user by username.  If there is no user with the given
@@ -104,6 +117,7 @@ app.use(function(req, res, next){
   // check security only on routes that have the security object defined
   // TODO better way for swagger security
   if (req.swagger.swaggerObject.securityDefinitions && req.swagger.swaggerObject.securityDefinitions.basicAuth){
+    debugger;
     return passport.authenticate('basic', { session: false })(req, res, next);
   } else {
     return next();

@@ -11,6 +11,57 @@ var userSchema = new mongoose.Schema({
   password: { type: String },
 });
 /**
+ * Check password for a user
+ * @param {object} details of the user whose password is being checked
+ * @config {string} username of the user
+ * @config {string} password of the user
+ * @param {function} cb
+ * @config {object} user instance user doc instance incase you need it
+ * @config {object} err Passed Error
+ */
+userSchema.statics.checkAuthentication = function(options, cb) {
+  var username = options.username;
+  var password = options.password;
+
+  // check the user exists
+  User
+  .findOne({username: username})
+  .select('username password')
+  .exec(function(err, user){
+    debugger;
+    if (!err && user){
+      debugger;
+      user.comparePassword(password, function(err, match){
+        if (match) {
+          cb(null, user);
+        } else {
+          err = {clientMsg: 'invalid password'};
+          cb(err);
+        }
+      });
+    } else {
+      err = {clientMsg: 'invalid username or password'};
+      cb(err);
+    }
+  });
+  // if user exists check the password
+};
+/**
+ * Compare two passwords for a match
+ * @param {string} password entered 
+ * @param {function} cb
+ * @config {object} err Passed Error
+ * @config {boolean} match Whether or not the password matched
+ */
+userSchema.methods.comparePassword = function(password, cb) {
+  debugger;
+  if (this.password === password){
+    cb(null, true);
+  } else {
+    cb({clientMsg: 'password does not match'}, false);
+  }
+};
+/**
  * Register a new user
  * @param {object} details of the user being registered
  * @config {string} username of the user
