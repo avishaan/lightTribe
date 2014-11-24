@@ -13,10 +13,14 @@ describe("A user", function() {
     fixture.deleteDB(function(err, user){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
-      done();
+      // seed a user
+      fixture.seedUser(function(err, user){
+        expect(err).toEqual(null);
+        done();
+      });
     });
   });
-  xit("should be able to register", function(done) {
+  it("should be able to register", function(done) {
     agent
     .post(URL + '/users')
     //.get('http://localhost:3000/api/v1/templates')
@@ -33,7 +37,7 @@ describe("A user", function() {
   it("should be able to access protected data", function(done) {
     agent
     .get(URL + '/users')
-    .auth('testUser', 'testPassword')
+    .auth('test', 'test')
     //.get('http://localhost:3000/api/v1/templates')
     .end(function(res){
       expect(res.status).toEqual(200);
