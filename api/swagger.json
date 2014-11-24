@@ -13,11 +13,6 @@
   "produces": [
     "application/json"
   ],
-  "security": [
-    {
-      "basicAuth": ["password"]
-    }
-  ],
   "basePath": "/api",
   "paths": {
     "/v1/reviews/{rid}": {

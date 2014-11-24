@@ -8,7 +8,6 @@ module.exports.registerUser = function registerUser (req, res, next) {
 };
 
 module.exports.profile = function profile (req, res, next) {
-  debugger;
   logger.info('protected route');
   res.status(200).send('ok');
 };

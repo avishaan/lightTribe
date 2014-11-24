@@ -28,9 +28,7 @@ userSchema.statics.checkAuthentication = function(options, cb) {
   .findOne({username: username})
   .select('username password')
   .exec(function(err, user){
-    debugger;
     if (!err && user){
-      debugger;
       user.comparePassword(password, function(err, match){
         if (match) {
           cb(null, user);
@@ -54,7 +52,6 @@ userSchema.statics.checkAuthentication = function(options, cb) {
  * @config {boolean} match Whether or not the password matched
  */
 userSchema.methods.comparePassword = function(password, cb) {
-  debugger;
   if (this.password === password){
     cb(null, true);
   } else {

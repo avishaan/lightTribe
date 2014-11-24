@@ -27,12 +27,10 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 passport.use(new BasicStrategy({
 },
 function(username, password, done) {
-  debugger;
   User.checkAuthentication({
     username: username,
     password: password
   }, function(err, user){
-    debugger;
     if (!err){
       return done(null, user);
     } else {
@@ -119,8 +117,7 @@ app.use(swaggerUi(swaggerDoc));
 app.use(function(req, res, next){
   // check security only on routes that have the security object defined
   // TODO better way for swagger security
-  if (req.swagger.swaggerObject.securityDefinitions && req.swagger.swaggerObject.securityDefinitions.basicAuth){
-    debugger;
+  if ( req.swagger.operation.security ){
     return passport.authenticate('basic', { session: false })(req, res, next);
   } else {
     return next();
