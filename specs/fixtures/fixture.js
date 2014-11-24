@@ -3,8 +3,8 @@ var User = require('./../../models/user.js');
 var async = require('async');
 
 // have a consistent user when necessary
-var username = 'tester';
-var password = 'password';
+var username = 'test';
+var password = 'test';
 
 module.exports.deleteDB = function(cb){
   User.remove({}, function(err, user){
