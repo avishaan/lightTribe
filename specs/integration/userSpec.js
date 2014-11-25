@@ -53,4 +53,13 @@ describe("A user", function() {
       done();
     });
   });
+  it("should prevent incorrect password from accessing", function(done) {
+    agent
+    .get(URL + '/users')
+    .auth('test', 'wrong')
+    .end(function(res){
+      expect(res.status).toEqual(500);
+      done();
+    });
+  });
 });
