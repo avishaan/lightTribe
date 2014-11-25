@@ -7,6 +7,16 @@ var User = require('../../models/user.js');
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
+var user = {
+  username: 'user',
+  password: 'password',
+};
+
+var seedUser = {
+  username: 'test',
+  password: 'test'
+};
+
 describe("A user", function() {
   // delete the database before each time
   beforeEach(function(done){
@@ -26,8 +36,8 @@ describe("A user", function() {
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
     .send({
-      username: 'testUser',
-      password: 'testPassword',
+      username: user.username,
+      password: user.password,
     })
     .end(function(res){
       expect(res.status).toEqual(200);
@@ -37,8 +47,7 @@ describe("A user", function() {
   it("should be able to access protected data", function(done) {
     agent
     .get(URL + '/users')
-    .auth('test', 'test')
-    //.get('http://localhost:3000/api/v1/templates')
+    .auth(seedUser.username, seedUser.password)
     .end(function(res){
       expect(res.status).toEqual(200);
       done();
