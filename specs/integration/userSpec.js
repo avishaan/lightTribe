@@ -53,10 +53,19 @@ describe("A user", function() {
       done();
     });
   });
-  it("should prevent incorrect password from accessing", function(done) {
+  it("should require the user to have a matching password", function(done) {
     agent
     .get(URL + '/users')
-    .auth('test', 'wrong')
+    .auth(seedUser.username, 'wrong')
+    .end(function(res){
+      expect(res.status).toEqual(500);
+      done();
+    });
+  });
+  it("should require the user to exist", function(done) {
+    agent
+    .get(URL + '/users')
+    .auth('wrong', seedUser.password)
     .end(function(res){
       expect(res.status).toEqual(500);
       done();
