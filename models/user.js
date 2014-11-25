@@ -123,11 +123,9 @@ userSchema.methods.hashPassword = function(cb) {
  * @config {boolean} match Whether or not the password matched
  */
 userSchema.methods.comparePassword = function(password, cb) {
-  if (this.password === password){
-    cb(null, true);
-  } else {
-    cb({clientMsg: 'password does not match'}, false);
-  }
+  bcrypt.compare(password, this.password, function(err, isMatch){
+    cb(err, isMatch);
+  });
 };
 /**
  * Register a new user
