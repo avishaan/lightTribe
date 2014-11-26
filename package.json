@@ -27,7 +27,8 @@
     "passport": "^0.2.1",
     "passport-http": "^0.2.2",
     "bcrypt": "^0.8.0",
-    "multer": "^0.1.6"
+    "multer": "^0.1.6",
+    "underscore": "^1.7.0"
   },
   "scripts": {
     "start": "./node_modules/supervisor/lib/cli-wrapper.js -e json,js --ignore specs,coverages,README.md app.js",
