@@ -2,6 +2,7 @@
 
 var app = require('express')();
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var http = require('http');
 var parseurl = require('parseurl');
 var qs = require('qs');
@@ -77,6 +78,7 @@ app.use(function (req, res, next) {
   return next();
 });
 
+app.use(multer({ dest: './uploads/'}));
 // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
 app.use(swaggerMetadata(swaggerDoc));
 
