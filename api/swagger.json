@@ -73,6 +73,60 @@
         }
       }
     },
+    "/v1/images": {
+      "post": {
+        "x-swagger-router-controller": "images",
+        "operationId": "createImage",
+        "tags": ["images"],
+        "description": "Upload image",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "description": "Image information",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "Ok"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-swagger-router-controller": "images",
+        "operationId": "readImage",
+        "tags": ["images"],
+        "description": "Read a specific image",
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "Ok"
+            }
+          }
+        }
+      }
+    },
     "/v1/users": {
       "post": {
         "x-swagger-router-controller": "users",
