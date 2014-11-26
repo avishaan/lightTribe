@@ -15,8 +15,9 @@ describe("An image", function() {
   it("can be uploaded", function(done) {
     agent
     .post(URL + '/images')
-    .attach('image', './specs/integration/images/test.png')
+    .attach('file', './specs/integration/images/test.png')
     .end(function(res){
+      console.log(res.text);
       expect(res.status).toEqual(200);
       done();
     });
