@@ -106,12 +106,22 @@
             }
           }
         }
-      },
+      }
+    },
+    "/v1/images/{iid}": {
       "get": {
         "x-swagger-router-controller": "images",
         "operationId": "readImage",
         "tags": ["images"],
         "description": "Read a specific image",
+        "parameters": [
+          {
+            "name": "iid",
+            "in": "path",
+            "type": "string",
+            "description": "Image Identifier"
+          }
+        ],
         "responses": {
           "default": {
             "description": "Invalid request.",
