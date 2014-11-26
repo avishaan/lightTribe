@@ -87,7 +87,8 @@ app.use(swaggerUi(swaggerDoc));
 app.use(function(req, res, next){
   // check security only on routes that have the security object defined
   // TODO better way for swagger security
-  if ( req.swagger.operation.security ){
+  // we are checking req.swagger first because there is something wrong with the way swagger handles files
+  if ( req.swagger && req.swagger.operation && req.swagger.operation.security ){
     return passport.authenticate('basic', { session: false })(req, res, next);
   } else {
     return next();
