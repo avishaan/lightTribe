@@ -19,6 +19,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
 var basicAuth = require('./auths/basic.js');
+var _ = require('underscore');
 
 
 // Use the BasicStrategy within Passport.
@@ -79,6 +80,11 @@ app.use(function (req, res, next) {
 });
 
 app.use(multer({ dest: './uploads/'}));
+// move the files in req.files to req.body due to https://github.com/apigee-127/swagger-tools/issues/60
+app.use(function (req, res, next) {
+  _.extend(req.body, req.files);
+  next();
+});
 // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
 app.use(swaggerMetadata(swaggerDoc));
 
