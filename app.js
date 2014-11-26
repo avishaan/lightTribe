@@ -17,44 +17,14 @@ var express = require('express');
 var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
-var BasicStrategy = require('passport-http').BasicStrategy;
+var basicAuth = require('./auths/basic.js');
 
 
 // Use the BasicStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object.
-passport.use(new BasicStrategy({
-},
-function(username, password, done) {
-  User.checkAuthentication({
-    username: username,
-    password: password
-  }, function(err, user){
-    if (!err){
-      return done(null, user);
-    } else {
-      return done(err);
-    }
-  });
-  // asynchronous verification, for effect...
-  //return done(null, {
-  //  username: 'test',
-  //  password: 'password'
-  //});
-  // process.nextTick(function () {
-
-  //   // Find the user by username.  If there is no user with the given
-  //   // username, or the password is not correct, set the user to `false` to
-  //   // indicate failure.  Otherwise, return the authenticated `user`.
-  //   findByUsername(username, function(err, user) {
-  //     if (err) { return done(err); }
-  //     if (!user) { return done(null, false); }
-  //     if (user.password != password) { return done(null, false); }
-  //     return done(null, user);
-  //   })
-  // });
-}));
+passport.use(basicAuth);
 
 app.use(passport.initialize());
 
