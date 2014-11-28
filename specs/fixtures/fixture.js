@@ -6,6 +6,12 @@ var async = require('async');
 var username = 'test';
 var password = 'test';
 
+// have the user exposed incase we need it for something
+module.exports.seededUser = {
+  username: username,
+  password: password,
+};
+
 module.exports.deleteDB = function(cb){
   User.remove({}, function(err, user){
     cb(err, user);
