@@ -2,6 +2,11 @@ var querystring = require('querystring');
 var logger = require('./../loggers/logger.js');
 var config = require('../config.js');
 
+module.exports.createReview = function createReview (req, res, next) {
+  logger.info('create review route');
+  res.status(200).send('ok');
+};
+
 module.exports.readReview = function readReview (req, res, next) {
   var rid = req.swagger.params.rid.value;
   logger.info('Lookup user ' + rid);
