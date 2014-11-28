@@ -68,6 +68,11 @@
             }
           }
         ],
+        "security": [
+          {
+            "basicAuth": ["password"]
+          }
+        ],
         "responses": {
           "default": {
             "description": "Invalid request.",
