@@ -246,7 +246,7 @@
           "type": "string"
         }
       },
-      "required": ["company, description"]
+      "required": ["company", "description"]
     },
     "UserRegistration": {
       "properties": {
