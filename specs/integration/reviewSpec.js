@@ -32,6 +32,8 @@ describe("Posting a review", function() {
       expect(err).toEqual(null);
       // seed a user
       fixture.seedUser(function(err, user){
+        // save the user for later
+        seedUser = user;
         expect(err).toEqual(null);
         done();
       });
@@ -56,7 +58,6 @@ describe("Posting a review", function() {
     .send(review)
     .end(function(res){
       var body = res.body;
-      console.log(body);
       expect(res.status).toEqual(200);
       expect(body._id).toBeDefined();
       expect(body.company).toEqual(review.company);
@@ -65,6 +66,7 @@ describe("Posting a review", function() {
       expect(body.images).toEqual(review.images);
       expect(body.location).toEqual(review.location);
       expect(body.rating).toEqual(review.rating);
+      expect(body.submitter).toEqual(seedUser.id);
       done();
     });
   });
