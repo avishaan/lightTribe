@@ -244,6 +244,9 @@
         },
         "_id": {
           "type": "string"
+        },
+        "submitter": {
+          "type": "string"
         }
       },
       "required": ["company", "description"]
