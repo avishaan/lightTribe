@@ -26,7 +26,9 @@ var reviewSchema = new mongoose.Schema({
  * @config {object} err Passed Error
  */
 reviewSchema.statics.createReview = function(options, cb) {
-  var review = {
+  // we are redefining the object to make sure other random stuff doesn't come through
+  var options = {};
+  options = {
     company: options.company,
     description: options.description,
     rating: options.rating,
@@ -36,7 +38,7 @@ reviewSchema.statics.createReview = function(options, cb) {
   };
 
   // add review to the database
-  Review.create(review, function(err, review){
+  Review.create(options, function(err, review){
     if (!err && review){
       // we created the review successfully
       cb(null, review);

@@ -1,10 +1,17 @@
 var querystring = require('querystring');
 var logger = require('./../loggers/logger.js');
 var config = require('../config.js');
+var Review = require('../models/review.js');
 
 module.exports.createReview = function createReview (req, res, next) {
-  logger.info('create review route');
-  res.status(200).send('ok');
+  var review = req.swagger.params.review.value;
+  Review.createReview(review, function(err, review){
+    if (!err){
+      res.status(200).send(review);
+    } else {
+      res.status(500).send(err);
+    }
+  });
 };
 
 module.exports.readReview = function readReview (req, res, next) {
