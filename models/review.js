@@ -12,9 +12,9 @@ var reviewSchema = new mongoose.Schema({
   rating: { type: Number },
   datetime: { type: Date },
   location: { type: String },
-  images: [{
-    url: { type: String }
-  }]
+  images: [
+    { type: String }
+  ]
 });
 
 /**
@@ -27,8 +27,7 @@ var reviewSchema = new mongoose.Schema({
  */
 reviewSchema.statics.createReview = function(options, cb) {
   // we are redefining the object to make sure other random stuff doesn't come through
-  var options = {};
-  options = {
+  var review = {
     company: options.company,
     description: options.description,
     rating: options.rating,
@@ -38,10 +37,10 @@ reviewSchema.statics.createReview = function(options, cb) {
   };
 
   // add review to the database
-  Review.create(options, function(err, review){
-    if (!err && review){
-      // we created the review successfully
-      cb(null, review);
+  Review.create(review, function(err, savedReview){
+    if (!err && savedReview){
+      // we created the savedReview successfully
+      cb(null, savedReview);
     } else {
       logger.error(err);
       cb({err: err, clientMsg: 'Something broke, try again'}, null);
