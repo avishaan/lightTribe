@@ -44,7 +44,7 @@ describe("Posting a review", function() {
     .set('Content-Type', 'application/json')
     .send(review)
     .end(function(res){
-      expect(res.status).toEqual(500);
+      expect(res.status).toEqual(401);
       done();
     });
   });
