@@ -70,7 +70,7 @@ describe("Posting a review", function() {
       done();
     });
   });
-  xit("should require a company name", function(done) {
+  it("should require a company name", function(done) {
     agent
     .post(URL + '/reviews')
     .set('Content-Type', 'application/json')
@@ -83,7 +83,8 @@ describe("Posting a review", function() {
       location: review.location
     })
     .end(function(res){
-      expect(res.status).toEqual(200);
+      // TODO need specific error message describing what is missing
+      expect(res.status).toEqual(400);
       done();
     });
   });
