@@ -27,7 +27,8 @@ module.exports.seedUser = function(cb){
       username: username,
       password: password,
       hashedPass : user.password,
-      _id: user._id.toString()
+      _id: user._id,
+      id: user.id
     };
     cb(err, user);
   });
