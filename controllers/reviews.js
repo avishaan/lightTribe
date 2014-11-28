@@ -5,6 +5,8 @@ var Review = require('../models/review.js');
 
 module.exports.createReview = function createReview (req, res, next) {
   var review = req.swagger.params.review.value;
+  // get the userid from the authenticated user, they are the one that submitted
+  review.submitter = req.user.id;
   Review.createReview(review, function(err, review){
     if (!err){
       res.status(200).send(review);

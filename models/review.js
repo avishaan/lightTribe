@@ -14,7 +14,8 @@ var reviewSchema = new mongoose.Schema({
   location: { type: String },
   images: [
     { type: String }
-  ]
+  ],
+  submitter: { type: String },
 });
 
 /**
@@ -33,7 +34,8 @@ reviewSchema.statics.createReview = function(options, cb) {
     rating: options.rating,
     images: options.images,
     datetime: options.datetime,
-    location: options.location
+    location: options.location,
+    submitter: options.submitter
   };
 
   // add review to the database
