@@ -22,6 +22,13 @@ module.exports.seedUser = function(cb){
     username: username,
     password: password
   }, function(err, user){
+    // return the user that was just created
+    user = {
+      username: username,
+      password: password,
+      hashedPass : user.password,
+      _id: user._id.toString()
+    };
     cb(err, user);
   });
 };
