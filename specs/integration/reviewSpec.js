@@ -55,7 +55,16 @@ describe("Posting a review", function() {
     .auth(seedUser.username, seedUser.password)
     .send(review)
     .end(function(res){
+      var body = res.body;
+      console.log(body);
       expect(res.status).toEqual(200);
+      expect(body._id).toBeDefined();
+      expect(body.company).toEqual(review.company);
+      expect(new Date(body.datetime).valueOf()).toEqual(review.datetime);
+      expect(body.description).toEqual(review.description);
+      expect(body.images).toEqual(review.images);
+      expect(body.location).toEqual(review.location);
+      expect(body.rating).toEqual(review.rating);
       done();
     });
   });
