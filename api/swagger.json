@@ -57,6 +57,17 @@
         "operationId": "createReview",
         "tags": ["reviews"],
         "description": "Create a new review",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "body",
+            "description": "Review information",
+            "required": true,
+            "schema": {
+              "$ref": "Review"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": "Invalid request.",
@@ -221,7 +232,7 @@
           }
         },
         "datetime": {
-          "type": "string"
+          "type": "number"
         },
         "location": {
           "type": "string"
