@@ -83,7 +83,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "Ok"
+              "$ref": "Review"
             }
           }
         }
@@ -241,9 +241,12 @@
         },
         "location": {
           "type": "string"
+        },
+        "_id": {
+          "type": "string"
         }
       },
-      "required": ["company"]
+      "required": ["company, description"]
     },
     "UserRegistration": {
       "properties": {
