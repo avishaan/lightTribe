@@ -14,7 +14,12 @@ module.exports = function(){
         apiURI : "http://localhost",
         expressPort: 3000,
         loggerLevel: 'info',
-        appName: 'Reviewly'
+        appName: 'Reviewly',
+        cloudinary: {
+          cloudName: 'codeHatcher',
+          apiKey: '351392996945264',
+          secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
+        }
       };
     case "dev":
     case "development":
@@ -23,7 +28,11 @@ module.exports = function(){
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
         loggerLevel: 'info',
-        appName: 'Reviewly'
+        appName: 'Reviewly',
+        cloudinary: {
+          cloudName: 'codeHatcher',
+          apiKey: '351392996945264'
+        }
       };
     case "test":
     case "testing":
@@ -32,7 +41,11 @@ module.exports = function(){
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
         loggerLevel: 'debug',
-        appName: 'Reviewly'
+        appName: 'Reviewly',
+        cloudinary: {
+          cloudName: 'codeHatcher',
+          apiKey: '351392996945264'
+        }
       };
     case "prod":
     case "production":
@@ -41,7 +54,11 @@ module.exports = function(){
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
         loggerLevel: 'debug',
-        appName: 'Reviewly'
+        appName: 'Reviewly',
+        cloudinary: {
+          cloudName: 'codeHatcher',
+          apiKey: '351392996945264'
+        }
       };
     default:
       throw new Error("Environment Not Recognized");
