@@ -16,9 +16,9 @@ module.exports = function(){
         loggerLevel: 'info',
         appName: 'Reviewly',
         cloudinary: {
-          cloudName: 'codeHatcher',
-          apiKey: '351392996945264',
-          secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
+          cloud_name: 'codeHatcher',
+          api_key: '351392996945264',
+          api_secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
         }
       };
     case "dev":
