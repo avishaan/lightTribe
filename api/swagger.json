@@ -118,7 +118,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "Ok"
+              "id": "string"
             }
           }
         }
