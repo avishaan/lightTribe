@@ -20,6 +20,8 @@ describe("An image", function() {
       console.log(res.body);
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
+      // save the image id for future use
+      image.id = res.body._id;
       done();
     });
   });
