@@ -17,8 +17,9 @@ describe("An image", function() {
     .post(URL + '/images')
     .attach('file', './specs/integration/images/test.png')
     .end(function(res){
-      console.log(res.text);
+      console.log(res.body);
       expect(res.status).toEqual(200);
+      expect(res.body._id).toBeDefined();
       done();
     });
   });
