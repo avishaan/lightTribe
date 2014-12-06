@@ -17,7 +17,7 @@ var review = {
   company: 'Company Name',
   description: 'This is a description',
   rating: 1,
-  images: ['1234', '1235', '1236'],
+  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
   datetime: Date.now(),
   location: '1234.5, 1234.6'
 };
