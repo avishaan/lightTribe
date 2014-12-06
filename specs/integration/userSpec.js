@@ -41,6 +41,7 @@ describe("A user", function() {
     })
     .end(function(res){
       expect(res.status).toEqual(200);
+      expect(res.body._id).toBeDefined();
       done();
     });
   });
