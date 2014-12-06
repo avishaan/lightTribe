@@ -108,6 +108,11 @@
             "required": true
           }
         ],
+        "security": [
+          {
+            "basicAuth": ["password"]
+          }
+        ],
         "responses": {
           "default": {
             "description": "Invalid request.",
@@ -136,6 +141,11 @@
             "in": "path",
             "type": "string",
             "description": "Image Identifier"
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": ["password"]
           }
         ],
         "responses": {

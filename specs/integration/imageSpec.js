@@ -14,11 +14,21 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 var image = {
   id: 'placeholder'
 };
+var user;
 
 describe("An image", function() {
+  beforeEach(function(done){
+    fixture.deleteDB(function(err){
+      fixture.seedUser(function(err, seedUser){
+        user = seedUser;
+        done();
+      });
+    });
+  });
   it("can be uploaded", function(done) {
     agent
     .post(URL + '/images')
+    .auth(user.username, user.password)
     .attach('file', './specs/integration/images/test.png')
     .end(function(res){
       expect(res.status).toEqual(200);
@@ -31,6 +41,7 @@ describe("An image", function() {
   it("can be retrieved after upload", function(done) {
     agent
     .get(URL + '/images/' + image.id)
+    .auth(user.username, user.password)
     .end(function(res){
       //console.log(res.body);
       expect(res.status).toEqual(200);
