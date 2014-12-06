@@ -47,7 +47,7 @@ describe("A user", function() {
   });
   it("should be able to access protected data", function(done) {
     agent
-    .get(URL + '/users')
+    .get(URL + '/users/' + seedUser.username)
     .auth(seedUser.username, seedUser.password)
     .end(function(res){
       expect(res.status).toEqual(200);
@@ -56,19 +56,31 @@ describe("A user", function() {
   });
   it("should require the user to have a matching password", function(done) {
     agent
-    .get(URL + '/users')
+    .get(URL + '/users/' + seedUser.username)
     .auth(seedUser.username, 'wrong')
     .end(function(res){
       expect(res.status).toEqual(500);
       done();
     });
   });
-  it("should require the user to exist", function(done) {
+  it("should require the username to exist", function(done) {
     agent
-    .get(URL + '/users')
+    .get(URL + '/users/' + seedUser.username)
     .auth('wrong', seedUser.password)
     .end(function(res){
       expect(res.status).toEqual(500);
+      done();
+    });
+  });
+  it("should be able to access profile", function(done) {
+    agent
+    .get(URL + '/users/' + seedUser.username)
+    .auth(seedUser.username, seedUser.password)
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body.reviews).toBeDefined();
+      expect(res.body.points).toBeDefined();
+      expect(res.body.rank).toBeDefined();
       done();
     });
   });
