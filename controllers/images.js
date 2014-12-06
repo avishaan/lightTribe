@@ -22,5 +22,6 @@ module.exports.createImage = function createImage (req, res, next) {
 };
 module.exports.readImage = function readImage (req, res, next) {
   logger.info('file read');
-  res.status(200).send('ok');
+  var url = cloudinary.url(req.swagger.params.iid.value)
+  res.status(200).send({clientMsg: "Image URL", url: url});
 };
