@@ -103,7 +103,7 @@
           {
             "name": "file",
             "in": "formData",
-            "type": "file",
+            "type": "string",
             "description": "Image information",
             "required": true
           }
