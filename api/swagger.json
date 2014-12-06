@@ -127,7 +127,7 @@
     "/v1/images/{iid}": {
       "get": {
         "x-swagger-router-controller": "images",
-        "operationId": "readImage",
+        "operationId": "readImageURL",
         "tags": ["images"],
         "description": "Read a specific image",
         "parameters": [
@@ -148,7 +148,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "Ok"
+              "url": "string"
             }
           }
         }

@@ -20,7 +20,7 @@ module.exports.createImage = function createImage (req, res, next) {
     res.status(400).send({clientMsg: "No file found"});
   }
 };
-module.exports.readImage = function readImage (req, res, next) {
+module.exports.readImageURL = function readImageURL (req, res, next) {
   logger.info('file read');
   var url = cloudinary.url(req.swagger.params.iid.value)
   res.status(200).send({clientMsg: "Image URL", url: url});
