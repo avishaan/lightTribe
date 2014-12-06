@@ -12,10 +12,7 @@ var user = {
   password: 'password',
 };
 
-var seedUser = {
-  username: 'test',
-  password: 'test'
-};
+var seedUser = {};
 
 describe("A user", function() {
   // delete the database before each time
@@ -26,6 +23,7 @@ describe("A user", function() {
       // seed a user
       fixture.seedUser(function(err, user){
         expect(err).toEqual(null);
+        seedUser = user;
         done();
       });
     });

@@ -7,11 +7,6 @@ var User = require('../../models/user.js');
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
-var user = {
-  username: 'user',
-  password: 'password',
-};
-
 // complete review for testing
 var review = {
   company: 'Company Name',
@@ -21,8 +16,6 @@ var review = {
   datetime: Date.now(),
   location: '1234.5, 1234.6'
 };
-
-var seedUser = fixture.seededUser;
 
 describe("Posting a review", function() {
   // delete the database before each time
