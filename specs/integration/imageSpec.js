@@ -3,6 +3,10 @@ var config = require("../../config.js");
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 //var httpMocks = require('node-mocks-http');
+var cloudinary = require('cloudinary');
+
+// config cloudinary
+cloudinary.config(config.cloudinary);
 
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
@@ -17,7 +21,6 @@ describe("An image", function() {
     .post(URL + '/images')
     .attach('file', './specs/integration/images/test.png')
     .end(function(res){
-      console.log(res.body);
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
       // save the image id for future use
@@ -29,7 +32,9 @@ describe("An image", function() {
     agent
     .get(URL + '/images/' + image.id)
     .end(function(res){
+      //console.log(res.body);
       expect(res.status).toEqual(200);
+      expect(res.body.url).toEqual(cloudinary.url(image.id));
       done();
     });
   });
