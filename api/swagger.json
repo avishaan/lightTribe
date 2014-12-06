@@ -139,16 +139,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
-            "schema": {
-              "$ref": "Error"
-            }
-          },
           "200": {
             "description": "Successful request.",
             "schema": {
               "url": "string"
+            }
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
             }
           }
         }
