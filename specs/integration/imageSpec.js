@@ -38,7 +38,7 @@ describe("An image", function() {
       done();
     });
   });
-  it("can be retrieved after upload", function(done) {
+  it("url can be retrieved after upload", function(done) {
     agent
     .get(URL + '/images/' + image.id)
     .auth(user.username, user.password)
