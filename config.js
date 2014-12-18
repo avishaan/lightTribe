@@ -19,6 +19,10 @@ module.exports = function(){
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
           api_secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
+        },
+        facebook: {
+          appID: '761889610566980',
+          appSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
         }
       };
     case "dev":
@@ -32,6 +36,10 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264'
+        },
+        facebook: {
+          appID: '761889610566980',
+          appSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
         }
       };
     case "test":
