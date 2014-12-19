@@ -1,12 +1,11 @@
-var FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook-token').Strategy;
 var User = require('../models/user.js');
 var config = require('../config.js');
 var randomString = require('random-string');
 
 module.exports = new FacebookStrategy({
   clientID: config.facebook.clientID,
-  clientSecret: config.facebook.clientSecret,
-  callbackURL: config.apiURI + ':' + config.expressPort + '/auth/facebook/callback'
+  clientSecret: config.facebook.clientSecret
 },
 function(token, refreshToken, profile, done) {
   User.findOne({
