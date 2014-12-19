@@ -21,7 +21,7 @@
         "operationId": "readReview",
         "security": [
           {
-            "basicAuth": ["password"]
+            "basicAuth": []
           }
         ],
         "tags": ["review"],
@@ -70,7 +70,7 @@
         ],
         "security": [
           {
-            "basicAuth": ["password"]
+            "basicAuth": []
           }
         ],
         "responses": {
@@ -110,7 +110,7 @@
         ],
         "security": [
           {
-            "basicAuth": ["password"]
+            "basicAuth": []
           }
         ],
         "responses": {
@@ -145,7 +145,7 @@
         ],
         "security": [
           {
-            "basicAuth": ["password"]
+            "basicAuth": []
           }
         ],
         "responses": {
@@ -214,7 +214,7 @@
         ],
         "security": [
           {
-            "basicAuth": ["password"]
+            "basicAuth": []
           }
         ],
         "responses": {
@@ -239,6 +239,12 @@
   "securityDefinitions": {
     "basicAuth": {
       "type": "basic"
+    },
+    "facebookAuth": {
+      "type": "apiKey",
+      "description": "Facebook token auth using passport-facebook-token",
+      "name": "access_token",
+      "in": "query"
     }
   },
   "definitions": {
