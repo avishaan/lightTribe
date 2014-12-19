@@ -19,6 +19,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
 var basicAuth = require('./auths/basic.js');
+var facebookAuth = require('./auths/facebook.js');
 var _ = require('underscore');
 
 
@@ -27,6 +28,7 @@ var _ = require('underscore');
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object.
 passport.use(basicAuth);
+passport.use(facebookAuth);
 
 app.use(passport.initialize());
 
