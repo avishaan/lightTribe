@@ -10,6 +10,9 @@ var bcrypt = require('bcrypt');
 var userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  facebook: {
+    id: { type: String, required: false, unique: true }
+  }
 });
 
 // if password is modified, re-hash on save

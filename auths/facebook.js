@@ -1,19 +1,36 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/user.js');
 var config = require('../config.js');
-debugger;
+var randomString = require('random-string');
+
 module.exports = new FacebookStrategy({
   clientID: config.facebook.clientID,
   clientSecret: config.facebook.clientSecret,
   callbackURL: config.apiURI + ':' + config.expressPort + '/auth/facebook/callback'
 },
-function(username, password, done) {
-  User.checkAuthentication({
-    username: username,
-    password: password
+function(token, refreshToken, profile, done) {
+  User.findOne({
+    'facebook.id': profile.id
   }, function(err, user){
     if (!err){
-      return done(null, user);
+      if (user) {
+        return done(null, user);
+      } else {
+        // no error but no user, go ahead and add and return that user
+        User.create({
+          password: randomString(),
+          username: profile.username,
+          facebook: {
+            id: profile.id
+          }
+        }, function(err, newUser){
+          if (!err){
+            return done(null, newUser);
+          } else {
+            return done(err);
+          }
+        });
+      }
     } else {
       return done(err);
     }
