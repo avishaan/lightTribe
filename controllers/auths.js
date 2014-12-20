@@ -10,7 +10,6 @@ module.exports.registerUser = function registerUser (req, res, next) {
     username: username,
     password: password
   }, function(err, user){
-    debugger;
     if (!err && user){
       res.status(200).send({
         _id: user.id
@@ -21,6 +20,15 @@ module.exports.registerUser = function registerUser (req, res, next) {
   });
 };
 
+module.exports.facebook = function facebook (req, res, next) {
+  logger.info('protected route');
+  debugger;
+  res.status(200).send({
+    reviews: 0,
+    points: 100000,
+    rank: 'newbie'
+  });
+};
 module.exports.profile = function profile (req, res, next) {
   logger.info('protected route');
   res.status(200).send({

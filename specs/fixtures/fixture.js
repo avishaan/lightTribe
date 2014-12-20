@@ -6,6 +6,12 @@ var async = require('async');
 var username = 'test';
 var password = 'test';
 
+module.exports.fbUser = {
+  username: 'Susan Amhfgfahddcd Schrockescu',
+  password: 'test',
+  access_token: ''
+};
+
 
 module.exports.deleteDB = function(cb){
   User.remove({}, function(err, user){
