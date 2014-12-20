@@ -22,8 +22,8 @@ module.exports.registerUser = function registerUser (req, res, next) {
 
 module.exports.facebook = function facebook (req, res, next) {
   logger.info('protected route');
-  debugger;
   res.status(200).send({
+    _id: 'numbers',
     reviews: 0,
     points: 100000,
     rank: 'newbie'

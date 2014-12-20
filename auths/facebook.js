@@ -18,7 +18,7 @@ function(token, refreshToken, profile, done) {
         // no error but no user, go ahead and add and return that user
         User.create({
           password: randomString(),
-          username: profile.username,
+          username: profile.username || 'fb' + profile.id,
           facebook: {
             id: profile.id
           }

@@ -11,7 +11,7 @@ var user = fixture.fbUser;
 
 var seedUser = {};
 
-xdescribe("A user", function() {
+describe("A user", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){

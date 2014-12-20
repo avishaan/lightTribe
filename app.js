@@ -101,6 +101,8 @@ app.use(function(req, res, next){
   if ( req.swagger && req.swagger.operation && req.swagger.operation.security ){
     if (req.swagger.operation.security[0].hasOwnProperty('basicAuth')){
       return passport.authenticate('basic', { session: false })(req, res, next);
+    } else if (req.swagger.operation.security[0].hasOwnProperty('facebookAuth')){
+      return passport.authenticate('facebook-token', { session: false })(req, res, next);
     }
   } else {
     return next();
