@@ -9,7 +9,7 @@ var password = 'test';
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
   password: 'test',
-  access_token: ''
+  access_token: 'CAAK07zZBYjUQBAPN07DMsttKWh8ruCpzktnnNKEOZBtme3gagixRNIrP1TWh1SnjdZB6zbSq3UGm0Ipsb5COfef6FEaD5JribaOch8Dyqf6TZAZAJ6zntV0gnVxe5D4OHDt2VZBpM5kcw8OTTeZClfAQZAGOLGFppYbYNNbX4ZAamUC5RgblZCc9FNX1IsS4CklBQHCsATotrEumcG0bDQ7AyZA'
 };
 
 
