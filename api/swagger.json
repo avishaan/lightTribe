@@ -234,6 +234,37 @@
           }
         }
       }
+    },
+    "/v1/auths/facebook": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "facebook",
+        "tags": ["auths"],
+        "description": "Facebook authentication",
+        "parameters": [
+          {}
+        ],
+        "security": [
+          {
+            "facebookAuth": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "uid": "string",
+              "token": "string"
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
