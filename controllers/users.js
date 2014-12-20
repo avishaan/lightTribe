@@ -10,7 +10,6 @@ module.exports.registerUser = function registerUser (req, res, next) {
     username: username,
     password: password
   }, function(err, user){
-    debugger;
     if (!err && user){
       res.status(200).send({
         _id: user.id
