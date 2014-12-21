@@ -260,7 +260,8 @@
             "description": "Successful request.",
             "schema": {
               "uid": "string",
-              "token": "string"
+              "token": "string",
+              "username": "string"
             }
           }
         }
