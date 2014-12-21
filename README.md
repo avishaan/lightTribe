@@ -36,3 +36,4 @@ Test cases are bundled into logical groups
 TODO
 ----------------------
 - [ ] todo list template
+- [ ] use swagger schema for jasmine test case
