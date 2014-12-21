@@ -21,13 +21,17 @@ module.exports.registerUser = function registerUser (req, res, next) {
 };
 
 module.exports.facebook = function facebook (req, res, next) {
+  var user = req.user;
   logger.info('protected route');
-  res.status(200).send({
-    _id: 'numbers',
-    reviews: 0,
-    points: 100000,
-    rank: 'newbie'
-  });
+  // setup our transform function to only send correct data back to frontend
+  function xform (doc, obj, options) {
+    return {
+      uid: doc.id,
+      username: true,
+      token: true
+    };
+  }
+  res.status(200).send(user.toObject({ transform: xform}));
 };
 module.exports.profile = function profile (req, res, next) {
   logger.info('protected route');
