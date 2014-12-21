@@ -35,7 +35,9 @@ describe("A user", function() {
     })
     .end(function(res){
       expect(res.status).toEqual(200);
-      expect(res.body._id).toBeDefined();
+      expect(res.body.uid).toBeDefined();
+      expect(res.body.token).toBeDefined();
+      expect(res.body.username).toBeDefined();
       done();
     });
   });
