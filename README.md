@@ -1,9 +1,9 @@
-Hexna Sublease-Node
+Reviewly
 ========
 
 Connect, Mongoose, Node, Swagger
 
-the following is a general backend written in node to add, remove, and edit sublease type contracts.
+the following is a general backend written in node to add, remove, and edit models.
 
 Technology/Players
 ----------------------
@@ -21,7 +21,6 @@ Documentation
 Each route takes the format of domain/version/route
 The route is located in the route documentation.
 The version differences are specified in each route.
-Route Example: `dev.quippics.us/api/v1/register`
 
 - Code Coverage(via Istanbul)
   - [Code Coverage Reports](./coverage/lcov-report/index.html)
