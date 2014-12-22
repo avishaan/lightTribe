@@ -21,7 +21,7 @@
         "operationId": "readReview",
         "security": [
           {
-            "basicAuth": []
+            "tokenAuth": []
           }
         ],
         "tags": ["review"],
@@ -70,7 +70,7 @@
         ],
         "security": [
           {
-            "basicAuth": []
+            "tokenAuth": []
           }
         ],
         "responses": {
