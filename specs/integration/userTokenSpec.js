@@ -60,7 +60,28 @@ describe("A user", function() {
       done();
     });
   });
-  it("should be able to access protected data", function(done) {
+  it("incorrect token prevents access", function(done) {
+    agent
+    .get(URL + '/users/' + seedUser.username)
+    .send({
+      access_token: 'wrongtoken'
+    })
+    .end(function(res){
+      expect(res.status).not.toEqual(200);
+      done();
+    });
+  });
+  it("lack of token prevents access", function(done) {
+    agent
+    .get(URL + '/users/' + seedUser.username)
+    .send({
+    })
+    .end(function(res){
+      expect(res.status).not.toEqual(200);
+      done();
+    });
+  });
+  it("token should allow access to protected route", function(done) {
     agent
     .get(URL + '/users/' + seedUser.username)
     .send({
