@@ -5,6 +5,7 @@ module.exports = new BasicStrategy({
 
 },
 function(username, password, done) {
+  debugger;
   User.checkAuthentication({
     username: username,
     password: password

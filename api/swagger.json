@@ -235,6 +235,38 @@
         }
       }
     },
+    "/v1/auths/basic": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "basic",
+        "tags": ["auths"],
+        "description": "Provide username and password to get auth token",
+        "parameters": [
+          {}
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "uid": "string",
+              "token": "string",
+              "username": "string"
+            }
+          }
+        }
+      }
+    },
     "/v1/auths/facebook": {
       "post": {
         "x-swagger-router-controller": "auths",
