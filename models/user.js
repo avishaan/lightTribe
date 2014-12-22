@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var bcrypt = require('bcrypt');
+var token = require('rand-token');
 /*
 |-------------------------------------------------------------
 | User Schema
@@ -10,7 +11,7 @@ var bcrypt = require('bcrypt');
 var userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  token: {
+  token: { // auth token data
     value: { type: String, default: 'placeholder' },
     expires: { type: Date, default: Date.now}
   },
@@ -19,6 +20,16 @@ var userSchema = new mongoose.Schema({
   }
 });
 
+// if the model itself is new
+userSchema.pre('save', function(next) {
+  if (this.isNew){
+    this.generateToken(function(err){
+      return next(err);
+    });
+  } else {
+    return next();
+  }
+});
 // if password is modified, re-hash on save
 userSchema.pre('save', function(next) {
   if (this.isModified('password')){
@@ -121,6 +132,17 @@ userSchema.methods.hashPassword = function(cb) {
       });
     }
   });
+};
+/**
+ * Generate new auth token
+ * @param {function} cb
+ * @config {object} err Passed Error
+ * @config {string} new generated token
+ */
+userSchema.methods.generateToken = function(cb) {
+  var value = token.generate('18');
+  this.token.value = value;
+  cb(null, value);
 };
 /**
  * Compare two passwords for a match
