@@ -9,7 +9,7 @@ var password = 'test';
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
   password: 'test',
-  access_token: 'CAAK07zZBYjUQBAEwyfZCZClgYZBVn4EgkivVIixiSn2iKS0jGCRG9O7a9VXv7NnsBLSxrX8GxTfmbGLgHN6rOT59Y8Q7lPzmS36Omzu7GtxjfJmSC1bPAwyJhtooX0mPEUk0X1yVGoZAXsZBt5DZBejuWa38A0P9sSCWyDEuMIH09WJd9wwR3dZCX2e2ZAt5WqsWifyWZCoV8ZB5nlTlDgRAiHZC'
+  fb_access_token: 'CAAK07zZBYjUQBAIR9U8AOgaBrPgyZCZCNZAaw8Fm2lzLx7iBt3T6zKBdjxJzxlQIXLmCu16zlBpoow5fSLZClZByeoyHbcKj1JHFC5jcR2d4IQR5dJcweN8A9TOYPJhMQARSeUv55MAtZCsovLiZCbPzZAs1mfuj1j1c9yZCMNyrZCSUSqCl1ZCTq3kAFlBJ8uygMdAZCxyodNY3b4WAuUiUFDhFG'
 };
 
 
@@ -29,7 +29,8 @@ module.exports.seedUser = function(cb){
       password: password,
       hashedPass : user.password,
       _id: user._id,
-      id: user.id
+      id: user.id,
+      token: user.token.value
     };
     cb(err, user);
   });

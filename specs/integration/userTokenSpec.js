@@ -47,7 +47,7 @@ describe("A user", function() {
     agent
     .get(URL + '/users/' + seedUser.username)
     .send({
-      token: seedUser.token
+      access_token: seedUser.token
     })
     .end(function(res){
       expect(res.status).toEqual(200);
