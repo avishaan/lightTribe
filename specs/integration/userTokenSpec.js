@@ -40,7 +40,6 @@ describe("A user", function() {
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
-      // TODO go in the database and make sure the user was actually saved here
       done();
     });
   });
