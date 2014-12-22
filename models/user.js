@@ -84,11 +84,9 @@ userSchema.statics.createUser = function(options, cb) {
 userSchema.statics.checkAuthentication = function(options, cb) {
   var username = options.username;
   var password = options.password;
-
   // check the user exists
   User
   .findOne({username: username})
-  .select('username password')
   .exec(function(err, user){
     if (!err && user){
       user.comparePassword(password, function(err, match){
