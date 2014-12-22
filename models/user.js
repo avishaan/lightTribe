@@ -134,6 +134,17 @@ userSchema.methods.hashPassword = function(cb) {
   });
 };
 /**
+ * Static to Check validity of token
+ * @param {function} cb
+ * @config {object} err Passed Error
+ * @config {boolean} new generated token
+ */
+userSchema.statics.checkToken = function(cb) {
+  var value = token.generate('18');
+  this.token.value = value;
+  cb(null, value);
+};
+/**
  * Generate new auth token
  * @param {function} cb
  * @config {object} err Passed Error
