@@ -27,8 +27,8 @@ module.exports.facebook = function facebook (req, res, next) {
   function xform (doc, obj, options) {
     return {
       uid: doc.id,
-      username: true,
-      token: true
+      username: obj.username,
+      token: obj.token.value
     };
   }
   res.status(200).send(user.toObject({ transform: xform}));
