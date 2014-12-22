@@ -31,7 +31,7 @@ describe("A user", function() {
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
     .send({
-      access_token: user.access_token
+      access_token: user.fb_access_token
     })
     .end(function(res){
       expect(res.status).toEqual(200);
