@@ -47,7 +47,7 @@ describe("Posting a review", function() {
     agent
     .post(URL + '/reviews')
     .set('Content-Type', 'application/json')
-    .auth(seedUser.username, seedUser.password)
+    .send({ access_token: seedUser.token })
     .send(review)
     .end(function(res){
       var body = res.body;
@@ -67,7 +67,7 @@ describe("Posting a review", function() {
     agent
     .post(URL + '/reviews')
     .set('Content-Type', 'application/json')
-    .auth(seedUser.username, seedUser.password)
+    .send({ access_token: seedUser.token })
     .send({
       description: review.description,
       rating: review.rating,
