@@ -214,7 +214,7 @@
         ],
         "security": [
           {
-            "basicAuth": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -271,6 +271,12 @@
   "securityDefinitions": {
     "basicAuth": {
       "type": "basic"
+    },
+    "tokenAuth": {
+      "type": "apiKey",
+      "description": "Built in token auth",
+      "name": "access_token",
+      "in": "query"
     },
     "facebookAuth": {
       "type": "apiKey",
