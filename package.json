@@ -30,7 +30,8 @@
     "multer": "^0.1.6",
     "underscore": "^1.7.0",
     "cloudinary": "^1.0.13",
-    "passport-facebook-token": "^0.4.0"
+    "passport-facebook-token": "^0.4.0",
+    "rand-token": "^0.2.1"
   },
   "scripts": {
     "start": "./node_modules/supervisor/lib/cli-wrapper.js -e json,js --ignore specs,coverages,README.md app.js",
