@@ -39,7 +39,6 @@ describe("A user", function() {
       expect(res.body.token).toBeDefined();
       expect(res.body.token).not.toEqual('placeholder');
       expect(res.body.username).toBeDefined();
-      console.log(res.body);
       done();
     });
   });
