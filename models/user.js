@@ -168,6 +168,22 @@ userSchema.methods.comparePassword = function(password, cb) {
   });
 };
 /**
+ * Find user based on token provided
+ * @param {object} details of the user being registered
+ * @config {string} token being looked up
+ * @param {function} cb
+ * @config {object} user instance user doc instance incase you need it
+ * @config {object} err Passed Error
+ */
+userSchema.statics.findByToken = function(options, cb) {
+  var token = options.token;
+  User
+  .findOne({'token.value': token})
+  .exec(function(err, user){
+    cb(err, user);
+  });
+};
+/**
  * Register a new user
  * @param {object} details of the user being registered
  * @config {string} username of the user
