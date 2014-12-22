@@ -40,6 +40,7 @@ describe("A user", function() {
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
+      // TODO go in the database and make sure the user was actually saved here
       done();
     });
   });
@@ -48,10 +49,9 @@ describe("A user", function() {
     .post(URL + '/auths/basic')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
-    .auth(user.username, user.password)
+    .auth(seedUser.username, seedUser.password)
     .end(function(res){
       expect(res.status).toEqual(200);
-      expect(res.body._id).toBeDefined();
       expect(res.body.uid).toBeDefined();
       expect(res.body.token).toBeDefined();
       expect(res.body.token).not.toEqual('placeholder');
