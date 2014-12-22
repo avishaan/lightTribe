@@ -41,39 +41,32 @@ describe("A user", function() {
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
       done();
+      // TODO go in the database and make sure the user was actually created
     });
   });
-  it("should be able to access protected data", function(done) {
-    agent
-    .get(URL + '/users/' + seedUser.username)
-    .auth(seedUser.username, seedUser.password)
-    .end(function(res){
-      expect(res.status).toEqual(200);
-      done();
-    });
-  });
-  it("should require the user to have a matching password", function(done) {
-    agent
-    .get(URL + '/users/' + seedUser.username)
-    .auth(seedUser.username, 'wrong')
-    .end(function(res){
-      expect(res.status).toEqual(500);
-      done();
-    });
-  });
-  it("should require the username to exist", function(done) {
-    agent
-    .get(URL + '/users/' + seedUser.username)
-    .auth('wrong', seedUser.password)
-    .end(function(res){
-      expect(res.status).toEqual(500);
-      done();
-    });
-  });
+  // the following test case can be reenabled if you decide to use username/password auth aka basic auth
+  //it("should require the user to have a matching password", function(done) {
+  //  agent
+  //  .get(URL + '/users/' + seedUser.username)
+  //  .auth(seedUser.username, 'wrong')
+  //  .end(function(res){
+  //    expect(res.status).toEqual(500);
+  //    done();
+  //  });
+  //});
+  //it("should require the username to exist", function(done) {
+  //  agent
+  //  .get(URL + '/users/' + seedUser.username)
+  //  .auth('wrong', seedUser.password)
+  //  .end(function(res){
+  //    expect(res.status).toEqual(500);
+  //    done();
+  //  });
+  //});
   it("should be able to access profile", function(done) {
     agent
     .get(URL + '/users/' + seedUser.username)
-    .auth(seedUser.username, seedUser.password)
+    .send({ access_token: seedUser.token })
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body.reviews).toBeDefined();
