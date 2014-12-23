@@ -59,15 +59,6 @@ describe("A user", function() {
   //    done();
   //  });
   //});
-  //it("should require the username to exist", function(done) {
-  //  agent
-  //  .get(URL + '/users/' + seedUser.username)
-  //  .auth('wrong', seedUser.password)
-  //  .end(function(res){
-  //    expect(res.status).toEqual(500);
-  //    done();
-  //  });
-  //});
   it("should be able to access profile", function(done) {
     agent
     .get(URL + '/users/' + seedUser.username)
