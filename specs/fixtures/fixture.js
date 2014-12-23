@@ -9,7 +9,7 @@ var password = 'test';
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
   password: 'test',
-  fb_access_token: 'CAAK07zZBYjUQBAIR9U8AOgaBrPgyZCZCNZAaw8Fm2lzLx7iBt3T6zKBdjxJzxlQIXLmCu16zlBpoow5fSLZClZByeoyHbcKj1JHFC5jcR2d4IQR5dJcweN8A9TOYPJhMQARSeUv55MAtZCsovLiZCbPzZAs1mfuj1j1c9yZCMNyrZCSUSqCl1ZCTq3kAFlBJ8uygMdAZCxyodNY3b4WAuUiUFDhFG'
+  fb_access_token: 'CAAK07zZBYjUQBAAOkiBVb0lDX1heDgXqitJkVZCleAwu3faNINiGMS9tiselzCPbl5bNfXuQKO0gJV5fi6Of7aLEk7D4hZAXg9GWiAPVALTf7D9jD5XhpfLCAhM1B6vf917immV7YLGFwPCzWxbfAE6IORP2AnxM7wZCXLkSeLA0x4a11IFSvZApp4snKlf43q4uqd3YG2TILLaXAk5Sw'
 };
 
 
