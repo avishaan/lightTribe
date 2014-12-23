@@ -40,8 +40,13 @@ describe("A user", function() {
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
-      done();
-      // TODO go in the database and make sure the user was actually created
+      User
+      .findOne({username: user.username})
+      .exec(function(err, user){
+        expect(err).toEqual(null);
+        expect(user).toBeDefined();
+        done();
+      });
     });
   });
   // the following test case can be reenabled if you decide to use username/password auth aka basic auth
