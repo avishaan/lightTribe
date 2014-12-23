@@ -7,10 +7,6 @@ var http = require('http');
 var parseurl = require('parseurl');
 var qs = require('qs');
 var swaggerTools = require('swagger-tools');
-var swaggerMetadata = swaggerTools.middleware.v2.swaggerMetadata;
-var swaggerRouter = swaggerTools.middleware.v2.swaggerRouter;
-var swaggerUi = swaggerTools.middleware.v2.swaggerUi;
-var swaggerValidator = swaggerTools.middleware.v2.swaggerValidator;
 var db = require('./dbs/db');
 var config = require('./config.js');
 var logger = require('./loggers/logger.js');
@@ -48,30 +44,6 @@ var options = {
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var swaggerDoc = require('./api/swagger.json');
 
-// Validate the Swagger document
-var result = swaggerTools.specs.v2.validate(swaggerDoc);
-
-// Handle swagger validation errors
-if (typeof result !== 'undefined') {
-  if (result.errors.length > 0) {
-    logger.error('The server could not start due to invalid Swagger document...');
-    result.errors.forEach(function (err) {
-      logger.error('#/' + err.path.join('/') + ': ' + err.message);
-      logger.debug(err);
-    });
-
-  }
-
-  if (result.warnings.length > 0) {
-    result.warnings.forEach(function (warn) {
-      logger.warn('#/' + warn.path.join('/') + ': ' + warn.message);
-    });
-  }
-  if (result.errors.length > 0) {
-    process.exit(1);
-  }
-}
-
 // Wire up the middleware required by Swagger Tools (body-parser and qs)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -89,11 +61,13 @@ app.use(function (req, res, next) {
   _.extend(req.body, req.files);
   next();
 });
-// Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
-app.use(swaggerMetadata(swaggerDoc));
+// Initialize the Swagger middleware
+swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
+  // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+  app.use(middleware.swaggerMetadata());
 
-// Serve the Swagger documents and Swagger UI
-app.use(swaggerUi(swaggerDoc));
+  // Validate Swagger requests
+  app.use(middleware.swaggerValidator());
 
 // Check if authentication is required
 app.use(function(req, res, next){
@@ -112,13 +86,12 @@ app.use(function(req, res, next){
     return next();
   }
 });
+  // Route validated requests to appropriate controller
+  app.use(middleware.swaggerRouter(options));
 
-// Validate Swagger requests
-app.use(swaggerValidator());
-
-// Route validated requests to appropriate controller
-app.use(swaggerRouter(options));
-
+  // Serve the Swagger documents and Swagger UI
+  app.use(middleware.swaggerUi());
+});
 // Start the server
 app.listen(config.expressPort, function () {
   logger.debug('Your server is listening on port %d',config.expressPort);
