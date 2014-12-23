@@ -110,7 +110,7 @@
         ],
         "security": [
           {
-            "basicAuth": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -145,7 +145,7 @@
         ],
         "security": [
           {
-            "basicAuth": []
+            "tokenAuth": []
           }
         ],
         "responses": {

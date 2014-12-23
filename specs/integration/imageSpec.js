@@ -14,13 +14,13 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 var image = {
   id: 'placeholder'
 };
-var user;
+var seedUser;
 
 describe("An image", function() {
   beforeEach(function(done){
     fixture.deleteDB(function(err){
-      fixture.seedUser(function(err, seedUser){
-        user = seedUser;
+      fixture.seedUser(function(err, user){
+        seedUser = user;
         done();
       });
     });
@@ -28,7 +28,7 @@ describe("An image", function() {
   it("can be uploaded", function(done) {
     agent
     .post(URL + '/images')
-    .auth(user.username, user.password)
+    .field('access_token', seedUser.token)
     .attach('file', './specs/integration/images/test.png')
     .end(function(res){
       expect(res.status).toEqual(200);
@@ -41,7 +41,7 @@ describe("An image", function() {
   it("url can be retrieved after upload", function(done) {
     agent
     .get(URL + '/images/' + image.id)
-    .auth(user.username, user.password)
+    .send({ access_token: seedUser.token })
     .end(function(res){
       //console.log(res.body);
       expect(res.status).toEqual(200);
