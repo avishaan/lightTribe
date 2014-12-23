@@ -274,7 +274,15 @@
         "tags": ["auths"],
         "description": "Facebook authentication",
         "parameters": [
-          {}
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Facebook Token",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FacebookToken"
+            }
+          }
         ],
         "security": [
           {
@@ -349,6 +357,13 @@
         }
       },
       "required": ["company", "description"]
+    },
+    "FacebookToken": {
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
     },
     "UserRegistration": {
       "properties": {
