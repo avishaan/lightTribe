@@ -36,10 +36,10 @@
         }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
@@ -74,10 +74,10 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
@@ -114,10 +114,10 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
@@ -155,10 +155,10 @@
               "url": "string"
             }
           },
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           }
         }
@@ -182,10 +182,10 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
@@ -218,10 +218,10 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
@@ -250,20 +250,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
             "description": "Successful request.",
             "schema": {
-              "properties": {
-                "token": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/InternalToken"
             }
           }
         }
@@ -293,9 +289,9 @@
         ],
         "responses": {
           "400": {
-            "description": "Successful request.",
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/400Response"
             }
           },
           "200": {
@@ -383,6 +379,14 @@
       }
     },
     "Ok": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "400Response": {
       "properties": {
         "message": {
           "type": "string"
