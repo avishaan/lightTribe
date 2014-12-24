@@ -23,6 +23,10 @@ module.exports = function(){
         facebook: {
           clientID: '761889610566980',
           clientSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
+        },
+        swagger: {
+          // make sure responses to client are validated automatically against schema
+          validateResponse: true
         }
       };
     case "dev":
@@ -40,6 +44,9 @@ module.exports = function(){
         facebook: {
           clientID: '761889610566980',
           clientSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
+        },
+        swagger: {
+          validateResponse: true
         }
       };
     case "test":
@@ -53,6 +60,9 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264'
+        },
+        swagger: {
+          validateResponse: true
         }
       };
     case "prod":
@@ -66,6 +76,9 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264'
+        },
+        swagger: {
+          validateResponse: false
         }
       };
     default:

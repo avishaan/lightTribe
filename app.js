@@ -67,7 +67,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   app.use(middleware.swaggerMetadata());
 
   // Validate Swagger requests
-  app.use(middleware.swaggerValidator());
+  app.use(middleware.swaggerValidator({ validateResponse: config.swagger.validateResponse }));
 
 // Check if authentication is required
 app.use(function(req, res, next){
