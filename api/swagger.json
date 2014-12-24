@@ -290,8 +290,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Invalid request.",
+          "400": {
+            "description": "Successful request.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -299,9 +299,11 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "uid": "string",
-              "token": "string",
-              "username": "string"
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
             }
           }
         }
