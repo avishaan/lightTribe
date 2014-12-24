@@ -259,9 +259,11 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "uid": "string",
-              "token": "string",
-              "username": "string"
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
             }
           }
         }
@@ -299,11 +301,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "properties": {
-                "token": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/InternalToken"
             }
           }
         }
@@ -359,6 +357,13 @@
         }
       },
       "required": ["company", "description"]
+    },
+    "InternalToken": {
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
     },
     "FacebookToken": {
       "properties": {
