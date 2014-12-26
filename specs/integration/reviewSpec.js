@@ -32,13 +32,26 @@ describe("Posting a review", function() {
       });
     });
   });
-  it("should require authentication to access", function(done) {
+  it("should require access_token to be filled out", function(done) {
     agent
     .post(URL + '/reviews')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
     .send(review)
     .end(function(res){
+      expect(res.status).toEqual(401);
+      done();
+    });
+  });
+  it("should require authentication to access", function(done) {
+    agent
+    .post(URL + '/reviews')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send(review)
+    .send({ access_token: 'wrongtoken' })
+    .end(function(res){
+      console.log(res.body);
       expect(res.status).toEqual(401);
       done();
     });
@@ -51,6 +64,7 @@ describe("Posting a review", function() {
     .send(review)
     .end(function(res){
       var body = res.body;
+      console.log(body);
       expect(res.status).toEqual(200);
       expect(body._id).toBeDefined();
       expect(body.company).toEqual(review.company);
