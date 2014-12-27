@@ -76,10 +76,7 @@
         ],
         "responses": {
           "401": {
-            "description": "Authentication Failed",
-            "schema": {
-              "$ref": "#/definitions/401Response"
-            }
+            "description": "Authentication Failed"
           },
           "400": {
             "description": "Error",
