@@ -9,21 +9,7 @@ module.exports.createReview = function createReview (req, res, next) {
   review.submitter = req.user.id;
   Review.createReview(review, function(err, review){
     if (!err){
-      function xform (doc, obj, options) {
-        return {
-          _id: doc.id,
-          company: obj.company,
-          description: obj.description,
-          rating: obj.rating,
-          images: obj.images,
-          // swagger spec expecting datetime in json format
-          datetime: doc.datetime.toJSON(),
-          location: obj.location,
-          submitter: obj.submitter
-        };
-      }
-      res.status(200).send(review.toObject({ transform: xform}));
-      //res.status(200).send(review);
+      res.status(200).send(review);
     } else {
       res.status(500).send(err);
     }
