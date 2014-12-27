@@ -32,7 +32,7 @@ describe("Posting a review", function() {
       });
     });
   });
-  xit("should require access_token to be filled out", function(done) {
+  it("should require access_token to be filled out", function(done) {
     agent
     .post(URL + '/reviews')
     //.get('http://localhost:3000/api/v1/templates')
@@ -43,7 +43,7 @@ describe("Posting a review", function() {
       done();
     });
   });
-  xit("should require authentication to access", function(done) {
+  it("should require a valid authentication token to access", function(done) {
     agent
     .post(URL + '/reviews')
     //.get('http://localhost:3000/api/v1/templates')
@@ -59,8 +59,8 @@ describe("Posting a review", function() {
     agent
     .post(URL + '/reviews')
     .set('Content-Type', 'application/json')
-    .send({ access_token: seedUser.token })
     .send(review)
+    .send({ access_token: seedUser.token })
     .end(function(res){
       var body = res.body;
       expect(res.status).toEqual(200);
