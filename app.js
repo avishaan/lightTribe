@@ -99,7 +99,7 @@ app.use(function(err, req, res, next){
   if (err){
     console.log(prettyjson.render(err, {}));
   }
-  next();
+  next(err);
 });
 // Start the server
 app.listen(config.expressPort, function () {
