@@ -18,6 +18,7 @@ var basicAuth = require('./auths/basic.js');
 var facebookAuth = require('./auths/facebook.js');
 var tokenAuth = require('./auths/token.js');
 var _ = require('underscore');
+var prettyjson = require('prettyjson');
 
 
 // Use the BasicStrategy within Passport.
@@ -91,6 +92,14 @@ app.use(function(req, res, next){
 
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
+});
+// let us know if there are uncaught errors, in any env, later only for dev
+// mainly for when swaggerValidate is true since it doesn't tell us the specific error
+app.use(function(err, req, res, next){
+  if (err){
+    console.log(prettyjson.render(err, {}));
+  }
+  next();
 });
 // Start the server
 app.listen(config.expressPort, function () {
