@@ -75,7 +75,7 @@ describe("Posting a review", function() {
       done();
     });
   });
-  xit("should require a company name", function(done) {
+  it("should require a company name", function(done) {
     agent
     .post(URL + '/reviews')
     .set('Content-Type', 'application/json')
