@@ -107,8 +107,15 @@
           {
             "name": "file",
             "in": "formData",
-            "type": "string",
+            "type": "file",
             "description": "Image information",
+            "required": false
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
             "required": true
           }
         ],
@@ -145,6 +152,13 @@
             "in": "path",
             "type": "string",
             "description": "Image Identifier"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "security": [
@@ -214,6 +228,13 @@
             "description": "Read the profile of a specific username",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "security": [
@@ -231,9 +252,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "reviews": "number",
-              "points": "number",
-              "rank": "string"
+              "$ref": "#/definitions/userProfile"
             }
           }
         }
@@ -326,6 +345,23 @@
     }
   },
   "definitions": {
+    "basicAuth": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "apiKey": {
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
     "Review": {
       "properties": {
         "company": {
@@ -371,6 +407,67 @@
         "access_token": {
           "type": "string"
         }
+      }
+    },
+    "userProfile": {
+      "properties": {
+        "measurements": {
+          "description": "User profile measurements",
+          "type": "object",
+          "$ref": "#/definitions/userMeasurements",
+          "required": ["waist", "hips"]
+        }
+      },
+      "required": ["measurements"],
+      "example": {
+        "measurements": {
+          "waist": "32.2",
+          "hips": "36.2",
+          "thighs": "34.1",
+          "calves": "12.9",
+          "length": "32.0",
+          "inseam": "28.3"
+        },
+        "status": {
+          "received": "yes",
+          "measured": "pending"
+        }
+      }
+    },
+    "userMeasurements": {
+      "properties": {
+        "waist": {
+          "description": "User waist measurement",
+          "type": "number"
+        },
+        "hips": {
+          "description": "User hips measurement",
+          "type": "number"
+        },
+        "thighs": {
+          "description": "User thighs measurement",
+          "type": "number"
+        },
+        "calves": {
+          "description": "User calves measurement",
+          "type": "number"
+        },
+        "length": {
+          "description": "User length measurement",
+          "type": "number"
+        },
+        "inseam": {
+          "description": "User inseam measurement",
+          "type": "number"
+        }
+      },
+      "example": {
+        "waist": "32.2",
+        "hips": "36.2",
+        "thighs": "34.1",
+        "calves": "12.9",
+        "length": "32.0",
+        "inseam": "28.3"
       }
     },
     "UserRegistration": {
