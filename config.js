@@ -12,9 +12,10 @@ module.exports = function(){
         env: 'local', //should be env/prod
         dbURI : "mongodb://localhost/" + npmInfo.name,
         apiURI : "http://localhost",
+        apiDomain : "localhost", //TODO use path from apiURI
         expressPort: 3000,
         loggerLevel: 'info',
-        appName: 'Reviewly',
+        appName: 'Reviewly', // we use this for cloudinary name
         cloudinary: {
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
@@ -35,6 +36,8 @@ module.exports = function(){
         env: 'dev', //should be env/prod
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
+        apiURI: process.env.apiURI,
+        apiDomain : process.env.apiDomain,
         loggerLevel: 'info',
         appName: 'Reviewly',
         cloudinary: {
@@ -55,6 +58,8 @@ module.exports = function(){
         env: 'test', //should be env/prod, can be changed to prod when we are comfy with prod environ
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
+        apiURI: process.env.apiURI,
+        apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
         appName: 'Reviewly',
         cloudinary: {
@@ -71,6 +76,8 @@ module.exports = function(){
         env: 'prod', //should be env/prod, can be changed to prod when we are comfy with prod environ
         dbURI : process.env.MONGODB_URI,
         expressPort: process.env.PORT,
+        apiURI: process.env.apiURI,
+        apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
         appName: 'Reviewly',
         cloudinary: {
