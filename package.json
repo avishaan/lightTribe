@@ -33,8 +33,8 @@
     "rand-token": "^0.2.1",
     "passport-http-bearer": "^1.0.1",
     "prettyjson": "^1.0.0",
-    "swagger-ui": "^2.1.4-M1",
-    "swagger-tools": "^0.8.1"
+    "swagger-tools": "^0.8.1",
+    "swagger-ui": "^2.1.4-M1"
   },
   "scripts": {
     "start": "./node_modules/supervisor/lib/cli-wrapper.js -e json,js --ignore specs,coverages,README.md app.js",
