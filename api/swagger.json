@@ -12,7 +12,8 @@
   ],
   "produces": [
     "application/json",
-    "text/plain"
+    "text/plain",
+    "text/html"
   ],
   "basePath": "/api",
   "paths": {
@@ -418,7 +419,6 @@
           "required": ["waist", "hips"]
         }
       },
-      "required": ["measurements"],
       "example": {
         "measurements": {
           "waist": "32.2",
