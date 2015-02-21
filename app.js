@@ -44,6 +44,10 @@ var options = {
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var swaggerDoc = require('./api/swagger.json');
+// based on the config set the swaggerDocs url accordingly
+if (config.env !== 'local'){
+  swaggerDoc.host = config.apiDomain;
+}
 
 // Wire up the middleware required by Swagger Tools (body-parser and qs)
 app.use(bodyParser.json());
@@ -90,8 +94,17 @@ app.use(function(req, res, next){
   // Route validated requests to appropriate controller
   app.use(middleware.swaggerRouter(options));
 
+  //make sure if we go to /docs we actually go to swaggerui using our own swaggerjson
+  app.use('/docs', function(req, res){
+    res.redirect('/swaggerui/?url=http://localhost:3000/api-docs');
+  });
   // Serve the Swagger documents and Swagger UI
-  app.use(middleware.swaggerUi());
+  app.use(middleware.swaggerUi({
+    apiDocs: "/api-docs",
+    //http://localhost:3000/docs/?url=http://localhost:3000/api-docs
+    swaggerUi: "/swaggerui",
+    swaggerUiDir: "./node_modules/swagger-ui/dist/"
+  }));
 });
 // let us know if there are uncaught errors, in any env, later only for dev
 // mainly for when swaggerValidate is true since it doesn't tell us the specific error
