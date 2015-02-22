@@ -26,8 +26,9 @@ The version differences are specified in each route.
   - [Code Coverage Reports](./coverage/lcov-report/index.html)
 
 - Route Documentation
-- visit http://localhost:PORT/docs to see the documentation
+- visit http://reviewly.herokuapp.com/docs to see the documentation
 - [Connecting Routes to Interface (Right Click and Save-As)](./docs/InterfaceRouteInfo.pdf)
+- [Design Composition (Right Click and Save-As)](./docs/design/skinnedWireframe.psd)
 
 Test Cases
 ----------------------
