@@ -110,7 +110,14 @@ app.use(function(req, res, next){
 // mainly for when swaggerValidate is true since it doesn't tell us the specific error
 app.use(function(err, req, res, next){
   if (err){
-    console.log(prettyjson.render(err, {}));
+    console.log(prettyjson.render({
+      code: err.code,
+      message: err.message,
+      failedValidation: err.failedValidation,
+      results: err.results,
+      path: err.path,
+      paramName: err.paramName
+    }, {}));
   }
   next(err);
 });
