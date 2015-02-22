@@ -29,13 +29,20 @@
         "tags": ["review"],
         "description": "Read a specific review by id",
         "parameters": [
-        {
-          "name": "rid",
-          "in": "path",
-          "description": "Review ID",
-          "required": true,
-          "type": "string"
-        }
+          {
+            "name": "rid",
+            "in": "path",
+            "description": "Review ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
         ],
         "responses": {
           "400": {
@@ -68,6 +75,13 @@
             "schema": {
               "$ref": "#/definitions/Review"
             }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "security": [
@@ -117,7 +131,7 @@
             "description": "Internal access token",
             "in": "query",
             "type": "string",
-            "required": true
+            "required": false
           }
         ],
         "security": [
