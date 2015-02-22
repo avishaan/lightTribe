@@ -116,7 +116,8 @@ app.use(function(err, req, res, next){
       failedValidation: err.failedValidation,
       results: err.results,
       path: err.path,
-      paramName: err.paramName
+      paramName: err.paramName,
+      url: req.url
     }, {}));
   }
   next(err);
