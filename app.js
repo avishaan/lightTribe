@@ -96,7 +96,12 @@ app.use(function(req, res, next){
 
   //make sure if we go to /docs we actually go to swaggerui using our own swaggerjson
   app.use('/docs', function(req, res){
-    res.redirect('/swaggerui/?url=http://localhost:3000/api-docs');
+    var url = config.apiURI;
+    if (config.env === 'local'){
+      // need to add port if not local
+      url = url + ':' + config.expressPort;
+    }
+    res.redirect('/swaggerui/?url=' + url + '/api-docs');
   });
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi({
