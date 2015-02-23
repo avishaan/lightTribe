@@ -1,6 +1,7 @@
 
 ## Who else is on the team (marketing, member onboarding)
 - timelines of when to get them
+- something else
 
 ## Markets to focus estimates of those markets
 
