@@ -33,6 +33,7 @@
     "rand-token": "^0.2.1",
     "passport-http-bearer": "^1.0.1",
     "prettyjson": "^1.0.0",
+    "random-string": "^0.1.2",
     "swagger-tools": "^0.8.1",
     "swagger-ui": "^2.1.4-M1"
   },
