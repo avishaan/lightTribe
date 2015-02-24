@@ -39,3 +39,6 @@ TODO
 - [ ] todo list template
 - [ ] use swagger schema for jasmine test cases
 - [ ] similar to tablo, describe how authentication works for the front end users
+
+Context
+----------------------
