@@ -8,7 +8,8 @@
   "host": "localhost:3000",
   "consumes": [
     "application/json",
-    "application/x-www-form-urlencoded"
+    "application/x-www-form-urlencoded",
+    "text/plain"
   ],
   "produces": [
     "application/json",
@@ -280,7 +281,20 @@
         "tags": ["auths"],
         "description": "Provide username and password to get auth token",
         "parameters": [
-          {}
+          {
+            "name": "username",
+            "in": "header",
+            "description": "The username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "header",
+            "description": "The user password",
+            "required": true,
+            "type": "string"
+          }
         ],
         "security": [
           {
