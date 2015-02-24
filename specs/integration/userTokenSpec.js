@@ -43,12 +43,31 @@ describe("A user", function() {
       done();
     });
   });
-  it("should be able to get a valid token via auth", function(done) {
+  it("should be able to get a valid token via header auth", function(done) {
     agent
     .post(URL + '/auths/basic')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
     .auth(seedUser.username, seedUser.password)
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body.uid).toBeDefined();
+      expect(res.body.token).toBeDefined();
+      expect(res.body.token).not.toEqual('placeholder');
+      expect(res.body.username).toBeDefined();
+      user.token = res.body.token;
+      done();
+    });
+  });
+  it("should be able to get a valid token via body param auth", function(done) {
+    agent
+    .post(URL + '/auths/basic')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: seedUser.username,
+      password: seedUser.password
+    })
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body.uid).toBeDefined();

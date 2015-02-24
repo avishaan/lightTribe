@@ -285,14 +285,14 @@
             "name": "username",
             "in": "header",
             "description": "The username",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "password",
             "in": "header",
             "description": "The user password",
-            "required": true,
+            "required": false,
             "type": "string"
           }
         ],
@@ -302,6 +302,12 @@
           }
         ],
         "responses": {
+          "401": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
           "400": {
             "description": "Error",
             "schema": {
