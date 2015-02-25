@@ -49,7 +49,7 @@ module.exports = function(){
           clientSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
         },
         swagger: {
-          validateResponse: true
+          validateResponse: false
         }
       };
     case "test":
