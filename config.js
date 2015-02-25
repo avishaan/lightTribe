@@ -27,7 +27,7 @@ module.exports = function(){
         },
         swagger: {
           // make sure responses to client are validated automatically against schema
-          validateResponse: true
+          validateResponse: false
         }
       };
     case "dev":
