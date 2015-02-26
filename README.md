@@ -42,3 +42,5 @@ TODO
 
 Context
 ----------------------
+- keep exploring why caching the auth headers occur when looking for a token, currently sending 401 and body
+- consider switching from auth headers to auth in the body
