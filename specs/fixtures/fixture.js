@@ -1,5 +1,6 @@
 var db = require('./../../dbs/db.js');
 var User = require('./../../models/user.js');
+var Review = require('./../../models/review.js');
 var async = require('async');
 
 // have a consistent user when necessary
@@ -14,8 +15,10 @@ module.exports.fbUser = {
 
 
 module.exports.deleteDB = function(cb){
-  User.remove({}, function(err, user){
-    cb(err, user);
+  Review.remov({}, function(err, reviews){
+    User.remove({}, function(err, user){
+      cb(err, user);
+    });
   });
 };
 module.exports.seedUser = function(cb){

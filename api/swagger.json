@@ -274,55 +274,6 @@
         }
       }
     },
-    "/v1/auths/basic": {
-      "post": {
-        "x-swagger-router-controller": "auths",
-        "operationId": "basic",
-        "tags": ["auths"],
-        "description": "Provide username and password to get auth token",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "header",
-            "description": "The username",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "header",
-            "description": "The user password",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
-          },
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
-          },
-          "200": {
-            "description": "Successful request.",
-            "schema": {
-              "$ref": "#/definitions/InternalToken"
-            }
-          }
-        }
-      }
-    },
     "/v1/auths/facebook": {
       "post": {
         "x-swagger-router-controller": "auths",
@@ -360,11 +311,62 @@
           }
         }
       }
+    },
+    "/v1/auths/basic": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "basic",
+        "tags": ["auths"],
+        "description": "Provide username and password to get auth token.",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "The username and password",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserCredentials"
+            }
+          }
+        ],
+        "security": [
+          {
+            "localAuth": []
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Error"
+          },
+          "401": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/InternalToken"
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
     "basicAuth": {
       "type": "basic"
+    },
+    "localAuth": {
+      "type": "basic",
+      "description": "Local authentication via body parameters"
     },
     "tokenAuth": {
       "type": "apiKey",
@@ -502,6 +504,16 @@
         "calves": "12.9",
         "length": "32.0",
         "inseam": "28.3"
+      }
+    },
+    "UserCredentials": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
       }
     },
     "UserRegistration": {
