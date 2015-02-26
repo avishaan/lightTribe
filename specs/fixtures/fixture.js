@@ -15,7 +15,7 @@ module.exports.fbUser = {
 
 
 module.exports.deleteDB = function(cb){
-  Review.remov({}, function(err, reviews){
+  Review.remove({}, function(err, reviews){
     User.remove({}, function(err, user){
       cb(err, user);
     });
