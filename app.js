@@ -15,6 +15,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
 var basicAuth = require('./auths/basic.js');
+var localAuth = require('./auths/local.js');
 var facebookAuth = require('./auths/facebook.js');
 var tokenAuth = require('./auths/token.js');
 var _ = require('underscore');
@@ -28,6 +29,7 @@ var prettyjson = require('prettyjson');
 passport.use(basicAuth);
 passport.use(facebookAuth);
 passport.use(tokenAuth);
+passport.use(localAuth);
 
 app.use(passport.initialize());
 
@@ -86,6 +88,11 @@ app.use(function(req, res, next){
       return passport.authenticate('facebook-token', { session: false })(req, res, next);
     } else if (req.swagger.operation.security[0].hasOwnProperty('tokenAuth')){
       return passport.authenticate('bearer', { session: false })(req, res, next);
+    } else if (req.swagger.operation.security[0].hasOwnProperty('localAuth')){
+      return passport.authenticate('local', { session: false })(req, res, next);
+    } else {
+      // this is if we have security but can't match the paramater
+      return next(new Error('could not find auth method'));
     }
   } else {
     return next();
