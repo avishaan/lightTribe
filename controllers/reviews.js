@@ -18,13 +18,11 @@ module.exports.createReview = function createReview (req, res, next) {
 
 module.exports.readReview = function readReview (req, res, next) {
   var rid = req.swagger.params.rid.value;
-  logger.info('Lookup user ' + rid);
-  // make sure to unescape any characters
-  rid = querystring.unescape(rid);
-  // get the user measurements
-  User.getMeasurements({phone: rid}, function(err, measurements){
+  logger.info('Lookup Review ' + rid);
+  // get the Review
+  Review.readReview({id: rid}, function(err, review){
     if (!err){
-      res.status(200).send(measurements);
+      res.status(200).send(review);
     } else {
       res.status(500).send(err);
     }
