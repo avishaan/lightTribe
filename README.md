@@ -27,7 +27,7 @@ The version differences are specified in each route.
 
 - Route Documentation
 - visit http://reviewly.herokuapp.com/docs to see the documentation
-- [Connecting Routes to Interface (Right Click and Save-As)](./docs/InterfaceRouteInfo.pdf)
+- [Connecting Routes to Interface (Right Click and Save-As)](./docs/integrations/integration.pdf)
 - [Design Composition (Right Click and Save-As)](./docs/design/skinnedWireframe.psd)
 
 Test Cases
