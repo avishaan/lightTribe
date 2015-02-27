@@ -42,8 +42,8 @@ module.exports = function(){
         appName: 'Reviewly',
         cloudinary: {
           cloudName: 'codeHatcher',
-          apiKey: '351392996945264',
-          api_secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
+          api_key: '351392996945264',
+          api_secret: process.env.cloudinarySecret
         },
         facebook: {
           clientID: '761889610566980',
@@ -65,7 +65,7 @@ module.exports = function(){
         appName: 'Reviewly',
         cloudinary: {
           cloudName: 'codeHatcher',
-          apiKey: '351392996945264',
+          api_key: '351392996945264',
           api_secret: process.env.cloudinarySecret
         },
         swagger: {
@@ -84,7 +84,7 @@ module.exports = function(){
         appName: 'Reviewly',
         cloudinary: {
           cloudName: 'codeHatcher',
-          apiKey: '351392996945264',
+          api_key: '351392996945264',
           api_secret: process.env.cloudinarySecret
         },
         swagger: {
