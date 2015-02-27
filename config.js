@@ -67,7 +67,7 @@ module.exports = function(){
           apiKey: '351392996945264'
         },
         swagger: {
-          validateResponse: true
+          validateResponse: false
         }
       };
     case "prod":
