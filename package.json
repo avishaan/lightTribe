@@ -1,6 +1,6 @@
 {
   "name": "Reviewly",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Reviewly API",
   "main": "app.js",
   "keywords": [
