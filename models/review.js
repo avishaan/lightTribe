@@ -61,12 +61,8 @@ reviewSchema.statics.readReview = function(options, cb) {
   var id = options.id;
   // see if review exists, if so pass error
   Review.find({_id: id}, function(err, review){
-    if (!err && review){
+    if (!err){
       cb(null, review);
-    } else if (!err && !review){
-      // need to register before using the app
-      logger.error('review doesn not exist');
-      cb({err: 'review does not exist', clientMsg: 'Review no longer exists'});
     } else {
       // we had some sort of database error
       logger.error(err);
