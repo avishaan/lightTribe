@@ -46,11 +46,8 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+          "401": {
+            "description": "Error"
           },
           "200": {
             "description": "Successful request.",
@@ -94,17 +91,8 @@
           "401": {
             "description": "Authentication Failed"
           },
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
-          },
           "200": {
-            "description": "Successful request.",
-            "schema": {
-              "$ref": "#/definitions/Review"
-            }
+            "description": "Successful request."
           }
         }
       }
@@ -141,17 +129,11 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+          "401": {
+            "description": "Error"
           },
           "200": {
-            "description": "Successful request.",
-            "schema": {
-              "id": "string"
-            }
+            "description": "Successful request."
           }
         }
       }
@@ -189,11 +171,8 @@
               "url": "string"
             }
           },
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+          "401": {
+            "description": "Error"
           }
         }
       }
@@ -216,11 +195,8 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+          "401": {
+            "description": "Error"
           },
           "200": {
             "description": "Successful request.",
@@ -259,11 +235,8 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+          "401": {
+            "description": "Error"
           },
           "200": {
             "description": "Successful request.",
@@ -297,11 +270,8 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+          "401": {
+            "description": "Error"
           },
           "200": {
             "description": "Successful request.",
@@ -335,20 +305,8 @@
           }
         ],
         "responses": {
-          "500": {
-            "description": "Error"
-          },
           "401": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
-          },
-          "400": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/400Response"
-            }
+            "description": "Error"
           },
           "200": {
             "description": "Successful request.",
