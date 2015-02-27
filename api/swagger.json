@@ -3,7 +3,7 @@
   "info": {
     "title": "Reviewly",
     "description": "Keep track of your reviews",
-    "version": "0.0.2"
+    "version": "0.0.5"
   },
   "host": "localhost:3000",
   "consumes": [
