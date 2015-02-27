@@ -60,7 +60,7 @@ reviewSchema.statics.createReview = function(options, cb) {
 reviewSchema.statics.readReview = function(options, cb) {
   var id = options.id;
   // see if review exists, if so pass error
-  Review.find({_id: id}, function(err, review){
+  Review.findOne({_id: id}, function(err, review){
     if (!err){
       cb(null, review);
     } else {

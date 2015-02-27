@@ -17,6 +17,7 @@ var image = {
 var seedUser;
 
 describe("An image", function() {
+  jasmine.getEnv().defaultTimeoutInterval = 20000;
   beforeEach(function(done){
     fixture.deleteDB(function(err){
       fixture.seedUser(function(err, user){
