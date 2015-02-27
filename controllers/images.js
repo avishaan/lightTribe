@@ -12,9 +12,13 @@ module.exports.createImage = function createImage (req, res, next) {
     // we have a file, upload it to cloudinary
     // TODO upload as stream to save space and increase speed
     cloudinary.uploader.upload(req.files.file.path, function(result){
-      res.status(200).send({
-        _id: result.public_id
-      });
+      if (!result.error){
+        res.status(200).send({
+          _id: result.public_id
+        });
+      } else {
+        res.status(500).send(result);
+      }
     });
   } else {
     res.status(400).send({clientMsg: "No file found"});
