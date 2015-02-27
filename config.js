@@ -43,7 +43,7 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264',
-          api_secret: process.env.cloudinary.api_secret
+          api_secret: process.env.cloudinarySecret
         },
         facebook: {
           clientID: '761889610566980',
@@ -66,7 +66,7 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264',
-          api_secret: process.env.cloudinary.api_secret
+          api_secret: process.env.cloudinarySecret
         },
         swagger: {
           validateResponse: false
@@ -85,7 +85,7 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264',
-          api_secret: process.env.cloudinary.api_secret
+          api_secret: process.env.cloudinarySecret
         },
         swagger: {
           validateResponse: false
