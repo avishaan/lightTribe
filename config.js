@@ -41,7 +41,7 @@ module.exports = function(){
         loggerLevel: 'info',
         appName: 'Reviewly',
         cloudinary: {
-          cloud_name: 'codeHatcher',
+          cloud_name: 'codehatcher',
           api_key: '351392996945264',
           api_secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
         },
@@ -64,7 +64,7 @@ module.exports = function(){
         loggerLevel: 'debug',
         appName: 'Reviewly',
         cloudinary: {
-          cloud_name: 'codeHatcher',
+          cloud_name: 'codehatcher',
           api_key: '351392996945264',
           api_secret: process.env.cloudinarySecret
         },
@@ -83,7 +83,7 @@ module.exports = function(){
         loggerLevel: 'debug',
         appName: 'Reviewly',
         cloudinary: {
-          cloud_name: 'codeHatcher',
+          cloud_name: 'codehatcher',
           api_key: '351392996945264',
           api_secret: process.env.cloudinarySecret
         },
