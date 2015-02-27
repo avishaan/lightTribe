@@ -43,7 +43,7 @@ module.exports = function(){
         cloudinary: {
           cloudName: 'codeHatcher',
           apiKey: '351392996945264',
-          api_secret: process.env.cloudinarySecret
+          api_secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
         },
         facebook: {
           clientID: '761889610566980',
