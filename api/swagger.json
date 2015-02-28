@@ -18,6 +18,46 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/v1/search/{term}": {
+      "get": {
+        "x-swagger-router-controller": "searches",
+        "operationId": "searchCompany",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["search"],
+        "description": "Search for a company by name",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "path",
+            "description": "Search term of company you are looking for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/reviews/{rid}": {
       "get": {
         "x-swagger-router-controller": "reviews",
@@ -27,7 +67,7 @@
             "tokenAuth": []
           }
         ],
-        "tags": ["review"],
+        "tags": ["reviews"],
         "description": "Read a specific review by id",
         "parameters": [
           {
