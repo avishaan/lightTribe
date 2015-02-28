@@ -26,10 +26,9 @@ describe("A search", function() {
   it("can return results without a lat/long", function(done) {
     agent
     .get(URL + '/search/Star')
-    .field('access_token', seedUser.token)
+    .query({access_token: seedUser.token})
     .end(function(res){
       expect(res.status).toEqual(200);
-      console.log(seedUser.token);
       // console.log(res);
       expect(res.body._id).toBeDefined();
       done();
