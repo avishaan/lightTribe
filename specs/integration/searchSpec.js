@@ -11,9 +11,6 @@ cloudinary.config(config.cloudinary);
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
-var image = {
-  id: 'placeholder'
-};
 var seedUser;
 
 describe("A search", function() {
@@ -32,6 +29,8 @@ describe("A search", function() {
     .field('access_token', seedUser.token)
     .end(function(res){
       expect(res.status).toEqual(200);
+      console.log(seedUser.token);
+      // console.log(res);
       expect(res.body._id).toBeDefined();
       done();
     });
