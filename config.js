@@ -18,7 +18,7 @@ module.exports = function(){
         appName: 'Reviewly', // we use this for cloudinary name
         google: {
           places: {
-            api_key: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
           }
         },
         cloudinary: {
@@ -47,7 +47,7 @@ module.exports = function(){
         appName: 'Reviewly',
         google: {
           places: {
-            api_key: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
           }
         },
         cloudinary: {
@@ -75,7 +75,7 @@ module.exports = function(){
         appName: 'Reviewly',
         google: {
           places: {
-            api_key: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
           }
         },
         cloudinary: {
@@ -99,7 +99,7 @@ module.exports = function(){
         appName: 'Reviewly',
         google: {
           places: {
-            api_key: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
           }
         },
         cloudinary: {
