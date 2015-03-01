@@ -14,11 +14,19 @@ module.exports.searchCompany = function searchCompany (req, res, next) {
     radius: '20000000',
     key: config.google.places.apiKey
   })
-  .end(function(search){
-    if (search.body.status === ('OK' || 'ZERO_RESULTS' )) {
-      res.status(200).send(search.body);
+  .end(function(result){
+    // no var declaration in if statement
+    if (result.body.status === ('OK' || 'ZERO_RESULTS' )) {
+      var places = result.body.predictions
+      .map(function(result){
+        return {
+          name: result.description,
+          _id: result.place_id
+        };
+      });
+      res.status(200).send(places);
     } else {
-      res.status(500).send(search.body);
+      res.status(500).send(result.body);
     }
   });
 };
