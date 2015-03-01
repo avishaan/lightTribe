@@ -28,9 +28,10 @@ describe("A search", function() {
     .get(URL + '/search/Star')
     .query({access_token: seedUser.token})
     .end(function(res){
+      var places = res.body;
       expect(res.status).toEqual(200);
-      // console.log(res);
-      expect(res.body._id).toBeDefined();
+      expect(places).toBeDefined();
+      expect(places.length).toBeDefined();
       done();
     });
   });
