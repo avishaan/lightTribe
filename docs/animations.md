@@ -7,6 +7,14 @@
 - build up with innocent beginner who knows more about it than the advanced while losing his ego
 - no closeup of the actual screen/app or illustration of the app
 - message is for the second character to say "I already have answers"
+- no music in the background
+- no singing
+- probably no text, no bubble
+- product in english and spanish language
+- voice should be funny but clear
+- midwest without any type of american accent
+- characters should be assexual a male should recognize itself
+- more like where a child makes a face when it has something to say in the sense of boy/girl
 -
 
 ## Sita sings the blues 
