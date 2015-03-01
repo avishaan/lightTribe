@@ -1,3 +1,13 @@
+# Animation
+## High Level Important
+- facial expressions
+- non-distracting backgrounds
+- 2D
+- voice actresses
+- build up with innocent beginner who knows more about it than the advanced while losing his ego
+- no closeup of the actual screen/app or illustration of the app
+- message is for the second character to say "I already have answers"
+-
 
 ## Sita sings the blues 
 ### Video
@@ -64,3 +74,17 @@
 - a little more flexible
 ### Cons
 - relatively specific style
+-
+## Dumb Ways to Die
+### Video
+- [video](http://youtu.be/IJNR2EpS0jw)
+### Pros
+- inexpensive
+- fast
+- requires less work
+- point comes across directly
+- requires less voice acting
+- a little more flexible
+- not distracting
+### Cons
+- slight simple
