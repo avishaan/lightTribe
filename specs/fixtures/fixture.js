@@ -6,7 +6,7 @@ var async = require('async');
 // have a consistent user when necessary
 var username = 'test';
 var password = 'test';
-var password = 'test@test.com';
+var email = 'test@test.com';
 
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
