@@ -25,8 +25,7 @@ module.exports.deleteDB = function(cb){
 module.exports.seedUser = function(cb){
   User.create({
     username: username,
-    password: password,
-    email: email
+    password: password
   }, function(err, user){
     // return the user that was just created
     user = {

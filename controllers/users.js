@@ -25,7 +25,7 @@ module.exports.profile = function profile (req, res, next) {
   logger.info('get user profile');
   User
   .findOne({ 'username': username })
-  .select('username id _id profile.reviews profile.points profile.rank email')
+  .select('username id _id profile.reviews profile.points profile.rank')
   .lean()
   .exec(function(err, user){
     if (!err) {
