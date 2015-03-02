@@ -4,13 +4,15 @@ var agent = require('superagent');
 
 module.exports.searchCompany = function searchCompany (req, res, next) {
   var term = req.swagger.params.term.value;
+  // default value if doesn't exist
+  var loc = typeof req.swagger.params.loc.value !== "undefined" ? req.swagger.params.loc.value : (req.swagger.params.loc.value = "0,0");
   logger.info('search company');
   agent
   .get('https://maps.googleapis.com/maps/api/place/autocomplete/json')
   .query({
     input: 'United Airlines',
     types: 'establishment',
-    location: '0,0',
+    location: loc,
     radius: '20000000',
     key: config.google.places.apiKey
   })
