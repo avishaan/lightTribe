@@ -16,6 +16,11 @@ module.exports = function(){
         expressPort: 3000,
         loggerLevel: 'info',
         appName: 'Reviewly', // we use this for cloudinary name
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
@@ -40,6 +45,11 @@ module.exports = function(){
         apiDomain : process.env.apiDomain,
         loggerLevel: 'info',
         appName: 'Reviewly',
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
@@ -63,6 +73,11 @@ module.exports = function(){
         apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
         appName: 'Reviewly',
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
@@ -82,6 +97,11 @@ module.exports = function(){
         apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
         appName: 'Reviewly',
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
