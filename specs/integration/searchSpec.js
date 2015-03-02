@@ -23,10 +23,32 @@ describe("A search", function() {
       });
     });
   });
-  it("can return results without a lat/long", function(done) {
+  it("requires a term to search", function(done) {
+    agent
+    .get(URL + '/search/')
+    .query({access_token: seedUser.token})
+    .end(function(res){
+      expect(res.status).not.toEqual(200);
+      done();
+    });
+  });
+  it("can return results when only given a search term", function(done) {
     agent
     .get(URL + '/search/Star')
     .query({access_token: seedUser.token})
+    .end(function(res){
+      var places = res.body;
+      expect(res.status).toEqual(200);
+      expect(places).toBeDefined();
+      expect(places.length).toBeDefined();
+      done();
+    });
+  });
+  it("can return results with a lat/long", function(done) {
+    agent
+    .get(URL + '/search/Star')
+    .query({access_token: seedUser.token})
+    .query({loc: '37.76999,-122.44696'})
     .end(function(res){
       var places = res.body;
       expect(res.status).toEqual(200);
