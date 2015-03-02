@@ -68,6 +68,7 @@ describe("A user", function() {
       expect(res.body.reviews).toBeDefined();
       expect(res.body.points).toBeDefined();
       expect(res.body.rank).toBeDefined();
+      expect(res.body.rank).toEqual('Newbie');
       done();
     });
   });
