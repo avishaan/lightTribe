@@ -10,7 +10,7 @@ module.exports.searchCompany = function searchCompany (req, res, next) {
   agent
   .get('https://maps.googleapis.com/maps/api/place/autocomplete/json')
   .query({
-    input: 'United Airlines',
+    input: term,
     types: 'establishment',
     location: loc,
     radius: '20000000',
