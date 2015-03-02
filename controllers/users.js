@@ -21,10 +21,18 @@ module.exports.registerUser = function registerUser (req, res, next) {
 };
 
 module.exports.profile = function profile (req, res, next) {
-  logger.info('protected route');
-  res.status(200).send({
-    reviews: 0,
-    points: 100000,
-    rank: 'newbie'
+  var username = req.swagger.params.username.value;
+  logger.info('get user profile');
+  User
+  .findOne({ 'username': username })
+  .select('username id _id profile.reviews profile.points profile.rank email')
+  .lean()
+  .exec(function(err, user){
+    if (!err) {
+      res.status(200).send(user);
+    } else {
+      logger.error(err);
+      res.status(500).send(err);
+    }
   });
 };
