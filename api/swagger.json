@@ -298,7 +298,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "#/definitions/userProfile"
+              "$ref": "#/definitions/userResponse"
             }
           }
         }
@@ -455,13 +455,16 @@
         }
       }
     },
-    "userProfile": {
+    "userResponse": {
       "properties": {
-        "measurements": {
-          "description": "User profile measurements",
+        "username": {
+          "description": "Username of the user",
+          "type": "string"
+        },
+        "profile": {
+          "description": "User Profile Information",
           "type": "object",
-          "$ref": "#/definitions/userMeasurements",
-          "required": ["waist", "hips"]
+          "$ref": "#/definitions/userProfile"
         }
       },
       "example": {
@@ -479,40 +482,25 @@
         }
       }
     },
-    "userMeasurements": {
+    "userProfile": {
       "properties": {
-        "waist": {
-          "description": "User waist measurement",
+        "reviews": {
+          "description": "Number of reviews the user has made",
           "type": "number"
         },
-        "hips": {
-          "description": "User hips measurement",
+        "points": {
+          "description": "Number of points the user has based on reviews and images",
           "type": "number"
         },
-        "thighs": {
-          "description": "User thighs measurement",
-          "type": "number"
-        },
-        "calves": {
-          "description": "User calves measurement",
-          "type": "number"
-        },
-        "length": {
-          "description": "User length measurement",
-          "type": "number"
-        },
-        "inseam": {
-          "description": "User inseam measurement",
-          "type": "number"
+        "rank": {
+          "description": "The name rank of the user",
+          "type": "string"
         }
       },
       "example": {
-        "waist": "32.2",
-        "hips": "36.2",
-        "thighs": "34.1",
-        "calves": "12.9",
-        "length": "32.0",
-        "inseam": "28.3"
+        "reviews": "12",
+        "points": "14",
+        "rank": "Newbie"
       }
     },
     "UserCredentials": {
