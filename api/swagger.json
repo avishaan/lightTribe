@@ -38,6 +38,13 @@
             "type": "string"
           },
           {
+            "name": "radius",
+            "in": "query",
+            "description": "Search radius to look for",
+            "required": false,
+            "type": "number"
+          },
+          {
             "name": "loc",
             "in": "query",
             "description": "Coorindates you are looking for ex: 0,0",
@@ -57,7 +64,7 @@
             "description": "Server Error"
           },
           "401": {
-            "description": "Error"
+            "description": "Unauthorized"
           },
           "200": {
             "description": "Successful request."
