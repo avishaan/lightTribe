@@ -264,7 +264,7 @@
         }
       }
     },
-    "/v1/users/{uid}": {
+    "/v1/users/{username}": {
       "get": {
         "x-swagger-router-controller": "users",
         "operationId": "profile",
@@ -272,7 +272,7 @@
         "description": "Read profile of single user by passing in a username",
         "parameters": [
           {
-            "name": "uid",
+            "name": "username",
             "in": "path",
             "description": "Read the profile of a specific username",
             "required": true,
