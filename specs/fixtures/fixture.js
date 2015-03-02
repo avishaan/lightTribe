@@ -6,6 +6,7 @@ var async = require('async');
 // have a consistent user when necessary
 var username = 'test';
 var password = 'test';
+var password = 'test@test.com';
 
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
@@ -24,7 +25,8 @@ module.exports.deleteDB = function(cb){
 module.exports.seedUser = function(cb){
   User.create({
     username: username,
-    password: password
+    password: password,
+    email: email
   }, function(err, user){
     // return the user that was just created
     user = {
