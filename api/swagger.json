@@ -64,7 +64,10 @@
             "description": "Server Error"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
           },
           "200": {
             "description": "Successful request."
