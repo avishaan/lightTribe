@@ -64,12 +64,12 @@ describe("A user", function() {
     .get(URL + '/users/' + seedUser.username)
     .send({ access_token: seedUser.token })
     .end(function(res){
+      var profile = res.body.profile;
       expect(res.status).toEqual(200);
-      expect(res.body.reviews).toBeDefined();
-      expect(res.body.points).toBeDefined();
-      expect(res.body.email).toBeDefined();
-      expect(res.body.rank).toBeDefined();
-      expect(res.body.rank).toEqual('Newbie');
+      expect(profile.reviews).toBeDefined();
+      expect(profile.points).toBeDefined();
+      expect(profile.rank).toBeDefined();
+      expect(profile.rank).toEqual('Newbie');
       done();
     });
   });
