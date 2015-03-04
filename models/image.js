@@ -21,20 +21,17 @@ var imageSchema = new mongoose.Schema({
 
 /**
  * Create a specific image
- * @param {object} options The options for the new image
+ * @param {object} files The files for the new image
  * @config {string} company of the image
  * @param {function} cb
  * @config {object} image 
  * @config {object} err Passed Error
  */
-imageSchema.statics.createImage = function(options, cb) {
-  var req;
-  debugger;
-  var req = options;
+imageSchema.statics.createImage = function(files, cb) {
   async.waterfall([
   function(done){
     //upload the image, if success then add to own database
-    cloudinary.uploader.upload(req.files.file.path, function(result){
+    cloudinary.uploader.upload(files.file.path, function(result){
       if (!result.error){
         done(null, result);
       } else {
@@ -61,8 +58,6 @@ imageSchema.statics.createImage = function(options, cb) {
       cb(err);
     }
   });
-
-
 };
 /**
  * Read a specific image
