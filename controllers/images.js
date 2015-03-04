@@ -8,6 +8,7 @@ var cloudinary = require('cloudinary');
 cloudinary.config(config.cloudinary);
 
 module.exports.createImage = function createImage (req, res, next) {
+  debugger;
   logger.info('file created');
   if (req.files && req.files.file && req.files.file.size) {
     Image.createImage(req, function(err, image){
