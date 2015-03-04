@@ -40,8 +40,12 @@ imageSchema.statics.createImage = function(files, cb) {
     });
   },
   function(result, done){
+    debugger;
     // add image to the database
-    Image.create({ public_id: result.public_id }, function(err, savedImage){
+    Image.create({
+     public_id: result.public_id,
+     url: result.url
+    }, function(err, savedImage){
       if (!err && savedImage){
         // we created the savedImage successfully
         done(null, savedImage);
