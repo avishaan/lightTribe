@@ -22,7 +22,18 @@ module.exports.createImage = function createImage (req, res, next) {
   }
 };
 module.exports.readImageURL = function readImageURL (req, res, next) {
+  var iid = req.swagger.params.iid.value;
   logger.info('return url');
-  var url = cloudinary.url(req.swagger.params.iid.value)
-  res.status(200).send({clientMsg: "Image URL", url: url});
+  // find image id
+  Image
+  .findOne({_id: iid })
+  .select ('_id url')
+  .lean()
+  .exec(function(err, image){
+    if (!err){
+      res.status(200).send(image);
+    } else {
+      res.status(500).send(err);
+    }
+  });
 };
