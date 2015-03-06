@@ -1,6 +1,4 @@
-var querystring = require('querystring');
 var logger = require('./../loggers/logger.js');
-var config = require('../config.js');
 var Review = require('../models/review.js');
 
 var Promise = require('bluebird');
