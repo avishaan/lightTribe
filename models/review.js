@@ -45,7 +45,7 @@ reviewSchema.statics.createReview = function(options, cb) {
       cb(null, savedReview);
     } else {
       logger.error(err);
-      cb({err: err, clientMsg: 'Something broke, try again'}, null);
+      cb(err);
     }
   });
 };
