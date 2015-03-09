@@ -89,25 +89,27 @@ userSchema.statics.createUser = function(options, cb) {
 userSchema.statics.checkAuthentication = function(options, cb) {
   var username = options.username;
   var password = options.password;
-  // check the user exists
-  User
-  .findOne({username: username})
-  .exec(function(err, user){
-    if (!err && user){
-      user.comparePassword(password, function(err, match){
-        if (match) {
-          cb(null, user);
-        } else {
-          err = {clientMsg: 'invalid password'};
-          cb(err);
-        }
-      });
+
+  //var User = require('bluebird').promisify(User);
+  var Promise = require('bluebird');
+  // bind to have an object along the chain of promises
+  Promise.resolve(User.findOne({username:username}).exec()).bind({})
+  .then(function(user){
+    this.user = user;
+    // call comparePassword with user as the context of this vs global
+    return Promise.promisify(user.comparePassword).call(user, password);
+  })
+  .then(function(match){
+    // check password match
+    if (match) {
+      cb(null, this.user);
     } else {
-      err = {clientMsg: 'invalid username or password'};
-      cb(err);
+      throw new Error("invalid username or password");
     }
+  })
+  .then(undefined, function(err){
+    cb(err);
   });
-  // if user exists check the password
 };
 /**
  * Hash password
