@@ -90,7 +90,6 @@ userSchema.statics.checkAuthentication = function(options, cb) {
   var username = options.username;
   var password = options.password;
 
-  //var User = require('bluebird').promisify(User);
   var Promise = require('bluebird');
   // bind to have an object along the chain of promises
   Promise.resolve(User.findOne({username:username}).exec()).bind({})
