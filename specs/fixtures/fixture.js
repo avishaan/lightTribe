@@ -53,7 +53,9 @@ module.exports.seedUser = function(cb){
   });
 };
 
-module.exports.seedReview = function(cb){
+module.exports.seedReview = function(options, cb){
+  var user = options.user;
+  review.submitter = user.id;
   Review.create(review, function(err, review){
     console.log("review added: ", review);
     cb(err, review);
