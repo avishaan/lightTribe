@@ -107,7 +107,7 @@ describe("Reviews", function() {
         seedUser = user;
         expect(err).toEqual(null);
         // seed review
-        fixture.seedReview(function(err, review){
+        fixture.seedReview({user: seedUser},function(err, review){
           expect(err).toEqual(null);
           done();
         });
@@ -119,6 +119,7 @@ describe("Reviews", function() {
     .get(URL + '/reviews')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
+    .query({access_token: seedUser.token})
     .end(function(res){
       var reviews = res.body;
       expect(reviews.length).toEqual(1);
