@@ -124,6 +124,7 @@ describe("Reviews", function() {
       expect(reviews.length).toEqual(1);
       expect(reviews[0]._id).toBeDefined();
       expect(res.status).toEqual(200);
+      expect(reviews[0].submitter).not.toBeDefined();
       done();
     });
   });
