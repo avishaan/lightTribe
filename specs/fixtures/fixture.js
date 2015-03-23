@@ -9,6 +9,16 @@ var username = 'test';
 var password = 'test';
 var email = 'test@test.com';
 
+// have a review when necessary
+var review = {
+  company: 'Company Name',
+  description: 'This is a description',
+  rating: 1,
+  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  datetime: new Date().toJSON(),
+  location: '1234.5, 1234.6'
+};
+
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
   password: 'test',
@@ -40,5 +50,14 @@ module.exports.seedUser = function(cb){
       token: user.token.value
     };
     cb(err, user);
+  });
+};
+
+module.exports.seedReview = function(options, cb){
+  var user = options.user;
+  review.submitter = user.id;
+  Review.create(review, function(err, review){
+    console.log("review added: ", review);
+    cb(err, review);
   });
 };

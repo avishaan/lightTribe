@@ -71,6 +71,27 @@ reviewSchema.statics.readReview = function(options, cb) {
   });
 };
 
+/**
+ * Read all reviews for a user
+ * @param {object} options The options for the lookup
+ * @config {string} options.userId user id of the user for which you want reviews
+ * @param {function} cb
+ * @config {object} reviews
+ * @config {object} err Passed Error
+ */
+reviewSchema.statics.readAllReviews = function(options, cb) {
+  // see if review exists, if so pass error
+  Review.find({submitter: options.userId}, function(err, reviews){
+    if (!err){
+      cb(null, reviews);
+    } else {
+      // we had some sort of database error
+      logger.error(err);
+      cb({err: err, clientMsg: 'Something broke, try again'}, null);
+    }
+  });
+};
+
 var Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;

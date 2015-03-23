@@ -30,3 +30,23 @@ module.exports.readReview = function readReview (req, res, next) {
     }
   });
 };
+
+module.exports.readAllReviews = function readReviews (req, res, next) {
+  logger.info('Lookup All Reviews for user: ' + req.user.id);
+  // get the Review
+  Review.readAllReviews({userId: req.user.id}, function(err, reviews){
+    if (!err){
+      reviews = reviews.map(function(review){
+        return review.toObject({ transform: hideProperties });
+      });
+      res.status(200).send(reviews);
+    } else {
+      res.status(500).send(err);
+    }
+  });
+  var hideProperties = function (doc, ret, options){
+    return {
+      _id: doc.id
+    };
+  };
+};

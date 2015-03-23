@@ -116,6 +116,40 @@
       }
     },
     "/v1/reviews": {
+      "get": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readAllReviews",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["reviews"],
+        "description": "Read all reviews for a user",
+        "parameters": [
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Reviews"
+              }
+            }
+          }
+        }
+      },
       "post": {
         "x-swagger-router-controller": "reviews",
         "operationId": "createReview",
@@ -413,6 +447,15 @@
           "type": "string"
         }
       }
+    },
+    "Reviews": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        }
+      },
+      "required": ["_id"]
     },
     "Review": {
       "properties": {
