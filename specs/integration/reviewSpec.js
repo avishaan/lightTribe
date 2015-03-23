@@ -123,8 +123,7 @@ describe("Reviews", function() {
       var reviews = res.body;
       expect(reviews.length).toEqual(1);
       expect(reviews[0]._id).toBeDefined();
-      expect(res.status).toEqual(401);
-
+      expect(res.status).toEqual(200);
       done();
     });
   });
