@@ -142,7 +142,10 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "#/definitions/Reviews"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Reviews"
+              }
             }
           }
         }
