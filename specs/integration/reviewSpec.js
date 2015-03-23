@@ -116,12 +116,15 @@ describe("Reviews", function() {
   });
   it("should be retrievable in list form by a user", function(done) {
     agent
-    .post(URL + '/reviews')
+    .get(URL + '/reviews')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
-    .send(review)
     .end(function(res){
+      var reviews = res.body;
+      expect(reviews.length).toEqual(1);
+      expect(reviews[0]._id).toBeDefined();
       expect(res.status).toEqual(401);
+
       done();
     });
   });
