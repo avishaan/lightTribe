@@ -30,3 +30,16 @@ module.exports.readReview = function readReview (req, res, next) {
     }
   });
 };
+
+module.exports.readAllReviews = function readReviews (req, res, next) {
+  debugger;
+  logger.info('Lookup All Reviews for user: ' + req.user._id);
+  // get the Review
+  Review.readReview({userId: req.user._id}, function(err, reviews){
+    if (!err){
+      res.status(200).send(reviews);
+    } else {
+      res.status(500).send(err);
+    }
+  });
+};
