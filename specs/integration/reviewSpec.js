@@ -94,3 +94,35 @@ describe("Posting a review", function() {
     });
   });
 });
+
+describe("Reviews", function() {
+  // delete the database before each time
+  beforeEach(function(done){
+    fixture.deleteDB(function(err, user){
+      // make sure it was able to delete the database ok
+      expect(err).toEqual(null);
+      // seed a user
+      fixture.seedUser(function(err, user){
+        // save the user for later
+        seedUser = user;
+        expect(err).toEqual(null);
+        // seed review
+        fixture.seedReview(function(err, review){
+          expect(err).toEqual(null);
+          done();
+        });
+      });
+    });
+  });
+  it("should be retrievable in list form by a user", function(done) {
+    agent
+    .post(URL + '/reviews')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send(review)
+    .end(function(res){
+      expect(res.status).toEqual(401);
+      done();
+    });
+  });
+});
