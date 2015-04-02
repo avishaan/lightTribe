@@ -126,6 +126,9 @@ describe("Reviews", function() {
       expect(reviews[0]._id).toBeDefined();
       expect(res.status).toEqual(200);
       expect(reviews[0].submitter).not.toBeDefined();
+      expect(reviews[0].description).toBeDefined();
+      expect(reviews[0].datetime).toBeDefined();
+      expect(reviews[0].company).toBeDefined();
       done();
     });
   });

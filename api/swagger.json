@@ -453,6 +453,19 @@
         "_id": {
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
+        },
+        "description": {
+          "type": "string",
+          "example": "This is a review of starbucks coffee, it could be 144 characters long"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "company": {
+          "type": "string",
+          "example": "Starbucks Coffee"
         }
       },
       "required": ["_id"]

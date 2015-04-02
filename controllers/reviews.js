@@ -44,9 +44,12 @@ module.exports.readAllReviews = function readReviews (req, res, next) {
       res.status(500).send(err);
     }
   });
-  var hideProperties = function (doc, ret, options){
+  var hideProperties = function (doc, obj, options){
     return {
-      _id: doc.id
+      _id: doc.id,
+      description: obj.description,
+      datetime: obj.datetime,
+      company: obj.company
     };
   };
 };
