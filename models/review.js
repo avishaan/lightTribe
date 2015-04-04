@@ -13,7 +13,7 @@ var reviewSchema = new mongoose.Schema({
   datetime: { type: Date },
   location: { type: String },
   images: [
-    { type: String }
+    { type: String, ref: 'Image' }
   ],
   submitter: { type: String },
 });
