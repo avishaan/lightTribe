@@ -45,11 +45,21 @@ module.exports.readAllReviews = function readReviews (req, res, next) {
     }
   });
   var hideProperties = function (doc, obj, options){
-    return {
-      _id: doc.id,
-      description: obj.description,
-      datetime: obj.datetime,
-      company: obj.company
-    };
+    // if ('function' == typeof doc.ownerDocument) {
+    if (doc.url) {
+      // working with image subdoc
+      return {
+        url: obj.url
+      };
+    } else {
+      // working with doc
+      return {
+        _id: doc.id,
+        description: obj.description,
+        datetime: obj.datetime,
+        company: obj.company,
+        images: obj.images
+      };
+    }
   };
 };
