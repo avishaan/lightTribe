@@ -56,8 +56,14 @@ module.exports.seedUser = function(cb){
 module.exports.seedReview = function(options, cb){
   var user = options.user;
   review.submitter = user.id;
-  Review.create(review, function(err, review){
-    //console.log("review added: ", review);
-    cb(err, review);
+  // first create an image for the review
+  Image.create({
+    public_id: 'uhn43civzs6m1c9uurqvr',
+    url: 'http://localhost'
+  }, function(err, image){
+    review.images = [image._id];
+    Review.create(review, function(err, review){
+      cb(err, review);
+    });
   });
 };

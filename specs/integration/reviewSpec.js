@@ -129,6 +129,10 @@ describe("Reviews", function() {
       expect(reviews[0].description).toBeDefined();
       expect(reviews[0].datetime).toBeDefined();
       expect(reviews[0].company).toBeDefined();
+      // make sure image information is therej
+      expect(reviews[0].images).toBeDefined();
+      expect(reviews[0].images.length).toEqual(1);
+      expect(reviews[0].images[0].url).toBeDefined();
       done();
     });
   });
