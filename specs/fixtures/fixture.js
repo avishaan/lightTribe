@@ -63,7 +63,6 @@ module.exports.seedReview = function(options, cb){
   }, function(err, image){
     review.images = [image._id];
     Review.create(review, function(err, review){
-      console.log("review added: ", review);
       cb(err, review);
     });
   });
