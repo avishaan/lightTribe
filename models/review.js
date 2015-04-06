@@ -81,7 +81,9 @@ reviewSchema.statics.readReview = function(options, cb) {
  */
 reviewSchema.statics.readAllReviews = function(options, cb) {
   // see if review exists, if so pass error
-  Review.find({submitter: options.userId}, function(err, reviews){
+  Review
+  .find({submitter: options.userId})
+  .exec(function(err, reviews){
     if (!err){
       cb(null, reviews);
     } else {
