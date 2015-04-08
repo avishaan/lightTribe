@@ -83,7 +83,7 @@ reviewSchema.statics.readAllReviews = function(options, cb) {
   // see if review exists, if so pass error
   Review
   .find({submitter: options.userId})
-  .populate('images')
+  //.populate('images')
   .exec(function(err, reviews){
     if (!err){
       cb(null, reviews);
