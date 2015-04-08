@@ -152,7 +152,6 @@ describe("Reviews", function() {
       .query({access_token: seedUser.token})
       .end(function(res){
         var reviews = res.body;
-        console.log(reviews);
         expect(res.status).toEqual(200);
         expect(reviews.length).toEqual(2);
         // make sure one of them has images populated
