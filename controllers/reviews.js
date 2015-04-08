@@ -52,11 +52,16 @@ module.exports.readAllReviews = function readReviews (req, res, next) {
   function(cb){
     //populate the images for the reviews
     async.each(allReviews, function(review, callback){
-      Review.populate(review, {path: 'images'}, function(err, review){
+      Review.populate(review, {path: 'images'}, function(err, populatedReview){
         if (!err) {
-          reviewsWithImage.push(review);
+          reviewsWithImage.push(populatedReview);
           callback(null);
         } else {
+          // this is technically incorrect name for this
+          // if the review doesn't have image use populated image due to incorrect objectid #24
+          // pretend the user didn't upload any images at all
+          review.set('images', []);
+          reviewsWithImage.push(review);
           callback(null);
         }
       });
