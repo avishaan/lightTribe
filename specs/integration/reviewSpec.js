@@ -152,8 +152,13 @@ describe("Reviews", function() {
       .query({access_token: seedUser.token})
       .end(function(res){
         var reviews = res.body;
+        console.log(reviews);
         expect(res.status).toEqual(200);
-        expect(reviews.length).toEqual(1);
+        expect(reviews.length).toEqual(2);
+        // make sure one of them has images populated
+        expect(reviews[0].images.length || reviews[1].images.length).toBeTruthy();
+        // make sure one of them doesn't have images populated (yes, not a great test)
+        expect(reviews[0].images.length && reviews[1].images.length).toBeFalsy();
         done();
       });
     });
