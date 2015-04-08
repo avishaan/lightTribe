@@ -137,7 +137,7 @@ describe("Reviews", function() {
     });
   });
   it("should be retrievable even when imageid in review is not real", function(done) {
-    // TODO should be checking to make sure it is always real
+    // post a review with fake images
     agent
     .post(URL + '/reviews')
     .set('Content-Type', 'application/json')
@@ -153,6 +153,7 @@ describe("Reviews", function() {
       .end(function(res){
         var reviews = res.body;
         expect(res.status).toEqual(200);
+        expect(reviews.length).toEqual(1);
         done();
       });
     });
