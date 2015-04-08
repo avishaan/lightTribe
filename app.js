@@ -22,7 +22,25 @@ var _ = require('underscore');
 var prettyjson = require('prettyjson');
 
 
-// Use the BasicStrategy within Passport.
+// debugging to send request as response like a mirror
+app.use('/api/dev/mirror', function(req, res){
+  req.rawBody = '';
+  req.setEncoding('utf8');
+
+  req.on('data', function(chunk) {
+    req.rawBody += chunk;
+  });
+  req.on('end', function() {
+    res.send({
+      raw: {
+        body: req.rawBody,
+        headers: req.rawHeaders,
+        trailers: req.rawTrailers
+      }
+    });
+  });
+});
+
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object.
