@@ -31,6 +31,7 @@ app.use('/api/dev/mirror', function(req, res){
     req.rawBody += chunk;
   });
   req.on('end', function() {
+    console.log(JSON.parse(req.rawBody));
     res.send({
       raw: {
         body: req.rawBody,
