@@ -36,6 +36,9 @@ app.use('/api/dev/mirror', function(req, res){
         body: req.rawBody,
         headers: req.rawHeaders,
         trailers: req.rawTrailers
+      },
+      parse: {
+        body: JSON.parse(req.rawBody)
       }
     });
   });
