@@ -31,17 +31,21 @@ app.use('/api/dev/mirror', function(req, res){
     req.rawBody += chunk;
   });
   req.on('end', function() {
-    console.log(JSON.parse(req.rawBody));
-    res.send({
+    var response = {
       raw: {
         body: req.rawBody,
         headers: req.rawHeaders,
-        trailers: req.rawTrailers
+        trailers: req.rawTrailers,
+        method: req.method,
+        baseURL: req.baseUrl,
+        originalURL: req.originalUrl
       },
       parse: {
         body: JSON.parse(req.rawBody)
       }
-    });
+    };
+    console.log(response);
+    res.send(response);
   });
 });
 
