@@ -136,4 +136,25 @@ describe("Reviews", function() {
       done();
     });
   });
+  it("should be retrievable even when imageid in review is not real", function(done) {
+    // TODO should be checking to make sure it is always real
+    agent
+    .post(URL + '/reviews')
+    .set('Content-Type', 'application/json')
+    .send(review)
+    .send({ access_token: seedUser.token })
+    .end(function(res){
+      var body = res.body;
+      agent
+      .get(URL + '/reviews')
+      //.get('http://localhost:3000/api/v1/templates')
+      .set('Content-Type', 'application/json')
+      .query({access_token: seedUser.token})
+      .end(function(res){
+        var reviews = res.body;
+        expect(res.status).toEqual(200);
+        done();
+      });
+    });
+  });
 });
