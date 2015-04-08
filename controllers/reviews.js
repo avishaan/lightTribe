@@ -79,7 +79,8 @@ module.exports.readAllReviews = function readReviews (req, res, next) {
   });
   var hideProperties = function (doc, obj, options){
     // if ('function' == typeof doc.ownerDocument) {
-    if (doc.url) {
+    if (doc.url && !doc.image) {
+      // should not have doc.image otherwise we are looking at review doc not image doc
       // working with image subdoc
       return {
         url: obj.url
