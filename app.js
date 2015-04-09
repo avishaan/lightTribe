@@ -42,7 +42,9 @@ app.use('/api/dev/mirror', function(req, res){
       },
       parse: {
         body: JSON.parse(req.rawBody),
-        access_token: req.param('access_token')
+        url: {
+          access_token: req.param('access_token')
+        }
       }
     };
     console.log(response);
