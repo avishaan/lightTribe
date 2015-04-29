@@ -43,12 +43,16 @@ describe("A user", function() {
       done();
     });
   });
-  it("should be able to get a valid token via auth", function(done) {
+  it("should be able to get a valid token via local body auth", function(done) {
     agent
     .post(URL + '/auths/basic')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
-    .auth(seedUser.username, seedUser.password)
+    .send({
+      username: seedUser.username,
+      password: seedUser.password
+    })
+    //.auth(seedUser.username, seedUser.password)
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body.uid).toBeDefined();

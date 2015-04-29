@@ -17,6 +17,7 @@ var image = {
 var seedUser;
 
 describe("An image", function() {
+  jasmine.getEnv().defaultTimeoutInterval = 20000;
   beforeEach(function(done){
     fixture.deleteDB(function(err){
       fixture.seedUser(function(err, user){
@@ -38,15 +39,25 @@ describe("An image", function() {
       done();
     });
   });
-  it("url can be retrieved after upload", function(done) {
+  it("can be retrieved after upload", function(done) {
     agent
-    .get(URL + '/images/' + image.id)
-    .send({ access_token: seedUser.token })
+    .post(URL + '/images')
+    .field('access_token', seedUser.token)
+    .attach('file', './specs/integration/images/test.png')
     .end(function(res){
-      //console.log(res.body);
       expect(res.status).toEqual(200);
-      expect(res.body.url).toEqual(cloudinary.url(image.id));
-      done();
+      expect(res.body._id).toBeDefined();
+      // save the image id for future use
+      image.id = res.body._id;
+      agent
+      .get(URL + '/images/' + image.id)
+      .send({ access_token: seedUser.token })
+      .end(function(res){
+        //console.log(res.body);
+        expect(res.status).toEqual(200);
+        expect(res.body.url).toBeDefined();
+        done();
+      });
     });
   });
 });

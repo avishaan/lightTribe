@@ -13,7 +13,7 @@ var reviewSchema = new mongoose.Schema({
   datetime: { type: Date },
   location: { type: String },
   images: [
-    { type: String }
+    { type: String, ref: 'Image' }
   ],
   submitter: { type: String },
 });
@@ -45,7 +45,7 @@ reviewSchema.statics.createReview = function(options, cb) {
       cb(null, savedReview);
     } else {
       logger.error(err);
-      cb({err: err, clientMsg: 'Something broke, try again'}, null);
+      cb(err);
     }
   });
 };
@@ -60,13 +60,33 @@ reviewSchema.statics.createReview = function(options, cb) {
 reviewSchema.statics.readReview = function(options, cb) {
   var id = options.id;
   // see if review exists, if so pass error
-  Review.find({id: id}, function(err, review){
-    if (!err && review){
+  Review.findOne({_id: id}, function(err, review){
+    if (!err){
       cb(null, review);
-    } else if (!err && !review){
-      // need to register before using the app
-      logger.error('review doesn not exist');
-      cb({err: 'review does not exist', clientMsg: 'Review no longer exists'});
+    } else {
+      // we had some sort of database error
+      logger.error(err);
+      cb({err: err, clientMsg: 'Something broke, try again'}, null);
+    }
+  });
+};
+
+/**
+ * Read all reviews for a user
+ * @param {object} options The options for the lookup
+ * @config {string} options.userId user id of the user for which you want reviews
+ * @param {function} cb
+ * @config {object} reviews
+ * @config {object} err Passed Error
+ */
+reviewSchema.statics.readAllReviews = function(options, cb) {
+  // see if review exists, if so pass error
+  Review
+  .find({submitter: options.userId})
+  //.populate('images')
+  .exec(function(err, reviews){
+    if (!err){
+      cb(null, reviews);
     } else {
       // we had some sort of database error
       logger.error(err);

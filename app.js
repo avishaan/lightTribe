@@ -15,19 +15,50 @@ var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
 var basicAuth = require('./auths/basic.js');
+var localAuth = require('./auths/local.js');
 var facebookAuth = require('./auths/facebook.js');
 var tokenAuth = require('./auths/token.js');
 var _ = require('underscore');
 var prettyjson = require('prettyjson');
 
 
-// Use the BasicStrategy within Passport.
+// debugging to send request as response like a mirror
+app.use('/api/dev/mirror', function(req, res){
+  req.rawBody = '';
+  req.setEncoding('utf8');
+
+  req.on('data', function(chunk) {
+    req.rawBody += chunk;
+  });
+  req.on('end', function() {
+    var response = {
+      raw: {
+        body: req.rawBody,
+        headers: req.rawHeaders,
+        trailers: req.rawTrailers,
+        method: req.method,
+        baseURL: req.baseUrl,
+        originalURL: req.originalUrl
+      },
+      parse: {
+        body: JSON.parse(req.rawBody),
+        url: {
+          access_token: req.param('access_token')
+        }
+      }
+    };
+    console.log(response);
+    res.send(response);
+  });
+});
+
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object.
 passport.use(basicAuth);
 passport.use(facebookAuth);
 passport.use(tokenAuth);
+passport.use(localAuth);
 
 app.use(passport.initialize());
 
@@ -86,6 +117,11 @@ app.use(function(req, res, next){
       return passport.authenticate('facebook-token', { session: false })(req, res, next);
     } else if (req.swagger.operation.security[0].hasOwnProperty('tokenAuth')){
       return passport.authenticate('bearer', { session: false })(req, res, next);
+    } else if (req.swagger.operation.security[0].hasOwnProperty('localAuth')){
+      return passport.authenticate('local', { session: false })(req, res, next);
+    } else {
+      // this is if we have security but can't match the paramater
+      return next(new Error('could not find auth method'));
     }
   } else {
     return next();
@@ -115,15 +151,7 @@ app.use(function(req, res, next){
 // mainly for when swaggerValidate is true since it doesn't tell us the specific error
 app.use(function(err, req, res, next){
   if (err){
-    console.log(prettyjson.render({
-      code: err.code,
-      message: err.message,
-      failedValidation: err.failedValidation,
-      results: err.results,
-      path: err.path,
-      paramName: err.paramName,
-      url: req.url
-    }, {}));
+    console.log(prettyjson.render(err, {}));
   }
   next(err);
 });

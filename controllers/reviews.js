@@ -1,13 +1,29 @@
-var querystring = require('querystring');
 var logger = require('./../loggers/logger.js');
-var config = require('../config.js');
 var Review = require('../models/review.js');
+var async = require('async');
+
+var Promise = require('bluebird');
+Promise.promisifyAll(Review);
 
 module.exports.createReview = function createReview (req, res, next) {
   var review = req.swagger.params.review.value;
   // get the userid from the authenticated user, they are the one that submitted
   review.submitter = req.user.id;
-  Review.createReview(review, function(err, review){
+  Review
+  .createReviewAsync(review)
+  .then(function(review){
+    res.status(200).send(review);
+  })
+  .catch(function(err){
+    res.status(500).send(err);
+  });
+};
+
+module.exports.readReview = function readReview (req, res, next) {
+  var rid = req.swagger.params.rid.value;
+  logger.info('Lookup Review ' + rid);
+  // get the Review
+  Review.readReview({id: rid}, function(err, review){
     if (!err){
       res.status(200).send(review);
     } else {
@@ -16,17 +32,73 @@ module.exports.createReview = function createReview (req, res, next) {
   });
 };
 
-module.exports.readReview = function readReview (req, res, next) {
-  var rid = req.swagger.params.rid.value;
-  logger.info('Lookup user ' + rid);
-  // make sure to unescape any characters
-  rid = querystring.unescape(rid);
-  // get the user measurements
-  User.getMeasurements({phone: rid}, function(err, measurements){
+module.exports.readAllReviews = function readReviews (req, res, next) {
+  logger.info('Lookup All Reviews for user: ' + req.user.id);
+  var allReviews;
+  var reviewsWithImage= [];
+
+  async.series([
+  function(cb){
+    // get the Reviews
+    Review.readAllReviews({userId: req.user.id}, function(err, reviews){
+      if (!err){
+        allReviews = reviews;
+        cb(null);
+      } else {
+        cb(err);
+      }
+    });
+  },
+  function(cb){
+    //populate the images for the reviews
+    async.each(allReviews, function(review, callback){
+      Review.populate(review, {path: 'images'}, function(err, populatedReview){
+        if (!err) {
+          reviewsWithImage.push(populatedReview);
+          callback(null);
+        } else {
+          // this is technically incorrect name for this
+          // if the review doesn't have image use populated image due to incorrect objectid #24
+          // pretend the user didn't upload any images at all
+          review.set('images', []);
+          reviewsWithImage.push(review);
+          callback(null);
+        }
+      });
+    }, function(err){
+      cb(err);
+    });
+  },
+  function(cb){
+    allReviews = reviewsWithImage.map(function(review){
+      return review.toObject({ transform: hideProperties });
+    });
+    cb(null, allReviews);
+  }
+  ], function(err, results){
     if (!err){
-      res.status(200).send(measurements);
+      res.status(200).send(allReviews);
     } else {
       res.status(500).send(err);
     }
   });
+  var hideProperties = function (doc, obj, options){
+    // if ('function' == typeof doc.ownerDocument) {
+    if (doc.url && !doc.image) {
+      // should not have doc.image otherwise we are looking at review doc not image doc
+      // working with image subdoc
+      return {
+        url: obj.url
+      };
+    } else {
+      // working with doc
+      return {
+        _id: doc.id,
+        description: obj.description,
+        datetime: obj.datetime,
+        company: obj.company,
+        images: obj.images
+      };
+    }
+  };
 };

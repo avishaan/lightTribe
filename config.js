@@ -16,6 +16,11 @@ module.exports = function(){
         expressPort: 3000,
         loggerLevel: 'info',
         appName: 'Reviewly', // we use this for cloudinary name
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
@@ -27,7 +32,7 @@ module.exports = function(){
         },
         swagger: {
           // make sure responses to client are validated automatically against schema
-          validateResponse: true
+          validateResponse: false
         }
       };
     case "dev":
@@ -40,16 +45,22 @@ module.exports = function(){
         apiDomain : process.env.apiDomain,
         loggerLevel: 'info',
         appName: 'Reviewly',
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
-          cloudName: 'codeHatcher',
-          apiKey: '351392996945264'
+          cloud_name: 'codehatcher',
+          api_key: '351392996945264',
+          api_secret: process.env.cloudinarySecret
         },
         facebook: {
           clientID: '761889610566980',
           clientSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
         },
         swagger: {
-          validateResponse: true
+          validateResponse: false
         }
       };
     case "test":
@@ -62,12 +73,18 @@ module.exports = function(){
         apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
         appName: 'Reviewly',
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
-          cloudName: 'codeHatcher',
-          apiKey: '351392996945264'
+          cloud_name: 'codehatcher',
+          api_key: '351392996945264',
+          api_secret: process.env.cloudinarySecret
         },
         swagger: {
-          validateResponse: true
+          validateResponse: false
         }
       };
     case "prod":
@@ -80,9 +97,15 @@ module.exports = function(){
         apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
         appName: 'Reviewly',
+        google: {
+          places: {
+            apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
+          }
+        },
         cloudinary: {
-          cloudName: 'codeHatcher',
-          apiKey: '351392996945264'
+          cloud_name: 'codehatcher',
+          api_key: '351392996945264',
+          api_secret: process.env.cloudinarySecret
         },
         swagger: {
           validateResponse: false
