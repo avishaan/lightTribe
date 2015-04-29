@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Sugar Log</title>
+        <link rel="stylesheet" href="css/screen.css">
+        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+    </head>
+    <body>
+        <header>
+            <h1>Sugar Log</h1>
+            <hr>
+        </header>
+
+        <div class='container-fluid' id='template'>
+            <div class="row">
+                <div class ="col-sm-5">
+                    <h4 class='title'>Sugar Log</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class ="col-sm-10">
+                    <form class="form-horizontal" role="form" id="templateView"></form>
+                </div>
+            </div>
+        </div>
+        <div>
+          <a href="#/phone/18001231234" role="button" class="btn btn-success" id="phone">Check Patient</a>
+        </div>
+
+        <footer>
+            <table border="0" style="margin-left:auto; margin-right:auto;">
+                <tr><td><span>&copy;</span> 2014 by Sugar Sugar Honey Honey Corp.<span>&trade;</span></td></tr>
+                <tr><td><a href="index.html">http://codehatcher.com</a></td></tr>
+            </table>
+        </div>
+        </footer>
+
+        <script type="text/template" id="submitButtonTemplate">
+          <button type="button" class="btn btn-success" id="submit">Submit</button>
+        </script>
+        
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="libs/underscore/underscore.js"></script>
+        <script src="libs/backbone/backbone.js"></script>
+        
+        <script src="js/models/measurement.js"></script>
+        <script src="js/collections/measurements.js"></script>
+        <script src="js/views/appView.js"></script>
+        <script src="js/routers/router.js"></script>
+        
+        <script src="js/app.js"></script>
+    </body>
+</html>

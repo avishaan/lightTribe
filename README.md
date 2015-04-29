@@ -1,17 +1,47 @@
+Reviewly
+========
 
-## Who else is on the team (marketing, member onboarding)
-- timelines of when to get them
-- something else
+Connect, Mongoose, Node, Swagger
 
-## Markets to focus estimates of those markets
+the following is a general backend written in node to add, remove, and edit models.
+Technology/Players
+----------------------
+- Express as the web application framework.
+- Connect as the web application framework.
+- Node.js as the server platform.
+- Swagger for the REST interface specs.
+- Jasmine as the testing framework.
+- Mongoose as the object modeler for Node.js.
+- MongoDB as the x-platform document based noSQL database.
+- Istanbul as the code coverage assessment tool
 
-## Testing and flexibility/changes
+Documentation
+----------------------
+Each route takes the format of domain/version/route
+The route is located in the route documentation.
+The version differences are specified in each route.
 
-## Development and time, dev location
+- Code Coverage(via Istanbul)
+  - [Code Coverage Reports](./coverage/lcov-report/index.html)
 
-## Equity/money
+- Route Documentation
+- visit http://reviewly.herokuapp.com/docs to see the documentation
+- [Connecting Routes to Interface (Right Click and Save-As)](./docs/integrations/integration.pdf)
+- [Design Composition (Right Click and Save-As)](./docs/design/skinnedWireframe.psd)
 
-## Want to understand the process as it has grown to this point, all the in between points
-- also for each change in direction, what was the cause/realization regarding that change
+Test Cases
+----------------------
+Test cases are bundled into logical groups
 
-## Start from a requirement perspective and then pick the implementation accordingly
+TODO
+----------------------
+- [ ] todo list template
+- [ ] use swagger schema for jasmine test cases
+- [ ] similar to tablo, describe how authentication works for the front end users
+
+Context
+----------------------
+- keep exploring why caching the auth headers occur when looking for a token, currently sending 401 and body
+- consider switching from auth headers to auth in the body
+- keep working on promises, specifically the user.checkAuthentication function
+- when image id doesn't actually exist still return something for the url for the images
