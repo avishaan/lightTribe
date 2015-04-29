@@ -1,0 +1,30 @@
+body {
+    background-color: #eee;
+}
+
+header{
+   text-align: center;
+}
+
+footer{
+   bottom: 0;
+   color: #0;
+   font-size: 80%;
+   z-index: 0;
+   position: absolute;
+   text-align:center;
+   bottom: 1%;
+   width: 20%;
+   right: 40%;
+}
+
+#contract{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.title{
+    text-align: center;
+    text-decoration: underline;
+}

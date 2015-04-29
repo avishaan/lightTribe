@@ -1,0 +1,30 @@
+{
+  "name": "node-sublease",
+  "version": "0.0.1",
+  "authors": [
+    "Avishaan <avishaan@codeHatcher.com>"
+  ],
+  "description": "make arbitrary contracts from right ehre",
+  "main": "index.html",
+  "keywords": [
+    "hexna",
+    "sublease"
+  ],
+  "license": "Private",
+  "homepage": "codehatcher.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "underscore": "~1.7.0",
+    "backbone": "~1.1.2",
+    "bootstrap": "~3.2.0",
+    "highcharts": "~4.0.4"
+  }
+}

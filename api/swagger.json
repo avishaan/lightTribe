@@ -1,0 +1,527 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Reviewly",
+    "description": "Keep track of your reviews",
+    "version": "0.1"
+  },
+  "host": "localhost:3000",
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "text/plain",
+    "text/html"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/v1/reviews/{rid}": {
+      "get": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readReview",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["review"],
+        "description": "Read a specific review by id",
+        "parameters": [
+          {
+            "name": "rid",
+            "in": "path",
+            "description": "Review ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        }
+      }
+    },
+    "/v1/reviews": {
+      "post": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "createReview",
+        "tags": ["reviews"],
+        "description": "Create a new review",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "body",
+            "description": "Review information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        }
+      }
+    },
+    "/v1/images": {
+      "post": {
+        "x-swagger-router-controller": "images",
+        "operationId": "createImage",
+        "tags": ["images"],
+        "description": "Upload image",
+        "consumes": [
+          "multipart/form-data",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "description": "Image information",
+            "required": false
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "id": "string"
+            }
+          }
+        }
+      }
+    },
+    "/v1/images/{iid}": {
+      "get": {
+        "x-swagger-router-controller": "images",
+        "operationId": "readImageURL",
+        "tags": ["images"],
+        "description": "Return URL of image given specific image identifier",
+        "parameters": [
+          {
+            "name": "iid",
+            "in": "path",
+            "type": "string",
+            "description": "Image Identifier"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "url": "string"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "registerUser",
+        "tags": ["users"],
+        "description": "Register a new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "The user information for registration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "_id": "string"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/{uid}": {
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "profile",
+        "tags": ["users"],
+        "description": "Read profile of single user by passing in a username",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "description": "Read the profile of a specific username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/userProfile"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auths/basic": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "basic",
+        "tags": ["auths"],
+        "description": "Provide username and password to get auth token",
+        "parameters": [
+          {}
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/InternalToken"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auths/facebook": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "facebook",
+        "tags": ["auths"],
+        "description": "Facebook authentication",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Facebook Token",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FacebookToken"
+            }
+          }
+        ],
+        "security": [
+          {
+            "facebookAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/400Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/InternalToken"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    },
+    "tokenAuth": {
+      "type": "apiKey",
+      "description": "Built in token auth",
+      "name": "access_token",
+      "in": "query"
+    },
+    "facebookAuth": {
+      "type": "apiKey",
+      "description": "Facebook token auth using passport-facebook-token",
+      "name": "access_token",
+      "in": "query"
+    }
+  },
+  "definitions": {
+    "basicAuth": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "apiKey": {
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "Review": {
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "location": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "submitter": {
+          "type": "string"
+        }
+      },
+      "required": ["company", "description"]
+    },
+    "InternalToken": {
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "FacebookToken": {
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "userProfile": {
+      "properties": {
+        "measurements": {
+          "description": "User profile measurements",
+          "type": "object",
+          "$ref": "#/definitions/userMeasurements",
+          "required": ["waist", "hips"]
+        }
+      },
+      "example": {
+        "measurements": {
+          "waist": "32.2",
+          "hips": "36.2",
+          "thighs": "34.1",
+          "calves": "12.9",
+          "length": "32.0",
+          "inseam": "28.3"
+        },
+        "status": {
+          "received": "yes",
+          "measured": "pending"
+        }
+      }
+    },
+    "userMeasurements": {
+      "properties": {
+        "waist": {
+          "description": "User waist measurement",
+          "type": "number"
+        },
+        "hips": {
+          "description": "User hips measurement",
+          "type": "number"
+        },
+        "thighs": {
+          "description": "User thighs measurement",
+          "type": "number"
+        },
+        "calves": {
+          "description": "User calves measurement",
+          "type": "number"
+        },
+        "length": {
+          "description": "User length measurement",
+          "type": "number"
+        },
+        "inseam": {
+          "description": "User inseam measurement",
+          "type": "number"
+        }
+      },
+      "example": {
+        "waist": "32.2",
+        "hips": "36.2",
+        "thighs": "34.1",
+        "calves": "12.9",
+        "length": "32.0",
+        "inseam": "28.3"
+      }
+    },
+    "UserRegistration": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Ok": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "401Response": {
+      "properties": {
+      }
+    },
+    "400Response": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "Error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    }
+  }
+}
+
