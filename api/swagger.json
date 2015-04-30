@@ -280,7 +280,7 @@
         "x-swagger-router-controller": "users",
         "operationId": "registerUser",
         "tags": ["users"],
-        "description": "Register a new user",
+        "description": "Register a new user and their information",
         "parameters": [
           {
             "name": "user",
@@ -305,17 +305,17 @@
         }
       }
     },
-    "/v1/users/{username}": {
+    "/v1/users/{userId}": {
       "get": {
         "x-swagger-router-controller": "users",
         "operationId": "profile",
         "tags": ["users"],
-        "description": "Read profile of single user by passing in a username",
+        "description": "Get information about the user and their settings. This is different than the profile which is the public page of the user",
         "parameters": [
           {
-            "name": "username",
+            "name": "userId",
             "in": "path",
-            "description": "Read the profile of a specific username",
+            "description": "User Id of the user you are querying",
             "required": true,
             "type": "string"
           },
