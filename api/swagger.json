@@ -682,7 +682,7 @@
       },
       "required": ["_id"]
     },
-    "CreatePost": {
+    "CreateComment": {
       "properties": {
         "text": {
           "type": "string",
