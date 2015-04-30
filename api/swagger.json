@@ -876,7 +876,8 @@
         "interests": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Interest"
+            "type": "string",
+            "example": "bikramYoga"
           }
         },
         "auths": {
