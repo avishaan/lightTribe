@@ -201,7 +201,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadUser"
+                "$ref": "#/definitions/ReadUserProfile"
               }
             }
           }
@@ -329,7 +329,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "#/definitions/ReadPost"
+              "$ref": "#/definitions/ReadOnePost"
             }
           }
         }
@@ -337,8 +337,8 @@
     },
     "/v1/posts": {
       "get": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "readAllReviews",
+        "x-swagger-router-controller": "posts",
+        "operationId": "readAllPosts",
         "security": [
           {
             "tokenAuth": []
@@ -708,6 +708,25 @@
           "example": "This is a very relavent post to me",
           "description": "Text body of the post a user may create"
         },
+        "user": {
+          "description": "User information",
+          "type": "object",
+          "$ref": "#/definitions/ReadUserBasic"
+        }
+      },
+      "required": ["_id"]
+    },
+    "ReadOnePost": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        },
         "logitude": {
           "type": "string",
           "example": "100.000",
@@ -736,7 +755,7 @@
         "user": {
           "description": "User information",
           "type": "object",
-          "$ref": "#/definitions/ReadUser"
+          "$ref": "#/definitions/ReadUserBasic"
         },
         "lastLogin": {
           "type": "string",
@@ -831,7 +850,21 @@
         }
       }
     },
-    "ReadUser": {
+    "ReadUserBasic": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of the profile thumbnail",
+          "example": "http://www.google.com/image.png"
+        }
+      }
+    },
+    "ReadUserProfile": {
       "properties": {
         "username": {
           "type": "string",
