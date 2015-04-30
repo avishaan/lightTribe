@@ -122,7 +122,7 @@
         }
       }
     },
-    "/v1/reviews": {
+    "/v1/posts": {
       "get": {
         "x-swagger-router-controller": "reviews",
         "operationId": "readAllReviews",
@@ -131,8 +131,8 @@
             "tokenAuth": []
           }
         ],
-        "tags": ["reviews"],
-        "description": "Read all posts relevant to the user",
+        "tags": ["posts"],
+        "description": "Get all posts that are relevant to the user",
         "parameters": [
           {
             "name": "access_token",
@@ -455,12 +455,38 @@
         }
       }
     },
-    "CreatePost": {
+    "ReadPost": {
       "properties": {
         "_id": {
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
         },
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        },
+        "logitude": {
+          "type": "string",
+          "example": "100.000",
+          "description": "Logitude of the GPS coordinate"
+        },
+        "latitude": {
+          "type": "string",
+          "example": "100.000",
+          "description": "Latitude of the GPS coordinate"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageURL"
+          }
+        }
+      },
+      "required": ["text", "logitude", "latitude"]
+    },
+    "CreatePost": {
+      "properties": {
         "text": {
           "type": "string",
           "example": "This is a very relavent post to me",
