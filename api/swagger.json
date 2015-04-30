@@ -547,7 +547,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "#/definitions/ReadUser"
+              "$ref": "#/definitions/ReadUserSettings"
             }
           }
         }
@@ -855,6 +855,37 @@
         }
       }
     },
+    "ReadUserSettings": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of the profile thumbnail",
+          "example": "http://www.google.com/image.png"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "interests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Interest"
+          }
+        },
+        "auths": {
+          "description": "Auth methods hooked up",
+          "type": "object",
+          "$ref": "#/definitions/Auth"
+        }
+      }
+    },
     "ReadUser": {
       "properties": {
         "username": {
@@ -899,6 +930,20 @@
         "reviews": "12",
         "points": "14",
         "rank": "Newbie"
+      }
+    },
+    "Auth": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of authentication method",
+          "example": "facebook"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether method is hooked up",
+          "example": "true"
+        }
       }
     },
     "UserCredentials": {
