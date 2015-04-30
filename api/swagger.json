@@ -208,20 +208,20 @@
         }
       }
     },
-    "/v1/posts": {
+    "/v1/posts/{postId}/comments": {
       "post": {
         "x-swagger-router-controller": "reviews",
         "operationId": "createReview",
-        "tags": ["reviews"],
-        "description": "Create a new post",
+        "tags": ["comments"],
+        "description": "Create a new comment on a specific post",
         "parameters": [
           {
-            "name": "review",
+            "name": "comment",
             "in": "body",
-            "description": "Review information",
+            "description": "Comment body payload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreatePost"
+              "$ref": "#/definitions/CreateComment"
             }
           },
           {
@@ -638,6 +638,16 @@
         }
       },
       "required": ["_id"]
+    },
+    "CreatePost": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "This is an example of the comment text",
+          "description": "Text of the comment posted by the user"
+        }
+      },
+      "required": ["text"]
     },
     "ReadPost": {
       "properties": {
