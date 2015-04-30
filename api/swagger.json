@@ -18,7 +18,7 @@
   ],
   "basePath": "/api",
   "paths": {
-    "/v1/search/{term}": {
+    "/v1/posts/": {
       "get": {
         "x-swagger-router-controller": "searches",
         "operationId": "searchCompany",
@@ -27,15 +27,15 @@
             "tokenAuth": []
           }
         ],
-        "tags": ["search"],
-        "description": "Search for a company by name",
+        "tags": ["posts"],
+        "description": "Search for a post",
         "parameters": [
           {
-            "name": "term",
-            "in": "path",
-            "description": "Search term of company you are looking for",
-            "required": true,
-            "type": "string"
+            "name": "terms",
+            "in": "query",
+            "description": "Search terms you are looking for",
+            "required": false,
+            "type": "number"
           },
           {
             "name": "radius",
@@ -47,7 +47,7 @@
           {
             "name": "loc",
             "in": "query",
-            "description": "Coorindates you are looking for ex: 0,0",
+            "description": "Coordinates to set as your center",
             "required": false,
             "type": "string"
           },
@@ -75,7 +75,7 @@
         }
       }
     },
-    "/v1/reviews/{rid}": {
+    "/v1/posts/{postId}": {
       "get": {
         "x-swagger-router-controller": "reviews",
         "operationId": "readReview",
@@ -84,13 +84,13 @@
             "tokenAuth": []
           }
         ],
-        "tags": ["reviews"],
-        "description": "Read a specific review by id",
+        "tags": ["posts"],
+        "description": "Read specific post by id",
         "parameters": [
           {
-            "name": "rid",
+            "name": "postId",
             "in": "path",
-            "description": "Review ID",
+            "description": "Post Id",
             "required": true,
             "type": "string"
           },
@@ -125,7 +125,7 @@
           }
         ],
         "tags": ["reviews"],
-        "description": "Read all reviews for a user",
+        "description": "Read all posts relevant to the user",
         "parameters": [
           {
             "name": "access_token",
@@ -154,7 +154,7 @@
         "x-swagger-router-controller": "reviews",
         "operationId": "createReview",
         "tags": ["reviews"],
-        "description": "Create a new review",
+        "description": "Create a new post",
         "parameters": [
           {
             "name": "review",
@@ -447,6 +447,33 @@
           "type": "string"
         }
       }
+    },
+    "Posts": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "description": {
+          "type": "string",
+          "example": "This is a very relavent post to me"
+        },
+        "logitude": {
+          "type": "string",
+          "example": "Logitude of the GPS coordinate"
+        },
+        "latitude": {
+          "type": "string",
+          "example": "Latitude of the GPS coordinate"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageURL"
+          }
+        }
+      },
+      "required": ["_id"]
     },
     "Reviews": {
       "properties": {
