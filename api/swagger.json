@@ -165,6 +165,49 @@
         }
       }
     },
+    "/v1/posts/{postId}/users": {
+      "get": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readReview",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users"],
+        "description": "Read all the users in a given post who have commented",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "Post Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadUser"
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/posts/{postId}/comments": {
       "get": {
         "x-swagger-router-controller": "reviews",
@@ -504,7 +547,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "$ref": "#/definitions/userResponse"
+              "$ref": "#/definitions/ReadUser"
             }
           }
         }
@@ -685,10 +728,10 @@
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
         },
-        "username": {
-          "type": "string",
-          "example": "codeHatcher",
-          "description": "username of the user"
+        "user": {
+          "description": "User information",
+          "type": "object",
+          "$ref": "#/definitions/ReadUser"
         },
         "lastLogin": {
           "type": "string",
@@ -812,30 +855,28 @@
         }
       }
     },
-    "userResponse": {
+    "ReadUser": {
       "properties": {
         "username": {
+          "type": "string",
           "description": "Username of the user",
-          "type": "string"
+          "example": "codeHatcher"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of the profile thumbnail",
+          "example": "http://www.google.com/image.png"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
         },
         "profile": {
           "description": "User Profile Information",
           "type": "object",
           "$ref": "#/definitions/userProfile"
-        }
-      },
-      "example": {
-        "measurements": {
-          "waist": "32.2",
-          "hips": "36.2",
-          "thighs": "34.1",
-          "calves": "12.9",
-          "length": "32.0",
-          "inseam": "28.3"
-        },
-        "status": {
-          "received": "yes",
-          "measured": "pending"
         }
       }
     },
