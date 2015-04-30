@@ -18,6 +18,46 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/v1/profile/{userId}": {
+      "get": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readReview",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["profile"],
+        "description": "Read public profile of a user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Unique Id of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/ReadProfile"
+            }
+          }
+        }
+      }
+    },
     "/v1/posts/": {
       "get": {
         "x-swagger-router-controller": "searches",
@@ -481,6 +521,30 @@
           "items": {
             "$ref": "#/definitions/ImageURL"
           }
+        }
+      },
+      "required": ["_id"]
+    },
+    "ReadProfile": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "username": {
+          "type": "string",
+          "example": "codeHatcher",
+          "description": "username of the user"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "categories": {
+          "type": "string",
+          "example": "",
+          "description": "Post categories along with number of posts of that category"
         }
       },
       "required": ["_id"]
