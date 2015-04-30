@@ -249,9 +249,7 @@
             }
           }
         }
-      }
-    },
-    "/v1/posts/{postId}/comments": {
+      },
       "post": {
         "x-swagger-router-controller": "reviews",
         "operationId": "createReview",
