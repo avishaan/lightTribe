@@ -236,7 +236,7 @@
         }
       }
     },
-    "/v1/images/{iid}": {
+    "/v1/images/{imageId}": {
       "get": {
         "x-swagger-router-controller": "images",
         "operationId": "readImageURL",
@@ -244,10 +244,10 @@
         "description": "Return URL of image given specific image identifier",
         "parameters": [
           {
-            "name": "iid",
+            "name": "imageId",
             "in": "path",
             "type": "string",
-            "description": "Image Identifier"
+            "description": "Image unique id"
           },
           {
             "name": "access_token",
