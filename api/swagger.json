@@ -787,39 +787,6 @@
         }
       }
     },
-    "Review": {
-      "properties": {
-        "company": {
-          "type": "string",
-          "example": "Starbucks, Polk Street"
-        },
-        "description": {
-          "type": "string",
-          "example": "My coffee was too cold and too sweet"
-        },
-        "rating": {
-          "type": "number",
-          "example": 2
-        },
-        "images": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "54f44c5d26352b1b9755b12f"
-          }
-        },
-        "datetime": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2015-03-04T07:36:56.224Z"
-        },
-        "location": {
-          "type": "string",
-          "example": "50.3 -120.5"
-        }
-      },
-      "required": ["company", "description"]
-    },
     "InternalToken": {
       "properties": {
         "token": {
