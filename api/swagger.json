@@ -448,23 +448,26 @@
         }
       }
     },
-    "Posts": {
+    "CreatePost": {
       "properties": {
         "_id": {
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
         },
-        "description": {
+        "text": {
           "type": "string",
-          "example": "This is a very relavent post to me"
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
         },
         "logitude": {
           "type": "string",
-          "example": "Logitude of the GPS coordinate"
+          "example": "100.000",
+          "description": "Logitude of the GPS coordinate"
         },
         "latitude": {
           "type": "string",
-          "example": "Latitude of the GPS coordinate"
+          "example": "100.000",
+          "description": "Latitude of the GPS coordinate"
         },
         "images": {
           "type": "array",
@@ -473,7 +476,7 @@
           }
         }
       },
-      "required": ["_id"]
+      "required": ["text", "logitude", "latitude"]
     },
     "Reviews": {
       "properties": {
