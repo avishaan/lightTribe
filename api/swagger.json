@@ -45,9 +45,16 @@
             "type": "number"
           },
           {
-            "name": "loc",
+            "name": "latitude",
             "in": "query",
-            "description": "Coordinates to set as your center",
+            "description": "Latitude for the search center",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "logitude",
+            "in": "query",
+            "description": "Logitude for the search center",
             "required": false,
             "type": "string"
           },
