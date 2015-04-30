@@ -58,6 +58,49 @@
         }
       }
     },
+    "/v1/profile/{userId}/posts": {
+      "get": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readReview",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["profile"],
+        "description": "Read public profile posts the user has made",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Unique Id of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadPost"
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/posts/": {
       "get": {
         "x-swagger-router-controller": "searches",
