@@ -151,7 +151,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Reviews"
+                "$ref": "#/definitions/ReadPost"
               }
             }
           }
@@ -169,7 +169,7 @@
             "description": "Review information",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Review"
+              "$ref": "#/definitions/CreatePost"
             }
           },
           {
@@ -483,7 +483,7 @@
           }
         }
       },
-      "required": ["text", "logitude", "latitude"]
+      "required": ["_id"]
     },
     "CreatePost": {
       "properties": {
