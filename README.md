@@ -41,5 +41,7 @@ Context
 ----------------------
 - keep exploring why caching the auth headers occur when looking for a token, currently sending 401 and body
 - consider switching from auth headers to auth in the body
-- keep working on promises, specifically the user.checkAuthentication function
 - when image id doesn't actually exist still return something for the url for the images
+- add fake data mockup to other controllers
+- try to embed object/property value in swagger without complex references
+- convert to promises when possible
