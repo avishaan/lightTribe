@@ -259,6 +259,13 @@
         "description": "Create a new comment on a specific post",
         "parameters": [
           {
+            "name": "postId",
+            "in": "path",
+            "description": "Post Id",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "comment",
             "in": "body",
             "description": "Comment body payload",
