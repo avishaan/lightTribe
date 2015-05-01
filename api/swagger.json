@@ -754,7 +754,7 @@
         },
         "categories": {
           "type": "string",
-          "example": "",
+          "example": "still in initial phase",
           "description": "Post categories along with number of posts of that category"
         }
       },
