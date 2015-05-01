@@ -710,8 +710,36 @@
         },
         "user": {
           "description": "User information",
-          "type": "object",
-          "$ref": "#/definitions/ReadUserBasic"
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user",
+              "example": "codeHatcher"
+            },
+            "thumbnail": {
+              "type": "string",
+              "description": "URL of the profile thumbnail",
+              "example": "http://www.google.com/image.png"
+            },
+            "lastLogin": {
+              "type": "string",
+              "format": "date-time",
+              "description": "last time the user was loggged in",
+              "example": "2015-03-04T07:36:56.224Z"
+            },
+            "interests": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "bikramYoga"
+              }
+            },
+            "auths": {
+              "description": "Auth methods hooked up",
+              "type": "object",
+              "$ref": "#/definitions/Auth"
+            }
+          }
         }
       },
       "required": ["_id"]
