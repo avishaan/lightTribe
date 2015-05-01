@@ -803,6 +803,7 @@
       "required": ["text", "logitude", "latitude"]
     },
     "ImageURL": {
+      "description": "URL of resolved image",
       "properties": {
         "url": {
           "type": "string",
