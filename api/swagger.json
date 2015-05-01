@@ -878,8 +878,18 @@
         },
         "auths": {
           "description": "Auth methods hooked up",
-          "type": "object",
-          "$ref": "#/definitions/Auth"
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of authentication method",
+              "example": "facebook"
+            },
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether method is hooked up",
+              "example": "true"
+            }
+          }
         }
       }
     },
@@ -941,20 +951,6 @@
         "reviews": "12",
         "points": "14",
         "rank": "Newbie"
-      }
-    },
-    "Auth": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of authentication method",
-          "example": "facebook"
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether method is hooked up",
-          "example": "true"
-        }
       }
     },
     "UserCredentials": {
