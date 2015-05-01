@@ -479,7 +479,12 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "url": "string"
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "URL string where image is located"
+                }
+              }
             }
           },
           "401": {
