@@ -94,7 +94,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadPost"
+                "$ref": "#/definitions/ReadOnePost"
               }
             }
           }
@@ -364,7 +364,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadPost"
+                "$ref": "#/definitions/ReadOnePost"
               }
             }
           }
@@ -702,53 +702,6 @@
       },
       "required": ["text"]
     },
-    "ReadPost": {
-      "properties": {
-        "_id": {
-          "type": "string",
-          "example": "54f44c5d26352b1b9755b12f"
-        },
-        "text": {
-          "type": "string",
-          "example": "This is a very relavent post to me",
-          "description": "Text body of the post a user may create"
-        },
-        "user": {
-          "description": "User information",
-          "properties": {
-            "username": {
-              "type": "string",
-              "description": "Username of the user",
-              "example": "codeHatcher"
-            },
-            "thumbnail": {
-              "type": "string",
-              "description": "URL of the profile thumbnail",
-              "example": "http://www.google.com/image.png"
-            },
-            "lastLogin": {
-              "type": "string",
-              "format": "date-time",
-              "description": "last time the user was loggged in",
-              "example": "2015-03-04T07:36:56.224Z"
-            },
-            "interests": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "example": "bikramYoga"
-              }
-            },
-            "auths": {
-              "description": "Auth methods hooked up",
-              "type": "object",
-              "$ref": "#/definitions/Auth"
-            }
-          }
-        }
-      },
-      "required": ["_id"]
-    },
     "ReadOnePost": {
       "properties": {
         "_id": {
@@ -770,6 +723,10 @@
           "example": "100.000",
           "description": "Latitude of the GPS coordinate"
         },
+        "user": {
+          "description": "User information",
+          "$ref": "#/definitions/ReadUserForPost"
+        },
         "images": {
           "type": "array",
           "items": {
@@ -788,7 +745,7 @@
         "user": {
           "description": "User information",
           "type": "object",
-          "$ref": "#/definitions/ReadUserBasic"
+          "$ref": "#/definitions/ReadUserForPost"
         },
         "lastLogin": {
           "type": "string",
@@ -893,7 +850,7 @@
         }
       }
     },
-    "ReadUserBasic": {
+    "ReadUserForPost": {
       "properties": {
         "username": {
           "type": "string",
@@ -904,6 +861,12 @@
           "type": "string",
           "description": "URL of the profile thumbnail",
           "example": "http://www.google.com/image.png"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
         }
       }
     },
@@ -1003,4 +966,3 @@
     }
   }
 }
-
