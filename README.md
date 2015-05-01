@@ -45,3 +45,4 @@ Context
 - add fake data mockup to other controllers
 - try to embed object/property value in swagger without complex references
 - convert to promises when possible
+- swagger-ui using github as the host
