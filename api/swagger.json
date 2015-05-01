@@ -244,7 +244,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadComment"
+                "$ref": "#/definitions/ReadOneComment"
               }
             }
           }
@@ -673,16 +673,32 @@
         }
       }
     },
-    "ReadComment": {
+    "ReadOneComment": {
       "properties": {
         "_id": {
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
         },
         "user": {
-          "type": "string",
-          "example": "User information, needs to be an object",
-          "description": "Object example"
+          "description": "User information for a comment",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user",
+              "example": "codeHatcher"
+            },
+            "thumbnail": {
+              "type": "string",
+              "description": "URL of the profile thumbnail",
+              "example": "http://www.google.com/image.png"
+            },
+            "lastLogin": {
+              "type": "string",
+              "format": "date-time",
+              "description": "last time the user was loggged in",
+              "example": "2015-03-04T07:36:56.224Z"
+            }
+          }
         },
         "text": {
           "type": "string",
@@ -890,7 +906,6 @@
         },
         "profile": {
           "description": "User Profile Information",
-          "type": "object",
           "$ref": "#/definitions/userProfile"
         }
       }
