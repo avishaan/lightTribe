@@ -724,7 +724,7 @@
           "description": "Latitude of the GPS coordinate"
         },
         "user": {
-          "description": "User information",
+          "description": "Basic user information",
           "$ref": "#/definitions/ReadUserForPost"
         },
         "images": {
