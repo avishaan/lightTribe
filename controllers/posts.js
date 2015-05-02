@@ -10,6 +10,7 @@ module.exports.createPost = function (req, res, next) {
   // get the userid from the authenticated user, they are the one that submitted
   post.author = req.user.id;
   res.status(200).send({
+    _id: "123",
     text: post.text,
     images: post.images,
     latitude: post.latitude,
