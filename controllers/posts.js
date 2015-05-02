@@ -5,6 +5,27 @@ var async = require('async');
 var Promise = require('bluebird');
 Promise.promisifyAll(Review);
 
+module.exports.createPost = function (req, res, next) {
+  var post = req.swagger.params.post.value;
+  // get the userid from the authenticated user, they are the one that submitted
+  post.author = req.user.id;
+  res.status(200).send({
+    text: post.text,
+    images: post.images,
+    latitude: post.latitude,
+    longitude: post.longitude,
+    author: post.author
+  });
+  // Review
+  // .createReviewAsync(review)
+  // .then(function(review){
+  //   res.status(200).send(review);
+  // })
+  // .catch(function(err){
+  //   res.status(500).send(err);
+  // });
+};
+
 module.exports.createReview = function createReview (req, res, next) {
   var review = req.swagger.params.review.value;
   // get the userid from the authenticated user, they are the one that submitted

@@ -377,7 +377,7 @@
         "description": "Create a new post",
         "parameters": [
           {
-            "name": "review",
+            "name": "post",
             "in": "body",
             "description": "Review information",
             "required": true,
