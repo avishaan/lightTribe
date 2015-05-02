@@ -12,7 +12,7 @@ var post = {
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
   latitude: '1234.5',
-  logitude: '1234.5'
+  longitude: '1234.5'
 };
 
 describe("Creating a post", function() {
@@ -61,17 +61,18 @@ describe("Creating a post", function() {
     .send({ access_token: seedUser.token })
     .end(function(res){
       var body = res.body;
+      console.log(body);
       expect(res.status).toEqual(200);
       expect(body._id).toBeDefined();
       expect(body.text).toEqual(post.text);
       expect(body.images).toEqual(post.images);
       expect(body.latitude).toEqual(post.latitude);
-      expect(body.logitude).toEqual(post.logitude);
-      expect(body.submitter).toEqual(seedUser.id);
+      expect(body.longitude).toEqual(post.longitude);
+      expect(body.author).toEqual(seedUser.id);
       done();
     });
   });
-  it("should require a text field to be filled out", function(done) {
+  xit("should require a text field to be filled out", function(done) {
     agent
     .post(URL + '/posts')
     .set('Content-Type', 'application/json')
