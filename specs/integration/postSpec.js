@@ -89,7 +89,8 @@ describe("Creating a post", function() {
   });
 });
 
-describe("Posts", function() {
+//TODO remove this for production
+xdescribe("Posts", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){
