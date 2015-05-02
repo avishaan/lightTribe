@@ -135,7 +135,7 @@
             "type": "string"
           },
           {
-            "name": "logitude",
+            "name": "longitude",
             "in": "query",
             "description": "Logitude for the search center",
             "required": false,
@@ -720,7 +720,7 @@
           "example": "This is a very relavent post to me",
           "description": "Text body of the post a user may create"
         },
-        "logitude": {
+        "longitude": {
           "type": "string",
           "example": "100.000",
           "description": "Logitude of the GPS coordinate"
@@ -774,7 +774,7 @@
           "example": "This is a very relavent post to me",
           "description": "Text body of the post a user may create"
         },
-        "logitude": {
+        "longitude": {
           "type": "string",
           "example": "100.000",
           "description": "Logitude of the GPS coordinate"
@@ -791,7 +791,7 @@
           }
         }
       },
-      "required": ["text", "logitude", "latitude"]
+      "required": ["text", "longitude", "latitude"]
     },
     "ImageURL": {
       "description": "URL of resolved image",
