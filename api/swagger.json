@@ -371,9 +371,9 @@
         }
       },
       "post": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "createReview",
-        "tags": ["reviews"],
+        "x-swagger-router-controller": "posts",
+        "operationId": "createPost",
+        "tags": ["posts"],
         "description": "Create a new post",
         "parameters": [
           {
