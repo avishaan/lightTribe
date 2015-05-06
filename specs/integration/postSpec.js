@@ -61,7 +61,6 @@ describe("Creating a post", function() {
     .send({ access_token: seedUser.token })
     .end(function(res){
       var body = res.body;
-      console.log(body);
       expect(res.status).toEqual(200);
       expect(body._id).toBeDefined();
       expect(body.text).toEqual(post.text);
@@ -72,7 +71,7 @@ describe("Creating a post", function() {
       done();
     });
   });
-  xit("should require a text field to be filled out", function(done) {
+  it("should require a text field to be filled out", function(done) {
     agent
     .post(URL + '/posts')
     .set('Content-Type', 'application/json')
@@ -80,10 +79,29 @@ describe("Creating a post", function() {
     .send({
       images: post.images,
       latitude: post.latitude,
-      logitude: post.logitude
+      longitude: post.longitude
+    })
+    .end(function(res){
+      expect(res.status).toEqual(400);
+      done();
+    });
+  });
+  it("should give information on the validation error", function(done) {
+    agent
+    .post(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .send({ access_token: seedUser.token })
+    .send({
+      images: post.images,
+      latitude: post.latitude,
+      longitude: post.longitude
     })
     .end(function(res){
       // TODO need specific error message describing what is missing
+      console.log(res.error);
+      // make sure the body is not empty
+      expect(res.body.error).not.toBe({});
+      expect(res.body.error).toBeDefined();
       expect(res.status).toEqual(400);
       done();
     });
