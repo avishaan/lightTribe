@@ -149,11 +149,16 @@ app.use(function(req, res, next){
 });
 // let us know if there are uncaught errors, in any env, later only for dev
 // mainly for when swaggerValidate is true since it doesn't tell us the specific error
+// the following only runs if there is an error, otherwise it shouldn't run
 app.use(function(err, req, res, next){
-  if (err){
-    console.log(prettyjson.render(err, {}));
+  console.log(prettyjson.render(err, {}));
+  if (err = "SCHEMA_VALIDATION_FAILED"){
+    // should be swagger validation error, let the FE know.
+    res.status(res.statusCode).send({ error: err });
+  } else {
+    // we don't know how to handle this, send it along
+    next(err);
   }
-  next(err);
 });
 // Start the server
 app.listen(config.expressPort, function () {
