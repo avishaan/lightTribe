@@ -3,7 +3,7 @@ var async = require('async');
 
 module.exports.createComment = function (req, res, next) {
   // get the userid from the authenticated user, they are the one that submitted
-  post.author = req.user.id;
+  var author = req.user.id;
   res.status(200).send({
     _id: "123"
   });
