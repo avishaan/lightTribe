@@ -58,16 +58,16 @@
         }
       }
     },
-    "/v1/profile/{userId}/posts": {
+    "/v1/users/{userId}/posts": {
       "get": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "readReview",
+        "x-swagger-router-controller": "posts",
+        "operationId": "readAllPostsByUser",
         "security": [
           {
             "tokenAuth": []
           }
         ],
-        "tags": ["profile"],
+        "tags": ["posts"],
         "description": "Read public profile posts the user has made",
         "parameters": [
           {
