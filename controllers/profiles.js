@@ -18,7 +18,7 @@ module.exports.readOneProfile = function (req, res, next) {
     },
     user: {
       username: "codeHatcher",
-      thumbnail: "http://www.google.com/image.png",
+      thumbnail: "https://www.google.com/images/srpr/logo11w.png",
       lastLogin: Date.now()
     }
   });
