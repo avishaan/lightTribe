@@ -7,14 +7,6 @@ var User = require('../../models/user.js');
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
-// complete post for testing
-var post = {
-  text: 'This is a post description',
-  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
-  latitude: '1234.5',
-  longitude: '1234.5'
-};
-
 describe("Reading a user profile", function() {
   // delete the database before each time
   beforeEach(function(done){
