@@ -27,7 +27,23 @@ module.exports.createPost = function (req, res, next) {
   // });
 };
 
-module.exports.readAllPosts = function readReviews (req, res, next) {
+module.exports.readAllPostsByUser = function (req, res, next) {
+  var userId = req.swagger.params.userId.value;
+  logger.info('Read all posts by user:' + userId);
+  res.status(200).send([
+    {
+      _id: "100",
+      text: "Post 1 text for authors post",
+      createDate: Date.now()
+    }, {
+      _id: "101",
+      text: "Post 2 text for authors post",
+      createDate: Date.now()
+    }
+  ]);
+};
+
+module.exports.readAllPosts = function (req, res, next) {
   logger.info('Lookup All posts relavent to user: ' + req.user.id);
   res.status(200).send([
     {
