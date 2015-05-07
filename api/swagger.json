@@ -94,7 +94,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadOnePost"
+                "$ref": "#/definitions/ReadOnePostByUser"
               }
             }
           }
@@ -708,6 +708,26 @@
         }
       },
       "required": ["text"]
+    },
+    "ReadOnePostByUser": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "when the post was created",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        }
+      },
+      "required": ["_id"]
     },
     "ReadOnePost": {
       "properties": {
