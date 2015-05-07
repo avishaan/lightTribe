@@ -20,8 +20,8 @@
   "paths": {
     "/v1/profile/{userId}": {
       "get": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "readReview",
+        "x-swagger-router-controller": "profiles",
+        "operationId": "readOneProfile",
         "security": [
           {
             "tokenAuth": []
@@ -753,11 +753,6 @@
           "description": "User information",
           "type": "object",
           "$ref": "#/definitions/ReadUserForPost"
-        },
-        "lastLogin": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2015-03-04T07:36:56.224Z"
         },
         "categories": {
           "type": "string",
