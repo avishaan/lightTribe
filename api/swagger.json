@@ -201,7 +201,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadUserProfile"
+                "$ref": "#/definitions/ReadUserForPost"
               }
             }
           }
