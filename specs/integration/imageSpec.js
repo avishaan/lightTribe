@@ -60,4 +60,14 @@ describe("An image", function() {
       });
     });
   });
+  it("can request an image that doesn't exist", function(done) {
+    agent
+    .get(URL + '/images/' + '123a')
+    .send({ access_token: seedUser.token })
+    .end(function(res){
+      //console.log(res.body);
+      expect(res.status).toEqual(500);
+      done();
+    });
+  });
 });
