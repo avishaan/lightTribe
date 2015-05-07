@@ -65,7 +65,7 @@ describe("Creating a post", function() {
     })
     .end(function(res){
       // TODO need specific error message describing what is missing
-      console.log(res.error);
+      //console.log(res.error);
       // make sure the body is not empty
       expect(res.body.error).not.toBe({});
       expect(res.body.error).toBeDefined();
