@@ -1,9 +1,6 @@
 var logger = require('./../loggers/logger.js');
 var async = require('async');
 
-var Promise = require('bluebird');
-Promise.promisifyAll(Review);
-
 module.exports.createPost = function (req, res, next) {
   var post = req.swagger.params.post.value;
   // get the userid from the authenticated user, they are the one that submitted
