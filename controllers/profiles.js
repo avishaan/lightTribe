@@ -10,7 +10,6 @@ module.exports.readOneProfile = function (req, res, next) {
   logger.info('Lookup profile for user: ' + userId);
   res.status(200).send({
     _id: "123",
-    lastLogin: Date.now(),
     categories: {
       yoga: 10,
       meditation: 50,
