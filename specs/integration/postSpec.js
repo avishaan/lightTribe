@@ -73,6 +73,21 @@ describe("Creating a post", function() {
       done();
     });
   });
+  it("should require a text field to be filled out", function(done) {
+    agent
+    .post(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .send({ access_token: seedUser.token })
+    .send({
+      images: post.images,
+      latitude: post.latitude,
+      longitude: post.longitude
+    })
+    .end(function(res){
+      expect(res.status).toEqual(400);
+      done();
+    });
+  });
   it("should be able to be submitted successfully", function(done) {
     agent
     .post(URL + '/posts')
@@ -88,21 +103,6 @@ describe("Creating a post", function() {
       expect(body.latitude).toEqual(post.latitude);
       expect(body.longitude).toEqual(post.longitude);
       expect(body.author).toEqual(seedUser.id);
-      done();
-    });
-  });
-  it("should require a text field to be filled out", function(done) {
-    agent
-    .post(URL + '/posts')
-    .set('Content-Type', 'application/json')
-    .send({ access_token: seedUser.token })
-    .send({
-      images: post.images,
-      latitude: post.latitude,
-      longitude: post.longitude
-    })
-    .end(function(res){
-      expect(res.status).toEqual(400);
       done();
     });
   });
