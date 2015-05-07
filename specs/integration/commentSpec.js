@@ -16,6 +16,10 @@ var post = {
   longitude: '1234.5'
 };
 
+var comment = {
+  text: "Example Comment"
+};
+
 describe("Comments", function() {
   // delete the database before each time
   beforeEach(function(done){
@@ -62,6 +66,19 @@ describe("Comments", function() {
     .end(function(res){
       var comments = res.body;
       expect(comments.length).toBeDefined();
+      expect(res.status).toEqual(200);
+      done();
+    });
+  });
+  it("should allow commenting on a post", function(done) {
+    agent
+    .post(URL + '/posts/' + post._id + '/comments')
+    .set('Content-Type', 'application/json')
+    .send(comment)
+    .send({ access_token: seedUser.token })
+    .end(function(res){
+      var body = res.body;
+      expect(body).toBeDefined();
       expect(res.status).toEqual(200);
       done();
     });
