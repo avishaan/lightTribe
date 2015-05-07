@@ -46,3 +46,4 @@ Context
 - try to embed object/property value in swagger without complex references
 - convert to promises when possible
 - swagger-ui using github as the host
+- finish test specs for comments
