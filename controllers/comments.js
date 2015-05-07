@@ -44,18 +44,3 @@ module.exports.readAllCommentsForPost = function (req, res, next) {
     }
   ]);
 };
-
-module.exports.readAllPosts = function (req, res, next) {
-  logger.info('Lookup All posts relavent to user: ' + req.user.id);
-  res.status(200).send([
-    {
-      _id: "100",
-      text: "Post 1",
-      createDate: Date.now(),
-      user: {
-        username: "codeHatcher",
-        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
-      }
-    }
-  ]);
-};
