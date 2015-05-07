@@ -9,6 +9,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 // complete post for testing
 var post = {
+  id: '1234',
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
   latitude: '1234.5',
@@ -114,6 +115,19 @@ describe("Creating a post", function() {
     .end(function(res){
       var posts = res.body;
       expect(posts.length).not.toEqual(0);
+      expect(res.status).toEqual(200);
+      done();
+    });
+  });
+  it("should return all users who commented on a specific post", function(done) {
+    agent
+    .get(URL + '/posts/' + post.id + '/users')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: seedUser.token })
+    .end(function(res){
+      var users = res.body;
+      expect(users.length).not.toEqual(0);
+      expect(users[0].user.username).toBeDefined();
       expect(res.status).toEqual(200);
       done();
     });
