@@ -27,6 +27,28 @@ module.exports.createPost = function (req, res, next) {
   // });
 };
 
+module.exports.readAllUsersInPost = function (req, res, next) {
+  var postId = req.swagger.params.postId.value;
+  logger.info('Read all users in post:' + postId);
+  res.status(200).send([
+    {
+      _id: "100",
+      user: {
+        username: "codehatcher",
+        lastLogin: Date.now(),
+        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
+      }
+    }, {
+      _id: "101",
+      user: {
+        username: "codehatcher",
+        lastLogin: Date.now(),
+        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
+      }
+    }
+  ]);
+};
+
 module.exports.readAllPostsByUser = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
   logger.info('Read all posts by user:' + userId);
