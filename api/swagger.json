@@ -251,8 +251,8 @@
         }
       },
       "post": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "createReview",
+        "x-swagger-router-controller": "comments",
+        "operationId": "createComment",
         "tags": ["comments"],
         "description": "Create a new comment on a specific post",
         "parameters": [
