@@ -210,8 +210,8 @@
     },
     "/v1/posts/{postId}/comments": {
       "get": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "readReview",
+        "x-swagger-router-controller": "comments",
+        "operationId": "readAllCommentsForPost",
         "security": [
           {
             "tokenAuth": []
@@ -676,6 +676,11 @@
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
         },
+        "text": {
+          "type": "string",
+          "example": "This is an example of the comment text",
+          "description": "Text of the comment posted by the user"
+        },
         "user": {
           "description": "User information for a comment",
           "properties": {
@@ -690,11 +695,6 @@
               "example": "http://www.google.com/image.png"
             }
           }
-        },
-        "text": {
-          "type": "string",
-          "example": "This is an example of the comment text",
-          "description": "Text of the comment posted by the user"
         }
       },
       "required": ["_id"]
