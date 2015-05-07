@@ -106,6 +106,18 @@ describe("Creating a post", function() {
       done();
     });
   });
+  it("should returns all the posts for a specifc user", function(done) {
+    agent
+    .get(URL + '/users/' + seedUser.id + '/posts')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: seedUser.token })
+    .end(function(res){
+      var posts = res.body;
+      expect(posts.length).not.toEqual(0);
+      expect(res.status).toEqual(200);
+      done();
+    });
+  });
 });
 
 //TODO remove this for production
