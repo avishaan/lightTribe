@@ -53,6 +53,26 @@ describe("Creating a post", function() {
       done();
     });
   });
+  it("should give information on the validation error", function(done) {
+    agent
+    .post(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .send({ access_token: seedUser.token })
+    .send({
+      images: post.images,
+      latitude: post.latitude,
+      longitude: post.longitude
+    })
+    .end(function(res){
+      // TODO need specific error message describing what is missing
+      console.log(res.error);
+      // make sure the body is not empty
+      expect(res.body.error).not.toBe({});
+      expect(res.body.error).toBeDefined();
+      expect(res.status).toEqual(400);
+      done();
+    });
+  });
   it("should be able to be submitted successfully", function(done) {
     agent
     .post(URL + '/posts')
@@ -82,26 +102,6 @@ describe("Creating a post", function() {
       longitude: post.longitude
     })
     .end(function(res){
-      expect(res.status).toEqual(400);
-      done();
-    });
-  });
-  it("should give information on the validation error", function(done) {
-    agent
-    .post(URL + '/posts')
-    .set('Content-Type', 'application/json')
-    .send({ access_token: seedUser.token })
-    .send({
-      images: post.images,
-      latitude: post.latitude,
-      longitude: post.longitude
-    })
-    .end(function(res){
-      // TODO need specific error message describing what is missing
-      console.log(res.error);
-      // make sure the body is not empty
-      expect(res.body.error).not.toBe({});
-      expect(res.body.error).toBeDefined();
       expect(res.status).toEqual(400);
       done();
     });
