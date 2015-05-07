@@ -1,17 +1,11 @@
 var logger = require('./../loggers/logger.js');
 var async = require('async');
 
-module.exports.createPost = function (req, res, next) {
-  var post = req.swagger.params.post.value;
+module.exports.createComment = function (req, res, next) {
   // get the userid from the authenticated user, they are the one that submitted
   post.author = req.user.id;
   res.status(200).send({
-    _id: "123",
-    text: post.text,
-    images: post.images,
-    latitude: post.latitude,
-    longitude: post.longitude,
-    author: post.author
+    _id: "123"
   });
   // Review
   // .createReviewAsync(review)
