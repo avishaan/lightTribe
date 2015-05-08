@@ -65,12 +65,21 @@ module.exports.readAllPostsByUser = function (req, res, next) {
   ]);
 };
 
-module.exports.readAllPosts = function (req, res, next) {
-  logger.info('Lookup All posts relavent to user: ' + req.user.id);
+module.exports.readRelevantPosts = function (req, res, next) {
+  debugger;
+  logger.info('Search posts based on incoming query parameters: ');
   res.status(200).send([
     {
       _id: "100",
       text: "Post 1",
+      createDate: Date.now(),
+      user: {
+        username: "codeHatcher",
+        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
+      }
+    }, {
+      _id: "101",
+      text: "Post 2",
       createDate: Date.now(),
       user: {
         username: "codeHatcher",
