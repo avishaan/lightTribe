@@ -134,6 +134,39 @@ describe("Creating a post", function() {
   });
 });
 
+describe("Search posts", function() {
+  // delete the database before each time
+  beforeEach(function(done){
+    fixture.deleteDB(function(err, user){
+      // make sure it was able to delete the database ok
+      expect(err).toEqual(null);
+      // seed a user
+      fixture.seedUser(function(err, user){
+        // save the user for later
+        seedUser = user;
+        expect(err).toEqual(null);
+        done();
+      });
+    });
+  });
+  it("should be returned based on query parameters", function(done) {
+    agent
+    .get(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: seedUser.token })
+    .query({ terms: 'yoga' })
+    .query({ radius: 50 })
+    .query({ latitude: 50 })
+    .query({ longitude: 50 })
+    .end(function(res){
+      var posts = res.body;
+      expect(posts.length).not.toEqual(0);
+      expect(res.status).toEqual(200);
+      done();
+    });
+  });
+});
+
 //TODO remove this for production
 xdescribe("Posts", function() {
   // delete the database before each time
