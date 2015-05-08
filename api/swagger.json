@@ -802,7 +802,9 @@
         "images": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImageURL"
+            "description": "image id of images uploaded to /images route",
+            "example": "554b34d8171ff19c8128c54d",
+            "type": "string"
           }
         }
       },
