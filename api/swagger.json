@@ -344,15 +344,43 @@
     "/v1/posts": {
       "get": {
         "x-swagger-router-controller": "posts",
-        "operationId": "readAllPosts",
+        "operationId": "readRelevantPosts",
         "security": [
           {
             "tokenAuth": []
           }
         ],
         "tags": ["posts"],
-        "description": "Get all posts that are relevant to the user",
+        "description": "Search for a post",
         "parameters": [
+          {
+            "name": "terms",
+            "in": "query",
+            "description": "Search terms you are looking for",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Search radius to look for",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "Latitude for the search center",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "Logitude for the search center",
+            "required": false,
+            "type": "number"
+          },
           {
             "name": "access_token",
             "description": "Internal access token",
@@ -362,8 +390,14 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Server Error"
+          },
           "401": {
-            "description": "Error"
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
           },
           "200": {
             "description": "Successful request.",
