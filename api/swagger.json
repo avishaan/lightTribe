@@ -160,7 +160,13 @@
             }
           },
           "200": {
-            "description": "Successful request."
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOnePost"
+              }
+            }
           }
         }
       }
