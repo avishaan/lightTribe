@@ -103,8 +103,8 @@
     },
     "/v1/posts/": {
       "get": {
-        "x-swagger-router-controller": "searches",
-        "operationId": "searchCompany",
+        "x-swagger-router-controller": "posts",
+        "operationId": "searchPosts",
         "security": [
           {
             "tokenAuth": []
