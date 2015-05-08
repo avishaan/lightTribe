@@ -20,19 +20,28 @@ module.exports.registerUser = function registerUser (req, res, next) {
   });
 };
 
-module.exports.profile = function profile (req, res, next) {
-  var username = req.swagger.params.username.value;
-  logger.info('get user profile');
-  User
-  .findOne({ 'username': username })
-  .select('username id _id profile.reviews profile.points profile.rank')
-  .lean()
-  .exec(function(err, user){
-    if (!err) {
-      res.status(200).send(user);
-    } else {
-      logger.error(err);
-      res.status(500).send(err);
-    }
+module.exports.readUserSettings = function (req, res, next) {
+  var userId = req.swagger.params.userId.value;
+  logger.info('Reading user settings for user: ' + userId);
+  res.status(200).send({
+    _id: "123",
+    username: "codeHatcher",
+    thumbnail: "https://www.google.com/images/srpr/logo11w.png",
+    lastLogin: Date.now(),
+    interests: ["bikramYoga", "vinyasaYoga"],
+    auths: [
+      {
+        name: "facebook",
+        enabled: "true"
+      }
+    ]
   });
+  // Review
+  // .createReviewAsync(review)
+  // .then(function(review){
+  //   res.status(200).send(review);
+  // })
+  // .catch(function(err){
+  //   res.status(500).send(err);
+  // });
 };
