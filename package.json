@@ -1,0 +1,15 @@
+{
+  "name": "lightTribeDocs",
+  "version": "1.0.0",
+  "description": "Swagger-UI static pages for LightTribe REST interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "swagger-ui": "^2.1.2-M2"
+  }
+}
