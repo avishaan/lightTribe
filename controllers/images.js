@@ -22,18 +22,20 @@ module.exports.createImage = function createImage (req, res, next) {
   }
 };
 module.exports.readImageURL = function readImageURL (req, res, next) {
-  var iid = req.swagger.params.iid.value;
+  var imageId = req.swagger.params.imageId.value;
   logger.info('return url');
   // find image id
   Image
-  .findOne({_id: iid })
+  .findOne({_id: imageId })
   .select ('_id url')
   .lean()
   .exec(function(err, image){
-    if (!err){
+    if (!err && image){
       res.status(200).send(image);
+    } else if (!err && !image) {
+      res.status(404).send({});
     } else {
-      res.status(500).send(err);
+      res.status(500).send({ error: err });
     }
   });
 };

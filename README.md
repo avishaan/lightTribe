@@ -1,4 +1,4 @@
-Reviewly
+LightTribe
 ========
 
 Connect, Mongoose, Node, Swagger
@@ -36,12 +36,13 @@ Test cases are bundled into logical groups
 TODO
 ----------------------
 - [ ] todo list template
-- [ ] use swagger schema for jasmine test cases
-- [ ] similar to tablo, describe how authentication works for the front end users
 
 Context
 ----------------------
 - keep exploring why caching the auth headers occur when looking for a token, currently sending 401 and body
 - consider switching from auth headers to auth in the body
-- keep working on promises, specifically the user.checkAuthentication function
 - when image id doesn't actually exist still return something for the url for the images
+- add fake data mockup to other controllers
+- try to embed object/property value in swagger without complex references
+- convert to promises when possible
+- swagger-ui using github as the host

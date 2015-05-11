@@ -59,17 +59,22 @@ describe("A user", function() {
   //    done();
   //  });
   //});
-  it("should be able to access profile", function(done) {
+  it("should be able to access user settings", function(done) {
     agent
-    .get(URL + '/users/' + seedUser.username)
+    .get(URL + '/users/' + seedUser.id)
     .send({ access_token: seedUser.token })
     .end(function(res){
-      var profile = res.body.profile;
+      var settings = res.body;
+      console.log(settings);
       expect(res.status).toEqual(200);
-      expect(profile.reviews).toBeDefined();
-      expect(profile.points).toBeDefined();
-      expect(profile.rank).toBeDefined();
-      expect(profile.rank).toEqual('Newbie');
+      expect(settings.password).not.toBeDefined();
+      expect(settings.lastLogin).toBeDefined();
+      expect(settings.thumbnail).toBeDefined();
+      expect(settings.auths).toBeDefined();
+      expect(settings.lastLogin).toBeDefined();
+      expect(settings.auths[0].name).toBeDefined();
+      expect(settings.interests).toBeDefined();
+      //expect(settings.username).toEqual(seedUser.username);
       done();
     });
   });
