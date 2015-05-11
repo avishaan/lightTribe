@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* ."
+    "prepublish": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* .",
+    "publish": "git push github gh-pages"
   },
   "author": "",
   "license": "ISC",
