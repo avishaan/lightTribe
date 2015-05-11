@@ -75,7 +75,7 @@ describe("Comments", function() {
     .post(URL + '/posts/' + post._id + '/comments')
     .set('Content-Type', 'application/json')
     .send(comment)
-    .send({ access_token: seedUser.token })
+    .query({ access_token: seedUser.token })
     .end(function(res){
       var body = res.body;
       expect(body).toBeDefined();
