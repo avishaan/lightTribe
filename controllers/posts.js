@@ -66,7 +66,6 @@ module.exports.readAllPostsByUser = function (req, res, next) {
 };
 
 module.exports.readRelevantPosts = function (req, res, next) {
-  debugger;
   logger.info('Search posts based on incoming query parameters: ');
   res.status(200).send([
     {
