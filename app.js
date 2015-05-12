@@ -137,7 +137,7 @@ app.use(function(req, res, next){
       // need to add port if not local
       url = url + ':' + config.expressPort;
     }
-    res.redirect('/swaggerui/?url=' + url + '/api-docs');
+    res.redirect(config.github.pagesURL +  '/?url=' +  config.github.pagesURL + '/api/swagger.json');
   });
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi({

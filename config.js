@@ -17,7 +17,8 @@ module.exports = function(){
         loggerLevel: 'info',
         appName: 'lightTribe', // we use this for cloudinary name
         github: {
-          name: 'lightTribe' // repo name in github
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
         },
         google: {
           places: {
@@ -49,7 +50,8 @@ module.exports = function(){
         loggerLevel: 'info',
         appName: 'lightTribe',
         github: {
-          name: 'lightTribe' // repo name in github
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
         },
         google: {
           places: {
@@ -80,7 +82,8 @@ module.exports = function(){
         loggerLevel: 'debug',
         appName: 'lightTribe',
         github: {
-          name: 'lightTribe' // repo name in github
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
         },
         google: {
           places: {
@@ -107,7 +110,8 @@ module.exports = function(){
         loggerLevel: 'debug',
         appName: 'lightTribe',
         github: {
-          name: 'lightTribe' // repo name in github
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
         },
         google: {
           places: {
