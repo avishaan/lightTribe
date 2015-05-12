@@ -25,7 +25,7 @@ The version differences are specified in each route.
   - [Code Coverage Reports](./coverage/lcov-report/index.html)
 
 - Route Documentation
-- visit http://reviewly.herokuapp.com/docs to see the documentation
+- visit http://lighttribe.herokuapp.com/docs to see the documentation
 - [Connecting Routes to Interface (Right Click and Save-As)](./docs/integrations/integration.pdf)
 - [Design Composition (Right Click and Save-As)](./docs/design/skinnedWireframe.psd)
 
