@@ -5,7 +5,7 @@
     "description": "Connecting people together",
     "version": "0.1.0"
   },
-  "host": "lighttribe-dev.herokuapp.com",
+  "host": "localhost:3000",
   "consumes": [
     "application/json",
     "application/x-www-form-urlencoded",

@@ -76,9 +76,9 @@ var options = {
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var swaggerDoc = require('./api/swagger.json');
 // based on the config set the swaggerDocs url accordingly
-if (config.env === 'local'){
-  //swaggerDoc.host = config.apiDomain;
-  swaggerDoc.host = 'localhost:3000';
+if (config.env !== 'local'){
+  swaggerDoc.host = config.apiDomain;
+  //swaggerDoc.host = 'localhost:3000';
 }
 
 // Wire up the middleware required by Swagger Tools (body-parser and qs)
