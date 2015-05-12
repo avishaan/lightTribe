@@ -22,6 +22,12 @@ var _ = require('underscore');
 var prettyjson = require('prettyjson');
 
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // debugging to send request as response like a mirror
 app.use('/api/dev/mirror', function(req, res){
   req.rawBody = '';
