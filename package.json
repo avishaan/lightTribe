@@ -8,7 +8,7 @@
     "docs:updateAPI": "git checkout develop -- api/swagger.json && git add -A && git commit -m 'Update swagger.json from develop branch using npm script'",
     "docs:publish": "git push github gh-pages",
     "docs": "npm run docs:updateAPI && npm run docs:publish",
-    "updateSwagger": "rm -rf ./node_modules/swagger-ui && npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* . && git add -A && git commit -m 'Updated swagger-ui for docs using npm script'"
+    "updateSwagger": "rm -rf ./node_modules/swagger-ui && npm install swagger-ui --save && cp -r ./node_modules/swagger-ui/dist/* . && git add -A && git commit -m 'Updated swagger-ui for docs using npm script'"
   },
   "author": "",
   "license": "ISC",
