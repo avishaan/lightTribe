@@ -27,7 +27,11 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "*");
   res.header("Access-Control-Expose-Headers", "*");
   res.header('Access-Control-Allow-Methods', '*');
-  next();
+  if (req.method == 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
 });
 
 // debugging to send request as response like a mirror
