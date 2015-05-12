@@ -51,7 +51,8 @@
     "coverIntegration": "./node_modules/istanbul/lib/cli.js cover --report none --dir coverages/integration app.js",
     "coverUnit": "./node_modules/istanbul/lib/cli.js cover --report none --dir coverages/unit ./node_modules/jasmine-node/bin/jasmine-node -- --verbose --captureExceptions --config NODE_ENV local specs",
     "report": "./node_modules/istanbul/lib/cli.js report --dir coverages/ && open ./coverages/lcov-report/index.html",
-    "push:dev": "git push dev develop:master"
+    "push:dev": "git push dev develop:master",
+    "push:github": "git push github develop:develop"
   },
   "engines": {
     "node": "0.12.0",
