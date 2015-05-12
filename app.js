@@ -132,20 +132,9 @@ app.use(function(req, res, next){
 
   //make sure if we go to /docs we actually go to swaggerui using our own swaggerjson
   app.use('/docs', function(req, res){
-    var url = config.apiURI;
-    if (config.env === 'local'){
-      // need to add port if not local
-      url = url + ':' + config.expressPort;
-    }
+    // redirect to github page hosting location connected via gh-pages branch
     res.redirect(config.github.pagesURL +  '/?url=' +  config.github.pagesURL + '/api/swagger.json');
   });
-  // Serve the Swagger documents and Swagger UI
-  app.use(middleware.swaggerUi({
-    apiDocs: "/api-docs",
-    //http://localhost:3000/docs/?url=http://localhost:3000/api-docs
-    swaggerUi: "/swaggerui",
-    swaggerUiDir: "./node_modules/swagger-ui/dist/"
-  }));
 });
 // let us know if there are uncaught errors, in any env, later only for dev
 // mainly for when swaggerValidate is true since it doesn't tell us the specific error
