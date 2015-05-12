@@ -65,7 +65,7 @@ module.exports = function(){
         },
         facebook: {
           clientID: '761889610566980',
-          clientSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
+          clientSecret: process.env.facebookSecret
         },
         swagger: {
           validateResponse: false
@@ -95,6 +95,10 @@ module.exports = function(){
           api_key: '351392996945264',
           api_secret: process.env.cloudinarySecret
         },
+        facebook: {
+          clientID: '761889610566980',
+          clientSecret: process.env.facebookSecret
+        },
         swagger: {
           validateResponse: false
         }
@@ -122,6 +126,10 @@ module.exports = function(){
           cloud_name: 'codehatcher',
           api_key: '351392996945264',
           api_secret: process.env.cloudinarySecret
+        },
+        facebook: {
+          clientID: '761889610566980',
+          clientSecret: process.env.facebookSecret
         },
         swagger: {
           validateResponse: false
