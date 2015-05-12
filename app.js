@@ -25,8 +25,7 @@ var prettyjson = require('prettyjson');
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
-  res.header("Via", "*");
-  res.header("via", "*");
+  res.header("Access-Control-Expose-Headers", "*");
   next();
 });
 
