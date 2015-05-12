@@ -1,6 +1,6 @@
 {
   "name": "lightTribeDocs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Swagger-UI static pages for LightTribe REST interface",
   "main": "index.js",
   "scripts": {
