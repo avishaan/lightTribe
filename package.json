@@ -13,6 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "swagger-ui": "2.1.4-M1"
+    "swagger-ui": "^2.1.2-M2"
   }
 }
