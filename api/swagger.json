@@ -1,0 +1,1032 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LightTribe",
+    "description": "Connecting people together",
+    "version": "0.1.0"
+  },
+  "host": "localhost:3000",
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "text/plain"
+  ],
+  "produces": [
+    "application/json",
+    "text/plain",
+    "text/html"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/v1/profile/{userId}": {
+      "get": {
+        "x-swagger-router-controller": "profiles",
+        "operationId": "readOneProfile",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["profile"],
+        "description": "Read public profile of a user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Unique Id of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/ReadProfile"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/{userId}/posts": {
+      "get": {
+        "x-swagger-router-controller": "posts",
+        "operationId": "readAllPostsByUser",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["posts"],
+        "description": "Read public profile posts the user has made",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Unique Id of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOnePostByUser"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/posts/": {
+      "get": {
+        "x-swagger-router-controller": "posts",
+        "operationId": "searchPosts",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["posts"],
+        "description": "Search for a post",
+        "parameters": [
+          {
+            "name": "terms",
+            "in": "query",
+            "description": "Search terms you are looking for",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Search radius to look for",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "Latitude for the search center",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "Logitude for the search center",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOnePost"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/posts/{postId}/users": {
+      "get": {
+        "x-swagger-router-controller": "posts",
+        "operationId": "readAllUsersInPost",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users"],
+        "description": "Read all the users in a given post who have commented",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "Post Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadUserForPost"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/posts/{postId}/comments": {
+      "get": {
+        "x-swagger-router-controller": "comments",
+        "operationId": "readAllCommentsForPost",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["comments"],
+        "description": "Read all comments for a specific post",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "Post Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOneComment"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "x-swagger-router-controller": "comments",
+        "operationId": "createComment",
+        "tags": ["comments"],
+        "description": "Create a new comment on a specific post",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "Post Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "description": "Comment body payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateComment"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
+    "/v1/posts/{postId}": {
+      "get": {
+        "x-swagger-router-controller": "reviews",
+        "operationId": "readReview",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["posts"],
+        "description": "Read specific post by id",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "Post Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/ReadOnePost"
+            }
+          }
+        }
+      }
+    },
+    "/v1/posts": {
+      "get": {
+        "x-swagger-router-controller": "posts",
+        "operationId": "readRelevantPosts",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["posts"],
+        "description": "Search for a post",
+        "parameters": [
+          {
+            "name": "terms",
+            "in": "query",
+            "description": "Search terms you are looking for",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Search radius to look for",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "Latitude for the search center",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "Logitude for the search center",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOnePost"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "x-swagger-router-controller": "posts",
+        "operationId": "createPost",
+        "tags": ["posts"],
+        "description": "Create a new post",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Review information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePost"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
+    "/v1/images": {
+      "post": {
+        "x-swagger-router-controller": "images",
+        "operationId": "createImage",
+        "tags": ["images"],
+        "description": "Upload image",
+        "consumes": [
+          "multipart/form-data",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "description": "Image information",
+            "required": false
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
+    "/v1/images/{imageId}": {
+      "get": {
+        "x-swagger-router-controller": "images",
+        "operationId": "readImageURL",
+        "tags": ["images"],
+        "description": "Return URL of image given specific image identifier",
+        "parameters": [
+          {
+            "name": "imageId",
+            "in": "path",
+            "type": "string",
+            "description": "Image unique id"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "URL string where image is located"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "registerUser",
+        "tags": ["users"],
+        "description": "Register a new user and their information",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "The user information for registration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
+    "/v1/users/{userId}": {
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "readUserSettings",
+        "tags": ["users"],
+        "description": "Get information about the user and their settings. This is different than the profile which is the public page of the user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User Id of the user you are querying",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/ReadUserSettings"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auths/facebook": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "facebook",
+        "tags": ["auths"],
+        "description": "Facebook authentication",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Facebook Token",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FacebookToken"
+            }
+          }
+        ],
+        "security": [
+          {
+            "facebookAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/InternalToken"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auths/basic": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "basic",
+        "tags": ["auths"],
+        "description": "Provide username and password to get auth token.",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "The username and password",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserCredentials"
+            }
+          }
+        ],
+        "security": [
+          {
+            "localAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/InternalToken"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    },
+    "localAuth": {
+      "type": "basic",
+      "description": "Local authentication via body parameters"
+    },
+    "tokenAuth": {
+      "type": "apiKey",
+      "description": "Built in token auth",
+      "name": "access_token",
+      "in": "query"
+    },
+    "facebookAuth": {
+      "type": "apiKey",
+      "description": "Facebook token auth using passport-facebook-token",
+      "name": "access_token",
+      "in": "query"
+    }
+  },
+  "definitions": {
+    "basicAuth": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "apiKey": {
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "ReadOneComment": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is an example of the comment text",
+          "description": "Text of the comment posted by the user"
+        },
+        "user": {
+          "description": "User information for a comment",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user",
+              "example": "codeHatcher"
+            },
+            "thumbnail": {
+              "type": "string",
+              "description": "URL of the profile thumbnail",
+              "example": "http://www.google.com/image.png"
+            }
+          }
+        }
+      },
+      "required": ["_id"]
+    },
+    "CreateComment": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "This is an example of the comment text",
+          "description": "Text of the comment posted by the user"
+        }
+      },
+      "required": ["text"]
+    },
+    "ReadOnePostByUser": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "when the post was created",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        }
+      },
+      "required": ["_id"]
+    },
+    "ReadOnePost": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        },
+        "longitude": {
+          "type": "string",
+          "example": "100.000",
+          "description": "Logitude of the GPS coordinate"
+        },
+        "latitude": {
+          "type": "string",
+          "example": "100.000",
+          "description": "Latitude of the GPS coordinate"
+        },
+        "user": {
+          "description": "Basic user information",
+          "$ref": "#/definitions/ReadUserForPost"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageURL"
+          }
+        }
+      },
+      "required": ["_id"]
+    },
+    "ReadProfile": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "user": {
+          "description": "User information",
+          "type": "object",
+          "$ref": "#/definitions/ReadUserForPost"
+        },
+        "categories": {
+          "type": "string",
+          "example": "still in initial phase",
+          "description": "Post categories along with number of posts of that category"
+        }
+      },
+      "required": ["_id"]
+    },
+    "CreatePost": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        },
+        "longitude": {
+          "type": "string",
+          "example": "100.000",
+          "description": "Logitude of the GPS coordinate"
+        },
+        "latitude": {
+          "type": "string",
+          "example": "100.000",
+          "description": "Latitude of the GPS coordinate"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "description": "image id of images uploaded to /images route",
+            "example": "554b34d8171ff19c8128c54d",
+            "type": "string"
+          }
+        }
+      },
+      "required": ["text", "longitude", "latitude"]
+    },
+    "ImageURL": {
+      "description": "URL of resolved image",
+      "properties": {
+        "url": {
+          "type": "string",
+          "example": "https://www.google.com/images/srpr/logo11w.png"
+        }
+      }
+    },
+    "InternalToken": {
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "FacebookToken": {
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "ReadUserSettings": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of the profile thumbnail",
+          "example": "http://www.google.com/image.png"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "interests": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "bikramYoga"
+          }
+        },
+        "auths": {
+          "description": "Auth methods hooked up",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of authentication method",
+              "example": "facebook"
+            },
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether method is hooked up",
+              "example": "true"
+            }
+          }
+        }
+      }
+    },
+    "ReadUserForPost": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of the profile thumbnail",
+          "example": "http://www.google.com/image.png"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
+        }
+      }
+    },
+    "ReadUserProfile": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of the profile thumbnail",
+          "example": "http://www.google.com/image.png"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "profile": {
+          "description": "User Profile Information",
+          "$ref": "#/definitions/userProfile"
+        }
+      }
+    },
+    "userProfile": {
+      "properties": {
+        "reviews": {
+          "description": "Number of reviews the user has made",
+          "type": "number"
+        },
+        "points": {
+          "description": "Number of points the user has based on reviews and images",
+          "type": "number"
+        },
+        "rank": {
+          "description": "The name rank of the user",
+          "type": "string"
+        }
+      },
+      "example": {
+        "reviews": "12",
+        "points": "14",
+        "rank": "Newbie"
+      }
+    },
+    "UserCredentials": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserRegistration": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Ok": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "401Response": {
+      "properties": {
+      }
+    },
+    "400Response": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "Error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    }
+  }
+}
