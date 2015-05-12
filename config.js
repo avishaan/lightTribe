@@ -15,7 +15,11 @@ module.exports = function(){
         apiDomain : "localhost", //TODO use path from apiURI
         expressPort: 3000,
         loggerLevel: 'info',
-        appName: 'Reviewly', // we use this for cloudinary name
+        appName: 'lightTribe', // we use this for cloudinary name
+        github: {
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
+        },
         google: {
           places: {
             apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
@@ -44,7 +48,11 @@ module.exports = function(){
         apiURI: process.env.apiURI,
         apiDomain : process.env.apiDomain,
         loggerLevel: 'info',
-        appName: 'Reviewly',
+        appName: 'lightTribe',
+        github: {
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
+        },
         google: {
           places: {
             apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
@@ -72,7 +80,11 @@ module.exports = function(){
         apiURI: process.env.apiURI,
         apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
-        appName: 'Reviewly',
+        appName: 'lightTribe',
+        github: {
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
+        },
         google: {
           places: {
             apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
@@ -96,7 +108,11 @@ module.exports = function(){
         apiURI: process.env.apiURI,
         apiDomain : process.env.apiDomain,
         loggerLevel: 'debug',
-        appName: 'Reviewly',
+        appName: 'lightTribe',
+        github: {
+          name: 'lightTribe', // repo name in github
+          pagesURL: 'http://codehatcher.github.io/lightTribe'
+        },
         google: {
           places: {
             apiKey: 'AIzaSyAnojt8rFHBUdU6yvlYL8ZSTjxnjsScdSw'
