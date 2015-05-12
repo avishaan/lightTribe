@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* . && git checkout develop -- api/swagger.json && git add -A && git commit -m 'Updated docs using npm script publish'",
-    "publish": "git push github gh-pages"
+    "prepublish": "git checkout develop -- api/swagger.json && npm version patch && git add -A && git commit -m 'Update swagger.json from develop branch using npm script'",
+    "publish": "git push github gh-pages",
+    "updateDocs": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* . && git add -A && git commit -m 'Updated swagger-ui for docs'"
   },
   "author": "",
   "license": "ISC",
