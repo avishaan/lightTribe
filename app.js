@@ -137,7 +137,8 @@ app.use(function(req, res, next){
       res.redirect('/swaggerui/?url=' + config.apiURI + ':' +config.expressPort + '/api-docs');
     } else {
       // since not local use github page redirect to github page hosting location connected via gh-pages branch
-      res.redirect(config.github.pagesURL +  '/?url=' +  config.github.pagesURL + '/api/swagger.json');
+      //res.redirect(config.github.pagesURL +  '/?url=' +  config.github.pagesURL + '/api/swagger.json');
+      res.redirect('/swaggerui/?url=' + config.apiURI + '/api-docs');
     }
   });
   // Serve the Swagger documents and Swagger UI
