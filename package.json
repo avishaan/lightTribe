@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "git checkout develop -- api/swagger.json && npm version patch && git add -A && git commit -m 'Update swagger.json from develop branch using npm script'",
     "publish": "git push github gh-pages",
-    "updateDocs": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* . && git add -A && git commit -m 'Updated swagger-ui for docs'"
+    "updateDocs": "npm install swagger-ui && cp -r ./node_modules/swagger-ui/dist/* . && rm -rf ./node_modules && git add -A && git commit -m 'Updated swagger-ui for docs'"
   },
   "author": "",
   "license": "ISC",
