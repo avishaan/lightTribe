@@ -122,6 +122,9 @@ describe("Creating a post", function() {
       .query({ access_token: seedUser.token })
       .end(function(res){
         var posts = res.body;
+        posts.forEach(function(post){
+          expect(post.author).toEqual(seedUser.id);
+        });
         expect(posts.length).not.toEqual(0);
         expect(res.status).toEqual(200);
         done();
