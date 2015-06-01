@@ -830,13 +830,13 @@
           "description": "Text body of the post a user may create"
         },
         "longitude": {
-          "type": "string",
-          "example": "100.000",
+          "type": "number",
+          "example": 100.000,
           "description": "Logitude of the GPS coordinate"
         },
         "latitude": {
-          "type": "string",
-          "example": "100.000",
+          "type": "number",
+          "example": 100.000,
           "description": "Latitude of the GPS coordinate"
         },
         "images": {
