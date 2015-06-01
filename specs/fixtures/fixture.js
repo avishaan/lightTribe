@@ -1,6 +1,6 @@
 var db = require('./../../dbs/db.js');
 var User = require('./../../models/user.js');
-var Review = require('./../../models/review.js');
+var Post = require('./../../models/post.js');
 var Image = require('./../../models/image.js');
 var async = require('async');
 
@@ -27,7 +27,7 @@ module.exports.fbUser = {
 
 
 module.exports.deleteDB = function(cb){
-  Review.remove({}, function(err, reviews){
+  Post.remove({}, function(err, posts){
     User.remove({}, function(err, user){
       Image.remove({}, function(err, images){
         cb(err, user);
@@ -53,17 +53,17 @@ module.exports.seedUser = function(cb){
   });
 };
 
-module.exports.seedReview = function(options, cb){
-  var user = options.user;
-  review.submitter = user.id;
-  // first create an image for the review
-  Image.create({
-    public_id: 'uhn43civzs6m1c9uurqvr',
-    url: 'http://localhost'
-  }, function(err, image){
-    review.images = [image._id];
-    Review.create(review, function(err, review){
-      cb(err, review);
-    });
-  });
-};
+// module.exports.seedReview = function(options, cb){
+//   var user = options.user;
+//   review.submitter = user.id;
+//   // first create an image for the review
+//   Image.create({
+//     public_id: 'uhn43civzs6m1c9uurqvr',
+//     url: 'http://localhost'
+//   }, function(err, image){
+//     review.images = [image._id];
+//     Review.create(review, function(err, review){
+//       cb(err, review);
+//     });
+//   });
+// };
