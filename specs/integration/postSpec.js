@@ -181,7 +181,7 @@ describe("Creating a post", function() {
             expect(res.body.url).toBeDefined();
             done();
           });
-        })
+        });
       });
     });
   });
