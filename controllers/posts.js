@@ -1,5 +1,6 @@
 var logger = require('./../loggers/logger.js');
 var Review = require('../models/review.js');
+var Post = require('../models/post.js');
 var async = require('async');
 
 var Promise = require('bluebird');
