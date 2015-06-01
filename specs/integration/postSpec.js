@@ -12,8 +12,8 @@ var post = {
   id: '1234',
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
-  latitude: '1234.5',
-  longitude: '1234.5'
+  latitude: 1234.5,
+  longitude: 1234.5
 };
 
 describe("Creating a post", function() {
@@ -107,16 +107,28 @@ describe("Creating a post", function() {
       done();
     });
   });
-  it("should returns all the posts for a specifc user", function(done) {
+  it("should return all the posts for a specifc user", function(done) {
+    // create the post
     agent
-    .get(URL + '/users/' + seedUser.id + '/posts')
+    .post(URL + '/posts')
     .set('Content-Type', 'application/json')
-    .query({ access_token: seedUser.token })
+    .send(post)
+    .send({ access_token: seedUser.token })
     .end(function(res){
-      var posts = res.body;
-      expect(posts.length).not.toEqual(0);
-      expect(res.status).toEqual(200);
-      done();
+      // do the test
+      agent
+      .get(URL + '/users/' + seedUser.id + '/posts')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: seedUser.token })
+      .end(function(res){
+        var posts = res.body;
+        posts.forEach(function(post){
+          expect(post.author).toEqual(seedUser.id);
+        });
+        expect(posts.length).not.toEqual(0);
+        expect(res.status).toEqual(200);
+        done();
+      });
     });
   });
   it("should return all users who commented on a specific post", function(done) {
