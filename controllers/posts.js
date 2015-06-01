@@ -4,28 +4,29 @@ var Post = require('../models/post.js');
 var async = require('async');
 
 var Promise = require('bluebird');
-Promise.promisifyAll(Review);
+Promise.promisifyAll(Post);
 
 module.exports.createPost = function (req, res, next) {
   var post = req.swagger.params.post.value;
   // get the userid from the authenticated user, they are the one that submitted
   post.author = req.user.id;
-  res.status(200).send({
-    _id: "123",
-    text: post.text,
-    images: post.images,
-    latitude: post.latitude,
-    longitude: post.longitude,
-    author: post.author
+  // save the post
+  Post
+  .createPostAsync(post)
+  .then(function(savedPost){
+    var post = savedPost.toJSON();
+    res.status(200).send({
+      _id: post._id,
+      text: post.text,
+      images: post.images,
+      longitude: post.geometry.coordinates[0],
+      latitude: post.geometry.coordinates[1],
+      author: post.author
+    });
+  })
+  .catch(function(err){
+    res.status(500).send(err);
   });
-  // Review
-  // .createReviewAsync(review)
-  // .then(function(review){
-  //   res.status(200).send(review);
-  // })
-  // .catch(function(err){
-  //   res.status(500).send(err);
-  // });
 };
 
 module.exports.readAllUsersInPost = function (req, res, next) {
