@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
+var Image = require('../models/image.js');
 var bcrypt = require('bcrypt');
 var token = require('rand-token');
 /*
@@ -22,6 +23,9 @@ var userSchema = new mongoose.Schema({
   },
   facebook: {
     id: { type: String, required: false, unique: false }
+  },
+  images: {
+    profile: { type: mongoose.Schema.Types.ObjectId, ref: Image.schema },
   }
 });
 
