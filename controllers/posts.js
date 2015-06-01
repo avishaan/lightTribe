@@ -54,17 +54,20 @@ module.exports.readAllUsersInPost = function (req, res, next) {
 module.exports.readAllPostsByUser = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
   logger.info('Read all posts by user:' + userId);
-  res.status(200).send([
-    {
-      _id: "100",
-      text: "Post 1 text for authors post",
-      createDate: Date.now()
-    }, {
-      _id: "101",
-      text: "Post 2 text for authors post",
-      createDate: Date.now()
+  Post
+  .find({ author: userId })
+  .select('createDate text author')
+  .lean()
+  .exec(function(err, posts){
+    if (!err) {
+      res.status(200).send(posts);
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not get posts for you :(",
+        err: err
+      });
     }
-  ]);
+  });
 };
 
 module.exports.readRelevantPosts = function (req, res, next) {
