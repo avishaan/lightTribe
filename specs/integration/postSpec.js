@@ -12,8 +12,8 @@ var post = {
   id: '1234',
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
-  latitude: '1234.5',
-  longitude: '1234.5'
+  latitude: 1234.5,
+  longitude: 1234.5
 };
 
 describe("Creating a post", function() {
