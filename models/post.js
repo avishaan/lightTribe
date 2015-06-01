@@ -8,7 +8,7 @@ var logger = require('./../loggers/logger.js');
 
 var postSchema = new mongoose.Schema({
   text: { type: String },
-  datetime: { type: Date },
+  createDate: { type: Date },
   geometry: { // based on GeoJSON
     type: {
       type: String, default: "Point"
@@ -33,7 +33,7 @@ postSchema.statics.createPost = function(options, cb) {
   // we are redefining the object to make sure other random stuff doesn't come through
   var post = {
     text: options.text,
-    datetime: Date.now(),
+    createDate: Date.now(),
     author: options.author,
     images: options.images,
     geometry: {
