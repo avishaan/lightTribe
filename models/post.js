@@ -9,7 +9,7 @@ var logger = require('./../loggers/logger.js');
 var postSchema = new mongoose.Schema({
   text: { type: String },
   createDate: { type: Date },
-  geometry: { // based on GeoJSON
+  loc: { // based on GeoJSON
     type: {
       type: String, default: "Point"
     },
