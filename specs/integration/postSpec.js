@@ -13,8 +13,8 @@ var post = {
   id: '1234',
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
-  latitude: 1234.5,
-  longitude: 1234.5
+  latitude: 37.796096, //San fran, google maps shows lat/lng order
+  longitude: -122.418145
 };
 
 describe("Creating a post", function() {
@@ -169,14 +169,14 @@ describe("Creating a post", function() {
         .lean()
         .exec(function(err, post){
           // make sure image id in the post is the same as we passed in
-          console.log(post);
+          //console.log(post);
           expect(imagePost.images[0]).toEqual(post.images[0]);
           // send image.id of post to resolve to url
           agent
           .get(URL + '/images/' + post.images[0])
           .send({ access_token: seedUser.token })
           .end(function(res){
-            console.log(res.body);
+            //console.log(res.body);
             expect(res.status).toEqual(200);
             expect(res.body.url).toBeDefined();
             done();
@@ -216,6 +216,47 @@ describe("Search posts", function() {
       expect(posts.length).not.toEqual(0);
       expect(res.status).toEqual(200);
       done();
+    });
+  });
+  it("should return anything within correct search radius", function(done) {
+    agent
+    .post(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .send(post)
+    .send({ access_token: seedUser.token })
+    .end(function(res){
+      Post.on('index', function(){
+        console.log('index completel');
+      })
+      Post.readPostsBySearch({
+        // 34.0204989,-118.4117325 los angeles actual distance 560km
+        latitude: 34.0204989,
+        longitude: -118.4117325,
+        distance: 500
+      }, function(err, posts){
+        expect(posts.length).toEqual(0);
+        expect(err).toEqual(null);
+        done();
+      });
+    });
+  });
+  it("should NOT return anything outside the search radius", function(done) {
+    agent
+    .post(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .send(post)
+    .send({ access_token: seedUser.token })
+    .end(function(res){
+      Post.readPostsBySearch({
+        // 34.0204989,-118.4117325 los angeles actual distance 560km
+        latitude: 34.0204989,
+        longitude: -118.4117325,
+        distance: 600
+      }, function(err, posts){
+        expect(posts.length).toEqual(1);
+        expect(err).toEqual(null);
+        done();
+      });
     });
   });
 });
