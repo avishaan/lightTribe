@@ -1,10 +1,12 @@
 var agent = require('superagent');
 var config = require("../../config.js");
+var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 var Comment = require('../../models/comment.js');
 var Post = require('../../models/post.js');
 //var httpMocks = require('node-mocks-http');
+Promise.promisifyAll(fixture);
 
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
@@ -25,16 +27,18 @@ var comment = {
 describe("Comments", function() {
   // delete the database before each time
   beforeEach(function(done){
-    fixture.deleteDB(function(err, user){
-      // make sure it was able to delete the database ok
-      expect(err).toEqual(null);
-      // seed a user
-      fixture.seedUser(function(err, user){
+    fixture
+    .deleteDBAsync({})
+    .then(function(dbInfo){
+      return fixture.seedUserAsync({});
+    })
+    .then(function(user){
         // save the user for later
         seedUser = user;
-        expect(err).toEqual(null);
         done();
-      });
+    })
+    .caught(function(err){
+      console.log("Error: ", err);
     });
   });
   //it("should require access_token to be filled out", function(done) {
