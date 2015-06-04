@@ -19,8 +19,6 @@ module.exports.createPost = function (req, res, next) {
       _id: post._id,
       text: post.text,
       images: post.images,
-      longitude: post.geometry.coordinates[0],
-      latitude: post.geometry.coordinates[1],
       author: post.author
     });
   })

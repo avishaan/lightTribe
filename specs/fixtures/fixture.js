@@ -52,6 +52,15 @@ module.exports.seedUser = function(cb){
     cb(err, user);
   });
 };
+module.exports.seedImage = function(cb){
+  Image.create({
+    // TODO: public id taken from real image, change if you see errors here
+    public_id: 'w4isrf95psfjifjpqycm',
+    url: 'http://localhost'
+  }, function(err, image){
+    cb(err, image);
+  });
+};
 
 // module.exports.seedReview = function(options, cb){
 //   var user = options.user;
