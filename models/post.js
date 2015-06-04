@@ -38,7 +38,7 @@ postSchema.statics.createPost = function(options, cb) {
   var polyCoordinates = utils.circleToPolygon({
     latitude: options.latitude,
     longitude: options.longitude,
-    radius: 1, // 1km
+    radius: options.radius || 1, // 1km
     sides: 12
   });
   // we are redefining the object to make sure other random stuff doesn't come through
