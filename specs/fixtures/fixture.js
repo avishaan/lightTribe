@@ -2,6 +2,7 @@ var db = require('./../../dbs/db.js');
 var User = require('./../../models/user.js');
 var Post = require('./../../models/post.js');
 var Image = require('./../../models/image.js');
+var Comment = require('./../../models/comment.js');
 var async = require('async');
 
 // have a consistent user when necessary
@@ -30,7 +31,9 @@ module.exports.deleteDB = function(cb){
   Post.remove({}, function(err, posts){
     User.remove({}, function(err, user){
       Image.remove({}, function(err, images){
-        cb(err, user);
+        Comment.remove({}, function(err, comments){
+          cb(err, user);
+        });
       });
     });
   });
