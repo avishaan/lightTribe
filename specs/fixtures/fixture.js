@@ -38,7 +38,13 @@ module.exports.deleteDB = function(cb){
     });
   });
 };
-module.exports.seedUser = function(cb){
+module.exports.seedUser = function(options, cb){
+  // check if options were passed in
+  if (typeof cb === "undefined"){
+    // if no options, assume callback was sent in as first param
+    cb = options;
+    options = null;
+  }
   User.create({
     username: username,
     password: password
@@ -55,7 +61,13 @@ module.exports.seedUser = function(cb){
     cb(err, user);
   });
 };
-module.exports.seedImage = function(cb){
+module.exports.seedImage = function(options, cb){
+  // check if options were passed in
+  if (typeof cb === "undefined"){
+    // if no options, assume callback was sent in as first param
+    cb = options;
+    options = null;
+  }
   Image.create({
     // TODO: public id taken from real image, change if you see errors here
     public_id: 'w4isrf95psfjifjpqycm',
