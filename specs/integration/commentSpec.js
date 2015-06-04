@@ -33,9 +33,9 @@ describe("Comments", function() {
       return fixture.seedUserAsync({});
     })
     .then(function(user){
-        // save the user for later
-        seedUser = user;
-        done();
+      // save the user for later
+      seedUser = user;
+      done();
     })
     .caught(function(err){
       console.log("Error: ", err);
