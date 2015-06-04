@@ -19,6 +19,7 @@ var commentSchema = new mongoose.Schema({
  * @property {string} text body of the comment
  * @property {date} createDate date comment happened
  * @property {string} author user who created the comment
+ * @property {string} parent the parent post for the comment
  * @param {function} cb
  * @property {object} comment that was just saved
  * @property {object} err Passed Error
@@ -28,7 +29,8 @@ commentSchema.statics.createComment = function(options, cb) {
   var comment = {
     text: options.text,
     createDate: Date.now(),
-    author: options.author
+    author: options.author,
+    parent: options.parent
   };
   // add comment to the database
   Comment.create(comment, function(err, savedComment){
