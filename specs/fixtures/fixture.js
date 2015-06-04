@@ -3,6 +3,7 @@ var User = require('./../../models/user.js');
 var Post = require('./../../models/post.js');
 var Image = require('./../../models/image.js');
 var Comment = require('./../../models/comment.js');
+var Post = require('./../../models/post.js');
 var async = require('async');
 
 // have a consistent user when necessary
@@ -18,6 +19,19 @@ var review = {
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
   datetime: new Date().toJSON(),
   location: '1234.5, 1234.6'
+};
+
+var post = {
+  id: '1234',
+  text: 'This is a post description',
+  createDate: Date.now(),
+  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  latitude: 37.796096, //San fran, google maps shows lat/lng order
+  longitude: -122.418145
+};
+
+var comment = {
+  text: "Example Comment"
 };
 
 module.exports.fbUser = {
@@ -80,6 +94,19 @@ module.exports.seedImage = function(options, cb){
     url: 'http://localhost'
   }, function(err, image){
     cb(err, image);
+  });
+};
+
+module.exports.seedPost = function(options, cb){
+  Post.createPost({
+    text: post.text,
+    createDate: Date.now(),
+    author: options.author,
+    images: options.images,
+    longitude: options.longitude,
+    latitude: options.latitude
+  }, function(err, savedPost){
+    cb(err, savedPost);
   });
 };
 
