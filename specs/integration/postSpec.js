@@ -167,8 +167,7 @@ describe("Creating a post", function() {
         .lean()
         .exec(function(err, post){
           // make sure image id in the post is the same as we passed in
-          //console.log(post);
-          expect(imagePost.images[0]).toEqual(post.images[0]);
+          expect(imagePost.images[0].toString()).toEqual(post.images[0]);
           // send image.id of post to resolve to url
           agent
           .get(URL + '/images/' + post.images[0])
