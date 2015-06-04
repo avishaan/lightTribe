@@ -102,8 +102,6 @@ describe("Creating a post", function() {
       expect(body._id).toBeDefined();
       expect(body.text).toEqual(post.text);
       expect(body.images).toEqual(post.images);
-      expect(body.latitude).toEqual(post.latitude);
-      expect(body.longitude).toEqual(post.longitude);
       expect(body.author).toEqual(seedUser.id);
       done();
     });
