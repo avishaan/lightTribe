@@ -27,7 +27,13 @@ module.exports.fbUser = {
 };
 
 
-module.exports.deleteDB = function(cb){
+module.exports.deleteDB = function(options, cb){
+  // check if options were passed in
+  if (typeof cb === "undefined"){
+    // if no options, assume callback was sent in as first param
+    cb = options;
+    options = null;
+  }
   Post.remove({}, function(err, posts){
     User.remove({}, function(err, user){
       Image.remove({}, function(err, images){
