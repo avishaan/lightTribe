@@ -24,6 +24,11 @@ var comment = {
   text: "Example Comment"
 };
 
+var image;
+var seedUser;
+var seedPost;
+var seedComment;
+
 describe("Comments", function() {
   // delete the database before each time
   beforeEach(function(done){
@@ -35,6 +40,22 @@ describe("Comments", function() {
     .then(function(user){
       // save the user for later
       seedUser = user;
+      return fixture.seedImageAsync({});
+    })
+    .then(function(savedImage){
+      post.images = [savedImage];
+
+      // setup post related items, such as the author
+      post.author = seedUser._id.toString();
+      return fixture.seedPostAsync(post);
+    })
+    .then(function(savedPost){
+      seedPost = savedPost.toJSON();
+
+      // setup comment related items
+      
+    })
+    .then(function(end){
       done();
     })
     .caught(function(err){
