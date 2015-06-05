@@ -109,6 +109,16 @@ module.exports.seedPost = function(options, cb){
     cb(err, savedPost);
   });
 };
+module.exports.seedComment = function(options, cb){
+  Comment.createComment({
+    text: post.text,
+    createDate: Date.now(),
+    author: options.author,
+    parent: options.parent
+  }, function(err, savedComment){
+    cb(err, savedComment);
+  });
+};
 
 // module.exports.seedReview = function(options, cb){
 //   var user = options.user;
