@@ -18,7 +18,7 @@ module.exports.createComment = function (req, res, next) {
   .then(function(comment){
     comment = comment.toJSON();
     res.status(200).send({
-      id: comment._id.toString()
+      _id: comment._id.toString()
     });
   })
   .catch(function(err){
