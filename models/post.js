@@ -34,10 +34,11 @@ postSchema.index({loc: '2dsphere'});
  */
 postSchema.statics.createPost = function(options, cb) {
   // convert coordinates to polygon so that we can cover an area
+  //helper function takes point and radius and converts to GeoJSON compatible polygon that roughly approximates a circle
   var polyCoordinates = utils.circleToPolygon({
     latitude: options.latitude,
     longitude: options.longitude,
-    radius: 1, // 1km
+    radius: options.radius || 1, // 1km
     sides: 12
   });
   // we are redefining the object to make sure other random stuff doesn't come through
@@ -61,9 +62,6 @@ postSchema.statics.createPost = function(options, cb) {
       cb(err);
     }
   });
-
-  //helper function takes point and radius and converts to GeoJSON compatible polygon that roughly approximates a circle
-
 };
 /**
  * Read a specific post

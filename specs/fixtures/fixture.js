@@ -2,6 +2,8 @@ var db = require('./../../dbs/db.js');
 var User = require('./../../models/user.js');
 var Post = require('./../../models/post.js');
 var Image = require('./../../models/image.js');
+var Comment = require('./../../models/comment.js');
+var Post = require('./../../models/post.js');
 var async = require('async');
 
 // have a consistent user when necessary
@@ -19,6 +21,19 @@ var review = {
   location: '1234.5, 1234.6'
 };
 
+var post = {
+  id: '1234',
+  text: 'This is a post description',
+  createDate: Date.now(),
+  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  latitude: 37.796096, //San fran, google maps shows lat/lng order
+  longitude: -122.418145
+};
+
+var comment = {
+  text: "Example Comment"
+};
+
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
   password: 'test',
@@ -26,16 +41,30 @@ module.exports.fbUser = {
 };
 
 
-module.exports.deleteDB = function(cb){
+module.exports.deleteDB = function(options, cb){
+  // check if options were passed in
+  if (typeof cb === "undefined"){
+    // if no options, assume callback was sent in as first param
+    cb = options;
+    options = null;
+  }
   Post.remove({}, function(err, posts){
     User.remove({}, function(err, user){
       Image.remove({}, function(err, images){
-        cb(err, user);
+        Comment.remove({}, function(err, comments){
+          cb(err, user);
+        });
       });
     });
   });
 };
-module.exports.seedUser = function(cb){
+module.exports.seedUser = function(options, cb){
+  // check if options were passed in
+  if (typeof cb === "undefined"){
+    // if no options, assume callback was sent in as first param
+    cb = options;
+    options = null;
+  }
   User.create({
     username: username,
     password: password
@@ -52,13 +81,42 @@ module.exports.seedUser = function(cb){
     cb(err, user);
   });
 };
-module.exports.seedImage = function(cb){
+module.exports.seedImage = function(options, cb){
+  // check if options were passed in
+  if (typeof cb === "undefined"){
+    // if no options, assume callback was sent in as first param
+    cb = options;
+    options = null;
+  }
   Image.create({
     // TODO: public id taken from real image, change if you see errors here
     public_id: 'w4isrf95psfjifjpqycm',
     url: 'http://localhost'
   }, function(err, image){
     cb(err, image);
+  });
+};
+
+module.exports.seedPost = function(options, cb){
+  Post.createPost({
+    text: post.text,
+    createDate: Date.now(),
+    author: options.author,
+    images: options.images,
+    longitude: options.longitude,
+    latitude: options.latitude
+  }, function(err, savedPost){
+    cb(err, savedPost);
+  });
+};
+module.exports.seedComment = function(options, cb){
+  Comment.createComment({
+    text: post.text,
+    createDate: Date.now(),
+    author: options.author,
+    parent: options.parent
+  }, function(err, savedComment){
+    cb(err, savedComment);
   });
 };
 
