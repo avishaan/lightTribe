@@ -65,18 +65,21 @@ commentSchema.statics.readComment = function(options, cb) {
   });
 };
 /**
- * Read all comments for a user
- * @param {object} options The options for the lookup
- * @config {string} options.userId user id of the user for which you want comments
+ * Read all comments for a specific post
+ * @param {object} options The options for the lookup of the post
+ * @property {string} options.postId post id of the user for which you want comments
  * @param {function} cb
- * @config {object} comments
- * @config {object} err Passed Error
+ * @property {object} comments
+ * @property {object} err Passed Error
  */
-commentSchema.statics.readAllComments = function(options, cb) {
+commentSchema.statics.readAllCommentsForPost = function(options, cb) {
   // see if comment exists, if so pass error
   Comment
-  .find({submitter: options.userId})
-  //.populate('images')
+  .find({ parent: options.postId })
+  .populate({
+    path: 'author',
+    select: 'username'
+  })
   .exec(function(err, comments){
     if (!err){
       cb(null, comments);
