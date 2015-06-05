@@ -94,6 +94,7 @@ describe("Comments", function() {
     .end(function(res){
       var comments = res.body;
       expect(comments.length).toBeDefined();
+      expect(comments.length).toEqual(1);
       expect(res.status).toEqual(200);
       done();
     });
