@@ -13,7 +13,6 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 // complete post for testing
 var post = {
-  id: '1234',
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
@@ -53,7 +52,9 @@ describe("Comments", function() {
       seedPost = savedPost.toJSON();
 
       // setup comment related items
-      
+      comment.author = seedUser._id;
+      comment.parent = seedPost._id;
+      return fixture.seedCommentAsync(comment);
     })
     .then(function(end){
       done();
@@ -87,7 +88,7 @@ describe("Comments", function() {
   //});
   it("should return all the comments for a post", function(done) {
     agent
-    .get(URL + '/posts/' + post.id + '/comments')
+    .get(URL + '/posts/' + seedPost._id + '/comments')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
     .end(function(res){
@@ -99,7 +100,7 @@ describe("Comments", function() {
   });
   it("should allow commenting on a post", function(done) {
     agent
-    .post(URL + '/posts/' + post.id + '/comments')
+    .post(URL + '/posts/' + seedPost._id + '/comments')
     .set('Content-Type', 'application/json')
     .send(comment)
     .query({ access_token: seedUser.token })
@@ -107,12 +108,12 @@ describe("Comments", function() {
       var comment = res.body;
       expect(comment).toBeDefined();
       expect(res.status).toEqual(200);
-      expect(comment.id).toBeDefined();
+      expect(comment._id).toBeDefined();
       // make sure parent of comment is the post
       Comment
-      .findOne({_id: comment.id})
+      .findOne({_id: comment._id})
       .exec(function(err, comment){
-        expect(comment.parent.toString()).toEqual(post.id);
+        expect(comment.parent.toString()).toEqual(seedPost._id.toString());
         done();
       });
     });
