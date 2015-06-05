@@ -18,7 +18,7 @@
   ],
   "basePath": "/api",
   "paths": {
-    "/v1/profile/{userId}": {
+    "/v1/profiles/{userId}": {
       "get": {
         "x-swagger-router-controller": "profiles",
         "operationId": "readOneProfile",
