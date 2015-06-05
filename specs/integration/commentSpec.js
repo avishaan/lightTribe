@@ -93,9 +93,13 @@ describe("Comments", function() {
     .query({ access_token: seedUser.token })
     .end(function(res){
       var comments = res.body;
+      expect(res.status).toEqual(200);
       expect(comments.length).toBeDefined();
       expect(comments.length).toEqual(1);
-      expect(res.status).toEqual(200);
+
+      expect(comments[0].author.username).toEqual(seedUser.username);
+      // make sure no sensitive user information made in through
+      expect(comments[0].author.password).not.toBeDefined();
       done();
     });
   });
