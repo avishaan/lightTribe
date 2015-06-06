@@ -41,7 +41,7 @@ module.exports.readUserSettings = function (req, res, next) {
 
 module.exports.updateUserSettings = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
-  var settings = req.swagger.params.settings.value
+  var settings = req.swagger.params.settings.value;
   var options = {};
   options.userImage = settings.userImage || undefined;
   options.interests = settings.interests || undefined;
