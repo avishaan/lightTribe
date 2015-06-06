@@ -18,22 +18,27 @@ var seedImage;
 describe("A user", function() {
   // delete the database before each time
   beforeEach(function(done){
-    fixture.deleteDB(function(err, user){
+    fixture.deleteDB(function(err, db){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
       // seed a user
-      fixture.seedUser(function(err, user){
+      fixture.seedImage(function(err, image){
         expect(err).toEqual(null);
-        seedUser = user;
-        fixture.seedImage(function(err, image){
+        seedImage = image;
+        user.userImage = image._id;
+        fixture.seedUser(user, function(err, user){
           expect(err).toEqual(null);
-          seedImage = image;
+          seedUser = user;
           done();
-        })
+        });
       });
     });
   });
   it("should be able to register", function(done) {
+    var user = {
+      username: 'user2',
+      password: 'stillpassword'
+    };
     agent
     .post(URL + '/users')
     //.get('http://localhost:3000/api/v1/templates')
@@ -70,7 +75,7 @@ describe("A user", function() {
     .send({ access_token: seedUser.token })
     .end(function(res){
       var settings = res.body;
-      //console.log(settings);
+      console.log(settings);
       expect(res.status).toEqual(200);
       expect(settings.password).not.toBeDefined();
       expect(settings.lastLogin).toBeDefined();
