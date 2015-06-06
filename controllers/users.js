@@ -8,7 +8,8 @@ module.exports.registerUser = function registerUser (req, res, next) {
   logger.info('registerUser');
   User.createUser({
     username: username,
-    password: password
+    password: password,
+
   }, function(err, user){
     if (!err && user){
       res.status(200).send({
@@ -35,6 +36,32 @@ module.exports.readUserSettings = function (req, res, next) {
         enabled: "true"
       }
     ]
+  });
+};
+
+module.exports.updateUserSettings = function (req, res, next) {
+  var userId = req.swagger.params.userId.value;
+  var settings = req.swagger.params.settings.value
+  var options = {};
+  options.userImage = settings.userImage || undefined;
+  options.interests = settings.interests || undefined;
+
+  logger.info('Updating user settings for user: ' + userId);
+  // find the user
+  User
+  .findOne({ _id: userId })
+  .exec(function(err, user){
+    if (!err && user){
+      user.updateUserSettings(options, function(err, savedUser){
+        if (!err){
+          res.status(200).send({ _id: savedUser._id.toString() });
+        } else {
+          res.status(500).send({ err: err, clientMsg: "Could not update user" });
+        }
+      });
+    } else {
+      res.status(500).send({ err: err, clientMsg: "Could not update user" });
+    }
   });
   // Review
   // .createReviewAsync(review)
