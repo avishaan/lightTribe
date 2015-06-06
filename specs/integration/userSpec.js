@@ -89,6 +89,7 @@ describe("A user", function() {
     .end(function(res){
       var settings = res.body;
       expect(res.status).toEqual(200);
+      // find that user and check the values now
       User
       .findOne({ _id: seedUser.id })
       .lean()
@@ -96,7 +97,6 @@ describe("A user", function() {
         expect(user.interests).toEqual(["bikramYoga", "ddpYoga"]);
         done();
       });
-      // find that user and check the values now
     });
   });
 });
