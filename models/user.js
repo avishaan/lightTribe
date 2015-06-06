@@ -15,8 +15,14 @@ var userSchema = new mongoose.Schema({
     value: { type: String, default: 'placeholder' },
     expires: { type: Date, default: Date.now}
   },
+  // auths: [{
+  //   name: { type: String }, // facebook/twitter/insta etc
+  //   id: { type: String, required: false, unique: false }, // id the provider uses
+  //   enabled: { type: Boolean }
+  // }],
   facebook: {
-    id: { type: String, required: false, unique: false }
+    id: { type: String, required: false, unique: false },
+    enabled: { type: Boolean }
   },
   userImage: { type: String, ref: 'Image' },
   interests: [

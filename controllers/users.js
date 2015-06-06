@@ -24,18 +24,27 @@ module.exports.registerUser = function registerUser (req, res, next) {
 module.exports.readUserSettings = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
   logger.info('Reading user settings for user: ' + userId);
-  res.status(200).send({
-    _id: "123",
-    username: "codeHatcher",
-    thumbnail: "https://www.google.com/images/srpr/logo11w.png",
-    lastLogin: Date.now(),
-    interests: ["bikramYoga", "vinyasaYoga"],
-    auths: [
-      {
-        name: "facebook",
-        enabled: "true"
-      }
-    ]
+  User
+  .findOne({ _id: userId })
+  .select('-password -token')
+  .populate('userImage')
+  .lean()
+  .exec(function(err, user){
+    if (!err && user){
+      res.status(200).send({
+        _id: user._id,
+        username: user.username,
+        interests: user.interests,
+        thumbnail: user.userImage.url,
+        auths: [{
+          name: "facebook",
+          enabled: true
+        }],
+        lastLogin: Date.now()
+      });
+    } else {
+      res.status(500).send({ err: err, clientMsg: "User not found!" });
+    }
   });
 };
 
