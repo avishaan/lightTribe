@@ -25,7 +25,7 @@ var userSchema = new mongoose.Schema({
   },
   userImage: { type: String, ref: 'Image' },
   interests: [
-    { type: String }
+    { type: String } // should match interest.key
   ]
 });
 
