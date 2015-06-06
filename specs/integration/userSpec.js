@@ -65,7 +65,7 @@ describe("A user", function() {
     .send({ access_token: seedUser.token })
     .end(function(res){
       var settings = res.body;
-      console.log(settings);
+      //console.log(settings);
       expect(res.status).toEqual(200);
       expect(settings.password).not.toBeDefined();
       expect(settings.lastLogin).toBeDefined();
@@ -76,6 +76,27 @@ describe("A user", function() {
       expect(settings.interests).toBeDefined();
       //expect(settings.username).toEqual(seedUser.username);
       done();
+    });
+  });
+  it("should be able to change their interests", function(done) {
+    agent
+    .post(URL + '/users/' + seedUser.id)
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser.token,
+      interests: ["bikramYoga", "ddpYoga"]
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      User
+      .findOne({ _id: seedUser.id })
+      .lean()
+      .exec(function(err, user){
+        expect(user.interests).toEqual(["bikramYoga", "ddpYoga"]);
+        done();
+      });
+      // find that user and check the values now
     });
   });
 });
