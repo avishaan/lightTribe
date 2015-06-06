@@ -18,7 +18,7 @@
   ],
   "basePath": "/api",
   "paths": {
-    "/v1/profile/{userId}": {
+    "/v1/profiles/{userId}": {
       "get": {
         "x-swagger-router-controller": "profiles",
         "operationId": "readOneProfile",
@@ -561,6 +561,50 @@
       }
     },
     "/v1/users/{userId}": {
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "updateUserSettings",
+        "tags": ["users"],
+        "description": "Update user settings such as interests and image",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User Id of the user you are querying",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "settings",
+            "in": "body",
+            "description": "Settings body payload to update user settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserSettings"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      },
       "get": {
         "x-swagger-router-controller": "users",
         "operationId": "readUserSettings",
@@ -870,6 +914,22 @@
       "properties": {
         "access_token": {
           "type": "string"
+        }
+      }
+    },
+    "UpdateUserSettings": {
+      "properties": {
+        "userImage": {
+          "type": "string",
+          "description": "Image unique id returned from image upload",
+          "example": "5572286715404b55c47017b7"
+        },
+        "interests": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "bikramYoga"
+          }
         }
       }
     },

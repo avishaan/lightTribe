@@ -22,7 +22,11 @@ var userSchema = new mongoose.Schema({
   },
   facebook: {
     id: { type: String, required: false, unique: false }
-  }
+  },
+  userImage: { type: String, ref: 'Image' },
+  interests: [
+    { type: String }
+  ]
 });
 
 // if the model itself is new
@@ -210,6 +214,36 @@ userSchema.statics.registerUser = function(options, cb) {
       cb(null, user);
     } else {
       cb({err: err, clientMsg: 'Something broke, try again'}, null);
+    }
+  });
+};
+/**
+ * Update user profile and interest information
+ * @param {object} cb
+ * @property {object} options passed options
+ * @property {string} options.image Image to replace existing image
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {string} user updated user
+ */
+userSchema.methods.updateUserSettings = function(options, cb) {
+  var _id = this._id;
+  User
+  .findOne({_id: _id})
+  .exec(function(err, user){
+    if (!err && user) {
+      // replace values with anything passed in
+      if (typeof options.userImage !== "undefined"){
+        user.set('userImage', options.userImage);
+      }
+      if (typeof options.interests !== "undefined"){
+        user.set('interests', options.interests);
+      }
+      user.save(function(err, savedUser){
+        cb(err, savedUser);
+      });
+    } else {
+      cb(new Error("Can't find user"), null);
     }
   });
 };
