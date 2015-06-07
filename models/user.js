@@ -24,6 +24,15 @@ var userSchema = new mongoose.Schema({
     id: { type: String, required: false, unique: false },
     enabled: { type: Boolean }
   },
+  auths:{
+    anonymous: {
+      id: { type: String, required: false, unique: true, sparse: true } // a way to identify unregistered users could use GUID or something else in the future
+    },
+    facebook: {
+      id: { type: String, required: false, unique: false },
+      enabled: { type: Boolean }
+    }
+  },
   userImage: { type: String, ref: 'Image' },
   interests: [
     { type: String } // should match interest.key
