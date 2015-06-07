@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var bcrypt = require('bcrypt');
 var token = require('rand-token');
+var chance = new require('chance').Chance();
 /*
 |-------------------------------------------------------------
 | User Schema
@@ -39,7 +40,7 @@ var userSchema = new mongoose.Schema({
   ]
 });
 
-// if the model itself is new
+// if there is no token, generate one before saving the model for first time
 userSchema.pre('save', function(next) {
   if (this.isNew){
     this.generateToken(function(err){
@@ -64,6 +65,38 @@ userSchema.pre('save', function(next) {
   }
 });
 /**
+ * Create a new anonymous user
+ * @param {object} options of the user being created
+ * @property {string} id of the user
+ * @property {string} username of the user
+ * @param {function} cb
+ * @property {object} user doc instance incase you need it
+ * @property {object} err Passed Error
+ */
+userSchema.statics.createAnonUser = function(options, cb) {
+  var username = options.username;
+  var id = options.id;
+  var password = chance.string({ length: 10 });
+
+  User
+  .create({
+    username: username,
+    password: password,
+    auths:{
+      anonymous: {
+        id: id
+      }
+    }
+  }, function(err, user){
+    if (!err && user){
+      cb(null, user);
+    } else {
+      err.clientMsg = 'could not register user';
+      cb(err);
+    }
+  });
+};
+/**
  * Create a new user
  * @param {object} details of the user being created
  * @config {string} username of the user
@@ -87,6 +120,37 @@ userSchema.statics.createUser = function(options, cb) {
     } else {
       err.clientMsg = 'could not register user';
       cb(err);
+    }
+  });
+};
+
+/**
+ * Check authentication for anony user, create user if you can't find all in one step
+ * @param {object} options for anonymous user being check/created 
+ * @config {string} username of the user
+ * @config {string} password of the user
+ * @param {function} cb
+ * @config {object} user instance user doc instance incase you need it
+ * @config {object} err Passed Error
+ */
+userSchema.statics.checkAnonAuth = function(options, cb) {
+  var username = options.username;
+  var id = options.id;
+
+  // check if the user exists first, if they do, return username/password
+  User
+  .findOne({ 'auths.anonymous.id': id })
+  .exec(function(err, user){
+    if (!err && !user){
+      // if we don't find a user, create him right then and there
+      User
+      .createAnonUser({ username: username, id: id }, function(err, user){
+        // send this newly created user back to the front end
+        cb(err, user);
+      });
+    } else {
+      // this means we either have a user or error let the parent fnc deal with it
+      cb(err, user);
     }
   });
 };
