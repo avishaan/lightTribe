@@ -11,21 +11,22 @@ var token = require('rand-token');
 var userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  profile: {
-    reviews: { type: Number, default: 0 },
-    points: { type: Number, default: 0 },
-    rank: { type: String, default: 'Newbie' }
-  },
   token: { // auth token data
     value: { type: String, default: 'placeholder' },
     expires: { type: Date, default: Date.now}
   },
+  // auths: [{
+  //   name: { type: String }, // facebook/twitter/insta etc
+  //   id: { type: String, required: false, unique: false }, // id the provider uses
+  //   enabled: { type: Boolean }
+  // }],
   facebook: {
-    id: { type: String, required: false, unique: false }
+    id: { type: String, required: false, unique: false },
+    enabled: { type: Boolean }
   },
   userImage: { type: String, ref: 'Image' },
   interests: [
-    { type: String }
+    { type: String } // should match interest.key
   ]
 });
 

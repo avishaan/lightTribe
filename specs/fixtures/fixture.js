@@ -63,16 +63,19 @@ module.exports.seedUser = function(options, cb){
   if (typeof cb === "undefined"){
     // if no options, assume callback was sent in as first param
     cb = options;
-    options = null;
+    options = {};
+    // use username and password from local variable
+    options.username = username;
+    options.password = password;
+  } else {
+    // use passed in options as is
   }
-  User.create({
-    username: username,
-    password: password
-  }, function(err, user){
+  //console.log(options);
+  User.create(options, function(err, user){
     // return the user that was just created
     user = {
-      username: username,
-      password: password,
+      username: user.username,
+      password: user.password,
       hashedPass : user.password,
       _id: user._id,
       id: user.id,
@@ -91,7 +94,7 @@ module.exports.seedImage = function(options, cb){
   Image.create({
     // TODO: public id taken from real image, change if you see errors here
     public_id: 'w4isrf95psfjifjpqycm',
-    url: 'http://localhost'
+    url: 'https://lh4.googleusercontent.com/-kOsv1Vmk57I/AAAAAAAAAAI/AAAAAAAAAMc/SvhhDYUHktE/s120-c/photo.jpg'
   }, function(err, image){
     cb(err, image);
   });

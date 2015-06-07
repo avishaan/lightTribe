@@ -18,6 +18,36 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/v1/interests": {
+      "get": {
+        "x-swagger-router-controller": "interests",
+        "operationId": "readAllInterests",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["interest"],
+        "description": "Get list of possible interests/categories and their meta data",
+        "parameters": [
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/profiles/{userId}": {
       "get": {
         "x-swagger-router-controller": "profiles",

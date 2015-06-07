@@ -14,7 +14,7 @@ cloudinary.config(config.cloudinary);
 */
 
 var imageSchema = new mongoose.Schema({
-  url: { type: String },
+  url: { type: String, default: 'https://lh4.googleusercontent.com/-kOsv1Vmk57I/AAAAAAAAAAI/AAAAAAAAAMc/SvhhDYUHktE/s120-c/photo.jpg' },
   hosting: { type: String, default: 'cloudinary' },
   public_id: { type: String }
 });
