@@ -5,10 +5,12 @@ var config = require('../config.js');
 module.exports.registerUser = function registerUser (req, res, next) {
   var username = req.swagger.params.user.value.username;
   var password = req.swagger.params.user.value.password;
+  var interests = req.swagger.params.user.value.interests;
   logger.info('registerUser');
   User.createUser({
     username: username,
     password: password,
+    interests: interests
 
   }, function(err, user){
     if (!err && user){
