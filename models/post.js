@@ -28,10 +28,10 @@ postSchema.index({loc: '2dsphere'});
 /**
  * Create a specific post
  * @param {object} options The options for the new post
- * @config {string} company of the post
+ * @property {string} company of the post
  * @param {function} cb
- * @config {object} post 
- * @config {object} err Passed Error
+ * @property {object} post 
+ * @property {object} err Passed Error
  */
 postSchema.statics.createPost = function(options, cb) {
   // convert coordinates to polygon so that we can cover an area
@@ -68,10 +68,10 @@ postSchema.statics.createPost = function(options, cb) {
 /**
  * Read a specific post
  * @param {object} options The options for the lookup
- * @config {string} post id of the post
+ * @property {string} post id of the post
  * @param {function} cb
- * @config {object} post 
- * @config {object} err Passed Error
+ * @property {object} post 
+ * @property {object} err Passed Error
  */
 postSchema.statics.readPost = function(options, cb) {
   var id = options.id;
@@ -90,12 +90,12 @@ postSchema.statics.readPost = function(options, cb) {
 /**
  * Read relevant post based on query parameters search
  * @param {object} options The options for the lookup
- * @config {number} options.longitude longitude of the search for posts in that area using WGS84 guidelines 
- * @config {number} options.latitude latitude of the search for posts in that area using WGS84 guidelines
- * @config {number} options.distance in units of meters assuming geoJSON guidelines
+ * @property {number} options.longitude longitude of the search for posts in that area using WGS84 guidelines 
+ * @property {number} options.latitude latitude of the search for posts in that area using WGS84 guidelines
+ * @property {number} options.distance in units of meters assuming geoJSON guidelines
  * @param {function} cb
- * @config {object} posts
- * @config {object} err Passed Error
+ * @property {object} posts
+ * @property {object} err Passed Error
  */
 postSchema.statics.readPostsBySearch = function(options, cb) {
   // see if post exists, if so pass error
@@ -124,10 +124,10 @@ postSchema.statics.readPostsBySearch = function(options, cb) {
 /**
  * Read all posts for a user
  * @param {object} options The options for the lookup
- * @config {string} options.userId user id of the user for which you want posts
+ * @property {string} options.userId user id of the user for which you want posts
  * @param {function} cb
- * @config {object} posts
- * @config {object} err Passed Error
+ * @property {object} posts
+ * @property {object} err Passed Error
  */
 postSchema.statics.readAllPosts = function(options, cb) {
   // see if post exists, if so pass error
