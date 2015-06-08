@@ -143,6 +143,7 @@ userSchema.statics.createUser = function(options, cb) {
  * @param {object} options for anonymous user being check/created 
  * @property {string} username of the user
  * @property {string} password of the user
+ * @property {string} interests of the user
  * @param {function} cb
  * @property {object} user instance user doc instance incase you need it
  * @property {object} err Passed Error
@@ -150,6 +151,7 @@ userSchema.statics.createUser = function(options, cb) {
 userSchema.statics.checkAnonAuth = function(options, cb) {
   var username = options.username;
   var id = options.id;
+  var interests = options.interests;
 
   // check if the user exists first, if they do, return username/password
   User
@@ -158,7 +160,9 @@ userSchema.statics.checkAnonAuth = function(options, cb) {
     if (!err && !user){
       // if we don't find a user, create him right then and there
       User
-      .createAnonUser({ username: username, id: id }, function(err, user){
+      .createAnonUser({
+        username: username, id: id, interests: interests
+      }, function(err, user){
         // send this newly created user back to the front end
         cb(err, user);
       });
