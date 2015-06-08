@@ -47,3 +47,4 @@ Context
 - convert to promises when possible
 - swagger-ui using github as the host
 - route for getting back list of interests, specifically doing the spec and then the swagger and then dummy controller
+- pass array into query parameter https://github.com/swagger-api/swagger-js/blob/master/test/spec/v2/petstore.json#L176-L189
