@@ -93,6 +93,7 @@ describe("An anonymous user", function() {
       .exec(function(err, savedUser){
         expect(err).toEqual(null);
         expect(savedUser).toBeDefined();
+        expect(savedUser.interests.length).toEqual(1);
         expect(savedUser.interests[0]).toEqual('yogaBikram');
         done();
       });
