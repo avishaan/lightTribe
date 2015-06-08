@@ -70,24 +70,37 @@ module.exports.readAllPostsByUser = function (req, res, next) {
 };
 
 module.exports.readRelevantPosts = function (req, res, next) {
+  var options = {
+    longitude: req.swagger.params.longitude.value,
+    latitude: req.swagger.params.latitude.value,
+    radius: req.swagger.params.radius.value
+  };
   logger.info('Search posts based on incoming query parameters: ');
-  res.status(200).send([
-    {
-      _id: "100",
-      text: "Post 1",
-      createDate: Date.now(),
-      user: {
-        username: "codeHatcher",
-        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
-      }
-    }, {
-      _id: "101",
-      text: "Post 2",
-      createDate: Date.now(),
-      user: {
-        username: "codeHatcher",
-        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
-      }
+  Post.readPostsBySearch(options, function(err, posts){
+    if (!err){
+      res.status(200).send(posts);
+    } else {
+      err.clientMsg = "Couldn't perform search :(";
+      res.status(500).send(err);
     }
-  ]);
+  });
+  //res.status(200).send([
+  //  {
+  //    _id: "100",
+  //    text: "Post 1",
+  //    createDate: Date.now(),
+  //    user: {
+  //      username: "codeHatcher",
+  //      thumbnail: "https://www.google.com/images/srpr/logo11w.png"
+  //    }
+  //  }, {
+  //    _id: "101",
+  //    text: "Post 2",
+  //    createDate: Date.now(),
+  //    user: {
+  //      username: "codeHatcher",
+  //      thumbnail: "https://www.google.com/images/srpr/logo11w.png"
+  //    }
+  //  }
+  //]);
 };
