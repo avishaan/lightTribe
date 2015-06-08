@@ -50,6 +50,16 @@ userSchema.pre('save', function(next) {
     return next();
   }
 });
+// if no interests are picked, go ahead and assign them a default one
+// this way when they do the search they have some interest
+userSchema.pre('save', function(next) {
+  if (this.isNew){
+    if (!this.interests || !this.interests.length){
+      this.interests = ['yogaBikram'];
+    }
+  }
+  return next();
+});
 // if password is modified, re-hash on save
 userSchema.pre('save', function(next) {
   if (this.isModified('password')){
@@ -77,11 +87,13 @@ userSchema.statics.createAnonUser = function(options, cb) {
   var username = options.username;
   var id = options.id;
   var password = chance.string({ length: 10 });
+  var interests = options.interests;
 
   User
   .create({
     username: username,
     password: password,
+    interests: interests,
     auths:{
       anonymous: {
         id: id
@@ -99,21 +111,23 @@ userSchema.statics.createAnonUser = function(options, cb) {
 /**
  * Create a new user
  * @param {object} details of the user being created
- * @config {string} username of the user
- * @config {string} password of the user
+ * @property {string} username of the user
+ * @property {string} password of the user
  * @param {function} cb
- * @config {object} user instance user doc instance incase you need it
- * @config {object} err Passed Error
+ * @property {object} user instance user doc instance incase you need it
+ * @property {object} err Passed Error
  */
 userSchema.statics.createUser = function(options, cb) {
   var username = options.username;
   var password = options.password;
+  var interests = options.interests;
 
   // check the user exists
   User
   .create({
     username: username,
-    password: password
+    password: password,
+    interests: interests
   }, function(err, user){
     if (!err && user){
       cb(null, user);
@@ -127,15 +141,17 @@ userSchema.statics.createUser = function(options, cb) {
 /**
  * Check authentication for anony user, create user if you can't find all in one step
  * @param {object} options for anonymous user being check/created 
- * @config {string} username of the user
- * @config {string} password of the user
+ * @property {string} username of the user
+ * @property {string} password of the user
+ * @property {string} interests of the user
  * @param {function} cb
- * @config {object} user instance user doc instance incase you need it
- * @config {object} err Passed Error
+ * @property {object} user instance user doc instance incase you need it
+ * @property {object} err Passed Error
  */
 userSchema.statics.checkAnonAuth = function(options, cb) {
   var username = options.username;
   var id = options.id;
+  var interests = options.interests;
 
   // check if the user exists first, if they do, return username/password
   User
@@ -144,7 +160,9 @@ userSchema.statics.checkAnonAuth = function(options, cb) {
     if (!err && !user){
       // if we don't find a user, create him right then and there
       User
-      .createAnonUser({ username: username, id: id }, function(err, user){
+      .createAnonUser({
+        username: username, id: id, interests: interests
+      }, function(err, user){
         // send this newly created user back to the front end
         cb(err, user);
       });
@@ -158,11 +176,11 @@ userSchema.statics.checkAnonAuth = function(options, cb) {
 /**
  * Check authentication for a user
  * @param {object} details of the user whose password is being checked
- * @config {string} username of the user
- * @config {string} password of the user
+ * @property {string} username of the user
+ * @property {string} password of the user
  * @param {function} cb
- * @config {object} user instance user doc instance incase you need it
- * @config {object} err Passed Error
+ * @property {object} user instance user doc instance incase you need it
+ * @property {object} err Passed Error
  */
 userSchema.statics.checkAuthentication = function(options, cb) {
   var username = options.username;
@@ -191,8 +209,8 @@ userSchema.statics.checkAuthentication = function(options, cb) {
 /**
  * Hash password
  * @param {function} cb
- * @config {object} err Passed Error
- * @config {boolean} hashed password 
+ * @property {object} err Passed Error
+ * @property {boolean} hashed password 
  */
 userSchema.methods.hashPassword = function(cb) {
   var user = this;
@@ -218,8 +236,8 @@ userSchema.methods.hashPassword = function(cb) {
 /**
  * Static to Check validity of token
  * @param {function} cb
- * @config {object} err Passed Error
- * @config {boolean} new generated token
+ * @property {object} err Passed Error
+ * @property {boolean} new generated token
  */
 userSchema.statics.checkToken = function(cb) {
   var value = token.generate('18');
@@ -229,8 +247,8 @@ userSchema.statics.checkToken = function(cb) {
 /**
  * Generate new auth token
  * @param {function} cb
- * @config {object} err Passed Error
- * @config {string} new generated token
+ * @property {object} err Passed Error
+ * @property {string} new generated token
  */
 userSchema.methods.generateToken = function(cb) {
   var value = token.generate('18');
@@ -241,8 +259,8 @@ userSchema.methods.generateToken = function(cb) {
  * Compare two passwords for a match
  * @param {string} password entered 
  * @param {function} cb
- * @config {object} err Passed Error
- * @config {boolean} match Whether or not the password matched
+ * @property {object} err Passed Error
+ * @property {boolean} match Whether or not the password matched
  */
 userSchema.methods.comparePassword = function(password, cb) {
   bcrypt.compare(password, this.password, function(err, isMatch){
@@ -252,10 +270,10 @@ userSchema.methods.comparePassword = function(password, cb) {
 /**
  * Find user based on token provided
  * @param {object} details of the user being registered
- * @config {string} token being looked up
+ * @property {string} token being looked up
  * @param {function} cb
- * @config {object} user instance user doc instance incase you need it
- * @config {object} err Passed Error
+ * @property {object} user instance user doc instance incase you need it
+ * @property {object} err Passed Error
  */
 userSchema.statics.findByToken = function(options, cb) {
   var token = options.token;
@@ -268,21 +286,23 @@ userSchema.statics.findByToken = function(options, cb) {
 /**
  * Register a new user
  * @param {object} details of the user being registered
- * @config {string} username of the user
- * @config {string} password of the user
+ * @property {string} username of the user
+ * @property {string} password of the user
  * @param {function} cb
- * @config {object} user instance user doc instance incase you need it
- * @config {object} err Passed Error
+ * @property {object} user instance user doc instance incase you need it
+ * @property {object} err Passed Error
  */
 userSchema.statics.registerUser = function(options, cb) {
   var username = options.username;
   var password = options.password;
+  var interests = options.interests;
   // make sure existing username doesn't exist
   // make sure existing email doesn't exist
   // register user
   User.create({
     username: username,
-    password: password
+    password: password,
+    interests: interests
   }, function(err, user){
     if (!err && user){
       cb(null, user);

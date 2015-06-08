@@ -10,6 +10,7 @@ var async = require('async');
 var username = 'test';
 var password = 'test';
 var email = 'test@test.com';
+var interests = ['yogaBikram', 'yogaVinyasa'];
 
 // have a review when necessary
 var review = {
@@ -26,12 +27,18 @@ var post = {
   text: 'This is a post description',
   createDate: Date.now(),
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  interests: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145
 };
 
 var comment = {
   text: "Example Comment"
+};
+
+module.exports.seeds = {
+  post: post,
+  comment: comment
 };
 
 module.exports.fbUser = {
@@ -67,6 +74,7 @@ module.exports.seedUser = function(options, cb){
     // use username and password from local variable
     options.username = username;
     options.password = password;
+    options.interests = interests;
   } else {
     // use passed in options as is
   }
@@ -76,6 +84,7 @@ module.exports.seedUser = function(options, cb){
     user = {
       username: user.username,
       password: user.password,
+      interests: user.interests,
       hashedPass : user.password,
       _id: user._id,
       id: user.id,
@@ -106,6 +115,7 @@ module.exports.seedPost = function(options, cb){
     createDate: Date.now(),
     author: options.author,
     images: options.images,
+    interests: options.interests,
     longitude: options.longitude,
     latitude: options.latitude
   }, function(err, savedPost){

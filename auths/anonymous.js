@@ -10,9 +10,12 @@ module.exports = new LocalStrategy({
   // these will be the actual fields we are interested in
   var username = req.swagger.params.body.value.username;
   var id = req.swagger.params.body.value.GUID;
+  var interests = req.swagger.params.body.value.interests;
+
   User.checkAnonAuth({
     username: username,
-    id: id
+    id: id,
+    interests: interests
   }, function(err, user){
     if (!err){
       return done(null, user);

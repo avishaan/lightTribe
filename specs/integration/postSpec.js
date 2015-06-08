@@ -13,6 +13,7 @@ var post = {
   id: '1234',
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  interests: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145
 };
@@ -103,6 +104,7 @@ describe("Creating a post", function() {
       expect(body.text).toEqual(post.text);
       expect(body.images).toEqual(post.images);
       expect(body.author).toEqual(seedUser.id);
+      expect(body.interests).toEqual(post.interests);
       done();
     });
   });

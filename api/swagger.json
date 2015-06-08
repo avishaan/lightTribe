@@ -958,9 +958,17 @@
             "example": "554b34d8171ff19c8128c54d",
             "type": "string"
           }
+        },
+        "interests": {
+          "type": "array",
+          "items": {
+            "description": "The interest categories this should be saved under",
+            "example": "yogaBikram",
+            "type": "string"
+          }
         }
       },
-      "required": ["text", "longitude", "latitude"]
+      "required": ["text", "longitude", "latitude", "interests"]
     },
     "ImageURL": {
       "description": "URL of resolved image",

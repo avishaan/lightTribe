@@ -10,7 +10,8 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 var anonUser = {
   username: "Anon",
-  GUID: chance.guid()
+  GUID: chance.guid(),
+  interests: ['ddpYoga']
 };
 
 var seedUser = {};
@@ -73,6 +74,51 @@ describe("An anonymous user", function() {
         expect(res.status).toEqual(200);
         // make sure it returns the same uid as it did the first time
         expect(anonUser.id).toEqual(res.body.uid);
+        done();
+      });
+    });
+  });
+  it("should be able to assign a default interest when none is passed in", function(done) {
+    agent
+    .post(URL + '/auths/anonymous')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: anonUser.username,
+      GUID: anonUser.GUID
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      User
+      .findOne({username: anonUser.username})
+      .exec(function(err, savedUser){
+        expect(err).toEqual(null);
+        expect(savedUser).toBeDefined();
+        expect(savedUser.interests.length).toEqual(1);
+        expect(savedUser.interests[0]).toEqual('yogaBikram');
+        done();
+      });
+    });
+  });
+  it("should be able to pass in some interests", function(done) {
+    agent
+    .post(URL + '/auths/anonymous')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: anonUser.username,
+      GUID: anonUser.GUID,
+      interests: anonUser.interests
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      User
+      .findOne({username: anonUser.username})
+      .exec(function(err, savedUser){
+        expect(err).toEqual(null);
+        expect(savedUser).toBeDefined();
+        expect(savedUser.interests.length).toEqual(1);
+        expect(savedUser.interests[0]).toEqual('ddpYoga');
         done();
       });
     });
