@@ -144,11 +144,11 @@
         "description": "Search for a post",
         "parameters": [
           {
-            "name": "terms",
+            "name": "interest",
             "in": "query",
-            "description": "Search terms you are looking for",
+            "description": "Interest you want to filter for",
             "required": false,
-            "type": "number"
+            "type": "string"
           },
           {
             "name": "radius",
