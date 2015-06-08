@@ -92,7 +92,7 @@ postSchema.statics.readPost = function(options, cb) {
  * @param {object} options The options for the lookup
  * @property {number} options.longitude longitude of the search for posts in that area using WGS84 guidelines 
  * @property {number} options.latitude latitude of the search for posts in that area using WGS84 guidelines
- * @property {number} options.distance in units of meters assuming geoJSON guidelines
+ * @property {number} options.radius in units of meters assuming geoJSON guidelines
  * @param {function} cb
  * @property {object} posts
  * @property {object} err Passed Error
@@ -100,7 +100,7 @@ postSchema.statics.readPost = function(options, cb) {
 postSchema.statics.readPostsBySearch = function(options, cb) {
   // see if post exists, if so pass error
   var coordinates = [options.longitude, options.latitude];
-  var distance = options.distance; // km
+  var radius = options.radius; // km, sometimes referred to as distance
   var earthRadius = 6371; // km
   Post
   .find({})
@@ -108,7 +108,7 @@ postSchema.statics.readPostsBySearch = function(options, cb) {
   .near({
     center: coordinates,
     spherical: true,
-    maxDistance: distance/earthRadius
+    maxDistance: radius/earthRadius
   })
   //.populate('images')
   .exec(function(err, posts){
