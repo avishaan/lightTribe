@@ -65,11 +65,3 @@ module.exports.facebook = function facebook (req, res, next) {
   }
   res.status(200).send(user.toObject({ transform: xform}));
 };
-module.exports.profile = function profile (req, res, next) {
-  logger.info('protected route');
-  res.status(200).send({
-    reviews: 0,
-    points: 100000,
-    rank: 'newbie'
-  });
-};
