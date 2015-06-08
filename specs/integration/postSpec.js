@@ -18,6 +18,8 @@ var post = {
   longitude: -122.418145
 };
 
+var seedPost;
+
 describe("Creating a post", function() {
   // delete the database before each time
   beforeEach(function(done){
@@ -189,15 +191,20 @@ describe("Creating a post", function() {
 describe("Search posts", function() {
   // delete the database before each time
   beforeEach(function(done){
-    fixture.deleteDB(function(err, user){
+    fixture.deleteDB(function(err, db){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
       // seed a user
       fixture.seedUser(function(err, user){
+        expect(err).toEqual(null);
         // save the user for later
         seedUser = user;
-        expect(err).toEqual(null);
-        done();
+        // setup post related items, such as the author
+        post.author = seedUser._id.toString();
+        fixture.seedPost(post, function(err, post){
+          seedPost = post;
+          done();
+        });
       });
     });
   });
@@ -206,10 +213,10 @@ describe("Search posts", function() {
     .get(URL + '/posts')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
-    .query({ terms: 'yoga' })
+    .query({ interest: 'yogaBikram' })
     .query({ radius: 50 })
-    .query({ latitude: 50 })
-    .query({ longitude: 50 })
+    .query({ latitude: post.latitude })
+    .query({ longitude: post.longitude })
     .end(function(res){
       var posts = res.body;
       expect(posts.length).not.toEqual(0);
@@ -228,7 +235,7 @@ describe("Search posts", function() {
         // 34.0204989,-118.4117325 los angeles actual distance 560km
         latitude: 34.0204989,
         longitude: -118.4117325,
-        distance: 500
+        radius: 500
       }, function(err, posts){
         expect(posts.length).toEqual(0);
         expect(err).toEqual(null);
@@ -247,9 +254,9 @@ describe("Search posts", function() {
         // 34.0204989,-118.4117325 los angeles actual distance 560km
         latitude: 34.0204989,
         longitude: -118.4117325,
-        distance: 600
+        radius: 600
       }, function(err, posts){
-        expect(posts.length).toEqual(1);
+        expect(posts.length).toEqual(2);
         expect(err).toEqual(null);
         done();
       });
