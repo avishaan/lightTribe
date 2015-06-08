@@ -172,7 +172,7 @@ app.use(function(err, req, res, next){
   console.log(prettyjson.render(err, {}));
   if (err = "SCHEMA_VALIDATION_FAILED"){
     // should be swagger validation error, let the FE know.
-    res.status(res.statusCode).send({ error: err });
+    res.status(400).send({ error: err });
   } else {
     // we don't know how to handle this, send it along
     next(err);
