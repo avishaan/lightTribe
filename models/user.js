@@ -50,6 +50,16 @@ userSchema.pre('save', function(next) {
     return next();
   }
 });
+// if no interests are picked, go ahead and assign them a default one
+// this way when they do the search they have some interest
+userSchema.pre('save', function(next) {
+  if (this.isNew){
+    if (!this.interests || !this.interests.length){
+      this.interests = ['yogaBikram'];
+    }
+  }
+  return next();
+});
 // if password is modified, re-hash on save
 userSchema.pre('save', function(next) {
   if (this.isModified('password')){
@@ -77,11 +87,13 @@ userSchema.statics.createAnonUser = function(options, cb) {
   var username = options.username;
   var id = options.id;
   var password = chance.string({ length: 10 });
+  var interests = options.interests;
 
   User
   .create({
     username: username,
     password: password,
+    interests: interests,
     auths:{
       anonymous: {
         id: id
@@ -108,12 +120,14 @@ userSchema.statics.createAnonUser = function(options, cb) {
 userSchema.statics.createUser = function(options, cb) {
   var username = options.username;
   var password = options.password;
+  var interests = options.interests;
 
   // check the user exists
   User
   .create({
     username: username,
-    password: password
+    password: password,
+    interests: interests
   }, function(err, user){
     if (!err && user){
       cb(null, user);
@@ -277,12 +291,14 @@ userSchema.statics.findByToken = function(options, cb) {
 userSchema.statics.registerUser = function(options, cb) {
   var username = options.username;
   var password = options.password;
+  var interests = options.interests;
   // make sure existing username doesn't exist
   // make sure existing email doesn't exist
   // register user
   User.create({
     username: username,
-    password: password
+    password: password,
+    interests: interests
   }, function(err, user){
     if (!err && user){
       cb(null, user);
