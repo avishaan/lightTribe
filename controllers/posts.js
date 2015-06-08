@@ -19,6 +19,7 @@ module.exports.createPost = function (req, res, next) {
       _id: post._id,
       text: post.text,
       images: post.images,
+      categories: post.categories,
       author: post.author
     });
   })
