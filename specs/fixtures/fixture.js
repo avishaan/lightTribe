@@ -26,7 +26,7 @@ var post = {
   text: 'This is a post description',
   createDate: Date.now(),
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
-  categories: ['yogaBikram', 'meditationZen'],
+  interests: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145
 };
@@ -112,7 +112,7 @@ module.exports.seedPost = function(options, cb){
     createDate: Date.now(),
     author: options.author,
     images: options.images,
-    categories: options.categories,
+    interests: options.interests,
     longitude: options.longitude,
     latitude: options.latitude
   }, function(err, savedPost){

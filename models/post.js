@@ -10,7 +10,7 @@ var utils = require('./../utils/circleToPolygon.js');
 var postSchema = new mongoose.Schema({
   text: { type: String },
   createDate: { type: Date },
-  categories: [{ type: String }],
+  interests: [{ type: String }],
   loc: { // based on GeoJSON
     type: {
       type: String, default: "MultiPoint"
@@ -48,7 +48,7 @@ postSchema.statics.createPost = function(options, cb) {
     createDate: Date.now(),
     author: options.author,
     images: options.images,
-    categories: options.categories,
+    interests: options.interests,
     loc: {
       type: "MultiPoint",
       coordinates: polyCoordinates

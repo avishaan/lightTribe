@@ -959,16 +959,16 @@
             "type": "string"
           }
         },
-        "categories": {
+        "interests": {
           "type": "array",
           "items": {
-            "description": "the key of the category for the post",
+            "description": "The interest categories this should be saved under",
             "example": "yogaBikram",
             "type": "string"
           }
         }
       },
-      "required": ["text", "longitude", "latitude", "categories"]
+      "required": ["text", "longitude", "latitude", "interests"]
     },
     "ImageURL": {
       "description": "URL of resolved image",
