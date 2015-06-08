@@ -224,9 +224,6 @@ describe("Search posts", function() {
     .send(post)
     .send({ access_token: seedUser.token })
     .end(function(res){
-      Post.on('index', function(){
-        console.log('index completel');
-      })
       Post.readPostsBySearch({
         // 34.0204989,-118.4117325 los angeles actual distance 560km
         latitude: 34.0204989,
