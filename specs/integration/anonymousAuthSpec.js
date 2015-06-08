@@ -77,4 +77,25 @@ describe("An anonymous user", function() {
       });
     });
   });
+  it("should be able to assign a default interest when none is passed in", function(done) {
+    agent
+    .post(URL + '/auths/anonymous')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: anonUser.username,
+      GUID: anonUser.GUID
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      User
+      .findOne({username: anonUser.username})
+      .exec(function(err, savedUser){
+        expect(err).toEqual(null);
+        expect(savedUser).toBeDefined();
+        expect(savedUser.interests[0]).toEqual('yogaBikram');
+        done();
+      });
+    });
+  });
 });
