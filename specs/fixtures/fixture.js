@@ -10,6 +10,7 @@ var async = require('async');
 var username = 'test';
 var password = 'test';
 var email = 'test@test.com';
+var interests = ['yogaBikram', 'yogaVinyasa'];
 
 // have a review when necessary
 var review = {
@@ -73,6 +74,7 @@ module.exports.seedUser = function(options, cb){
     // use username and password from local variable
     options.username = username;
     options.password = password;
+    options.interests = interests;
   } else {
     // use passed in options as is
   }
@@ -82,6 +84,7 @@ module.exports.seedUser = function(options, cb){
     user = {
       username: user.username,
       password: user.password,
+      interests: user.interests,
       hashedPass : user.password,
       _id: user._id,
       id: user.id,
