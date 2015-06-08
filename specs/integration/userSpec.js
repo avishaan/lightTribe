@@ -37,7 +37,8 @@ describe("A user", function() {
   it("should be able to register", function(done) {
     var user = {
       username: 'user2',
-      password: 'stillpassword'
+      password: 'stillpassword',
+      interests: ['yogaVinyasa']
     };
     agent
     .post(URL + '/users')
@@ -46,15 +47,44 @@ describe("A user", function() {
     .send({
       username: user.username,
       password: user.password,
+      interests: user.interests
     })
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
       User
       .findOne({username: user.username})
-      .exec(function(err, user){
+      .exec(function(err, savedUser){
         expect(err).toEqual(null);
-        expect(user).toBeDefined();
+        expect(savedUser).toBeDefined();
+        expect(savedUser.interests[0]).toEqual(user.interests[0]);
+        done();
+      });
+    });
+  });
+  it("should be able to forget to add an interest", function(done) {
+    // if the user forgets to add an interest, have the backend add a default
+    var user = {
+      username: 'user2',
+      password: 'stillpassword'
+    };
+    agent
+    .post(URL + '/users')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: user.username,
+      password: user.password
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body._id).toBeDefined();
+      User
+      .findOne({username: user.username})
+      .exec(function(err, savedUser){
+        expect(err).toEqual(null);
+        expect(savedUser).toBeDefined();
+        expect(savedUser.interests[0]).toEqual('yogaBikram');
         done();
       });
     });
@@ -75,7 +105,6 @@ describe("A user", function() {
     .send({ access_token: seedUser.token })
     .end(function(res){
       var settings = res.body;
-      console.log(settings);
       expect(res.status).toEqual(200);
       expect(settings.password).not.toBeDefined();
       expect(settings.lastLogin).toBeDefined();
