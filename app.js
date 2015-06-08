@@ -15,6 +15,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
 var basicAuth = require('./auths/basic.js');
+var anonymousAuth = require('./auths/anonymous.js');
 var localAuth = require('./auths/local.js');
 var facebookAuth = require('./auths/facebook.js');
 var tokenAuth = require('./auths/token.js');
@@ -68,6 +69,7 @@ app.use('/api/dev/mirror', function(req, res){
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object.
 passport.use(basicAuth);
+passport.use("anonymous", anonymousAuth);
 passport.use(facebookAuth);
 passport.use(tokenAuth);
 passport.use(localAuth);
@@ -128,6 +130,8 @@ app.use(function(req, res, next){
       return passport.authenticate('basic', { session: false })(req, res, next);
     } else if (req.swagger.operation.security[0].hasOwnProperty('facebookAuth')){
       return passport.authenticate('facebook-token', { session: false })(req, res, next);
+    } else if (req.swagger.operation.security[0].hasOwnProperty('anonymousAuth')){
+      return passport.authenticate('anonymous', { session: false })(req, res, next);
     } else if (req.swagger.operation.security[0].hasOwnProperty('tokenAuth')){
       return passport.authenticate('bearer', { session: false })(req, res, next);
     } else if (req.swagger.operation.security[0].hasOwnProperty('localAuth')){

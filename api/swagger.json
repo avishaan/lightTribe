@@ -674,6 +674,41 @@
         }
       }
     },
+    "/v1/auths/anonymous": {
+      "post": {
+        "x-swagger-router-controller": "auths",
+        "operationId": "anonymous",
+        "tags": ["auths"],
+        "description": "Anonymous authentication",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Anonymous Credentials",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnonymousAccess"
+            }
+          }
+        ],
+        "security": [
+          {
+            "anonymousAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/InternalToken"
+            }
+          }
+        }
+      }
+    },
     "/v1/auths/facebook": {
       "post": {
         "x-swagger-router-controller": "auths",
@@ -746,6 +781,9 @@
     }
   },
   "securityDefinitions": {
+    "anonymousAuth": {
+      "type": "basic"
+    },
     "basicAuth": {
       "type": "basic"
     },
@@ -936,6 +974,16 @@
     "InternalToken": {
       "properties": {
         "token": {
+          "type": "string"
+        }
+      }
+    },
+    "AnonymousAccess": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "GUID": {
           "type": "string"
         }
       }
