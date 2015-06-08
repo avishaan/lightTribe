@@ -15,6 +15,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 var post = {
   text: 'This is a post description',
   images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  categories: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145
 };
