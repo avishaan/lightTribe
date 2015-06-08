@@ -958,9 +958,17 @@
             "example": "554b34d8171ff19c8128c54d",
             "type": "string"
           }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "description": "the key of the category for the post",
+            "example": "yogaBikram",
+            "type": "string"
+          }
         }
       },
-      "required": ["text", "longitude", "latitude"]
+      "required": ["text", "longitude", "latitude", "categories"]
     },
     "ImageURL": {
       "description": "URL of resolved image",
