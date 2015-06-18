@@ -110,7 +110,10 @@ postSchema.statics.readPostsBySearch = function(options, cb) {
     spherical: true,
     maxDistance: radius/earthRadius
   })
-  //.populate('images')
+  .populate({
+    path: 'author',
+    select: 'userImage _id username'
+  })
   .exec(function(err, posts){
     if (!err){
       cb(null, posts);
