@@ -20,7 +20,7 @@ var post = {
 
 var seedPost;
 
-describe("Creating a post", function() {
+xdescribe("Creating a post", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){
@@ -194,17 +194,29 @@ describe("Search posts", function() {
     fixture.deleteDB(function(err, db){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
-      // seed a user
-      fixture.seedUser(function(err, user){
-        expect(err).toEqual(null);
-        // save the user for later
-        seedUser = user;
-        // setup post related items, such as the author
-        post.author = seedUser._id.toString();
-        fixture.seedPost(post, function(err, post){
-          seedPost = post;
-          done();
+      fixture.seedImage(function(err, image){
+        // setup user image and post image
+        post.images = [image._id.toString()];
+        // seed a user
+        fixture.seedUser({
+          username: 'testJasmine',
+          password: 'test123',
+          email: 'test@email.com',
+          interests: ['yogaBikram', 'yogaVinyasa'],
+          userImage: image._id.toString()
+        },
+        function(err, user){
+          expect(err).toEqual(null);
+          // save the user for later
+          seedUser = user;
+          // setup post related items, such as the author
+          post.author = seedUser._id.toString();
+          fixture.seedPost(post, function(err, post){
+            seedPost = post;
+            done();
+          });
         });
+
       });
     });
   });

@@ -75,6 +75,7 @@ module.exports.seedUser = function(options, cb){
     options.username = username;
     options.password = password;
     options.interests = interests;
+    options.userImage = userImage;
   } else {
     // use passed in options as is
   }
