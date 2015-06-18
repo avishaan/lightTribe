@@ -1,6 +1,7 @@
 var logger = require('./../loggers/logger.js');
 var Review = require('../models/review.js');
 var Post = require('../models/post.js');
+var Image = require('../models/image.js');
 var async = require('async');
 
 var Promise = require('bluebird');
@@ -78,7 +79,18 @@ module.exports.readRelevantPosts = function (req, res, next) {
   logger.info('Search posts based on incoming query parameters: ');
   Post.readPostsBySearch(options, function(err, posts){
     if (!err){
-      res.status(200).send(posts);
+      var opts = [
+        { path: 'author.userImage', select: 'url' }
+      ];
+      // populate the images of the authors
+      Image.populate(posts, opts, function(err, posts){
+        if (!err){
+          res.status(200).send(posts);
+        } else {
+          err.clientMsg = "Could not populate userImage";
+          res.status(500).send(err);
+        }
+      });
     } else {
       err.clientMsg = "Couldn't perform search :(";
       res.status(500).send(err);
