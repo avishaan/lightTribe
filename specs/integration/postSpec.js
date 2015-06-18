@@ -232,6 +232,11 @@ describe("Search posts", function() {
     .end(function(res){
       var posts = res.body;
       expect(posts.length).not.toEqual(0);
+      // make sure response matches correctly
+      var post = posts[0];
+      expect(post.author.username).toBeDefined();
+      expect(post.author._id).toBeDefined();
+      expect(post.author.userImage.url).toBeDefined();
       expect(res.status).toEqual(200);
       done();
     });
