@@ -131,76 +131,6 @@
         }
       }
     },
-    "/v1/posts/": {
-      "get": {
-        "x-swagger-router-controller": "posts",
-        "operationId": "searchPosts",
-        "security": [
-          {
-            "tokenAuth": []
-          }
-        ],
-        "tags": ["posts"],
-        "description": "Search for a post",
-        "parameters": [
-          {
-            "name": "interest",
-            "in": "query",
-            "description": "Interest you want to filter for",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Search radius to look for",
-            "required": false,
-            "type": "number"
-          },
-          {
-            "name": "latitude",
-            "in": "query",
-            "description": "Latitude for the search center",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "longitude",
-            "in": "query",
-            "description": "Logitude for the search center",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "access_token",
-            "description": "Internal access token",
-            "in": "query",
-            "type": "string",
-            "required": false
-          }
-        ],
-        "responses": {
-          "500": {
-            "description": "Server Error"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/401Response"
-            }
-          },
-          "200": {
-            "description": "Successful request.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ReadOnePost"
-              }
-            }
-          }
-        }
-      }
-    },
     "/v1/posts/{postId}/users": {
       "get": {
         "x-swagger-router-controller": "posts",
@@ -902,7 +832,7 @@
           "example": "100.000",
           "description": "Latitude of the GPS coordinate"
         },
-        "user": {
+        "author": {
           "description": "Basic user information",
           "$ref": "#/definitions/ReadUserForPost"
         },
@@ -1068,10 +998,15 @@
           "description": "Username of the user",
           "example": "codeHatcher"
         },
-        "thumbnail": {
+        "userImage": {
+          "type": "object",
+          "description": "Image information about the user",
+          "$ref": "#/definitions/ImageURL"
+        },
+        "_id": {
           "type": "string",
-          "description": "URL of the profile thumbnail",
-          "example": "http://www.google.com/image.png"
+          "description": "User id of the user",
+          "example": "54f44c5d26352b1b9755b12f"
         },
         "lastLogin": {
           "type": "string",
