@@ -873,12 +873,12 @@
         },
         "longitude": {
           "type": "number",
-          "example": 100.000,
+          "example": 50.000,
           "description": "Logitude of the GPS coordinate"
         },
         "latitude": {
           "type": "number",
-          "example": 100.000,
+          "example": 50.000,
           "description": "Latitude of the GPS coordinate"
         },
         "images": {
