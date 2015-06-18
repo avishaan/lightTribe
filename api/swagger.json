@@ -998,11 +998,6 @@
           "description": "Username of the user",
           "example": "codeHatcher"
         },
-        "userImage": {
-          "type": "object",
-          "description": "Image information about the user",
-          "$ref": "#/definitions/ImageURL"
-        },
         "_id": {
           "type": "string",
           "description": "User id of the user",
@@ -1013,6 +1008,11 @@
           "format": "date-time",
           "description": "last time the user was loggged in",
           "example": "2015-03-04T07:36:56.224Z"
+        },
+        "userImage": {
+          "type": "object",
+          "description": "Image information about the user",
+          "$ref": "#/definitions/ImageURL"
         }
       }
     },
