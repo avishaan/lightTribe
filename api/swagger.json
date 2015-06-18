@@ -18,6 +18,33 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/dev/mirror": {
+      "post": {
+        "x-swagger-router-controller": "debuggers",
+        "operationId": "mirrorResponse",
+        "tags": ["dev"],
+        "description": "Have the server mirror the response back as the request, used for debugging",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Internal access token",
+            "in": "body",
+            "schema": {
+              "type": "object"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/interests": {
       "get": {
         "x-swagger-router-controller": "interests",

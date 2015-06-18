@@ -14,6 +14,7 @@ var express = require('express');
 var morgan = require('morgan');
 var passport = require('passport');
 var User = require('./models/user.js');
+var Debuggers = require('./controllers/debuggers.js');
 var basicAuth = require('./auths/basic.js');
 var anonymousAuth = require('./auths/anonymous.js');
 var localAuth = require('./auths/local.js');
@@ -36,34 +37,7 @@ app.use(function(req, res, next) {
 });
 
 // debugging to send request as response like a mirror
-app.use('/api/dev/mirror', function(req, res){
-  req.rawBody = '';
-  req.setEncoding('utf8');
-
-  req.on('data', function(chunk) {
-    req.rawBody += chunk;
-  });
-  req.on('end', function() {
-    var response = {
-      raw: {
-        body: req.rawBody,
-        headers: req.rawHeaders,
-        trailers: req.rawTrailers,
-        method: req.method,
-        baseURL: req.baseUrl,
-        originalURL: req.originalUrl
-      },
-      parse: {
-        body: JSON.parse(req.rawBody),
-        url: {
-          access_token: req.param('access_token')
-        }
-      }
-    };
-    console.log(response);
-    res.send(response);
-  });
-});
+//app.use('/api/dev/mirror', Debuggers.mirrorResponse);
 
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, a username and password), and invoke a callback
