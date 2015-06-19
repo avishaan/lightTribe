@@ -18,6 +18,33 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/dev/apns": {
+      "post": {
+        "x-swagger-router-controller": "debuggers",
+        "operationId": "apnsTestResponse",
+        "tags": ["dev"],
+        "description": "Have the server trigger a manual apple notification",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Specs for the apple notification",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/apnRequest"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/dev/mirror": {
       "post": {
         "x-swagger-router-controller": "debuggers",
@@ -27,7 +54,7 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Internal access token",
+            "description": "Body object to mirror back to the request",
             "in": "body",
             "schema": {
               "type": "object"
@@ -1065,6 +1092,22 @@
           "description": "User Profile Information",
           "$ref": "#/definitions/userProfile"
         }
+      }
+    },
+    "apnRequest": {
+      "properties": {
+        "uuid": {
+          "description": "Device id of the deivce to trigger the notification for",
+          "type": "string"
+        },
+        "notificationType": {
+          "description": "could be 'post'",
+          "type": "string"
+        }
+      },
+      "example": {
+        "uuid": "12",
+        "type": "post"
       }
     },
     "userProfile": {
