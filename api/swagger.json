@@ -18,6 +18,60 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/dev/apns": {
+      "post": {
+        "x-swagger-router-controller": "debuggers",
+        "operationId": "apnsTestResponse",
+        "tags": ["dev"],
+        "description": "Have the server trigger a manual apple notification",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Specs for the apple notification",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/apnRequest"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
+    "/dev/mirror": {
+      "post": {
+        "x-swagger-router-controller": "debuggers",
+        "operationId": "mirrorResponse",
+        "tags": ["dev"],
+        "description": "Have the server mirror the response back as the request, used for debugging",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Body object to mirror back to the request",
+            "in": "body",
+            "schema": {
+              "type": "object"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/interests": {
       "get": {
         "x-swagger-router-controller": "interests",
@@ -1038,6 +1092,22 @@
           "description": "User Profile Information",
           "$ref": "#/definitions/userProfile"
         }
+      }
+    },
+    "apnRequest": {
+      "properties": {
+        "uuid": {
+          "description": "Device id of the deivce to trigger the notification for",
+          "type": "string"
+        },
+        "notificationType": {
+          "description": "could be 'post'",
+          "type": "string"
+        }
+      },
+      "example": {
+        "uuid": "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95",
+        "type": "post"
       }
     },
     "userProfile": {
