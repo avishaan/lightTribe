@@ -21,7 +21,7 @@
     "/dev/apns": {
       "post": {
         "x-swagger-router-controller": "debuggers",
-        "operationId": "apnsTestResponse",
+        "operationId": "apnTestResponse",
         "tags": ["dev"],
         "description": "Have the server trigger a manual apple notification",
         "parameters": [

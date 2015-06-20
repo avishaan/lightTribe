@@ -43,7 +43,7 @@ module.exports.mirrorResponse = function mirrorResponse (req, res, next) {
     });
   }
 };
-module.exports.readImageURL = function readImageURL (req, res, next) {
+module.exports.apnTestResponse = function apnTestResponse (req, res, next) {
   var imageId = req.swagger.params.imageId.value;
   logger.info('return url');
   // find image id
