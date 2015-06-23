@@ -37,6 +37,9 @@ module.exports = function(){
         swagger: {
           // make sure responses to client are validated automatically against schema
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          password: 'P@ssw0rdC0mpl3x'
         }
       };
     case "dev":
@@ -69,6 +72,9 @@ module.exports = function(){
         },
         swagger: {
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          password: 'P@ssw0rdC0mpl3x'
         }
       };
     case "test":
@@ -101,6 +107,9 @@ module.exports = function(){
         },
         swagger: {
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          password: 'P@ssw0rdC0mpl3x'
         }
       };
     case "prod":
@@ -133,6 +142,9 @@ module.exports = function(){
         },
         swagger: {
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          password: process.env.certPassword
         }
       };
     default:
