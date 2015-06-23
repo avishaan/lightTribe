@@ -39,9 +39,9 @@ var userSchema = new mongoose.Schema({
     { type: String } // should match interest.key
   ],
   devices: [{
-    uuid: { type: String },
+    token: { type: String },
     time: { type: Date, default: Date.now },
-    type: { type: String, default: 'iOS'}
+    type: { type: String, default: 'ios'}
   }]
 });
 
