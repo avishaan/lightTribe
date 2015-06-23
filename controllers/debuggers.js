@@ -8,7 +8,7 @@ var apn = require('apn');
 var service = new apn.Connection({
   pfx: './certs/' + config.cert.filename,
   passphrase: config.cert.passphrase,
-  production: false
+  production: config.cert.production
 });
 service.on('connected', function(openSockets) {
   console.log('connected');
