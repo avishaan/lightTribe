@@ -2,6 +2,20 @@ var logger = require('./../loggers/logger.js');
 var User = require('./../models/user.js');
 var config = require('../config.js');
 
+module.exports.addDevice = function addDevice (req, res, next) {
+  // make sure all fields are filled in
+  var platform = req.swagger.params.body.value.platform;
+  var token = req.swagger.params.body.value.token;
+
+  if (!platform || !token) {
+    res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+
+  // make sure a hexadecimal string came in
+  // call addDevice on user model
+
+};
+
 module.exports.registerUser = function registerUser (req, res, next) {
   var username = req.swagger.params.user.value.username;
   var password = req.swagger.params.user.value.password;
