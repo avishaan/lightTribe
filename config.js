@@ -40,7 +40,7 @@ module.exports = function(){
         },
         cert: { // apple certificate password
           passphrase: 'P@ssw0rdC0mpl3x',
-          filename: 'dev.p12'
+          filename: 'dev.pfx'
         }
       };
     case "dev":

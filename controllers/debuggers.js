@@ -4,6 +4,30 @@ var Image = require('./../models/image.js');
 var config = require('../config.js');
 var fs = require('fs');
 
+var apn = require('apn');
+var service = new apn.Connection({
+  pfx: './certs/' + config.cert.filename,
+  passphrase: config.cert.passphrase,
+  production: false
+});
+service.on('connected', function(openSockets) {
+  console.log('connected');
+});
+service.on('error', function(error){
+  console.log("error: ", error);
+});
+service.on('timeout', function(){
+  console.log('timeout');
+});
+service.on('socketError', console.log);
+
+// send the notification
+var note = new apn.Notification();
+note.setAlertText("Test");
+note.badge = 1;
+service.pushNotification(note, "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95");
+
+
 
 module.exports.mirrorResponse = function mirrorResponse (req, res, next) {
   if (req.header('content-type') == 'application/json') {
@@ -45,19 +69,4 @@ module.exports.mirrorResponse = function mirrorResponse (req, res, next) {
 };
 module.exports.apnTestResponse = function apnTestResponse (req, res, next) {
   var imageId = req.swagger.params.imageId.value;
-  logger.info('return url');
-  // find image id
-  Image
-  .findOne({_id: imageId })
-  .select ('_id url')
-  .lean()
-  .exec(function(err, image){
-    if (!err && image){
-      res.status(200).send(image);
-    } else if (!err && !image) {
-      res.status(404).send({});
-    } else {
-      res.status(500).send({ error: err });
-    }
-  });
 };
