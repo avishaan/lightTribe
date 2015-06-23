@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema({
   devices: [{
     token: { type: String },
     time: { type: Date, default: Date.now },
-    type: { type: String, default: 'ios'}
+    platform: { type: String, default: 'ios'}
   }]
 });
 
