@@ -37,7 +37,12 @@ var userSchema = new mongoose.Schema({
   userImage: { type: String, ref: 'Image' },
   interests: [
     { type: String } // should match interest.key
-  ]
+  ],
+  devices: [{
+    uuid: { type: String },
+    time: { type: Date, default: Date.now },
+    type: { type: String, default: 'iOS'}
+  }]
 });
 
 // if there is no token, generate one before saving the model for first time
