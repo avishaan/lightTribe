@@ -894,7 +894,7 @@
           "description": "hexadecimal string of device token to register"
         }
       },
-      "required": ["token", "type"]
+      "required": ["token", "platform"]
     },
     "CreateComment": {
       "properties": {
