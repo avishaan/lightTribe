@@ -11,7 +11,7 @@ var service = new apn.Connection({
   production: config.cert.production
 });
 service.on('connected', function(openSockets) {
-  console.log('connected');
+  console.log('Connected to Apple Notification Gateway with sockets:', openSockets);
 });
 service.on('error', function(error){
   console.log("error: ", error);

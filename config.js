@@ -39,8 +39,8 @@ module.exports = function(){
           validateResponse: false
         },
         cert: { // apple certificate password
-          passphrase: 'P@ssw0rdC0mpl3x',
-          filename: 'dev.pfx',
+          passphrase: '123',
+          filename: 'dev.p12',
           production: false
         }
       };
@@ -76,8 +76,8 @@ module.exports = function(){
           validateResponse: false
         },
         cert: { // apple certificate password
-          passphrase: 'P@ssw0rdC0mpl3x',
-          filename: 'dev.pfx',
+          passphrase: '123',
+          filename: 'dev.p12',
           production: false
         }
       };
@@ -113,7 +113,7 @@ module.exports = function(){
           validateResponse: false
         },
         cert: { // apple certificate password
-          passphrase: 'P@ssw0rdC0mpl3x',
+          passphrase: '123',
           filename: 'dev.p12',
           production: false
         }
