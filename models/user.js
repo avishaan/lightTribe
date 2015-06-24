@@ -226,12 +226,15 @@ userSchema.methods.removeDevice = function(options, cb) {
   var user = this;
   // if time wasn't passed in, find anything older than now, if time was passed in that means it may have come back from the apple feedback and we need to only remove anything older than that
   var time = options.time || Date.now();
+  // token in consistent format
+  var token = apn.Device(options.token).toString('hex');
+
   User.findByIdAndUpdate(
     this.id,
     {
       '$pull': {
         devices: {
-          token: options.token,
+          token: token,
           platform: options.platform,
           time: { '$lte': time }
         }
@@ -257,7 +260,7 @@ userSchema.methods.removeDevice = function(options, cb) {
 userSchema.methods.addDevice = function(options, cb) {
   var user = this;
   // convert token to consistent format
-  var token = new apn.Device(options.token).toString('hex');
+  var token = apn.Device(options.token).toString('hex');
   user.devices.push({
     platform: options.platform,
     token: token,
