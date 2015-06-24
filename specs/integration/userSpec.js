@@ -182,4 +182,44 @@ describe("A user", function() {
       });
     });
   });
+  it("should be able to remove a device from a user", function(done) {
+    // add device to user as part of the setup
+    agent
+    .post(URL + '/users/' + seedUser.id + '/devices')
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser.token,
+      platform: 'ios',
+      token: 'a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95'
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      // find that user and check the values now
+      // remove that device from the user
+      agent
+      .del(URL + '/users/' + seedUser.id + '/devices')
+      .set('Content-Type', 'application/json')
+      .send({
+        access_token: seedUser.token,
+        platform: 'ios',
+        token: 'a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95'
+      })
+      .end(function(res){
+        var settings = res.body;
+        expect(res.status).toEqual(200);
+        // find that user and check the values now
+        User
+        .findOne({ _id: seedUser.id })
+        .lean()
+        .exec(function(err, user){
+          // make sure the whole user wasn't delete
+          expect(user).not.toBeUndefined();
+          // make sure the user no longer has any devices
+          expect(user.devices.length).toEqual(0);
+          done();
+        });
+      });
+    });
+  });
 });
