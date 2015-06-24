@@ -212,6 +212,26 @@ userSchema.statics.checkAuthentication = function(options, cb) {
   });
 };
 /**
+ * Add device to user for notification purposes
+ * @param {object} options for adding device to user
+ * @property {string} token Device token which uniquely idents device
+ * @property {string} platform what software is the phone running?
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {object} user user the device was added to
+ */
+userSchema.methods.addDevice = function(options, cb) {
+  var user = this;
+  user.devices.push({
+    platform: options.platform,
+    token: options.token,
+    time: Date.now()
+  });
+  user.save(function(err, user){
+    cb(err, user);
+  });
+};
+/**
  * Hash password
  * @param {function} cb
  * @property {object} err Passed Error

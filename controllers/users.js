@@ -12,7 +12,20 @@ module.exports.addDevice = function addDevice (req, res, next) {
   }
   // TODO make sure a hexadecimal string came in
   // call addDevice on user model
-  debugger;
+  req.user.addDevice({
+    platform: platform,
+    token: token
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not save device token"
+      });
+    }
+  });
 
 };
 
