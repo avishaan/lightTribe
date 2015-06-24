@@ -212,6 +212,34 @@ userSchema.statics.checkAuthentication = function(options, cb) {
   });
 };
 /**
+ * Remove device from user for notification purposes
+ * @param {object} options for adding device to user
+ * @property {string} token Device token which uniquely idents device
+ * @property {string} platform what software is the phone running?
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {object} user user the device was added to
+ */
+userSchema.methods.removeDevice = function(options, cb) {
+  var user = this;
+  // next, check if it is finding it, make so test case tests after callback completes
+  User.findByIdAndUpdate(
+    this.id,
+    {
+      '$pull': {
+        devices: { token: options.token, platform: options.platform }
+      }
+    },
+    {
+      new: true,
+      upsert: false
+      // sort: time
+    },
+    function(err, user){
+      debugger;
+    });
+};
+/**
  * Add device to user for notification purposes
  * @param {object} options for adding device to user
  * @property {string} token Device token which uniquely idents device
