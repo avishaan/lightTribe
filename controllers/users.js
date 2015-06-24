@@ -29,6 +29,33 @@ module.exports.addDevice = function addDevice (req, res, next) {
 
 };
 
+module.exports.removeDevice = function removeDevice (req, res, next) {
+  var platform = req.swagger.params.body.value.platform;
+  var token = req.swagger.params.body.value.token;
+
+  // make sure all fields are filled in
+  if (!platform || !token) {
+    res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+  // TODO make sure a hexadecimal string came in
+  // call addDevice on user model
+  req.user.removeDevice({
+    platform: platform,
+    token: token
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not save device token"
+      });
+    }
+  });
+
+};
+
 module.exports.registerUser = function registerUser (req, res, next) {
   var username = req.swagger.params.user.value.username;
   var password = req.swagger.params.user.value.password;

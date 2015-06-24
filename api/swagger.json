@@ -594,7 +594,51 @@
             "description": "Payload for the device you want to add",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddDevice"
+              "$ref": "#/definitions/DeviceInfo"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      },
+      "delete": {
+        "x-swagger-router-controller": "users",
+        "operationId": "removeDevice",
+        "tags": ["users"],
+        "description": "Remove user device, mainly for push notifications",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User Id of the user you are querying",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Payload for the device you want to add",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceInfo"
             }
           },
           {
@@ -881,7 +925,7 @@
       },
       "required": ["_id"]
     },
-    "AddDevice": {
+    "DeviceInfo": {
       "properties": {
         "platform": {
           "type": "string",
