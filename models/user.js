@@ -223,10 +223,8 @@ userSchema.statics.checkAuthentication = function(options, cb) {
  */
 userSchema.methods.removeDevice = function(options, cb) {
   var user = this;
-  // TODO, check based on the time as well, learn how to do that properly
   // if time wasn't passed in, find anything older than now, if time was passed in that means it may have come back from the apple feedback and we need to only remove anything older than that
   var time = options.time || Date.now();
-  debugger;
   User.findByIdAndUpdate(
     this.id,
     {
@@ -241,7 +239,6 @@ userSchema.methods.removeDevice = function(options, cb) {
     {
       new: true,
       upsert: false
-      // sort: time
     },
     function(err, user){
       cb(err, user);
