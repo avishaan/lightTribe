@@ -177,6 +177,7 @@ describe("A user", function() {
       .lean()
       .exec(function(err, user){
         expect(user.devices.length).toEqual(1);
+        expect(user.devices[0].token).toEqual("a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95");
         done();
       });
     });
