@@ -222,7 +222,7 @@ userSchema.statics.checkAuthentication = function(options, cb) {
  */
 userSchema.methods.removeDevice = function(options, cb) {
   var user = this;
-  // next, check if it is finding it, make so test case tests after callback completes
+  // TODO, check based on the time as well, learn how to do that properly
   User.findByIdAndUpdate(
     this.id,
     {
@@ -236,7 +236,7 @@ userSchema.methods.removeDevice = function(options, cb) {
       // sort: time
     },
     function(err, user){
-      debugger;
+      cb(err, user);
     });
 };
 /**
