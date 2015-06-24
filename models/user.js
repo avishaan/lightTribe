@@ -3,6 +3,7 @@ var logger = require('./../loggers/logger.js');
 var bcrypt = require('bcrypt');
 var token = require('rand-token');
 var chance = new require('chance').Chance();
+var apn = require('apn');
 /*
 |-------------------------------------------------------------
 | User Schema
@@ -255,9 +256,11 @@ userSchema.methods.removeDevice = function(options, cb) {
  */
 userSchema.methods.addDevice = function(options, cb) {
   var user = this;
+  // convert token to consistent format
+  var token = new apn.Device(options.token).toString('hex');
   user.devices.push({
     platform: options.platform,
-    token: options.token,
+    token: token,
     time: Date.now()
   });
   user.save(function(err, user){

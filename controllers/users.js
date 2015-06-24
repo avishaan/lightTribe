@@ -1,6 +1,7 @@
 var logger = require('./../loggers/logger.js');
 var User = require('./../models/user.js');
 var config = require('../config.js');
+var apn = require('apn');
 
 module.exports.addDevice = function addDevice (req, res, next) {
   var platform = req.swagger.params.body.value.platform;
