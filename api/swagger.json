@@ -883,8 +883,8 @@
     },
     "AddDevice": {
       "properties": {
-        "type": {
-          "platform": "string",
+        "platform": {
+          "type": "string",
           "example": "ios",
           "description": "platform the device is on, android/ios"
         },
@@ -894,7 +894,7 @@
           "description": "hexadecimal string of device token to register"
         }
       },
-      "required": ["text"]
+      "required": ["token", "type"]
     },
     "CreateComment": {
       "properties": {
