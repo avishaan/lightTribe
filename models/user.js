@@ -216,6 +216,7 @@ userSchema.statics.checkAuthentication = function(options, cb) {
  * @param {object} options for adding device to user
  * @property {string} token Device token which uniquely idents device
  * @property {string} platform what software is the phone running?
+ * @property {number|undefined} time timestamp of token to search for
  * @param {function} cb
  * @property {object} err Passed Error
  * @property {object} user user the device was added to
@@ -223,11 +224,18 @@ userSchema.statics.checkAuthentication = function(options, cb) {
 userSchema.methods.removeDevice = function(options, cb) {
   var user = this;
   // TODO, check based on the time as well, learn how to do that properly
+  // if time wasn't passed in, find anything older than now, if time was passed in that means it may have come back from the apple feedback and we need to only remove anything older than that
+  var time = options.time || Date.now();
+  debugger;
   User.findByIdAndUpdate(
     this.id,
     {
       '$pull': {
-        devices: { token: options.token, platform: options.platform }
+        devices: {
+          token: options.token,
+          platform: options.platform,
+          time: { '$lte': time }
+        }
       }
     },
     {
