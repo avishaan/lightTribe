@@ -1201,18 +1201,13 @@
     },
     "apnRequest": {
       "properties": {
-        "uuid": {
-          "description": "Device id of the deivce to trigger the notification for",
-          "type": "string"
-        },
-        "notificationType": {
-          "description": "could be 'post'",
+        "token": {
+          "description": "Device token of the device to trigger the notification for",
           "type": "string"
         }
       },
       "example": {
-        "uuid": "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95",
-        "type": "post"
+        "token": "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95"
       }
     },
     "userProfile": {
