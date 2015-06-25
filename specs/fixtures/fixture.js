@@ -11,6 +11,7 @@ var username = 'test';
 var password = 'test';
 var email = 'test@test.com';
 var interests = ['yogaBikram', 'yogaVinyasa'];
+var userImage = 'w4isrf95psfjifjpqycm';
 
 // have a review when necessary
 var review = {
@@ -67,10 +68,14 @@ module.exports.deleteDB = function(options, cb){
 };
 module.exports.seedUser = function(options, cb){
   // check if options were passed in
-  if (typeof cb === "undefined"){
+  if (typeof cb === "undefined" || !options.hasOwnProperty(username)){
     // if no options, assume callback was sent in as first param
-    cb = options;
-    options = {};
+    // if 1 arguments assume callback was sent in as first parameter
+    // NOTE: recently changed this for when an empty object was passed in for the setup to the comments integration route
+    if (arguments.length === 1){
+      cb = options;
+      options = {};
+    }
     // use username and password from local variable
     options.username = username;
     options.password = password;
