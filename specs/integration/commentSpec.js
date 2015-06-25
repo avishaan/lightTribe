@@ -40,7 +40,14 @@ describe("Comments", function() {
     .then(function(user){
       // save the user for later
       seedUser = user;
-      return fixture.seedImageAsync({});
+      // add device token/id to user
+      user.model.addDevice({
+        time: Date.now(),
+        token: 'a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95',
+        platform: 'ios'
+      }, function(err, user){
+        return fixture.seedImageAsync({});
+      });
     })
     .then(function(savedImage){
       post.images = [savedImage];
@@ -115,6 +122,24 @@ describe("Comments", function() {
       expect(comment).toBeDefined();
       expect(res.status).toEqual(200);
       expect(comment._id).toBeDefined();
+      // make sure parent of comment is the post
+      Comment
+      .findOne({_id: comment._id})
+      .exec(function(err, comment){
+        expect(comment.parent.toString()).toEqual(seedPost._id.toString());
+        done();
+      });
+    });
+  });
+  it("should send notification to post author", function(done) {
+    agent
+    .post(URL + '/posts/' + seedPost._id + '/comments')
+    .set('Content-Type', 'application/json')
+    .send(comment)
+    .query({ access_token: seedUser.token })
+    .end(function(res){
+      var comment = res.body;
+      expect(res.status).toEqual(200);
       // make sure parent of comment is the post
       Comment
       .findOne({_id: comment._id})
