@@ -93,7 +93,8 @@ module.exports.seedUser = function(options, cb){
       hashedPass : user.password,
       _id: user._id,
       id: user.id,
-      token: user.token.value
+      token: user.token.value,
+      model: user // full mongo user model
     };
     cb(err, user);
   });
