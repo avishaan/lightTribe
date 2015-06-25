@@ -38,8 +38,11 @@ module.exports.removeDevice = function removeDevice (req, res, next) {
   if (!platform || !token) {
     res.status(500).send({ clientMsg: "Missing parameters" });
   }
+  // var apns = require('../notifications/apns.js');
+  // apns.feedback.emit('feedback', Date.now(), 'a591bde2720d89d4086beaa843f9b061a18b36b48cd0008a1f347a5ad844be95');
   // TODO make sure a hexadecimal string came in
   // call addDevice on user model
+  
   req.user.removeDevice({
     platform: platform,
     token: token
