@@ -68,7 +68,7 @@ module.exports.deleteDB = function(options, cb){
 };
 module.exports.seedUser = function(options, cb){
   // check if options were passed in
-  if (typeof cb === "undefined" || !options.hasOwnProperty(username)){
+  if (typeof cb === "undefined" || !options.hasOwnProperty('username')){
     // NOTE: recently changed this for when an empty object was passed in for the setup to the comments integration route
     if (arguments.length === 1){
       // if 1 arguments assume callback was sent in as first parameter
