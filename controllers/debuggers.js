@@ -46,15 +46,21 @@ module.exports.mirrorResponse = function mirrorResponse (req, res, next) {
 };
 
 module.exports.apnTestResponse = function apnTestResponse (req, res, next) {
-  var token = req.swagger.params.body.value.token;
-  var note = new apn.Notification();
-  var message =  "Test Notification sent at: " + new Date() + " to token: " + token;
-  note.setAlertText(message);
-  note.badge = 1;
+  if (config.env != "prod") {
+    var token = req.swagger.params.body.value.token;
+    var note = new apn.Notification();
+    var message =  "Test Notification sent at: " + new Date() + " to token: " + token;
+    note.setAlertText(message);
+    note.badge = 1;
 
-  apns.service.pushNotification(note, token);
-  res.status(200).send({
-    clientMsg: message
-  });
+    apns.service.pushNotification(note, token);
+    res.status(200).send({
+      clientMsg: message
+    });
 
+  } else {
+    return res.status(500).send({
+      clientMsg: "Route not available in Production"
+    });
+  }
 };
