@@ -22,7 +22,11 @@ var facebookAuth = require('./auths/facebook.js');
 var tokenAuth = require('./auths/token.js');
 var _ = require('underscore');
 var prettyjson = require('prettyjson');
+var apns = require('./notifications/apns.js');
 
+
+// setup notification networks
+apns.connect();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
