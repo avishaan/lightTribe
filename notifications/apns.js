@@ -1,6 +1,8 @@
 var apn = require('apn');
 var config = require('../config.js');
 
+console.log('Setup APNS');
+
 var service = new apn.Connection({
   pfx: './certs/' + config.cert.filename,
   passphrase: config.cert.passphrase,
@@ -28,3 +30,6 @@ service.on('socketError', function(){
 //note.setAlertText("Test");
 //note.badge = 1;
 //service.pushNotification(note, "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95");
+
+// we will use this to generate our notifications
+module.exports.service = service;
