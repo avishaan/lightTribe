@@ -41,7 +41,8 @@ module.exports = function(){
         cert: { // apple certificate password
           passphrase: '123',
           filename: 'dev.p12',
-          production: false
+          production: false,
+          feedbackInterval: 1
         }
       };
     case "dev":
@@ -78,7 +79,8 @@ module.exports = function(){
         cert: { // apple certificate password
           passphrase: '123',
           filename: 'dev.p12',
-          production: false
+          production: false,
+          feedbackInterval: 10
         }
       };
     case "test":
@@ -115,7 +117,8 @@ module.exports = function(){
         cert: { // apple certificate password
           passphrase: '123',
           filename: 'dev.p12',
-          production: false
+          production: false,
+          feedbackInterval: 10
         }
       };
     case "prod":
@@ -152,7 +155,8 @@ module.exports = function(){
         cert: { // apple certificate password
           passphrase: process.env.certPassphrase,
           filename: 'prod.p12',
-          production: true
+          production: true,
+          feedbackInterval: 300
         }
       };
     default:
