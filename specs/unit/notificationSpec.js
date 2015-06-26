@@ -83,6 +83,7 @@ describe("Notifications", function() {
       return apns.service.pushNotification.callCount === 1;
     }, "Expect queue dream to finish and be called", 1000);
     runs(function(){
+      // check the payload of the note, make sure the correct person was notified
       console.log("call count:", apns.service.pushNotification.callCount);
       done();
     });
