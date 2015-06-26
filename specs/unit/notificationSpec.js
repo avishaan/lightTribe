@@ -6,6 +6,9 @@ var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 var Comment = require('../../models/comment.js');
 var Post = require('../../models/post.js');
+
+var apns = require('../../notifications/apns.js');
+var apn = require('apn');
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
@@ -65,6 +68,24 @@ describe("Notifications", function() {
     });
   });
   it("should trigger when a comment is made", function(done) {
+    spyOn(apns.service, 'pushNotification').andCallThrough();
+
+    runs(function(){
+      Comment.createComment({
+        text: "Test Text",
+        author: comment.author,
+        parent: comment.parent
+      }, function(err, savedComment){
+        console.log("created comment");
+      });
+    });
+    waitsFor(function(){
+      return apns.service.pushNotification.callCount === 1;
+    }, "Expect queue dream to finish and be called", 1000);
+    runs(function(){
+      console.log("call count:", apns.service.pushNotification.callCount);
+      done();
+    });
 
   });
 });
