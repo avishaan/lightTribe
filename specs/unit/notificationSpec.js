@@ -69,23 +69,35 @@ describe("Notifications", function() {
   });
   it("should trigger when a comment is made", function(done) {
     spyOn(apns.service, 'pushNotification').andCallThrough();
-
     runs(function(){
       Comment.createComment({
         text: "Test Text",
         author: comment.author,
         parent: comment.parent
       }, function(err, savedComment){
-        console.log("created comment");
+        // now new comment was created which should also create push notification
       });
     });
     waitsFor(function(){
+      // wait until that spied obj has been called 1 time
       return apns.service.pushNotification.callCount === 1;
     }, "Expect queue dream to finish and be called", 1000);
     runs(function(){
-      // check the payload of the note, make sure the correct person was notified
-      console.log("call count:", apns.service.pushNotification.callCount);
-      done();
+      // make sure the notification was only sent once
+      expect(apns.service.pushNotification.callCount).toEqual(1);
+      // find the parent post of the comment
+      Post
+      .findOne({ _id: comment.parent })
+      .populate('author')
+      .lean()
+      .exec(function(err, savedPost){
+        // find the device id of that author
+        var notifiedDevice = apns.service.pushNotification.mostRecentCall.args[1];
+        // check the payload device token matches the device token of the author
+        expect(notifiedDevice).toEqual(savedPost.author.devices[0].token);
+        done();
+
+      });
     });
 
   });
