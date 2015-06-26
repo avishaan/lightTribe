@@ -40,7 +40,14 @@ describe("Comments", function() {
     .then(function(user){
       // save the user for later
       seedUser = user;
-      return fixture.seedImageAsync({});
+      // add device token/id to user
+      user.model.addDevice({
+        time: Date.now(),
+        token: 'a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95',
+        platform: 'ios'
+      }, function(err, user){
+        return fixture.seedImageAsync({});
+      });
     })
     .then(function(savedImage){
       post.images = [savedImage];

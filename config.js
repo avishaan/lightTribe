@@ -37,6 +37,12 @@ module.exports = function(){
         swagger: {
           // make sure responses to client are validated automatically against schema
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          passphrase: '123',
+          filename: 'dev.p12',
+          production: false,
+          feedbackInterval: 1
         }
       };
     case "dev":
@@ -69,6 +75,12 @@ module.exports = function(){
         },
         swagger: {
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          passphrase: '123',
+          filename: 'dev.p12',
+          production: false,
+          feedbackInterval: 10
         }
       };
     case "test":
@@ -101,6 +113,12 @@ module.exports = function(){
         },
         swagger: {
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          passphrase: '123',
+          filename: 'dev.p12',
+          production: false,
+          feedbackInterval: 10
         }
       };
     case "prod":
@@ -133,6 +151,12 @@ module.exports = function(){
         },
         swagger: {
           validateResponse: false
+        },
+        cert: { // apple certificate password
+          passphrase: process.env.certPassphrase,
+          filename: 'prod.p12',
+          production: true,
+          feedbackInterval: 300
         }
       };
     default:

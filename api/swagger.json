@@ -21,7 +21,7 @@
     "/dev/apns": {
       "post": {
         "x-swagger-router-controller": "debuggers",
-        "operationId": "apnsTestResponse",
+        "operationId": "apnTestResponse",
         "tags": ["dev"],
         "description": "Have the server trigger a manual apple notification",
         "parameters": [
@@ -574,6 +574,96 @@
         }
       }
     },
+    "/v1/users/{userId}/devices": {
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "addDevice",
+        "tags": ["users"],
+        "description": "Add user device, mainly for push notifications",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User Id of the user you are querying",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Payload for the device you want to add",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceInfo"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      },
+      "delete": {
+        "x-swagger-router-controller": "users",
+        "operationId": "removeDevice",
+        "tags": ["users"],
+        "description": "Remove user device, mainly for push notifications",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User Id of the user you are querying",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Payload for the device you want to add",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceInfo"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/users/{userId}": {
       "post": {
         "x-swagger-router-controller": "users",
@@ -834,6 +924,21 @@
         }
       },
       "required": ["_id"]
+    },
+    "DeviceInfo": {
+      "properties": {
+        "platform": {
+          "type": "string",
+          "example": "ios",
+          "description": "platform the device is on, android/ios"
+        },
+        "token": {
+          "type": "string",
+          "example": "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95",
+          "description": "hexadecimal string of device token to register"
+        }
+      },
+      "required": ["token", "platform"]
     },
     "CreateComment": {
       "properties": {
@@ -1096,18 +1201,13 @@
     },
     "apnRequest": {
       "properties": {
-        "uuid": {
-          "description": "Device id of the deivce to trigger the notification for",
-          "type": "string"
-        },
-        "notificationType": {
-          "description": "could be 'post'",
+        "token": {
+          "description": "Device token of the device to trigger the notification for",
           "type": "string"
         }
       },
       "example": {
-        "uuid": "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95",
-        "type": "post"
+        "token": "a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95"
       }
     },
     "userProfile": {

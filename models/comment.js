@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var utils = require('./../utils/circleToPolygon.js');
+var Post = require('./../models/post.js');
+var apns = require('./../notifications/apns.js');
+var apn = require('apn');
 /*
 |-------------------------------------------------------------
 | Comment Schema
@@ -13,6 +16,36 @@ var commentSchema = new mongoose.Schema({
   author: { type: String, ref: 'User' },
   parent: { type: String, ref: 'Post' }, // parent post the comment belongs to
 });
+
+// after comment is saved, notifiy correct users
+ commentSchema.post('save', function(comment){
+   // find original post
+   Post
+   .findOne({_id: comment.parent })
+   .populate('author')
+   .exec(function(err, post){
+     if (!err && post && post.author.devices.length){
+       var devices = post.toJSON().author.devices;
+       devices.forEach(function(device){
+         if (device.platform === 'ios'){
+           // send notification to the ios device
+           var note = new apn.Notification();
+           note.badge = 0;
+           note.alert = "Someone commented on your post!";
+           note.payload = {
+             comment: {
+               _id: comment.id,
+               text: comment.text
+             }
+           };
+           apns.service.pushNotification(note, device.token);
+         }
+       });
+     }
+   });
+   // find author of original post
+   // send notification to all devices of that author
+ });
 /**
  * Create a specific comment
  * @param {object} options The options for the new comment

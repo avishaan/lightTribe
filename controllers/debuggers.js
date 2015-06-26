@@ -3,7 +3,8 @@ var User = require('./../models/user.js');
 var Image = require('./../models/image.js');
 var config = require('../config.js');
 var fs = require('fs');
-
+var apn = require('apn');
+var apns = require('../notifications/apns.js');
 
 module.exports.mirrorResponse = function mirrorResponse (req, res, next) {
   if (req.header('content-type') == 'application/json') {
@@ -39,25 +40,27 @@ module.exports.mirrorResponse = function mirrorResponse (req, res, next) {
     });
   } else {
     return res.status(500).send({
-      clientMsg: "Soemthing went wrong, could not mirror"
+      clientMsg: "Route not available in Production"
     });
   }
 };
-module.exports.readImageURL = function readImageURL (req, res, next) {
-  var imageId = req.swagger.params.imageId.value;
-  logger.info('return url');
-  // find image id
-  Image
-  .findOne({_id: imageId })
-  .select ('_id url')
-  .lean()
-  .exec(function(err, image){
-    if (!err && image){
-      res.status(200).send(image);
-    } else if (!err && !image) {
-      res.status(404).send({});
-    } else {
-      res.status(500).send({ error: err });
-    }
-  });
+
+module.exports.apnTestResponse = function apnTestResponse (req, res, next) {
+  if (config.env != "prod") {
+    var token = req.swagger.params.body.value.token;
+    var note = new apn.Notification();
+    var message =  "Test Notification sent at: " + new Date() + " to token: " + token;
+    note.setAlertText(message);
+    note.badge = 1;
+
+    apns.service.pushNotification(note, token);
+    res.status(200).send({
+      clientMsg: message
+    });
+
+  } else {
+    return res.status(500).send({
+      clientMsg: "Route not available in Production"
+    });
+  }
 };

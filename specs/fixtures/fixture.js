@@ -11,6 +11,7 @@ var username = 'test';
 var password = 'test';
 var email = 'test@test.com';
 var interests = ['yogaBikram', 'yogaVinyasa'];
+var userImage = 'w4isrf95psfjifjpqycm';
 
 // have a review when necessary
 var review = {
@@ -67,10 +68,13 @@ module.exports.deleteDB = function(options, cb){
 };
 module.exports.seedUser = function(options, cb){
   // check if options were passed in
-  if (typeof cb === "undefined"){
-    // if no options, assume callback was sent in as first param
-    cb = options;
-    options = {};
+  if (typeof cb === "undefined" || !options.hasOwnProperty('username')){
+    // NOTE: recently changed this for when an empty object was passed in for the setup to the comments integration route
+    if (arguments.length === 1){
+      // if 1 arguments assume callback was sent in as first parameter
+      cb = options;
+      options = {};
+    }
     // use username and password from local variable
     options.username = username;
     options.password = password;
@@ -89,7 +93,8 @@ module.exports.seedUser = function(options, cb){
       hashedPass : user.password,
       _id: user._id,
       id: user.id,
-      token: user.token.value
+      token: user.token.value,
+      model: user // full mongo user model
     };
     cb(err, user);
   });

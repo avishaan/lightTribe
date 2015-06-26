@@ -3,6 +3,7 @@ var logger = require('./../loggers/logger.js');
 var bcrypt = require('bcrypt');
 var token = require('rand-token');
 var chance = new require('chance').Chance();
+var apn = require('apn');
 /*
 |-------------------------------------------------------------
 | User Schema
@@ -37,7 +38,12 @@ var userSchema = new mongoose.Schema({
   userImage: { type: String, ref: 'Image' },
   interests: [
     { type: String } // should match interest.key
-  ]
+  ],
+  devices: [{
+    token: { type: String },
+    time: { type: Date, default: Date.now },
+    platform: { type: String, default: 'ios'}
+  }]
 });
 
 // if there is no token, generate one before saving the model for first time
@@ -204,6 +210,64 @@ userSchema.statics.checkAuthentication = function(options, cb) {
   })
   .then(undefined, function(err){
     cb(err);
+  });
+};
+/**
+ * Remove device from user for notification purposes
+ * @param {object} options for adding device to user
+ * @property {string} token Device token which uniquely idents device
+ * @property {string} platform what software is the phone running?
+ * @property {number|undefined} time timestamp of token to search for
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {object} user user the device was added to
+ */
+userSchema.methods.removeDevice = function(options, cb) {
+  var user = this;
+  // if time wasn't passed in, find anything older than now, if time was passed in that means it may have come back from the apple feedback and we need to only remove anything older than that
+  var time = options.time || Date.now();
+  // token in consistent format
+  var token = apn.Device(options.token).toString('hex');
+
+  User.findByIdAndUpdate(
+    this.id,
+    {
+      '$pull': {
+        devices: {
+          token: token,
+          platform: options.platform,
+          time: { '$lte': time }
+        }
+      }
+    },
+    {
+      new: true,
+      upsert: false
+    },
+    function(err, user){
+      cb(err, user);
+    });
+};
+/**
+ * Add device to user for notification purposes
+ * @param {object} options for adding device to user
+ * @property {string} token Device token which uniquely idents device
+ * @property {string} platform what software is the phone running?
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {object} user user the device was added to
+ */
+userSchema.methods.addDevice = function(options, cb) {
+  var user = this;
+  // convert token to consistent format
+  var token = apn.Device(options.token).toString('hex');
+  user.devices.push({
+    platform: options.platform,
+    token: token,
+    time: Date.now()
+  });
+  user.save(function(err, user){
+    cb(err, user);
   });
 };
 /**

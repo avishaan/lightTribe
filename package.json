@@ -13,6 +13,7 @@
     "swagger-tools": "./node_modules/bin/swagger-tools/swagger-tools"
   },
   "dependencies": {
+    "apn": "^1.7.4",
     "async": "^0.9.0",
     "bcrypt": "0.8.2",
     "bluebird": "^2.9.13",
@@ -20,6 +21,7 @@
     "chance": "^0.7.5",
     "cloudinary": "^1.0.13",
     "express": "^4.12.3",
+    "moment": "^2.10.3",
     "mongoose": "4.0.2",
     "morgan": "^1.5.0",
     "multer": "^0.1.6",

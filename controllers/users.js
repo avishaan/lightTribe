@@ -1,6 +1,62 @@
 var logger = require('./../loggers/logger.js');
 var User = require('./../models/user.js');
 var config = require('../config.js');
+var apn = require('apn');
+
+module.exports.addDevice = function addDevice (req, res, next) {
+  var platform = req.swagger.params.body.value.platform;
+  var token = req.swagger.params.body.value.token;
+
+  // make sure all fields are filled in
+  if (!platform || !token) {
+    res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+  // TODO make sure a hexadecimal string came in
+  // call addDevice on user model
+  req.user.addDevice({
+    platform: platform,
+    token: token
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not save device token"
+      });
+    }
+  });
+
+};
+
+module.exports.removeDevice = function removeDevice (req, res, next) {
+  var platform = req.swagger.params.body.value.platform;
+  var token = req.swagger.params.body.value.token;
+
+  // make sure all fields are filled in
+  if (!platform || !token) {
+    res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+  // var apns = require('../notifications/apns.js');
+  // apns.feedback.emit('feedback', Date.now(), 'a591bde2720d89d4086beaa843f9b061a18b36b48cd0008a1f347a5ad844be95');
+  // TODO make sure a hexadecimal string came in
+  // call addDevice on user model
+  req.user.removeDevice({
+    platform: platform,
+    token: token
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not save device token"
+      });
+    }
+  });
+};
 
 module.exports.registerUser = function registerUser (req, res, next) {
   var username = req.swagger.params.user.value.username;
