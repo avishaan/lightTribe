@@ -131,22 +131,4 @@ describe("Comments", function() {
       });
     });
   });
-  it("should send notification to post author", function(done) {
-    agent
-    .post(URL + '/posts/' + seedPost._id + '/comments')
-    .set('Content-Type', 'application/json')
-    .send(comment)
-    .query({ access_token: seedUser.token })
-    .end(function(res){
-      var comment = res.body;
-      expect(res.status).toEqual(200);
-      // make sure parent of comment is the post
-      Comment
-      .findOne({_id: comment._id})
-      .exec(function(err, comment){
-        expect(comment.parent.toString()).toEqual(seedPost._id.toString());
-        done();
-      });
-    });
-  });
 });
