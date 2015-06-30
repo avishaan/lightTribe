@@ -42,7 +42,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2015-06-30 03:14:18 +0000</string>
+	<string>2015-06-30 03:18:46 +0000</string>
 	<key>Modifier</key>
 	<string>Brown Magic</string>
 	<key>NotesVisible</key>
@@ -4295,6 +4295,96 @@ A new LightPage template can be created by clicking the "+" icon.}</string>
 			<array>
 				<dict>
 					<key>Bounds</key>
+					<string>{{56, 1620}, {290, 34.666668}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<string>0</string>
+							<key>g</key>
+							<string>0</string>
+							<key>r</key>
+							<string>0</string>
+						</dict>
+						<key>Font</key>
+						<string>Helvetica-Bold</string>
+						<key>NSKern</key>
+						<real>0.0</real>
+						<key>Size</key>
+						<real>16</real>
+					</dict>
+					<key>ID</key>
+					<integer>128397</integer>
+					<key>Layer</key>
+					<integer>1</integer>
+					<key>Link</key>
+					<dict>
+						<key>documentJump</key>
+						<dict>
+							<key>Type</key>
+							<integer>6</integer>
+							<key>Worksheet</key>
+							<integer>5</integer>
+						</dict>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>a</key>
+								<string>0.2</string>
+								<key>b</key>
+								<string>1</string>
+								<key>g</key>
+								<string>1</string>
+								<key>r</key>
+								<string>1</string>
+							</dict>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>1</string>
+								<key>g</key>
+								<string>1</string>
+								<key>r</key>
+								<string>1</string>
+							</dict>
+							<key>CornerRadius</key>
+							<real>6</real>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Pad</key>
+						<integer>4</integer>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\fs28 \cf1 Share on Facebook}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
 					<string>{{62, 378}, {274, 36}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
@@ -6992,7 +7082,7 @@ A new LightPage template can be created by clicking the "+" icon.}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{56, 1718}, {290, 34.666668}}</string>
+					<string>{{56, 1685.3334}, {290, 34.666668}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7633,7 +7723,7 @@ Info}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{410, 126}, {292, 260}}</string>
+					<string>{{410, 126}, {292, 480}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -7696,7 +7786,11 @@ Info}</string>
 \
 Changes can be saved in the upper right. This gives the user the option to make changes to existing templates as well as saving a template without having to post immediately.\
 \
-Location GPS coordinates for event location should come from picked location on map.}</string>
+Location GPS coordinates for event location should come from picked location on map.\
+\
+By clicking "share on Facebook" the app can allow you to post a link to the LightTribe app to Facebook with text such as "I just posted an event with the LightTribe app"\
+\
+By clicking "publish" the app will publish the LightPage into the same queue as the posts but it will have different features.}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -34011,7 +34105,7 @@ Info}</string>
 		<key>SidebarWidth</key>
 		<integer>116</integer>
 		<key>VisibleRegion</key>
-		<string>{{14, 1133.2}, {691.20001, 758.40002}}</string>
+		<string>{{14, 1156.8}, {691.20001, 758.3999}}</string>
 		<key>Zoom</key>
 		<real>1.25</real>
 		<key>ZoomValues</key>
