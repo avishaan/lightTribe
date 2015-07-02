@@ -368,6 +368,14 @@
         "description": "Search for a post",
         "parameters": [
           {
+            "name": "interests",
+            "in": "query",
+            "description": "User interests",
+            "required": false,
+            "type": "string",
+            "collectionFormat": "csv"
+          },
+          {
             "name": "terms",
             "in": "query",
             "description": "Search terms you are looking for",
