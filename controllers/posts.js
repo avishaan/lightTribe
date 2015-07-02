@@ -70,6 +70,33 @@ module.exports.readAllPostsByUser = function (req, res, next) {
   });
 };
 
+module.exports.readOnePost = function (req, res, next) {
+  var postId = req.swagger.params.postId.value;
+  logger.info('Read specific post: ' + postId);
+  Post
+  .findOne({ _id: postId })
+  .select('createDate text author images')
+  .populate({
+    path: 'author',
+    select: 'username userImage lastLogin _id'
+  })
+  .populate({
+    path: 'images',
+    select: 'url'
+  })
+  .lean()
+  .exec(function(err, post){
+    if (!err) {
+      res.status(200).send(post);
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not find that specific post :(",
+        err: err
+      });
+    }
+  });
+};
+
 module.exports.readRelevantPosts = function (req, res, next) {
   var options = {
     longitude: req.swagger.params.longitude.value,

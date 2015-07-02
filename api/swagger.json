@@ -317,8 +317,8 @@
     },
     "/v1/posts/{postId}": {
       "get": {
-        "x-swagger-router-controller": "reviews",
-        "operationId": "readReview",
+        "x-swagger-router-controller": "posts",
+        "operationId": "readOnePost",
         "security": [
           {
             "tokenAuth": []
