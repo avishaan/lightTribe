@@ -20,7 +20,7 @@ var post = {
 
 var seedPost;
 
-xdescribe("Creating a post", function() {
+describe("Creating a post", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){
@@ -174,14 +174,20 @@ xdescribe("Creating a post", function() {
           expect(imagePost.images[0].toString()).toEqual(post.images[0]);
           // send image.id of post to resolve to url
           agent
-          .get(URL + '/images/' + post.images[0])
+          .get(URL + '/posts/' + imagePost.id)
           .send({ access_token: seedUser.token })
           .end(function(res){
-            //console.log(res.body);
-            expect(res.status).toEqual(200);
-            expect(res.body.url).toBeDefined();
+            console.log(res.body);
             done();
           });
+          //agent
+          //.get(URL + '/images/' + post.images[0])
+          //.send({ access_token: seedUser.token })
+          //.end(function(res){
+          //  //console.log(res.body);
+          //  expect(res.status).toEqual(200);
+          //  expect(res.body.url).toBeDefined();
+          //});
         });
       });
     });
