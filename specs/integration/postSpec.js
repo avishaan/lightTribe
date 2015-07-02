@@ -234,7 +234,7 @@ describe("Search posts", function() {
     .get(URL + '/posts')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
-    .query({ interest: 'yogaBikram' })
+    .query({ interests: 'yogaBikram, yogaBikram2' })
     .query({ radius: 50 })
     .query({ latitude: post.latitude })
     .query({ longitude: post.longitude })

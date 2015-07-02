@@ -370,7 +370,7 @@
           {
             "name": "interests",
             "in": "query",
-            "description": "User interests",
+            "description": "User interests (comma separated values)",
             "required": false,
             "type": "string",
             "collectionFormat": "csv"
