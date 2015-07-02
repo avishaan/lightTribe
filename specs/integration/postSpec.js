@@ -177,7 +177,10 @@ describe("Creating a post", function() {
           .get(URL + '/posts/' + imagePost.id)
           .send({ access_token: seedUser.token })
           .end(function(res){
-            console.log(res.body);
+            var post = res.body;
+            expect(post.images[0].url).toBeDefined();
+            expect(post.author.username).toBeDefined();
+            expect(post.author).toBeDefined();
             done();
           });
           //agent
