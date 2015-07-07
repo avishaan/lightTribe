@@ -404,6 +404,13 @@
             "type": "number"
           },
           {
+            "name": "page",
+            "in": "query",
+            "description": "Logitude for the search center",
+            "required": true,
+            "type": "number"
+          },
+          {
             "name": "access_token",
             "description": "Internal access token",
             "in": "query",
