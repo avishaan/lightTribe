@@ -123,6 +123,7 @@ describe("Creating a post", function() {
       .get(URL + '/users/' + seedUser.id + '/posts')
       .set('Content-Type', 'application/json')
       .query({ access_token: seedUser.token })
+      .query({ page: 1 })
       .end(function(res){
         var posts = res.body;
         posts.forEach(function(post){
