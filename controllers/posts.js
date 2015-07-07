@@ -52,11 +52,18 @@ module.exports.readAllUsersInPost = function (req, res, next) {
 };
 
 module.exports.readAllPostsByUser = function (req, res, next) {
+
+  var maxResults = 25;
+
   var userId = req.swagger.params.userId.value;
+  var page = req.swagger.params.page.value;
+
   logger.info('Read all posts by user:' + userId);
   Post
   .find({ author: userId })
   .select('createDate text author')
+  .limit(maxResults)
+  .skip((page -1) * maxResults)
   .lean()
   .exec(function(err, posts){
     if (!err) {
