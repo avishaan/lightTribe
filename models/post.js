@@ -98,10 +98,12 @@ postSchema.statics.readPost = function(options, cb) {
  * @property {object} err Passed Error
  */
 postSchema.statics.readPostsBySearch = function(options, cb) {
+  var maxResults = 40; // max results to return
   // see if post exists, if so pass error
   var coordinates = [options.longitude, options.latitude];
   var radius = options.radius; // km, sometimes referred to as distance
   var earthRadius = 6371; // km
+  var page = options.page || 1;
   Post
   .find({})
   .where('loc')
@@ -114,6 +116,8 @@ postSchema.statics.readPostsBySearch = function(options, cb) {
     path: 'author',
     select: 'userImage _id username'
   })
+  .skip((page - 1) * maxResults)
+  .limit(maxResults)
   .exec(function(err, posts){
     if (!err){
       cb(null, posts);

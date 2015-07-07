@@ -101,7 +101,8 @@ module.exports.readRelevantPosts = function (req, res, next) {
   var options = {
     longitude: req.swagger.params.longitude.value,
     latitude: req.swagger.params.latitude.value,
-    radius: req.swagger.params.radius.value
+    radius: req.swagger.params.radius.value,
+    page: req.swagger.params.page.value
   };
   logger.info('Search posts based on incoming query parameters: ');
   Post.readPostsBySearch(options, function(err, posts){
