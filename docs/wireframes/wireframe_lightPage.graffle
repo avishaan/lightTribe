@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2015-07-07 21:07:53 +0000</string>
+	<string>2015-07-07 21:43:39 +0000</string>
 	<key>Modifier</key>
 	<string>Brown Magic</string>
 	<key>NotesVisible</key>
@@ -977,6 +977,204 @@
 			<array>
 				<dict>
 					<key>Bounds</key>
+					<string>{{58, 244}, {231, 14}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FitText</key>
+					<string>Vertical</string>
+					<key>Flow</key>
+					<string>Resize</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<string>1</string>
+							<key>g</key>
+							<string>1</string>
+							<key>r</key>
+							<string>1</string>
+						</dict>
+						<key>Font</key>
+						<string>HelveticaNeue-Light</string>
+						<key>Size</key>
+						<real>11</real>
+					</dict>
+					<key>ID</key>
+					<integer>128369</integer>
+					<key>Layer</key>
+					<integer>1</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Align</key>
+						<integer>0</integer>
+						<key>Pad</key>
+						<integer>0</integer>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Light;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
+
+\f0\fs22 \cf1 San Francisco, California, United States}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{297, 199}, {60, 14}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FitText</key>
+					<string>Vertical</string>
+					<key>Flow</key>
+					<string>Resize</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<string>1</string>
+							<key>g</key>
+							<string>1</string>
+							<key>r</key>
+							<string>1</string>
+						</dict>
+						<key>Font</key>
+						<string>HelveticaNeue-Bold</string>
+						<key>Size</key>
+						<real>11</real>
+					</dict>
+					<key>ID</key>
+					<integer>128367</integer>
+					<key>Layer</key>
+					<integer>1</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Align</key>
+						<integer>0</integer>
+						<key>Pad</key>
+						<integer>0</integer>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
+
+\f0\b\fs22 \cf1 workshop}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{58, 258}, {231, 14}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FitText</key>
+					<string>Vertical</string>
+					<key>Flow</key>
+					<string>Resize</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<string>1</string>
+							<key>g</key>
+							<string>1</string>
+							<key>r</key>
+							<string>1</string>
+						</dict>
+						<key>Font</key>
+						<string>HelveticaNeue-Light</string>
+						<key>Size</key>
+						<real>11</real>
+					</dict>
+					<key>ID</key>
+					<integer>128366</integer>
+					<key>Layer</key>
+					<integer>1</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Align</key>
+						<integer>0</integer>
+						<key>Pad</key>
+						<integer>0</integer>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Light;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
+
+\f0\fs22 \cf1 yoga, meditation, occult, health, martial arts}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
 					<string>{{335, 162}, {15, 15}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
@@ -1630,7 +1828,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{58, 211}, {231, 52}}</string>
+					<string>{{58, 199}, {231, 52}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1691,7 +1889,7 @@
 
 \f0\b\fs22 \cf1 LightPage short description\
 
-\f1\b0 Text field that has additional information for publishing purposes\
+\f1\b0 Text field that has additional information for publishing purposes. This is the max size for it.\
 }</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
@@ -4267,6 +4465,48 @@ A new LightPage template can be created by clicking the "+" icon.}</string>
 			</array>
 			<key>GraphicsList</key>
 			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{317.99893, 2214.5}, {9.0021381, 11}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>128447</integer>
+					<key>Layer</key>
+					<integer>1</integer>
+					<key>Rotation</key>
+					<real>90</real>
+					<key>Shape</key>
+					<string>Bezier</string>
+					<key>ShapeData</key>
+					<dict>
+						<key>UnitPoints</key>
+						<array>
+							<string>{-0.50000381, -0.5}</string>
+							<string>{-0.50000381, -0.5}</string>
+							<string>{-0.50000381, 0.5}</string>
+							<string>{-0.50000381, 0.5}</string>
+							<string>{-0.50000381, 0.5}</string>
+							<string>{0.50001144, -3.6239624e-05}</string>
+							<string>{0.49999619, -1.7166138e-05}</string>
+							<string>{0.50004959, -6.1035156e-05}</string>
+							<string>{-0.50000381, -0.5}</string>
+						</array>
+					</dict>
+					<key>Style</key>
+					<dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+					</dict>
+				</dict>
 				<dict>
 					<key>Bounds</key>
 					<string>{{37, 2169}, {147, 21}}</string>
@@ -9207,15 +9447,15 @@ A new LightPage template can be created by clicking the "+" icon.}</string>
 					<dict>
 						<key>UnitPoints</key>
 						<array>
-							<string>{-0.5, -0.5}</string>
-							<string>{-0.5, -0.5}</string>
-							<string>{-0.5, 0.5}</string>
-							<string>{-0.5, 0.5}</string>
-							<string>{-0.5, 0.5}</string>
-							<string>{0.5, -2.2742779e-05}</string>
-							<string>{0.5, -2.2742779e-05}</string>
-							<string>{0.5, -2.2742779e-05}</string>
-							<string>{-0.5, -0.5}</string>
+							<string>{-0.50000381, -0.5}</string>
+							<string>{-0.50000381, -0.5}</string>
+							<string>{-0.50000381, 0.5}</string>
+							<string>{-0.50000381, 0.5}</string>
+							<string>{-0.50000381, 0.5}</string>
+							<string>{0.50001144, -3.6239624e-05}</string>
+							<string>{0.49999619, -1.7166138e-05}</string>
+							<string>{0.50004959, -6.1035156e-05}</string>
+							<string>{-0.50000381, -0.5}</string>
 						</array>
 					</dict>
 					<key>Style</key>
@@ -10095,7 +10335,7 @@ Info}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{410, 126}, {292, 740}}</string>
+					<string>{{410, 126}, {292, 760}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -10170,7 +10410,7 @@ Anonymous users can't post a LightPage\
 \
 Topics are a multi select list with a maximum of 5 selections.\
 \
-When class is chosen, the user doesn't need to pick a start time.}</string>
+When class is chosen, the user doesn't need to pick a start time so hide that field.}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -11369,7 +11609,7 @@ When class is chosen, the user doesn't need to pick a start time.}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
@@ -11385,9 +11625,9 @@ When class is chosen, the user doesn't need to pick a start time.}</string>
 		<key>SidebarWidth</key>
 		<integer>116</integer>
 		<key>VisibleRegion</key>
-		<string>{{-184.74997, 53.124996}, {1171.25, 1329.9999}}</string>
+		<string>{{0.81300813, -16.187021}, {761.78864, 865.04071}}</string>
 		<key>Zoom</key>
-		<real>0.80000001192092896</real>
+		<real>1.2300000190734863</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
