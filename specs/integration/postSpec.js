@@ -238,6 +238,7 @@ describe("Search posts", function() {
     .query({ radius: 50 })
     .query({ latitude: post.latitude })
     .query({ longitude: post.longitude })
+    .query({ page: 1 })
     .end(function(res){
       var posts = res.body;
       expect(posts.length).not.toEqual(0);
@@ -250,7 +251,7 @@ describe("Search posts", function() {
       done();
     });
   });
-  it("should return anything within correct search radius", function(done) {
+  it("should NOT return anything within correct search radius", function(done) {
     agent
     .post(URL + '/posts')
     .set('Content-Type', 'application/json')
@@ -269,7 +270,7 @@ describe("Search posts", function() {
       });
     });
   });
-  it("should NOT return anything outside the search radius", function(done) {
+  it("should return anything inside the search radius", function(done) {
     agent
     .post(URL + '/posts')
     .set('Content-Type', 'application/json')
