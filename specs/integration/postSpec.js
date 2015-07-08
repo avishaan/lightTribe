@@ -1,9 +1,11 @@
 var agent = require('superagent');
 var config = require("../../config.js");
+var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 var Post = require('../../models/post.js');
 //var httpMocks = require('node-mocks-http');
+Promise.promisifyAll(fixture);
 
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
@@ -26,13 +28,22 @@ describe("Creating a post", function() {
     fixture.deleteDB(function(err, user){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
-      // seed a user
-      fixture.seedUser(function(err, user){
-        // save the user for later
-        seedUser = user;
-        expect(err).toEqual(null);
-        done();
+      // seed image so we have it for the user
+      fixture.seedImage({}, function(err, image){
+        fixture.seedUser({
+          username: 'test',
+          password: 'test',
+          email: 'test@test.com',
+          interests: ['yogaBikram', 'yogaVinyasa'],
+          userImage: image._id
+        }, function(err, user){
+          // save the user for later
+          seedUser = user;
+          expect(err).toEqual(null);
+          done();
+        });
       });
+      // seed a user
     });
   });
   it("should require access_token to be filled out", function(done) {
@@ -136,18 +147,57 @@ describe("Creating a post", function() {
     });
   });
   it("should return all users who commented on a specific post", function(done) {
-    agent
-    .get(URL + '/posts/' + post.id + '/users')
-    .set('Content-Type', 'application/json')
-    .query({ access_token: seedUser.token })
-    .query({ page: 1 })
-    .end(function(res){
-      var users = res.body;
-      expect(users.length).not.toEqual(0);
-      expect(users[0].user.username).toBeDefined();
-      expect(res.status).toEqual(200);
-      done();
+    fixture
+    .seedPostAsync({
+      text: "Post text test",
+      author: seedUser.id,
+      images: [],
+      interests: [],
+      longitude: 10,
+      latitude: 10
+    })
+    .then(function(post){
+      return fixture.seedCommentAsync({
+        text: "Comment text test",
+        author: seedUser.id,
+        parent: post.id
+      });
+    })
+    .then(function(comment){
+      var postId = comment.parent;
+      // finished
+      agent
+      .get(URL + '/posts/' + postId + '/users')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: seedUser.token })
+      .query({ page: 1 })
+      .end(function(res){
+        var users = res.body;
+        console.log(users);
+        expect(users.length).not.toEqual(0);
+        expect(users[0].user.username).toBeDefined();
+        expect(res.status).toEqual(200);
+        done();
+      });
+    })
+    .caught(function(err){
+      console.log(err);
+      throw new Error(err);
     });
+    // seedComment
+    // agent
+    // .get(URL + '/posts/' + post.id + '/users')
+    // .set('Content-Type', 'application/json')
+    // .query({ access_token: seedUser.token })
+    // .query({ page: 1 })
+    // .end(function(res){
+    //   var users = res.body;
+    //   expect(users.length).not.toEqual(0);
+    //   expect(users[0].user.username).toBeDefined();
+    //   expect(res.status).toEqual(200);
+    //   throw new Error('Check this test');
+    //   done();
+    // });
   });
   it("should allow images to be retrieved and attached from/to a post", function(done) {
     // we probably don't need this as we already are testing image resolution correctly and we are resolving the image information independently of querying the post. Because we are doing this independently we removed a bunch of testing and complexity for ourselves
