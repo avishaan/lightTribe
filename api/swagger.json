@@ -164,7 +164,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Logitude for the search center",
+            "description": "Page number of the search results to return",
             "required": true,
             "type": "number"
           },
@@ -413,7 +413,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Logitude for the search center",
+            "description": "Page number of the results to return",
             "required": true,
             "type": "number"
           },
