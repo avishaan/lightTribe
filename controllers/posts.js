@@ -31,6 +31,10 @@ module.exports.createPost = function (req, res, next) {
 
 module.exports.readAllUsersInPost = function (req, res, next) {
   var postId = req.swagger.params.postId.value;
+  var page = req.swagger.params.page.value;
+
+  var maxResults = 40;
+
   logger.info('Read all users in post:' + postId);
   res.status(200).send([
     {

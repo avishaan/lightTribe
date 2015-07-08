@@ -212,6 +212,13 @@
             "type": "string"
           },
           {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for returned search results",
+            "required": true,
+            "type": "number"
+          },
+          {
             "name": "access_token",
             "description": "Internal access token",
             "in": "query",
