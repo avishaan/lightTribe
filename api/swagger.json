@@ -255,6 +255,13 @@
             "type": "string"
           },
           {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the search results to return",
+            "required": true,
+            "type": "number"
+          },
+          {
             "name": "access_token",
             "description": "Internal access token",
             "in": "query",
