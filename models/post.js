@@ -21,6 +21,9 @@ var postSchema = new mongoose.Schema({
     { type: String, ref: 'Image' }
   ],
   author: { type: String, ref: 'User' },
+  privacy: {
+    audience: { type: String, default: 'public' }
+  }
 });
 
 postSchema.index({loc: '2dsphere'});
