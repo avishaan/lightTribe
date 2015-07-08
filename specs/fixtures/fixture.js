@@ -116,8 +116,10 @@ module.exports.seedImage = function(options, cb){
 };
 
 module.exports.seedPost = function(options, cb){
+  var text = options.text || post.text;
+
   Post.createPost({
-    text: post.text,
+    text: text,
     createDate: Date.now(),
     author: options.author,
     images: options.images,
