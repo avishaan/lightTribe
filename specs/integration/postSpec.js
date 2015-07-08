@@ -140,6 +140,7 @@ describe("Creating a post", function() {
     .get(URL + '/posts/' + post.id + '/users')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
+    .query({ page: 1 })
     .end(function(res){
       var users = res.body;
       expect(users.length).not.toEqual(0);
