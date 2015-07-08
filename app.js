@@ -146,7 +146,7 @@ app.use(function(req, res, next){
 // the following only runs if there is an error, otherwise it shouldn't run
 app.use(function(err, req, res, next){
   console.log(prettyjson.render(err, {}));
-  if (err = "SCHEMA_VALIDATION_FAILED"){
+  if (err.code == "SCHEMA_VALIDATION_FAILED"){
     // should be swagger validation error, let the FE know.
     res.status(400).send({ error: err });
   } else {
