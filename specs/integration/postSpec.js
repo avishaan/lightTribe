@@ -175,7 +175,7 @@ describe("Creating a post", function() {
         var users = res.body;
         console.log(users);
         expect(users.length).not.toEqual(0);
-        expect(users[0].user.username).toBeDefined();
+        expect(users[0].username).toBeDefined();
         expect(res.status).toEqual(200);
         done();
       });
