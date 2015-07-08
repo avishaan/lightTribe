@@ -99,6 +99,7 @@ describe("Comments", function() {
     .get(URL + '/posts/' + seedPost._id + '/comments')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
+    .query({ page: 1 })
     .end(function(res){
       var comments = res.body;
       expect(res.status).toEqual(200);
