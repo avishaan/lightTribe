@@ -1,7 +1,9 @@
 var logger = require('./../loggers/logger.js');
 var Review = require('../models/review.js');
 var Post = require('../models/post.js');
+var User = require('../models/user.js');
 var Image = require('../models/image.js');
+var Comment = require('../models/comment.js');
 var async = require('async');
 
 var Promise = require('bluebird');
@@ -36,23 +38,40 @@ module.exports.readAllUsersInPost = function (req, res, next) {
   var maxResults = 40;
 
   logger.info('Read all users in post:' + postId);
-  res.status(200).send([
-    {
-      _id: "100",
-      user: {
-        username: "codehatcher",
-        lastLogin: Date.now(),
-        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
+
+  // find the comments for a matching post
+  // select the participants
+  // populate the participants
+  // lean it up
+  Comment
+  .find({ parent: postId })
+  .sort('createDate')
+  .select('author')
+  .populate({
+    path: 'author',
+    select: 'username userImage'
+  })
+  .limit(maxResults)
+  .skip((page - 1) * maxResults)
+  .lean()
+  .exec(function(err, comments){
+    var authors = comments.map(function(comment){
+      return comment.author;
+    });
+    // populate the images
+    Image
+    .populate(authors, {
+      path: 'userImage',
+      select: 'url'
+    })
+    .onResolve(function(err, authors){
+      if (!err) {
+        res.status(200).send(authors);
+      } else {
+        res.status(500).send({err: err, clientMsg: "Something broke :("});
       }
-    }, {
-      _id: "101",
-      user: {
-        username: "codehatcher",
-        lastLogin: Date.now(),
-        thumbnail: "https://www.google.com/images/srpr/logo11w.png"
-      }
-    }
-  ]);
+    });
+  });
 };
 
 module.exports.readAllPostsByUser = function (req, res, next) {
