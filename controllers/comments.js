@@ -27,10 +27,16 @@ module.exports.createComment = function (req, res, next) {
 };
 
 module.exports.readAllCommentsForPost = function (req, res, next) {
+  var maxResults = 40; // max results to return in the route perpage
   var postId = req.swagger.params.postId.value;
+  var page = req.swagger.params.page.value;
   logger.info('Read all comments for post:' + postId);
   Comment
-  .readAllCommentsForPostAsync({postId: postId})
+  .readAllCommentsForPostAsync({
+    postId: postId,
+    maxResults: maxResults,
+    page: page
+  })
   .then(function(comments){
     res.status(200).send(comments);
   })

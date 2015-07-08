@@ -106,9 +106,14 @@ commentSchema.statics.readComment = function(options, cb) {
  * @property {object} err Passed Error
  */
 commentSchema.statics.readAllCommentsForPost = function(options, cb) {
+  var maxResults = options.maxResults || 50;
+  var postId = options.postId;
+  var page = options.page;
   // see if comment exists, if so pass error
   Comment
-  .find({ parent: options.postId })
+  .find({ parent: postId })
+  .limit(maxResults)
+  .skip((page - 1) * maxResults)
   .populate({
     path: 'author',
     select: 'username'
