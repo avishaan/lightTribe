@@ -1091,6 +1091,11 @@
             "example": "yogaBikram",
             "type": "string"
           }
+        },
+        "privacy": {
+          "type": "string",
+          "example": "public",
+          "description": "Privacy setting of the post"
         }
       },
       "required": ["text", "longitude", "latitude", "interests"]
