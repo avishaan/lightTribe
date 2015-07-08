@@ -22,7 +22,7 @@ var postSchema = new mongoose.Schema({
   ],
   author: { type: String, ref: 'User' },
   privacy: {
-    audience: { type: String, default: 'public' }
+    audience: { type: String, default: 'public', required: true }
   }
 });
 
@@ -55,6 +55,9 @@ postSchema.statics.createPost = function(options, cb) {
     loc: {
       type: "MultiPoint",
       coordinates: polyCoordinates
+    },
+    privacy: {
+      audience: options.privacy || 'public'
     }
   };
   // add post to the database
