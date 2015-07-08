@@ -17,7 +17,7 @@ var review = {
   location: '1234.5, 1234.6'
 };
 
-describe("Posting a review", function() {
+xdescribe("Posting a review", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){
@@ -95,7 +95,7 @@ describe("Posting a review", function() {
   });
 });
 
-describe("Reviews", function() {
+xdescribe("Reviews", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){

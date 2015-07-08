@@ -13,7 +13,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 var seedUser;
 
-describe("A search", function() {
+xdescribe("A search", function() {
   jasmine.getEnv().defaultTimeoutInterval = 20000;
   beforeEach(function(done){
     fixture.deleteDB(function(err){
