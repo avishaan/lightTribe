@@ -173,7 +173,6 @@ describe("Creating a post", function() {
       .query({ page: 1 })
       .end(function(res){
         var users = res.body;
-        console.log(users);
         expect(users.length).not.toEqual(0);
         expect(users[0].username).toBeDefined();
         expect(res.status).toEqual(200);
