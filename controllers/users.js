@@ -71,7 +71,8 @@ module.exports.registerUser = function registerUser (req, res, next) {
   }, function(err, user){
     if (!err && user){
       res.status(200).send({
-        _id: user.id
+        _id: user.id,
+        token: user.token.value
       });
     } else {
       res.status(500).send(err);
