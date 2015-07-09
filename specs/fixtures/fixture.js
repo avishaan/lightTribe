@@ -18,7 +18,7 @@ var review = {
   company: 'Company Name',
   description: 'This is a description',
   rating: 1,
-  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  images: ['558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b'],
   datetime: new Date().toJSON(),
   location: '1234.5, 1234.6'
 };
@@ -27,7 +27,7 @@ var post = {
   id: '1234',
   text: 'This is a post description',
   createDate: Date.now(),
-  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  images: ['558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b'],
   interests: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145
