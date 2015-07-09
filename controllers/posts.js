@@ -5,6 +5,7 @@ var User = require('../models/user.js');
 var Image = require('../models/image.js');
 var Comment = require('../models/comment.js');
 var async = require('async');
+var _ = require('underscore');
 
 var Promise = require('bluebird');
 Promise.promisifyAll(Post);
@@ -59,6 +60,8 @@ module.exports.readAllUsersInPost = function (req, res, next) {
     var authors = comments.map(function(comment){
       return comment.author;
     });
+    // get a unique list of authors by removing the dups
+    authors = _.uniq(authors);
     // populate the images
     Image
     .populate(authors, {
