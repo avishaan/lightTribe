@@ -88,7 +88,7 @@ module.exports.seedUser = function(options, cb){
     // return the user that was just created
     user = {
       username: user.username,
-      password: user.password,
+      password: options.password,
       interests: user.interests,
       hashedPass : user.password,
       _id: user._id,
