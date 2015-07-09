@@ -36,6 +36,9 @@ var userSchema = new mongoose.Schema({
     }
   },
   userImage: { type: String, ref: 'Image' },
+  profile: {
+    shortDescription: { type: String }
+  },
   interests: [
     { type: String } // should match interest.key
   ],
@@ -393,6 +396,9 @@ userSchema.methods.updateUserSettings = function(options, cb) {
       // replace values with anything passed in
       if (typeof options.userImage !== "undefined"){
         user.set('userImage', options.userImage);
+      }
+      if (typeof options.shortDescription !== "undefined"){
+        user.profile.shortDescription = options.shortDescription;
       }
       if (typeof options.interests !== "undefined"){
         user.set('interests', options.interests);

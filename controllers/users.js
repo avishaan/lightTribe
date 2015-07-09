@@ -113,6 +113,7 @@ module.exports.updateUserSettings = function (req, res, next) {
   var options = {};
   options.userImage = settings.userImage || undefined;
   options.interests = settings.interests || undefined;
+  options.shortDescription = settings.shortDescription || undefined;
 
   logger.info('Updating user settings for user: ' + userId);
   // find the user
