@@ -93,7 +93,7 @@ module.exports.readUserSettings = function (req, res, next) {
         _id: user._id,
         username: user.username,
         interests: user.interests,
-        thumbnail: user.userImage.url,
+        userImage: user.userImage,
         auths: [{
           name: "facebook",
           enabled: true
