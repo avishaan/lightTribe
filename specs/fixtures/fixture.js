@@ -11,7 +11,7 @@ var username = 'test';
 var password = 'test';
 var email = 'test@test.com';
 var interests = ['yogaBikram', 'yogaVinyasa'];
-var userImage = 'w4isrf95psfjifjpqycm';
+var userImage = '558d23ce7189b21400bef51b';
 
 // have a review when necessary
 var review = {
