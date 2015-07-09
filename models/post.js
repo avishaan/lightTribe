@@ -22,7 +22,12 @@ var postSchema = new mongoose.Schema({
   ],
   author: { type: String, ref: 'User' },
   privacy: {
-    audience: { type: String, default: 'public', required: true }
+    audience: {
+     type: String,
+     default: 'public',
+     required: true,
+     enum: ["public", "private"]
+    }
   }
 });
 
