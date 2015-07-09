@@ -40,6 +40,7 @@ describe("A user", function() {
     .end(function(res){
       expect(res.status).toEqual(200);
       expect(res.body._id).toBeDefined();
+      expect(res.body.token).toBeDefined(); //gh#61
       done();
     });
   });
@@ -85,8 +86,9 @@ describe("A user", function() {
     });
   });
   it("token should allow access to protected route", function(done) {
+    console.log(seedUser);
     agent
-    .get(URL + '/users/' + seedUser.username)
+    .get(URL + '/users/' + seedUser._id)
     .send({
       access_token: seedUser.token
     })
