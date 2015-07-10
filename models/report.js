@@ -12,39 +12,13 @@ var apn = require('apn');
 
 var reportSchema = new mongoose.Schema({
   resource: { type: String },
-  createDate: { type: Date, default: Date.now },
-  author: { type: String, ref: 'User' },
-  parent: { type: String, ref: 'Post' }, // parent post the report belongs to
+  reportDate: { type: Date, default: Date.now },
+  parentId: { type: String }, // parent id of the resource
 });
 
 // after report is saved, notifiy correct users
  reportSchema.post('save', function(report){
    // find original post
-   Post
-   .findOne({_id: report.parent })
-   .populate('author')
-   .exec(function(err, post){
-     if (!err && post && post.author.devices.length){
-       var devices = post.toJSON().author.devices;
-       devices.forEach(function(device){
-         if (device.platform === 'ios'){
-           // send notification to the ios device
-           var note = new apn.Notification();
-           note.badge = 0;
-           note.alert = "Someone reported on your post!";
-           note.payload = {
-             report: {
-               _id: report.id,
-               text: report.text
-             }
-           };
-           apns.service.pushNotification(note, device.token);
-         }
-       });
-     }
-   });
-   // find author of original post
-   // send notification to all devices of that author
  });
 /**
  * Create a specific report
