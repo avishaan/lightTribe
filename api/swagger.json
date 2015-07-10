@@ -1282,12 +1282,12 @@
         "resource": {
           "description": "The type of resource being reported, ex: 'image'",
           "type": "string",
-          "enum": ["image"]
+          "enum": ["post"]
         }
       },
       "example": {
         "id": "54f44c5d26352b1b9755b12f",
-        "resource": "image"
+        "resource": "post"
       }
     },
     "apnRequest": {
