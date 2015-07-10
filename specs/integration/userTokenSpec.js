@@ -86,7 +86,6 @@ describe("A user", function() {
     });
   });
   it("token should allow access to protected route", function(done) {
-    console.log(seedUser);
     agent
     .get(URL + '/users/' + seedUser._id)
     .send({
