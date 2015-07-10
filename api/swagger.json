@@ -18,6 +18,33 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/v1/reports": {
+      "post": {
+        "x-swagger-router-controller": "reports",
+        "operationId": "createReport",
+        "tags": ["reports"],
+        "description": "Report an image, post, or comment for removal consideration",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request for reporting an image",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/dev/apns": {
       "post": {
         "x-swagger-router-controller": "debuggers",
@@ -1243,6 +1270,24 @@
           "description": "User Profile Information",
           "$ref": "#/definitions/userProfile"
         }
+      }
+    },
+    "ReportRequest": {
+      "properties": {
+        "id": {
+          "description": "The id of the resource being reported",
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "resource": {
+          "description": "The type of resource being reported, ex: 'image'",
+          "type": "string",
+          "enum": ["image"]
+        }
+      },
+      "example": {
+        "id": "54f44c5d26352b1b9755b12f",
+        "resource": "image"
       }
     },
     "apnRequest": {
