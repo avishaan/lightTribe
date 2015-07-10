@@ -45,8 +45,6 @@ describe("A report", function() {
       return fixture.seedImageAsync({});
     })
     .then(function(savedImage){
-      console.log("saved image complete");
-      console.log(savedImage);
       image = savedImage;
       post.images = [savedImage];
 
