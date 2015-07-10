@@ -1274,7 +1274,7 @@
     },
     "ReportRequest": {
       "properties": {
-        "id": {
+        "_id": {
           "description": "The id of the resource being reported",
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
