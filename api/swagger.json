@@ -1146,6 +1146,11 @@
             "type": "string",
             "example": "bikramYoga"
           }
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Short description of user and/or their services",
+          "example": "I am a yoga teacher and love dancing"
         }
       }
     },
