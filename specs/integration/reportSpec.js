@@ -71,18 +71,16 @@ describe("A report", function() {
   });
   it("should be able to be submitted for an image when inappropriate", function(done) {
     agent
-    .post(URL + '/users')
+    .post(URL + '/reports')
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
     .send({
-      id: image._id,
+      _id: image._id,
       resource: "image"
     })
     .query({ access_token: seedUser.token })
     .end(function(res){
       expect(res.status).toEqual(200);
-      expect(res.body._id).toBeDefined();
-      expect(res.body.token).toBeDefined(); //gh#61
       done();
     });
   });
