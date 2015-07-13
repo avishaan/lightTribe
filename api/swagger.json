@@ -22,6 +22,11 @@
       "post": {
         "x-swagger-router-controller": "reports",
         "operationId": "createReport",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
         "tags": ["reports"],
         "description": "Report an image, post, or comment for removal consideration",
         "parameters": [
