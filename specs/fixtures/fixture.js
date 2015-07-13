@@ -3,6 +3,7 @@ var User = require('./../../models/user.js');
 var Post = require('./../../models/post.js');
 var Image = require('./../../models/image.js');
 var Comment = require('./../../models/comment.js');
+var Report = require('./../../models/report.js');
 var Post = require('./../../models/post.js');
 var async = require('async');
 
@@ -60,7 +61,9 @@ module.exports.deleteDB = function(options, cb){
     User.remove({}, function(err, user){
       Image.remove({}, function(err, images){
         Comment.remove({}, function(err, comments){
-          cb(err, user);
+          Report.remove({}, function(err, reports){
+            cb(err, user);
+          });
         });
       });
     });

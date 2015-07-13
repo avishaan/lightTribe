@@ -14,6 +14,7 @@ var reportSchema = new mongoose.Schema({
   resource: { type: String },
   reportDate: { type: Date, default: Date.now },
   parentId: { type: String }, // parent id of the resource
+  author: { type: String, ref: 'User' } // author who created the report
 });
 
 // after report is saved, notifiy correct users
@@ -23,10 +24,10 @@ var reportSchema = new mongoose.Schema({
 /**
  * Create a specific report
  * @param {object} options The options for the new report
- * @property {string} text body of the report
- * @property {date} createDate date report happened
+ * @property {date} reportDate date report happened
  * @property {string} author user who created the report
- * @property {string} parent the parent post for the report
+ * @property {string} parentId the parent id for the report
+ * @property {string} resource the resource type: post, comment, etc
  * @param {function} cb
  * @property {object} report that was just saved
  * @property {object} err Passed Error
@@ -34,10 +35,10 @@ var reportSchema = new mongoose.Schema({
 reportSchema.statics.createReport = function(options, cb) {
   // we are redefining the object to make sure other random stuff doesn't come through
   var report = {
-    text: options.text,
-    createDate: Date.now(),
+    resource: options.resource,
+    createDate: Date.now() || options.reportDate,
     author: options.author,
-    parent: options.parent
+    parentId: options.parentId
   };
   // add report to the database
   Report.create(report, function(err, savedReport){

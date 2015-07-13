@@ -45,8 +45,6 @@ describe("A report", function() {
       return fixture.seedImageAsync({});
     })
     .then(function(savedImage){
-      console.log("saved image complete");
-      console.log(savedImage);
       image = savedImage;
       post.images = [savedImage];
 
@@ -75,8 +73,8 @@ describe("A report", function() {
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
     .send({
-      _id: image._id,
-      resource: "image"
+      _id: seedPost._id,
+      resource: "post"
     })
     .query({ access_token: seedUser.token })
     .end(function(res){
