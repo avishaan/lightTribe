@@ -1193,7 +1193,7 @@
         },
         "author": {
           "description": "Basic user information",
-          "$ref": "#/definitions/ReadUserForPost"
+          "$ref": "#/definitions/ReadUserForMessage"
         }
       },
       "required": ["_id", "text", "author"]
