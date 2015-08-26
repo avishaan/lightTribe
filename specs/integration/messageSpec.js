@@ -68,7 +68,7 @@ describe("Messages", function() {
   //});
   it("should allow user1 to message user2", function(done) {
     agent
-    .post(URL + '/messages')
+    .post(URL + '/conversations')
     .set('Content-Type', 'application/json')
     .query({ access_token: user1.token })
     .send({
@@ -83,7 +83,7 @@ describe("Messages", function() {
   it("should allow user2 to read all of it's conversations", function(done) {
     // first seed the message
     agent
-    .post(URL + '/messages')
+    .post(URL + '/conversations')
     .set('Content-Type', 'application/json')
     .query({ access_token: user1.token })
     .send({
