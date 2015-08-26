@@ -1,5 +1,6 @@
 var logger = require('./../loggers/logger.js');
 var Comment = require('./../models/comment.js');
+var Conversation = require('./../models/conversation.js');
 
 var Promise = require('bluebird');
 // convert built in functions to promises
@@ -28,8 +29,18 @@ module.exports.createMessageForConversation = function (req, res, next) {
   var sender = req.user.id;
   var recipient = req.swagger.params.conversation.value.recipient;
   var text = req.swagger.params.conversation.value.text;
-  res.status(200).send({});
+  Conversation.createConversation({
+    author: sender,
+    text: text,
+    participants: recipient
+  }, function(err, conversation) {
+    debugger;
+    if (!err) {
+      res.status(200).send({});
+    } else {
 
+    }
+  });
 };
 
 module.exports.readOneConversation = function(req, res, next) {
