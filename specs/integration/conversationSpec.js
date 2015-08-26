@@ -94,7 +94,7 @@ describe("Messages", function() {
       expect(res.status).toEqual(200);
       // get a list of all the conversations for a user
       agent
-      .get(URL + '/conversations/')
+      .get(URL + '/conversations')
       .set('Content-Type', 'application/json')
       .query({ access_token: user2.token })
       .end(function(res){
