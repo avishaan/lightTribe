@@ -28,8 +28,24 @@ module.exports.createMessageForConversation = function (req, res, next) {
   var sender = req.user.id;
   var recipient = req.swagger.params.conversation.value.recipient;
   var text = req.swagger.params.conversation.value.text;
-  res.status(200);
+  res.status(200).send({});
 
+};
+
+module.exports.readOneConversation = function(req, res, next) {
+  var user = req.user.id;
+  var conversationId = req.swagger.params.conversationId.value;
+
+  res.status(200).send([
+    {
+      _id: "10",
+      text: "Message one",
+      author: {
+        _id: '20',
+        username: 'codeHatcher'
+      }
+    }
+  ]);
 };
 
 module.exports.createComment = function (req, res, next) {
