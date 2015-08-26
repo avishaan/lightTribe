@@ -421,13 +421,6 @@
         "description": "Get the messages in a conversation",
         "parameters": [
           {
-            "name": "conversationId",
-            "in": "path",
-            "description": "Unique conversation",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "access_token",
             "description": "Internal access token",
             "in": "query",
