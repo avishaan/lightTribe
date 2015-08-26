@@ -443,7 +443,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadOneMessage"
+                "$ref": "#/definitions/ReadAllConversations"
               }
             }
           }
@@ -1165,6 +1165,20 @@
         }
       },
       "required": ["_id"]
+    },
+    "ReadAllConversations": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "Conversation Id"
+        },
+        "participants": {
+          "description": "All the users participating in a conversation",
+          "$ref": "#/definitions/ReadUserForPost"
+        }
+      },
+      "required": ["_id", "participants"]
     },
     "ReadOneMessage": {
       "properties": {
