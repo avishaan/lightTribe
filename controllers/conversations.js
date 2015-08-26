@@ -24,6 +24,14 @@ module.exports.readAllUserConversations = function (req, res, next) {
   ]);
 };
 
+module.exports.createMessageForConversation = function (req, res, next) {
+  var sender = req.user.id;
+  var recipient = req.swagger.params.conversation.value.recipient;
+  var text = req.swagger.params.conversation.value.text;
+  res.status(200);
+
+};
+
 module.exports.createComment = function (req, res, next) {
   // get the userid from the authenticated user, they are the one that submitted
   var author = req.user.id;

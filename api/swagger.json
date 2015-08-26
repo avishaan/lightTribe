@@ -1175,7 +1175,7 @@
         },
         "participants": {
           "description": "All the users participating in a conversation",
-          "$ref": "#/definitions/ReadUserForPost"
+          "$ref": "#/definitions/ReadUserForMessage"
         }
       },
       "required": ["_id", "participants"]
