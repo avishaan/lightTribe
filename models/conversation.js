@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var _ = require('underscore');
+var Message = require('./../models/message.js');
 /*
 |-------------------------------------------------------------
 | Conversation Schema
@@ -39,16 +40,35 @@ conversationSchema.statics.createConversation = function(options, cb) {
     author: options.author,
     participants: participants
   };
+  // create the message that we will insert 
+  var message = new Message({
+    text: convo.text,
+    createDate: convo.createDate,
+    author: convo.author
+  });
   // conversations that already exist? add this message to existing conversation
-  Conversation.findOne({participants: convo.participants})
-  // add conversation to the database
-  Conversation.create(conversation, function(err, savedConversation){
-    if (!err && savedConversation){
-      // we created the savedConversation successfully
-      cb(null, savedConversation);
-    } else {
-      logger.error(err);
-      cb(err);
+  debugger;
+  Conversation
+  .findOne({participants: convo.participants})
+  .exec(function(err, foundConvo){
+    // check whether we need to create a new convo or save the message to an existing convo
+    if (!err && foundConvo){
+      // there is already a convo with these participants, add this message to existing convo
+      foundConvo.messages.push(message);
+      foundConvo.save(function(err, savedConvo){
+        cb(err, savedConvo);
+      });
+    } else if (!err && !foundConvo) {
+      // create a new convo that includes this message
+      Conversation
+      .create({
+        participants: convo.participants,
+        messages: [message]
+      }, function(err, savedConvo){
+        cb(err, savedConvo);
+      });
+    } else { // had a problem
+      cb(err, null);
     }
   });
 };
