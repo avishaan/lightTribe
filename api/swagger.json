@@ -411,7 +411,7 @@
     "/v1/conversations": {
       "get": {
         "x-swagger-router-controller": "conversations",
-        "operationId": "readAllConversationsForUser",
+        "operationId": "readAllUserConversations",
         "security": [
           {
             "tokenAuth": []
