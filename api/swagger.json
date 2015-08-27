@@ -408,6 +408,134 @@
         }
       }
     },
+    "/v1/conversations": {
+      "get": {
+        "x-swagger-router-controller": "conversations",
+        "operationId": "readAllUserConversations",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["conversations"],
+        "description": "Get the messages in a conversation",
+        "parameters": [
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadAllConversations"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "x-swagger-router-controller": "conversations",
+        "operationId": "createMessageForConversation",
+        "tags": ["conversations"],
+        "description": "Create message for a conversation",
+        "parameters": [
+          {
+            "name": "conversation",
+            "in": "body",
+            "description": "Conversation information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateMessage"
+            }
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
+    "/v1/conversations/{conversationId}": {
+      "get": {
+        "x-swagger-router-controller": "conversations",
+        "operationId": "readOneConversation",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["conversations"],
+        "description": "Get the messages in a conversation",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "Unique conversation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOneConversation"
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/posts": {
       "get": {
         "x-swagger-router-controller": "posts",
@@ -1038,6 +1166,52 @@
       },
       "required": ["_id"]
     },
+    "ReadAllConversations": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "Conversation Id"
+        },
+        "participants": {
+          "description": "All the users participating in a conversation",
+          "$ref": "#/definitions/ReadUserForMessage"
+        }
+      },
+      "required": ["_id", "participants"]
+    },
+    "ReadOneConversation": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "Conversation Id"
+        },
+        "messages": {
+          "description": "All messages in this conversation",
+          "$ref": "#/definitions/ReadOneMessage"
+        }
+      },
+      "required": ["_id", "messages"]
+    },
+    "ReadOneMessage": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is the body of a private message",
+          "description": "Text body of the message a user sent"
+        },
+        "author": {
+          "description": "Basic user information",
+          "$ref": "#/definitions/ReadUserForMessage"
+        }
+      },
+      "required": ["_id", "text", "author"]
+    },
     "ReadOnePost": {
       "properties": {
         "_id": {
@@ -1090,6 +1264,21 @@
         }
       },
       "required": ["_id"]
+    },
+    "CreateMessage": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Text body of the post a user may create"
+        },
+        "recipient": {
+          "type": "string",
+          "example": "554b34d8171ff19c8128c54d",
+          "description": "user id of the intended recipient of the message"
+        }
+      },
+      "required": ["text", "recipient"]
     },
     "CreatePost": {
       "properties": {
@@ -1225,6 +1414,20 @@
               "example": "true"
             }
           }
+        }
+      }
+    },
+    "ReadUserForMessage": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "_id": {
+          "type": "string",
+          "description": "User id of the user",
+          "example": "54f44c5d26352b1b9755b12f"
         }
       }
     },
