@@ -112,10 +112,14 @@ describe("Messages", function() {
         .set('Content-Type', 'application/json')
         .query({ access_token: user2.token })
         .end(function(res){
-          var messages = res.body;
+          var conversation = res.body;
+          var messages = conversation[0].messages
           expect(res.status).toEqual(200);
+          expect(conversation.length).toEqual(1);
           expect(messages.length).toEqual(1);
-          expect(messages[0]._id).toBeDefined();
+          expect(conversation[0]._id).toBeDefined();
+          expect(messages[0].author).toBeDefined();
+          expect(messages[0].author.username).toBeDefined();
           done();
         });
       });
