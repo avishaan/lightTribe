@@ -24,7 +24,6 @@ describe("Messages", function() {
     .then(function(user){
       // save the user for later
       user1 = user;
-      console.log('seed user:', user.username);
       return fixture.seedUserAsync({
         username: "test2",
         password: "password2"
@@ -33,14 +32,11 @@ describe("Messages", function() {
     .then(function(user){
       // save the user for later
       user2 = user;
-      console.log('seed user2:', user.username);
     })
     .then(function(end){
       done();
-      console.log('done');
     })
     .caught(function(err){
-      console.log("Error: ", err);
     });
   });
   //it("should require access_token to be filled out", function(done) {
