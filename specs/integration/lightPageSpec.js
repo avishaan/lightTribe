@@ -301,6 +301,7 @@ describe("Search posts", function() {
       expect(post.author.username).toBeDefined();
       expect(post.author._id).toBeDefined();
       expect(post.author.userImage.url).toBeDefined();
+      expect(post.postType).toBeDefined();
       expect(res.status).toEqual(200);
       done();
     });
