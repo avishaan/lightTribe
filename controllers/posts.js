@@ -25,7 +25,8 @@ module.exports.createPost = function (req, res, next) {
       images: post.images,
       interests: post.interests,
       author: post.author,
-      privacy: post.privacy
+      privacy: post.privacy,
+      postType: post.postType
     });
   })
   .catch(function(err){

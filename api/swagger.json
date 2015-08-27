@@ -1315,8 +1315,15 @@
         },
         "privacy": {
           "type": "string",
+          "enum": [ "public", "private" ],
           "example": "public",
           "description": "Privacy setting of the post"
+        },
+        "postType": {
+          "type": "string",
+          "enum": [ "standard", "lightPage" ],
+          "example": "standard",
+          "description": "A normal post should be set as standard, a light page specific post should be set as lightPage "
         }
       },
       "required": ["text", "longitude", "latitude", "interests"]
