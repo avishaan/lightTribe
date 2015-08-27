@@ -21,6 +21,14 @@ var postSchema = new mongoose.Schema({
     { type: String, ref: 'Image' }
   ],
   author: { type: String, ref: 'User' },
+  postType: {
+    audience: {
+     type: String,
+     default: 'standard',
+     required: true,
+     enum: ["standard", "lightPage"]
+    }
+  },
   privacy: {
     audience: {
      type: String,
@@ -36,7 +44,7 @@ postSchema.index({loc: '2dsphere'});
 /**
  * Create a specific post
  * @param {object} options The options for the new post
- * @property {string} company of the post
+ * @property {string} text The text of the post
  * @param {function} cb
  * @property {object} post 
  * @property {object} err Passed Error
@@ -63,7 +71,8 @@ postSchema.statics.createPost = function(options, cb) {
     },
     privacy: {
       audience: options.privacy || 'public'
-    }
+    },
+    postType: options.postType
   };
   // add post to the database
   Post.create(post, function(err, savedPost){
