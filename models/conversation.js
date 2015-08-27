@@ -136,6 +136,30 @@ conversationSchema.statics.readConversationsBySearch = function(options, cb) {
   });
 };
 /**
+ * Read one conversation for a user
+ * @param {object} options The options for the lookup
+ * @property {string} options.conversationId user id of the user for which you want conversations
+ * @param {function} cb
+ * @property {object} conversation
+ * @property {object} err Passed Error
+ */
+conversationSchema.statics.readOneConversation = function(options, cb) {
+  // find all conversations where the user is a participant in the conversation
+  Conversation
+  .find({ _id: options.conversationId})
+  .populate('messages.author')
+  .exec(function(err, conversations){
+    if (!err){
+      debugger;
+      cb(null, conversations);
+    } else {
+      // we had some sort of database error
+      logger.error(err);
+      cb({err: err, clientMsg: 'Something broke, try again'}, null);
+    }
+  });
+};
+/**
  * Read all conversations for a user
  * @param {object} options The options for the lookup
  * @property {string} options.userId user id of the user for which you want conversations

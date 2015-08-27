@@ -43,16 +43,16 @@ module.exports.readOneConversation = function(req, res, next) {
   var user = req.user.id;
   var conversationId = req.swagger.params.conversationId.value;
 
-  res.status(200).send([
-    {
-      _id: "10",
-      text: "Message one",
-      author: {
-        _id: '20',
-        username: 'codeHatcher'
-      }
+  Conversation.readOneConversation({
+    conversationId: conversationId
+  }, function(err, conversation){
+    debugger;
+    if (!err) {
+      res.status(200).send(conversation);
+    } else {
+      res.status(500).send({err: err});
     }
-  ]);
+  });
 };
 
 module.exports.createComment = function (req, res, next) {
