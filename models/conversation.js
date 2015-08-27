@@ -147,7 +147,8 @@ conversationSchema.statics.readAllUserConversations = function(options, cb) {
   // find all conversations where the user is a participant in the conversation
   Conversation
   .find({ participants: { $in: [options.userId ]}})
-  //.populate('images')
+  .populate('participants')
+  .select('-messages')
   .exec(function(err, conversations){
     if (!err){
       cb(null, conversations);
