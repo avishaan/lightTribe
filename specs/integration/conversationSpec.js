@@ -102,6 +102,8 @@ describe("Messages", function() {
         expect(res.status).toEqual(200);
         expect(conversations.length).toEqual(1);
         expect(conversations[0]._id).toBeDefined();
+        expect(conversations[0].participants).toBeDefined();
+        expect(conversations[0].messages).not.toBeDefined();
         // save the conversation id for later
         var conversationId = conversations[0]._id;
         // get all the messages in the only conversation
