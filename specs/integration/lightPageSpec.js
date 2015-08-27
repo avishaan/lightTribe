@@ -10,7 +10,7 @@ Promise.promisifyAll(fixture);
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
-// complete post for testing
+// complete lightPage for testing
 var post = {
   id: '1234',
   text: 'This is a post description',
@@ -156,7 +156,8 @@ describe("Creating a post", function() {
       images: [],
       interests: [],
       longitude: 10,
-      latitude: 10
+      latitude: 10,
+      postType: "lightPage"
     })
     .then(function(post){
       return fixture.seedCommentAsync({
