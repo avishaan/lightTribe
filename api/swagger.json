@@ -1192,7 +1192,7 @@
           "$ref": "#/definitions/ReadOneMessage"
         }
       },
-      "required": ["_id", "participants"]
+      "required": ["_id", "messages"]
     },
     "ReadOneMessage": {
       "properties": {
