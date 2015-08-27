@@ -150,7 +150,6 @@ conversationSchema.statics.readOneConversation = function(options, cb) {
   .populate('messages.author')
   .exec(function(err, conversations){
     if (!err){
-      debugger;
       cb(null, conversations);
     } else {
       // we had some sort of database error
