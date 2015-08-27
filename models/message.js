@@ -11,7 +11,7 @@ var messageSchema = new mongoose.Schema({
   text: { type: String },
   createDate: { type: Date, default: Date.now },
   author: { type: String, ref: 'User' },
-  parent: { type: String, ref: 'Conversation' }, // parent post the message belongs to
+  //parent: { type: String, ref: 'Conversation' }, // parent post the message belongs to
 });
 
 /**

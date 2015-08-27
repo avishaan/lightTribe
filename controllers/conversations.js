@@ -8,21 +8,18 @@ Promise.promisifyAll(Comment);
 
 module.exports.readAllUserConversations = function (req, res, next) {
   // get the userid from the authenticated user, they are the one that submitted
-  var user = req.user.id;
-  res.status(200).send([
-    {
-      _id: '10',
-      participants: [
-        {
-          _id: '20',
-          username: 'codeHatcher'
-        }, {
-          _id: '21',
-          username: 'codeHatcher'
-        }
-      ]
+  var userId = req.user.id;
+  // find all conversations where the submitted user is one of the participants
+  Conversation
+  .readAllUserConversations({
+    userId: userId
+  }, function(err, conversations){
+    if (!err) {
+      res.status(200).send(conversations);
+    } else {
+      res.status(500).send({ err: err });
     }
-  ]);
+  });
 };
 
 module.exports.createMessageForConversation = function (req, res, next) {
@@ -34,11 +31,10 @@ module.exports.createMessageForConversation = function (req, res, next) {
     text: text,
     participants: recipient
   }, function(err, conversation) {
-    debugger;
     if (!err) {
       res.status(200).send({});
     } else {
-
+      res.status(500).send({err: err});
     }
   });
 };

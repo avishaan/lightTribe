@@ -14,7 +14,8 @@ var conversationSchema = new mongoose.Schema({
     { type: String, ref: 'User' }
   ],
   messages: [
-    { type: String, ref: 'Message' }
+    //{ type: String, ref: 'Message' }
+    Message.schema
   ]
 });
 
@@ -47,7 +48,6 @@ conversationSchema.statics.createConversation = function(options, cb) {
     author: convo.author
   });
   // conversations that already exist? add this message to existing conversation
-  debugger;
   Conversation
   .findOne({participants: convo.participants})
   .exec(function(err, foundConvo){
@@ -63,7 +63,7 @@ conversationSchema.statics.createConversation = function(options, cb) {
       Conversation
       .create({
         participants: convo.participants,
-        messages: [message]
+        messages: [message.toJSON()]
       }, function(err, savedConvo){
         cb(err, savedConvo);
       });
@@ -143,10 +143,10 @@ conversationSchema.statics.readConversationsBySearch = function(options, cb) {
  * @property {object} conversations
  * @property {object} err Passed Error
  */
-conversationSchema.statics.readAllConversations = function(options, cb) {
-  // see if conversation exists, if so pass error
+conversationSchema.statics.readAllUserConversations = function(options, cb) {
+  // find all conversations where the user is a participant in the conversation
   Conversation
-  .find({submitter: options.userId})
+  .find({ participants: { $in: [options.userId ]}})
   //.populate('images')
   .exec(function(err, conversations){
     if (!err){
