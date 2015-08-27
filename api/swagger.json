@@ -529,7 +529,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ReadOneMessage"
+                "$ref": "#/definitions/ReadOneConversation"
               }
             }
           }
@@ -1176,6 +1176,20 @@
         "participants": {
           "description": "All the users participating in a conversation",
           "$ref": "#/definitions/ReadUserForMessage"
+        }
+      },
+      "required": ["_id", "participants"]
+    },
+    "ReadOneConversation": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "Conversation Id"
+        },
+        "messages": {
+          "description": "All messages in this conversation",
+          "$ref": "#/definitions/ReadOneMessage"
         }
       },
       "required": ["_id", "participants"]
