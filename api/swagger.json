@@ -1315,6 +1315,7 @@
         },
         "privacy": {
           "type": "string",
+          "enum": [ "public", "private" ],
           "example": "public",
           "description": "Privacy setting of the post"
         },
