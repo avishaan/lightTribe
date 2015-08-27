@@ -24,7 +24,7 @@ var postSchema = new mongoose.Schema({
   postType: {
     type: String,
     default: 'standard',
-    required: true,
+    required: false,
     enum: ["standard", "lightPage"]
   },
   privacy: {
