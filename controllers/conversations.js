@@ -46,7 +46,6 @@ module.exports.readOneConversation = function(req, res, next) {
   Conversation.readOneConversation({
     conversationId: conversationId
   }, function(err, conversation){
-    debugger;
     if (!err) {
       res.status(200).send(conversation);
     } else {
