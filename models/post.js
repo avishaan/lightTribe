@@ -22,12 +22,10 @@ var postSchema = new mongoose.Schema({
   ],
   author: { type: String, ref: 'User' },
   postType: {
-    audience: {
-     type: String,
-     default: 'standard',
-     required: true,
-     enum: ["standard", "lightPage"]
-    }
+    type: String,
+    default: 'standard',
+    required: true,
+    enum: ["standard", "lightPage"]
   },
   privacy: {
     audience: {
