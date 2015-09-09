@@ -1,6 +1,7 @@
 var logger = require('./../loggers/logger.js');
 var Comment = require('./../models/comment.js');
 var Conversation = require('./../models/conversation.js');
+var io = require('./../sockets/io.js');
 
 var Promise = require('bluebird');
 // convert built in functions to promises
