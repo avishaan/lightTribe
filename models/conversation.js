@@ -22,7 +22,7 @@ var conversationSchema = new mongoose.Schema({
 
 // after conversation is saved, let everyone know there is an update to the conversation
 conversationSchema.post('save', function(doc){
-  console.log('finished save, trigger an event on the socket');
+  logger.info('finished save, trigger an event on the socket');
   doc.participants.forEach(function(participant){
     // emit an event to each participants 'room'
     io.to(participant).emit('conversation:update');
