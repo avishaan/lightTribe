@@ -14,6 +14,7 @@ Technology/Players
 - Mongoose as the object modeler for Node.js.
 - MongoDB as the x-platform document based noSQL database.
 - Istanbul as the code coverage assessment tool
+- Socket.io as the real-time bidirectional event-based communication engine
 
 Documentation
 ----------------------
