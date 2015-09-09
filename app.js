@@ -4,6 +4,7 @@ var app = require('express')();
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var http = require('http');
+var io = require('socket.io')(http);
 var parseurl = require('parseurl');
 var qs = require('qs');
 var swaggerTools = require('swagger-tools');
@@ -37,6 +38,20 @@ app.use(function(req, res, next) {
     next();
   }
 });
+
+// socket io
+io.on('connection', function(socket){
+  logger.debug('user connected');
+  // when the client wants to subscribe, they need to send the user information in
+  socket.on('subscribe', function(data){
+    // check if we have all the information we need for the event
+    if (data.hasOwnProperty(userId) && data.hasOwnProperty(event)) {
+      // allow this client to join the room for the userId
+      socket.join(data.userId);
+    }
+  });
+});
+
 
 // debugging to send request as response like a mirror
 //app.use('/api/dev/mirror', Debuggers.mirrorResponse);
