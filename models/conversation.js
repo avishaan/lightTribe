@@ -25,7 +25,6 @@ conversationSchema.post('save', function(doc){
   console.log('finished save, trigger an event on the socket');
   doc.participants.forEach(function(participant){
     // emit an event to each participants 'room'
-    debugger;
     io.to(participant).emit('conversation:update');
   });
 });
