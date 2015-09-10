@@ -33,9 +33,17 @@ server.listen(config.expressPort, function () {
 });
 
 // socket io
+// make available to other places in the app
+module.exports.io = io;
 // setup socket subscription model
 io.on('connection', function(socket){
   logger.info('socket connected');
+
+  // allow a client to test their socket.io connection
+  socket.on('ping', function(){
+    io.emit('pong');
+  });
+
   // when the client wants to subscribe, they need to send the user information in
   socket.on('subscribe', function(data){
     logger.info('socket wants to subscribe with userId: ' + data.userId);

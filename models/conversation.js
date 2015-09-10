@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var _ = require('underscore');
 var Message = require('./../models/message.js');
-var io = require('./../sockets/io.js').io;
+// get the io instance from the main app.js file so we can share with multiple files
+var io = require('./../app.js').io;
 /*
 |-------------------------------------------------------------
 | Conversation Schema
@@ -23,6 +24,7 @@ var conversationSchema = new mongoose.Schema({
 // after conversation is saved, let everyone know there is an update to the conversation
 conversationSchema.post('save', function(doc){
   logger.info('finished save, trigger an event on the socket');
+  io.emit('test:event');
   doc.participants.forEach(function(participant){
     // emit an event to each participants 'room'
     io.to(participant).emit('conversation:update');

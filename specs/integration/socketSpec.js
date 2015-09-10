@@ -4,7 +4,7 @@ var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 var Comment = require('../../models/comment.js');
-var socket = require('socket.io-client')('http://localhost:3000');
+var socket = require('socket.io-client')('http://localhost:' + config.expressPort);
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
@@ -13,10 +13,10 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 var user1;
 var user2;
-
-socket.on('connect', function(){
-  console.log('connected');
+socket.on('conversation:update', function(){
+  console.log('convo update');
 });
+
 
 describe("Messages", function() {
   // delete the database before each time
@@ -59,9 +59,21 @@ describe("Messages", function() {
     });
   });
   it("should trigger a socket event when a message is sent to a user", function(done) {
-    // start the socket
+    // subscribe to event
+    socket.emit('ping');
+
     socket.emit('subscribe', {
       userId: user1._id
+    });
+
+    socket.on('pong', function(){
+      console.log('pong event fired');
+    });
+
+    socket.on('test:event', function(){
+      console.log('test event fired');
+      socket.disconnect();
+      done();
     });
 
     agent
@@ -74,7 +86,6 @@ describe("Messages", function() {
     })
     .end(function(res){
       expect(res.status).toEqual(200);
-      done();
     });
   });
 });
