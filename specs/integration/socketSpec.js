@@ -4,7 +4,7 @@ var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 var Comment = require('../../models/comment.js');
-var socket = require('socket.io-client')('http://localhost:9001');
+var socket = require('socket.io-client')('http://localhost:3000');
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
@@ -60,8 +60,9 @@ describe("Messages", function() {
   });
   it("should trigger a socket event when a message is sent to a user", function(done) {
     // start the socket
-    socket.emit('subscribe', user1._id);
-
+    socket.emit('subscribe', {
+      userId: user1._id
+    });
 
     agent
     .post(URL + '/conversations')

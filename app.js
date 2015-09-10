@@ -38,8 +38,9 @@ io.on('connection', function(socket){
   logger.info('socket connected');
   // when the client wants to subscribe, they need to send the user information in
   socket.on('subscribe', function(data){
+    logger.info('socket wants to subscribe with userId: ' + data.userId);
     // check if we have all the information we need for the event
-    if (data.hasOwnProperty(userId) && data.hasOwnProperty(event)) {
+    if (data.hasOwnProperty('userId')) {
       // allow this client to join the room for the userId
       socket.join(data.userId);
       logger.info('socket joined channel: ' + data.userId );

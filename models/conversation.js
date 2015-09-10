@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var _ = require('underscore');
 var Message = require('./../models/message.js');
-var io = require('./../sockets/io.js');
+var io = require('./../sockets/io.js').io;
 /*
 |-------------------------------------------------------------
 | Conversation Schema

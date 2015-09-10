@@ -5,3 +5,5 @@ module.exports.init = function(server) {
   // return the io for use
   return require('socket.io')(server);
 };
+
+module.exports.io = io();
