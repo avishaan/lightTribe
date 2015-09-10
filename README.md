@@ -14,6 +14,7 @@ Technology/Players
 - Mongoose as the object modeler for Node.js.
 - MongoDB as the x-platform document based noSQL database.
 - Istanbul as the code coverage assessment tool
+- Socket.io as the real-time bidirectional event-based communication engine
 
 Documentation
 ----------------------
@@ -28,6 +29,7 @@ The version differences are specified in each route.
 - visit http://lighttribe-dev.herokuapp.com/docs to see the documentation
 - [Connecting Routes to Interface (Right Click and Save-As)](./docs/integrations/integration.pdf)
 - [Design Composition (Right Click and Save-As)](./docs/design/skinnedWireframe.psd)
+- [Socket implementation](./docs/api/sockets.md)
 
 Test Cases
 ----------------------
