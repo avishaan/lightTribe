@@ -9,7 +9,7 @@ Sockets are implemented as follows.
 Example Request:
 
 ```javascript
-socket.emit('subscribe', '50341373e894ad16347efe01')
+socket.emit('subscribe', { userId: '50341373e894ad16347efe01' })
 ```
 ####Receive event that notifies client of update conversation
 #####_Status:_ Developed, Not Tested
