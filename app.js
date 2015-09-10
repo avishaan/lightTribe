@@ -49,6 +49,7 @@ io.on('connection', function(socket){
     if (data.hasOwnProperty(userId) && data.hasOwnProperty(event)) {
       // allow this client to join the room for the userId
       socket.join(data.userId);
+      logger.info('socket joined channel: ' + data.userId );
     }
   });
 });
