@@ -2,7 +2,7 @@
 
 var app = require('express')();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io = require('./sockets/io.js').init(server);
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var http = require('http');

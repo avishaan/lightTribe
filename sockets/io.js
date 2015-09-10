@@ -1,5 +1,7 @@
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var logger = require('./../loggers/logger.js');
+var io = require('socket.io');
 
-module.exports = io;
+module.exports.init = function(server) {
+  // return the io for use
+  return require('socket.io')(server);
+};
