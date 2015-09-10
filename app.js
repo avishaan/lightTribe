@@ -1,10 +1,11 @@
 'use strict';
 
 var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var http = require('http');
-var io = require('./sockets/io.js');
 var parseurl = require('parseurl');
 var qs = require('qs');
 var swaggerTools = require('swagger-tools');
@@ -26,17 +27,9 @@ var prettyjson = require('prettyjson');
 
 var apns = require('./notifications/apns.js');
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*");
-  res.header("Access-Control-Expose-Headers", "*");
-  res.header('Access-Control-Allow-Methods', '*');
-  if (req.method == 'OPTIONS') {
-    res.send(200);
-  } else {
-    next();
-  }
+// Start the server
+server.listen(config.expressPort, function () {
+  logger.debug('Your server is listening on port %d',config.expressPort);
 });
 
 // socket io
@@ -54,6 +47,18 @@ io.on('connection', function(socket){
   });
 });
 
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Expose-Headers", "*");
+  res.header('Access-Control-Allow-Methods', '*');
+  if (req.method == 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
+});
 
 // debugging to send request as response like a mirror
 //app.use('/api/dev/mirror', Debuggers.mirrorResponse);
@@ -170,8 +175,4 @@ app.use(function(err, req, res, next){
     // we don't know how to handle this, send it along
     next(err);
   }
-});
-// Start the server
-app.listen(config.expressPort, function () {
-  logger.debug('Your server is listening on port %d',config.expressPort);
 });
