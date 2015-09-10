@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 // socket io
 // setup socket subscription model
 io.on('connection', function(socket){
-  logger.debug('user connected');
+  logger.info('socket connected');
   // when the client wants to subscribe, they need to send the user information in
   socket.on('subscribe', function(data){
     // check if we have all the information we need for the event
