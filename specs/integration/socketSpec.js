@@ -13,10 +13,6 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 var user1;
 var user2;
-socket.on('conversation:update', function(){
-  console.log('convo update');
-});
-
 
 describe("Messages", function() {
   // delete the database before each time
@@ -67,12 +63,14 @@ describe("Messages", function() {
     });
 
     socket.on('pong', function(){
-      console.log('pong event fired');
+      // console.log('pong event fired');
     });
 
-    socket.on('test:event', function(){
-      console.log('test event fired');
+    socket.on('conversation:update', function(){
+      // console.log('convo event fired');
       socket.disconnect();
+      // if we end up here, we had a successful test
+      expect(true).toEqual(true);
       done();
     });
 
