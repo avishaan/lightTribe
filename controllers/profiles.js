@@ -1,27 +1,50 @@
 var logger = require('./../loggers/logger.js');
-var Review = require('../models/review.js');
 var async = require('async');
+var User = require('./../models/user.js');
 
 var Promise = require('bluebird');
-Promise.promisifyAll(Review);
 
 module.exports.readOneProfile = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
   logger.info('Lookup profile for user: ' + userId);
-  res.status(200).send({
-    _id: "123",
-    categories: {
-      yoga: 10,
-      meditation: 50,
-      dancing: 11,
-      healing: 70
-    },
-    user: {
-      username: "codeHatcher",
-      thumbnail: "https://www.google.com/images/srpr/logo11w.png",
-      lastLogin: Date.now()
+  User
+  .findOne({ _id: userId })
+  .select('-password -token -devices -auths')
+  .populate({
+    path: 'userImage',
+    select: 'url'
+  })
+  .lean()
+  .exec(function(err, user){
+    if (!err && user){
+      res.status(200).send({
+        _id: user._id,
+        user: {
+          username: user.username,
+          userImage: user.userImage
+        },
+        shortDescription: user.profile.shortDescription,
+        interests: user.interests,
+        lastLogin: Date.now()
+      });
+    } else {
+      res.status(500).send({ err: err, clientMsg: "User not found!" });
     }
   });
+  //res.status(200).send({
+  //  _id: "123",
+  //  categories: {
+  //    yoga: 10,
+  //    meditation: 50,
+  //    dancing: 11,
+  //    healing: 70
+  //  },
+  //  user: {
+  //    username: "codeHatcher",
+  //    thumbnail: "https://www.google.com/images/srpr/logo11w.png",
+  //    lastLogin: Date.now()
+  //  }
+  //});
   // Review
   // .createReviewAsync(review)
   // .then(function(review){
