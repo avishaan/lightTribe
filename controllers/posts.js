@@ -99,30 +99,16 @@ module.exports.readAllPostsByUser = function (req, res, next) {
   .exec(function(err, posts){
     if (!err) {
       // go through each post and populate the image for the author
-      async.map(posts, function(post, cb){
-        Image.populate(post.author, {
-          path: 'userImage',
-          select: 'url'
-        }, function(err, doc){
-          if (err) { return cb(err); }
-          // make the post a simple object first
-          post = post.toJSON();
-          // make sure the population occured before assigning values, this is incase the userImage id was invalid
-          if (doc.url) {
-            // remake post with populate userImage
-            // convert to json
-            post.author = doc.toJSON();
-          }
-          return cb(null, post);
-        });
-      }, function(err, populatedPosts){
-        if (!err) {
-          res.status(200).send(populatedPosts);
+      var opts = [
+        { path: 'author.userImage', select: 'url' }
+      ];
+      // populate the images of the authors
+      Image.populate(posts, opts, function(err, posts){
+        if (!err){
+          res.status(200).send(posts);
         } else {
-          res.status(500).send({
-            clientMsg: "Could not get posts for you :(",
-            err: err
-          });
+          err.clientMsg = "Could not populate userImage";
+          res.status(500).send(err);
         }
       });
     } else {
