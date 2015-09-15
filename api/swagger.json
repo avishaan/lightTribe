@@ -1262,7 +1262,7 @@
           "example": "My short description",
           "description": "the user's short description"
         },
-        "categories": {
+        "interests": {
           "type": "string",
           "example": "still in initial phase",
           "description": "Post categories along with number of posts of that category"
