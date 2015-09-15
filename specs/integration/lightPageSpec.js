@@ -19,7 +19,17 @@ var post = {
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145,
   privacy: "public",
-  postType: "lightPage"
+  postType: "lightPage",
+  street: "1234 Main St.",
+  country: "USA",
+  state: "OH",
+  zip: "94109",
+  website: "www.google.com",
+  eventType: "workshop",
+  shortDescription: "short description example",
+  longDescription: "long description example",
+  startDate: Date.now(),
+  endDate: Date.now()
 };
 
 var seedPost;
