@@ -68,6 +68,7 @@ describe("Reading a user profile", function() {
       expect(profile.interests).toBeDefined();
       expect(profile.user).toBeDefined();
       expect(profile.user.username).toBeDefined();
+      expect(profile.user.lastLogin).toBeDefined();
       expect(profile.user.userImage).toBeDefined();
       expect(profile.user.userImage.url).toBeDefined();
       expect(res.status).toEqual(200);
