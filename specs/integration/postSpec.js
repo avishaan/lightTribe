@@ -178,7 +178,6 @@ describe("Creating a post", function() {
         expect(users.length).not.toEqual(0);
         expect(users[0].username).toBeDefined();
         expect(users[0].userImage).toBeDefined();
-        expect(users[0].lastLogin).toBeDefined();
         expect(res.status).toEqual(200);
         done();
       });
