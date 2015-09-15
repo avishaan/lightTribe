@@ -250,7 +250,6 @@ describe("Creating a post", function() {
             .query({ page: 1 })
             .end(function(res){
               var posts = res.body;
-              console.log(posts);
               expect(posts[0].images).not.toBeDefined();
               expect(posts[0].author.userImage.url).toBeDefined();
               done();
