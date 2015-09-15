@@ -319,6 +319,7 @@ describe("Search posts", function() {
       // make sure response matches correctly
       var post = posts[0];
       expect(post.author.username).toBeDefined();
+      expect(post.createDate).toBeDefined();
       expect(post.author._id).toBeDefined();
       expect(post.author.userImage.url).toBeDefined();
       expect(res.status).toEqual(200);
