@@ -148,107 +148,6 @@ describe("Creating a post", function() {
       });
     });
   });
-  it("should return all users who commented on a specific post", function(done) {
-    fixture
-    .seedPostAsync({
-      text: "Post text test",
-      author: seedUser.id,
-      images: [],
-      interests: [],
-      longitude: 10,
-      latitude: 10,
-      postType: "lightPage"
-    })
-    .then(function(post){
-      return fixture.seedCommentAsync({
-        text: "Comment text test",
-        author: seedUser.id,
-        parent: post.id
-      });
-    })
-    .then(function(comment){
-      var postId = comment.parent;
-      // finished
-      agent
-      .get(URL + '/posts/' + postId + '/users')
-      .set('Content-Type', 'application/json')
-      .query({ access_token: seedUser.token })
-      .query({ page: 1 })
-      .end(function(res){
-        var users = res.body;
-        expect(users.length).not.toEqual(0);
-        expect(users[0].username).toBeDefined();
-        expect(res.status).toEqual(200);
-        done();
-      });
-    })
-    .caught(function(err){
-      console.log(err);
-      throw new Error(err);
-    });
-    // seedComment
-    // agent
-    // .get(URL + '/posts/' + post.id + '/users')
-    // .set('Content-Type', 'application/json')
-    // .query({ access_token: seedUser.token })
-    // .query({ page: 1 })
-    // .end(function(res){
-    //   var users = res.body;
-    //   expect(users.length).not.toEqual(0);
-    //   expect(users[0].user.username).toBeDefined();
-    //   expect(res.status).toEqual(200);
-    //   throw new Error('Check this test');
-    //   done();
-    // });
-  });
-  it("should allow images to be retrieved and attached from/to a post", function(done) {
-    // we probably don't need this as we already are testing image resolution correctly and we are resolving the image information independently of querying the post. Because we are doing this independently we removed a bunch of testing and complexity for ourselves
-    var image;
-    // seed the image
-    fixture.seedImage(function(err, image){
-      expect(image._id).toBeDefined();
-      // replace image in our dummy post
-      var imagePost = post;
-      imagePost.images = [image._id];
-      // upload
-      agent
-      .post(URL + '/posts')
-      .set('Content-Type', 'application/json')
-      .send(imagePost)
-      .send({ access_token: seedUser.token })
-      .end(function(res){
-        var body = res.body;
-        imagePost.id = body._id;
-        // now get that post
-        Post
-        .findOne({_id: imagePost.id})
-        .lean()
-        .exec(function(err, post){
-          // make sure image id in the post is the same as we passed in
-          expect(imagePost.images[0].toString()).toEqual(post.images[0]);
-          // send image.id of post to resolve to url
-          agent
-          .get(URL + '/posts/' + imagePost.id)
-          .send({ access_token: seedUser.token })
-          .end(function(res){
-            var post = res.body;
-            expect(post.images[0].url).toBeDefined();
-            expect(post.author.username).toBeDefined();
-            expect(post.author).toBeDefined();
-            done();
-          });
-          //agent
-          //.get(URL + '/images/' + post.images[0])
-          //.send({ access_token: seedUser.token })
-          //.end(function(res){
-          //  //console.log(res.body);
-          //  expect(res.status).toEqual(200);
-          //  expect(res.body.url).toBeDefined();
-          //});
-        });
-      });
-    });
-  });
 });
 
 describe("Search posts", function() {
@@ -302,6 +201,18 @@ describe("Search posts", function() {
       expect(post.author._id).toBeDefined();
       expect(post.author.userImage.url).toBeDefined();
       expect(post.postType).toBeDefined();
+      expect(post.lightPage).toBeDefined();
+      expect(post.lightPage.address).toBeDefined();
+      expect(post.lightPage.address.street).toBeDefined();
+      expect(post.lightPage.address.country).toBeDefined();
+      expect(post.lightPage.address.state).toBeDefined();
+      expect(post.lightPage.address.zip).toBeDefined();
+      expect(post.lightPage.website).toBeDefined();
+      expect(post.lightPage.eventType).toBeDefined();
+      expect(post.lightPage.shortDescription).toBeDefined();
+      expect(post.lightPage.longDescription).toBeDefined();
+      expect(post.lightPage.startDate).toBeDefined();
+      expect(post.lightPage.endDate).toBeDefined();
       expect(res.status).toEqual(200);
       done();
     });
