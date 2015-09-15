@@ -7,18 +7,33 @@ var User = require('../../models/user.js');
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
+var user = {
+  username: 'user',
+  password: 'password',
+  profile: {
+    shortDescription: 'My Desc'
+  }
+};
+
+var seedUser = {};
+var seedImage;
+
 describe("Reading a user profile", function() {
   // delete the database before each time
   beforeEach(function(done){
-    fixture.deleteDB(function(err, user){
+    fixture.deleteDB(function(err, db){
       // make sure it was able to delete the database ok
       expect(err).toEqual(null);
       // seed a user
-      fixture.seedUser(function(err, user){
-        // save the user for later
-        seedUser = user;
+      fixture.seedImage(function(err, image){
         expect(err).toEqual(null);
-        done();
+        seedImage = image;
+        user.userImage = image._id;
+        fixture.seedUser(user, function(err, user){
+          expect(err).toEqual(null);
+          seedUser = user;
+          done();
+        });
       });
     });
   });
@@ -57,6 +72,7 @@ describe("Reading a user profile", function() {
       expect(profile.user.userImage.url).toBeDefined();
       expect(res.status).toEqual(200);
       expect(profile.shortDescription).toBeDefined();
+      expect(profile.shortDescription).toEqual(user.profile.shortDescription);
       done();
     });
   });
