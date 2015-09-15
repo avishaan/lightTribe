@@ -252,6 +252,7 @@ describe("Creating a post", function() {
             .end(function(res){
               var posts = res.body;
               expect(posts[0].images).not.toBeDefined();
+              expect(posts[0].createDate).toBeDefined();
               expect(posts[0].author.userImage.url).toBeDefined();
               done();
             });
