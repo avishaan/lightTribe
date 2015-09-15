@@ -44,7 +44,7 @@ var postSchema = new mongoose.Schema({
     eventType: { type: String },
     shortDescription: { type: String },
     longDescription: { type: String },
-    startDate: { Type: Date },
+    startDate: { type: Date },
     endDate: { type: Date }
   }
 });
