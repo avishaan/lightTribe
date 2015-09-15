@@ -99,7 +99,7 @@ describe("A user", function() {
   //    done();
   //  });
   //});
-  it("should be able to access user settings", function(done) {
+  it("should be able to access user profile", function(done) {
     agent
     .get(URL + '/users/' + seedUser.id)
     .send({ access_token: seedUser.token })
@@ -114,6 +114,7 @@ describe("A user", function() {
       expect(settings.auths[0].name).toBeDefined();
       expect(settings.interests).toBeDefined();
       //expect(settings.username).toEqual(seedUser.username);
+
       done();
     });
   });
