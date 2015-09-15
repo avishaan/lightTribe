@@ -99,7 +99,7 @@ describe("A user", function() {
   //    done();
   //  });
   //});
-  it("should be able to access user profile", function(done) {
+  it("should be able to access user settings", function(done) {
     agent
     .get(URL + '/users/' + seedUser.id)
     .send({ access_token: seedUser.token })
