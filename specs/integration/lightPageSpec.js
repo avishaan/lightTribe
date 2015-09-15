@@ -183,12 +183,17 @@ describe("Search posts", function() {
           seedUser = user;
           // setup post related items, such as the author
           post.author = seedUser._id.toString();
-          fixture.seedPost(post, function(err, post){
-            seedPost = post;
+          agent
+          .post(URL + '/posts')
+          .set('Content-Type', 'application/json')
+          .send(post)
+          .send({ access_token: seedUser.token })
+          .end(function(res){
+            var body = res.body;
+            seedPost = body;
             done();
           });
         });
-
       });
     });
   });
@@ -207,16 +212,16 @@ describe("Search posts", function() {
       expect(posts.length).not.toEqual(0);
       // make sure response matches correctly
       var post = posts[0];
+      console.log(posts);
       expect(post.author.username).toBeDefined();
       expect(post.author._id).toBeDefined();
       expect(post.author.userImage.url).toBeDefined();
       expect(post.postType).toBeDefined();
       expect(post.lightPage).toBeDefined();
-      expect(post.lightPage.address).toBeDefined();
-      expect(post.lightPage.address.street).toBeDefined();
-      expect(post.lightPage.address.country).toBeDefined();
-      expect(post.lightPage.address.state).toBeDefined();
-      expect(post.lightPage.address.zip).toBeDefined();
+      expect(post.lightPage.street).toBeDefined();
+      expect(post.lightPage.country).toBeDefined();
+      expect(post.lightPage.state).toBeDefined();
+      expect(post.lightPage.zip).toBeDefined();
       expect(post.lightPage.website).toBeDefined();
       expect(post.lightPage.eventType).toBeDefined();
       expect(post.lightPage.shortDescription).toBeDefined();
