@@ -1329,6 +1329,56 @@
           "enum": [ "standard", "lightPage" ],
           "example": "standard",
           "description": "A normal post should be set as standard, a light page specific post should be set as lightPage "
+        },
+        "street": {
+          "type": "string",
+          "example": "1234 Main St.",
+          "description": "street address"
+        },
+        "country": {
+          "type": "string",
+          "example": "USA",
+          "description": "country designation"
+        },
+        "state": {
+          "type": "string",
+          "example": "Ohio",
+          "description": "state designation"
+        },
+        "zip": {
+          "type": "string",
+          "example": "94109",
+          "description": "zip designation"
+        },
+        "website": {
+          "type": "string",
+          "example": "www.google.com",
+          "description": "website address"
+        },
+        "eventType": {
+          "type": "string",
+          "example": "workshop",
+          "description": "event type"
+        },
+        "shortDescription": {
+          "type": "string",
+          "example": "short description example",
+          "description": "short description of the lightpage"
+        },
+        "longDescription": {
+          "type": "string",
+          "example": "this is the very very long description of the lightPage",
+          "description": "long description of the lightpage"
+        },
+        "startDate": {
+          "format": "date-time",
+          "example": "2015-03-04T07:36:56.224Z",
+          "description": "start date of the lightPage post"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "end date of the lightPage post",
+          "example": "2015-03-04T07:36:56.224Z"
         }
       },
       "required": ["text", "longitude", "latitude", "interests"]
