@@ -89,9 +89,13 @@ module.exports.readAllPostsByUser = function (req, res, next) {
   logger.info('Read all posts by user:' + userId);
   Post
   .find({ author: userId })
-  .select('createDate text author')
+  .select('images createDate text author')
   .limit(maxResults)
   .skip((page -1) * maxResults)
+  .populate({
+    path: 'images',
+    select: 'url'
+  })
   .lean()
   .exec(function(err, posts){
     if (!err) {

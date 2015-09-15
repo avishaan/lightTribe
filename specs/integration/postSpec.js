@@ -14,7 +14,8 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 var post = {
   id: '1234',
   text: 'This is a post description',
-  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  //images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  images: ['558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b'],
   interests: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145,
@@ -226,7 +227,6 @@ describe("Creating a post", function() {
         var body = res.body;
         imagePost.id = body._id;
         // now get that post
-        console.log(imagePost.id);
         Post
         .findOne({_id: imagePost.id})
         .lean()
@@ -239,11 +239,21 @@ describe("Creating a post", function() {
           .send({ access_token: seedUser.token })
           .end(function(res){
             var post = res.body;
-            console.log(post);
             expect(post.images[0].url).toBeDefined();
             expect(post.author.username).toBeDefined();
             expect(post.author).toBeDefined();
-            done();
+            // get all the users posts and check for image gh #68
+            agent
+            .get(URL + '/users/' + seedUser.id + '/posts')
+            .set('Content-Type', 'application/json')
+            .query({ access_token: seedUser.token })
+            .query({ page: 1 })
+            .end(function(res){
+              var posts = res.body;
+              expect(posts[0].images).toBeDefined();
+              expect(posts[0].images[0].url).toBeDefined();
+              done();
+            });
           });
           //agent
           //.get(URL + '/images/' + post.images[0])
