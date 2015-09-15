@@ -136,6 +136,7 @@ postSchema.statics.readPostsBySearch = function(options, cb) {
   })
   .skip((page - 1) * maxResults)
   .limit(maxResults)
+  .sort({ createDate: 'desc' })
   .exec(function(err, posts){
     if (!err){
       cb(null, posts);
