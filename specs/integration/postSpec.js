@@ -199,7 +199,65 @@ describe("Creating a post", function() {
     //   done();
     // });
   });
-  it("should allow images to be retrieved and attached from/to a post", function(done) {
+  it("should allow images to be retrieved and attached from/to a post #68", function(done) {
+    // we probably don't need this as we already are testing image resolution correctly and we are resolving the image information independently of querying the post. Because we are doing this independently we removed a bunch of testing and complexity for ourselves
+    var image = {};
+    // seed the image
+    agent
+    .post(URL + '/images')
+    .field('access_token', seedUser.token)
+    .attach('file', './specs/integration/images/test.png')
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body._id).toBeDefined();
+      // save the image id for future use
+
+      image._id = res.body._id;
+      // replace image in our dummy post
+      var imagePost = post;
+      imagePost.images = [image._id];
+      // upload
+      agent
+      .post(URL + '/posts')
+      .set('Content-Type', 'application/json')
+      .send(imagePost)
+      .send({ access_token: seedUser.token })
+      .end(function(res){
+        var body = res.body;
+        imagePost.id = body._id;
+        // now get that post
+        console.log(imagePost.id);
+        Post
+        .findOne({_id: imagePost.id})
+        .lean()
+        .exec(function(err, post){
+          // make sure image id in the post is the same as we passed in
+          expect(imagePost.images[0].toString()).toEqual(post.images[0]);
+          // send image.id of post to resolve to url
+          agent
+          .get(URL + '/posts/' + imagePost.id)
+          .send({ access_token: seedUser.token })
+          .end(function(res){
+            var post = res.body;
+            console.log(post);
+            expect(post.images[0].url).toBeDefined();
+            expect(post.author.username).toBeDefined();
+            expect(post.author).toBeDefined();
+            done();
+          });
+          //agent
+          //.get(URL + '/images/' + post.images[0])
+          //.send({ access_token: seedUser.token })
+          //.end(function(res){
+          //  //console.log(res.body);
+          //  expect(res.status).toEqual(200);
+          //  expect(res.body.url).toBeDefined();
+          //});
+        });
+      });
+    });
+  });
+  it("should allow images to be retrieved and attached from/to a users' posts gh #68", function(done) {
     // we probably don't need this as we already are testing image resolution correctly and we are resolving the image information independently of querying the post. Because we are doing this independently we removed a bunch of testing and complexity for ourselves
     var image;
     // seed the image
