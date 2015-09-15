@@ -24,10 +24,9 @@ describe("Reading a user profile", function() {
   });
   it("should require access_token to be filled out", function(done) {
     agent
-    .get(URL + '/profile/' + seedUser.id)
+    .get(URL + '/profiles/' + seedUser.id)
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
-    .send(post)
     .end(function(res){
       expect(res.status).toEqual(401);
       done();
@@ -35,10 +34,9 @@ describe("Reading a user profile", function() {
   });
   it("should require a valid authentication token to access", function(done) {
     agent
-    .get(URL + '/profile/' + seedUser.id)
+    .get(URL + '/profiles/' + seedUser.id)
     //.get('http://localhost:3000/api/v1/templates')
     .set('Content-Type', 'application/json')
-    .send(post)
     .send({ access_token: 'wrongtoken' })
     .end(function(res){
       expect(res.status).toEqual(401);
@@ -47,14 +45,18 @@ describe("Reading a user profile", function() {
   });
   it("should return a profile", function(done) {
     agent
-    .get(URL + '/profile/' + seedUser.id)
+    .get(URL + '/profiles/' + seedUser.id)
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
     .end(function(res){
       var profile = res.body;
-      expect(profile.categories).toBeDefined();
+      expect(profile.interests).toBeDefined();
       expect(profile.user).toBeDefined();
+      expect(profile.user.username).toBeDefined();
+      expect(profile.user.userImage).toBeDefined();
+      expect(profile.user.userImage.url).toBeDefined();
       expect(res.status).toEqual(200);
+      expect(profile.shortDescription).toBeDefined();
       done();
     });
   });
