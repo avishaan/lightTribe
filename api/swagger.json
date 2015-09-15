@@ -1257,6 +1257,11 @@
           "type": "object",
           "$ref": "#/definitions/ReadUserForPost"
         },
+        "shortDescription": {
+          "type": "string",
+          "example": "My short description",
+          "description": "the user's short description"
+        },
         "categories": {
           "type": "string",
           "example": "still in initial phase",
