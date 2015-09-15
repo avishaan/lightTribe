@@ -140,7 +140,7 @@ describe("Creating a post", function() {
       .end(function(res){
         var posts = res.body;
         posts.forEach(function(post){
-          expect(post.author).toEqual(seedUser.id);
+          expect(post.author._id).toEqual(seedUser.id);
         });
         expect(posts.length).not.toEqual(0);
         expect(res.status).toEqual(200);
@@ -250,8 +250,9 @@ describe("Creating a post", function() {
             .query({ page: 1 })
             .end(function(res){
               var posts = res.body;
-              expect(posts[0].images).toBeDefined();
-              expect(posts[0].images[0].url).toBeDefined();
+              console.log(posts);
+              expect(posts[0].images).not.toBeDefined();
+              expect(posts[0].author.userImage.url).toBeDefined();
               done();
             });
           });
