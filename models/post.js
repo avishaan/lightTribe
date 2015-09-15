@@ -34,6 +34,20 @@ var postSchema = new mongoose.Schema({
      required: true,
      enum: ["public", "private"]
     }
+  },
+  lightPage: { // lightPage specific properties
+    address: {
+      street: { type: String },
+      country: { type: String },
+      state: { type: String },
+      zip: { type: String }
+    },
+    website: { type: String },
+    eventType: { type: String },
+    shortDescription: { type: String },
+    longDescription: { type: String },
+    startDate: { Type: Date },
+    endDate: { type: Date }
   }
 });
 
