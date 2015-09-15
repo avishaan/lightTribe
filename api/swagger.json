@@ -629,7 +629,7 @@
           {
             "name": "post",
             "in": "body",
-            "description": "Review information",
+            "description": "Post information",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreatePost"
