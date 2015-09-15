@@ -21,11 +21,11 @@ module.exports.readOneProfile = function (req, res, next) {
         _id: user._id,
         user: {
           username: user.username,
-          userImage: user.userImage
+          userImage: user.userImage,
+          lastLogin: Date.now()
         },
         shortDescription: user.profile.shortDescription,
         interests: user.interests,
-        lastLogin: Date.now()
       });
     } else {
       res.status(500).send({ err: err, clientMsg: "User not found!" });
