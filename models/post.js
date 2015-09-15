@@ -36,12 +36,10 @@ var postSchema = new mongoose.Schema({
     }
   },
   lightPage: { // lightPage specific properties
-    address: {
-      street: { type: String },
-      country: { type: String },
-      state: { type: String },
-      zip: { type: String }
-    },
+    street: { type: String },
+    country: { type: String },
+    state: { type: String },
+    zip: { type: String },
     website: { type: String },
     eventType: { type: String },
     shortDescription: { type: String },
@@ -89,12 +87,10 @@ postSchema.statics.createPost = function(options, cb) {
   if (options.postType === "lightPage") {
     // if the postType is a lightPage then add the 'lightPage' specific properties
     post.lightPage = {
-      address: {
-        street: options.street,
-        country: options.country,
-        state: options.state,
-        zip: options.zip,
-      },
+      street: options.street,
+      country: options.country,
+      state: options.state,
+      zip: options.zip,
       website: options.website,
       eventType: options.eventType,
       shortDescription: options.shortDescription,
