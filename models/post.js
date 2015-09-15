@@ -86,6 +86,21 @@ postSchema.statics.createPost = function(options, cb) {
     },
     postType: options.postType
   };
+  if (options.postType === "lightPage") {
+    // if the postType is a lightPage then add the 'lightPage' specific properties
+    post.lightPage = {
+      street: options.street,
+      country: options.country,
+      state: options.state,
+      zip: options.zip,
+      website: options.website,
+      eventType: options.eventType,
+      shortDescription: options.shortDescription,
+      longDescription: options.longDescription,
+      startDate: options.startDate,
+      endDate: options.endDate
+    };
+  }
   // add post to the database
   Post.create(post, function(err, savedPost){
     if (!err && savedPost){
