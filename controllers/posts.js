@@ -92,6 +92,7 @@ module.exports.readAllPostsByUser = function (req, res, next) {
   .select('createDate text author')
   .limit(maxResults)
   .skip((page -1) * maxResults)
+  .sort({ date: 'desc' })
   .populate({
     path: 'author',
     select: 'userImage'
