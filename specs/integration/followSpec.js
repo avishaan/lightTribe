@@ -69,7 +69,7 @@ describe("A user", function() {
       });
     });
   });
-  it("shoulw allow user1 to follow user2 once, even if a second follow attempt was made", function(done) {
+  it("should allow user1 to follow user2 once, even if a second follow attempt was made", function(done) {
     agent
     .post(URL + '/follows')
     .set('Content-Type', 'application/json')
