@@ -3,6 +3,52 @@ var User = require('./../models/user.js');
 var config = require('../config.js');
 var apn = require('apn');
 
+module.exports.unfollowUser = function followUser (req, res, next) {
+  var userId = req.swagger.params.body.value.userId;
+
+  // make sure all fields are filled in
+  if (!userId) {
+    return res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+  // add the person this user follows to the model
+  req.user.unfollow({
+    userId: userId
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not stop follow of user"
+      });
+    }
+  });
+};
+
+module.exports.followUser = function followUser (req, res, next) {
+  var userId = req.swagger.params.body.value.userId;
+
+  // make sure all fields are filled in
+  if (!userId) {
+    return res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+  // add the person this user follows to the model
+  req.user.follow({
+    userId: userId
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not follow user"
+      });
+    }
+  });
+};
+
 module.exports.addDevice = function addDevice (req, res, next) {
   var platform = req.swagger.params.body.value.platform;
   var token = req.swagger.params.body.value.token;
@@ -103,6 +149,33 @@ module.exports.readUserSettings = function (req, res, next) {
       });
     } else {
       res.status(500).send({ err: err, clientMsg: "User not found!" });
+    }
+  });
+};
+
+// get all the users that passed in user
+module.exports.readUserFollows = function (req, res, next) {
+  var userId = req.swagger.params.userId.value;
+
+  // check userId passed in
+  if (!userId) {
+    return res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+
+  logger.info('Check who this user follows ' + userId);
+  User
+  .findOne({ _id: userId })
+  .select('-password -token')
+  .populate({
+    path: 'follows',
+    select: '-password -token -devices -auths'
+  })
+  .lean()
+  .exec(function(err, user){
+    if (!err && user){
+      res.status(200).send(user.follows);
+    } else {
+      res.status(500).send({ err: err, clientMsg: "Follows not found" });
     }
   });
 };

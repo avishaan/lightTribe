@@ -18,6 +18,111 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/v1/users/{userId}/follows": {
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "readUserFollows",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users", "follows"],
+        "description": "Read all of the users this user follows",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Unique Id of the user whose follows we wan to return ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadUserForFollows"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/follows": {
+      "delete": {
+        "x-swagger-router-controller": "users",
+        "operationId": "unfollowUser",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users", "follows"],
+        "description": "Authenticated user stops following the user passed in",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request to stop following a user",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UnfollowUser"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      },
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "followUser",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users", "follows"],
+        "description": "Authenticated user follows the user passed in",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request for following a user",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FollowUser"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/reports": {
       "post": {
         "x-swagger-router-controller": "reports",
@@ -1142,6 +1247,26 @@
       },
       "required": ["token", "platform"]
     },
+    "UnfollowUser": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "UserId of the user that the authenticated user wants stop following"
+        }
+      },
+      "required": ["userId"]
+    },
+    "FollowUser": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "UserId of the user that the authenticated user wants to follow"
+        }
+      },
+      "required": ["userId"]
+    },
     "CreateComment": {
       "properties": {
         "text": {
@@ -1496,6 +1621,31 @@
           "type": "string",
           "description": "User id of the user",
           "example": "54f44c5d26352b1b9755b12f"
+        }
+      }
+    },
+    "ReadUserForFollows": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of the user",
+          "example": "codeHatcher"
+        },
+        "_id": {
+          "type": "string",
+          "description": "User id of the user",
+          "example": "54f44c5d26352b1b9755b12f"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the user was loggged in",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "userImage": {
+          "type": "object",
+          "description": "Image information about the user",
+          "$ref": "#/definitions/ImageURL"
         }
       }
     },
