@@ -4,10 +4,13 @@ var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
 //var httpMocks = require('node-mocks-http');
 
+var Promise = require('bluebird');
+Promise.promisifyAll(fixture);
+
 var apiVersion = '/v1';
 var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
-var user = {
+var user1 = {
   username: 'user',
   password: 'password',
 };
@@ -23,24 +26,26 @@ var seedImage;
 describe("A user", function() {
   // delete the database before each time
   beforeEach(function(done){
-    fixture.deleteDB(function(err, db){
-      // make sure it was able to delete the database ok
-      expect(err).toEqual(null);
-      // seed a user
-      fixture.seedImage(function(err, image){
-        expect(err).toEqual(null);
-        seedImage = image;
-        user.userImage = image._id;
-        fixture.seedUser(user, function(err, user){
-          expect(err).toEqual(null);
-          seedUser = user;
-          fixture.seedUser(user2, function(err, user){
-            expect(err).toEqual(null);
-            seedUser2 = user;
-            done();
-          });
-        });
-      });
+    fixture
+    .deleteDBAsync({})
+    .then(function(dbInfo){
+      return fixture.seedUserAsync(user1);
+    })
+    .then(function(user1){
+      // save the user1 for later
+      seedUser1 = user1;
+      return fixture.seedUserAsync(user2);
+    })
+    .then(function(user2){
+      // save the user2 for later
+      seedUser2 = user2;
+      return fixture.seedImageAsync({});
+    })
+    .then(function(end){
+      done();
+    })
+    .caught(function(err){
+      console.log("Error: ", err);
     });
   });
   it("should be able to add a device to a user", function(done) {
@@ -55,15 +60,7 @@ describe("A user", function() {
     .end(function(res){
       var settings = res.body;
       expect(res.status).toEqual(200);
-      // find that user and check the values now
-      User
-      .findOne({ _id: seedUser.id })
-      .lean()
-      .exec(function(err, user){
-        expect(user.devices.length).toEqual(1);
-        expect(user.devices[0].token).toEqual("a591bde2720d89d4086beaa843f9b061a18b36b48cd0008a1f347a5ad844be95");
-        done();
-      });
+      done();
     });
   });
 });
