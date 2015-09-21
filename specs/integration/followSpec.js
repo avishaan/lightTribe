@@ -48,19 +48,25 @@ describe("A user", function() {
       console.log("Error: ", err);
     });
   });
-  it("should be able to add a device to a user", function(done) {
+  it("should allow user1 to follow user2", function(done) {
     agent
-    .post(URL + '/users/' + seedUser.id + '/devices')
+    .post(URL + '/follows')
     .set('Content-Type', 'application/json')
     .send({
-      access_token: seedUser.token,
-      platform: 'ios',
-      token: 'a591bde2 720d89d4 086beaa8 43f9b061 a18b36b4 8cd0008a 1f347a5a d844be95'
+      access_token: seedUser1.token,
+      userId: seedUser2._id
     })
     .end(function(res){
       var settings = res.body;
       expect(res.status).toEqual(200);
-      done();
+      // find the user model and make sure that they no longer follow that person
+      User
+      .findOne(seedUser1._id)
+      .lean()
+      .exec(function(err, user){
+        expect(user.follows[0]).toEqual(seedUser2.id);
+        done();
+      });
     });
   });
 });
