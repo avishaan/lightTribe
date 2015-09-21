@@ -119,7 +119,6 @@ describe("A user", function() {
     .end(function(res){
       var settings = res.body;
       expect(res.status).toEqual(200);
-      // find the user model and make sure that they follow that person
       agent
       .del(URL + '/follows')
       .set('Content-Type', 'application/json')
@@ -137,6 +136,27 @@ describe("A user", function() {
           expect(user.follows.length).toEqual(0);
           done();
         });
+      });
+    });
+  });
+  it("should not error if a user stops following someone they are NOT following", function(done) {
+    // stop following user without having followed them
+    agent
+    .del(URL + '/follows')
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser1.token,
+      userId: seedUser2._id
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      User
+      .findOne(seedUser1._id)
+      .lean()
+      .exec(function(err, user){
+        expect(user.follows.length).toEqual(0);
+        done();
       });
     });
   });
