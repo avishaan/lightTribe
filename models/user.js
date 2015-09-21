@@ -253,6 +253,24 @@ userSchema.methods.removeDevice = function(options, cb) {
     });
 };
 /**
+ * Add a user to follow to user
+ * @param {object} options for adding follows to user
+ * @property {string} userId user id of the user the authenticated user wants to follow
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {object} user user the follows was added to
+ */
+userSchema.methods.follow = function(options, cb) {
+  var user = this;
+  var userId = options.userId
+  user.follows.addToSet(userId);
+  // TODO: make this happen in a command to prevent conflicts: User.update()
+  user.save(function(err, user){
+    // returning as json to prevent another save later on, could remove if necessary
+    cb(err, user.toJSON());
+  });
+};
+/**
  * Add device to user for notification purposes
  * @param {object} options for adding device to user
  * @property {string} token Device token which uniquely idents device

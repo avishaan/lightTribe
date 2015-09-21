@@ -3,6 +3,28 @@ var User = require('./../models/user.js');
 var config = require('../config.js');
 var apn = require('apn');
 
+module.exports.followUser = function followUser (req, res, next) {
+  var userId = req.swagger.params.body.value.userId;
+
+  // make sure all fields are filled in
+  if (!userId) {
+    return res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+  // add the person this user follows to the model
+  req.user.follow({
+    userId: userId
+  }, function(err, user){
+    if (!err) {
+      res.status(200).send({
+        _id: user.id
+      });
+    } else {
+      res.status(500).send({
+        clientMsg: "Could not follow user"
+      });
+    }
+  });
+};
 module.exports.addDevice = function addDevice (req, res, next) {
   var platform = req.swagger.params.body.value.platform;
   var token = req.swagger.params.body.value.token;
