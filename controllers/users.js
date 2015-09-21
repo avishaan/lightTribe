@@ -153,6 +153,33 @@ module.exports.readUserSettings = function (req, res, next) {
   });
 };
 
+// get all the users that passed in user
+module.exports.readUserFollows = function (req, res, next) {
+  var userId = req.swagger.params.userId.value;
+
+  // check userId passed in
+  if (!userId) {
+    return res.status(500).send({ clientMsg: "Missing parameters" });
+  }
+
+  logger.info('Check who this user follows ' + userId);
+  User
+  .findOne({ _id: userId })
+  .select('-password -token')
+  .populate({
+    path: 'follows',
+    select: '-password -token -devices -auths'
+  })
+  .lean()
+  .exec(function(err, user){
+    if (!err && user){
+      res.status(200).send(user.follows);
+    } else {
+      res.status(500).send({ err: err, clientMsg: "Follows not found" });
+    }
+  });
+};
+
 module.exports.updateUserSettings = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
   var settings = req.swagger.params.settings.value;
