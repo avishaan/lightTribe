@@ -1103,6 +1103,12 @@
           "example": "This is an example of the comment text",
           "description": "Text of the comment posted by the user"
         },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "when the object was created",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
         "user": {
           "description": "User information for a comment",
           "properties": {
