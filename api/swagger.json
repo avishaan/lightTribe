@@ -19,6 +19,36 @@
   "basePath": "/api",
   "paths": {
     "/v1/follows": {
+      "delete": {
+        "x-swagger-router-controller": "users",
+        "operationId": "unfollowUser",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users", "follows"],
+        "description": "Authenticated user stops following the user passed in",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request to stop following a user",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UnfollowUser"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      },
       "post": {
         "x-swagger-router-controller": "users",
         "operationId": "followUser",
@@ -1173,6 +1203,16 @@
         }
       },
       "required": ["token", "platform"]
+    },
+    "UnfollowUser": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "UserId of the user that the authenticated user wants stop following"
+        }
+      },
+      "required": ["userId"]
     },
     "FollowUser": {
       "properties": {
