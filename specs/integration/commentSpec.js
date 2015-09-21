@@ -109,6 +109,9 @@ describe("Comments", function() {
       expect(comments[0].author.username).toEqual(seedUser.username);
       // make sure no sensitive user information made in through
       expect(comments[0].author.password).not.toBeDefined();
+      // make sure it has a date returned gh #51
+      expect(comments[0].createDate).toBeDefined();
+
       done();
     });
   });
