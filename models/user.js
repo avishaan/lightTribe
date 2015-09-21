@@ -46,7 +46,8 @@ var userSchema = new mongoose.Schema({
     token: { type: String },
     time: { type: Date, default: Date.now },
     platform: { type: String, default: 'ios'}
-  }]
+  }],
+  follows: [{ type: String, ref: 'User' }]
 });
 
 // if there is no token, generate one before saving the model for first time
