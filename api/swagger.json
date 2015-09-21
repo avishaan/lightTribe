@@ -18,6 +18,38 @@
   ],
   "basePath": "/api",
   "paths": {
+    "/v1/follows": {
+      "post": {
+        "x-swagger-router-controller": "users",
+        "operationId": "followUser",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["users", "follows"],
+        "description": "Authenticated user follows the user passed in",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request for following a user",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FollowUser"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/reports": {
       "post": {
         "x-swagger-router-controller": "reports",
@@ -1141,6 +1173,16 @@
         }
       },
       "required": ["token", "platform"]
+    },
+    "FollowUser": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f",
+          "description": "UserId of the user that the authenticated user wants to follow"
+        }
+      },
+      "required": ["userId"]
     },
     "CreateComment": {
       "properties": {
