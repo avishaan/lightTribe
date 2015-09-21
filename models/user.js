@@ -252,6 +252,26 @@ userSchema.methods.removeDevice = function(options, cb) {
       cb(err, user);
     });
 };
+
+/**
+ * Remove a user to stop following them
+ * @param {object} options for stopping follows to user
+ * @property {string} userId user id of the user the authenticated user wants to stop following
+ * @param {function} cb
+ * @property {object} err Passed Error
+ * @property {object} user user who stopped following the passed in user
+ */
+userSchema.methods.unfollow = function(options, cb) {
+  var user = this;
+  var userId = options.userId
+  user.follows.pull(userId);
+  // TODO: make this happen in a command to prevent conflicts: User.update()
+  user.save(function(err, user){
+    // returning as json to prevent another save later on, could remove if necessary
+    cb(err, user.toJSON());
+  });
+};
+
 /**
  * Add a user to follow to user
  * @param {object} options for adding follows to user
