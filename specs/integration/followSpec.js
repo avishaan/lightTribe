@@ -69,6 +69,35 @@ describe("A user", function() {
       });
     });
   });
+  it("should allow user1 to see everyone they are following", function(done) {
+    // gh #77
+    // seed a follow
+    agent
+    .post(URL + '/follows')
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser1.token,
+      userId: seedUser2._id
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      // find the user model and make sure that they no longer follow that person
+      agent
+      .get(URL + '/users/' + seedUser1._id + '/follows')
+      .set('Content-Type', 'application/json')
+      .send({ access_token: seedUser1.token })
+      .end(function(res){
+        var follows = res.body;
+        expect(res.status).toEqual(200);
+        expect(follows.length).toEqual(1);
+        expect(follows[0].username).toEqual(seedUser2.username);
+        expect(follows[0].password).not.toBeDefined();
+        expect(follows[0].token).not.toBeDefined();
+        done();
+      });
+    });
+  });
   it("should allow user1 to follow user2 once, even if a second follow attempt was made", function(done) {
     agent
     .post(URL + '/follows')
