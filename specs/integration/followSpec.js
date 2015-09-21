@@ -107,4 +107,37 @@ describe("A user", function() {
       });
     });
   });
+  it("should allow user1 to UNfollow user 2", function(done) {
+    // first follow so we can later test the unfollow
+    agent
+    .post(URL + '/follows')
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser1.token,
+      userId: seedUser2._id
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      // find the user model and make sure that they follow that person
+      agent
+      .del(URL + '/follows')
+      .set('Content-Type', 'application/json')
+      .send({
+        access_token: seedUser1.token,
+        userId: seedUser2._id
+      })
+      .end(function(res){
+        var settings = res.body;
+        expect(res.status).toEqual(200);
+        User
+        .findOne(seedUser1._id)
+        .lean()
+        .exec(function(err, user){
+          expect(user.follows.length).toEqual(0);
+          done();
+        });
+      });
+    });
+  });
 });
