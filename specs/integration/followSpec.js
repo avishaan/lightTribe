@@ -69,4 +69,42 @@ describe("A user", function() {
       });
     });
   });
+  it("shoulw allow user1 to follow user2 once, even if a second follow attempt was made", function(done) {
+    agent
+    .post(URL + '/follows')
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser1.token,
+      userId: seedUser2._id
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      // find the user model and make sure that they follow that person
+      User
+      .findOne(seedUser1._id)
+      .lean()
+      .exec(function(err, user){
+        expect(user.follows.length).toEqual(1);
+        agent
+        .post(URL + '/follows')
+        .set('Content-Type', 'application/json')
+        .send({
+          access_token: seedUser1.token,
+          userId: seedUser2._id
+        })
+        .end(function(res){
+          var settings = res.body;
+          expect(res.status).toEqual(200);
+          User
+          .findOne(seedUser1._id)
+          .lean()
+          .exec(function(err, user){
+            expect(user.follows.length).toEqual(1);
+            done();
+          });
+        });
+      });
+    });
+  });
 });
