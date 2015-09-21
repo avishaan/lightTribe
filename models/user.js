@@ -47,7 +47,7 @@ var userSchema = new mongoose.Schema({
     time: { type: Date, default: Date.now },
     platform: { type: String, default: 'ios'}
   }],
-  follows: [{ type: String, ref: 'User' }]
+  follows: [{ type: String, ref: 'User' }] // users this user is following
 });
 
 // if there is no token, generate one before saving the model for first time
