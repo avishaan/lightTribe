@@ -587,7 +587,10 @@
             "description": "Authentication Failed"
           },
           "200": {
-            "description": "Successful request."
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/CreateMessageResponse"
+            }
           }
         }
       }
@@ -1276,6 +1279,14 @@
         }
       },
       "required": ["text"]
+    },
+    "CreateMessageResponse": {
+      "properties": {
+        "conversationId": {
+          "type": "string",
+          "example": "54f44c5d26352b1b9755b12f"
+        }
+      }
     },
     "ReadOnePostByUser": {
       "properties": {
