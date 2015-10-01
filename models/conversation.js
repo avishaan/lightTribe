@@ -84,28 +84,6 @@ conversationSchema.statics.createConversation = function(options, cb) {
   });
 };
 /**
- * Read a specific conversation
- * @param {object} options The options for the lookup
- * @property {string} conversation id of the conversation
- * @param {function} cb
- * @property {object} conversation 
- * @property {object} err Passed Error
- */
-conversationSchema.statics.readConversation = function(options, cb) {
-  var id = options.id;
-  // see if conversation exists, if so pass error
-  Conversation.findOne({_id: id}, function(err, conversation){
-    if (!err){
-      cb(null, conversation);
-    } else {
-      // we had some sort of database error
-      logger.error(err);
-      cb({err: err, clientMsg: 'Something broke, try again'}, null);
-    }
-  });
-};
-
-/**
  * Read relevant conversation based on query parameters search
  * @param {object} options The options for the lookup
  * @property {number} options.longitude longitude of the search for conversations in that area using WGS84 guidelines 
