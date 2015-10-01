@@ -33,7 +33,9 @@ module.exports.createMessageForConversation = function (req, res, next) {
     participants: recipient
   }, function(err, conversation) {
     if (!err) {
-      res.status(200).send({});
+      res.status(200).send({
+        conversationId: conversation._id
+      });
     } else {
       res.status(500).send({err: err});
     }
