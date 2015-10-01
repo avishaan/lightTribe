@@ -135,7 +135,7 @@ conversationSchema.statics.readConversationsBySearch = function(options, cb) {
 conversationSchema.statics.readOneConversation = function(options, cb) {
   // find all conversations where the user is a participant in the conversation
   Conversation
-  .find({ _id: options.conversationId})
+  .findOne({ _id: options.conversationId})
   .populate('messages.author')
   .exec(function(err, conversations){
     if (!err){
