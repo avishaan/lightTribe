@@ -635,10 +635,7 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ReadOneConversation"
-              }
+              "$ref": "#/definitions/ReadOneConversation"
             }
           }
         }
