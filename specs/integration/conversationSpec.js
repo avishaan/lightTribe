@@ -130,6 +130,8 @@ describe("Messages", function() {
         expect(conversations.length).toEqual(1);
         expect(conversations[0]._id).toBeDefined();
         expect(conversations[0].participants).toBeDefined();
+        // make sure both users are participants of a convo even if other user didn't respond gh#79
+        expect(conversations[0].participants.length).toEqual(2);
         expect(conversations[0].messages).not.toBeDefined();
         // save the conversation id for later
         var conversationId = conversations[0]._id;
@@ -143,7 +145,6 @@ describe("Messages", function() {
           //console.log(conversation.participants);
           var messages = conversation.messages;
           expect(res.status).toEqual(200);
-          // make sure both users are participants of a convo even if other user didn't respond gh#79
           expect(conversation.participants.length).toEqual(2);
           expect(messages.length).toEqual(1);
           expect(conversation._id).toBeDefined();
