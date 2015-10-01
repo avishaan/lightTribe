@@ -62,7 +62,7 @@ describe("Messages", function() {
   //    done();
   //  });
   //});
-  xit("should allow user1 to message user2", function(done) {
+  it("should allow user1 to message user2", function(done) {
     agent
     .post(URL + '/conversations')
     .set('Content-Type', 'application/json')
@@ -78,7 +78,7 @@ describe("Messages", function() {
       done();
     });
   });
-  xit("should keep the same conversation id upon a second message to the same user", function(done) {
+  it("should keep the same conversation id upon a second message to the same user", function(done) {
     var conversationId;
     agent
     .post(URL + '/conversations')
