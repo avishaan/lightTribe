@@ -74,7 +74,7 @@ describe("Messages", function() {
     .end(function(res){
       expect(res.status).toEqual(200);
       // make sure conversation id exists gh#80
-      expect(res.body.conversation._id).toBeDefined();
+      expect(res.body.conversationId).toBeDefined();
       done();
     });
   });
@@ -90,8 +90,8 @@ describe("Messages", function() {
     })
     .end(function(res){
       expect(res.status).toEqual(200);
-      expect(res.body.conversation._id).toBeDefined();
-      conversationId = res.body.conversation._id;
+      expect(res.body.conversationId).toBeDefined();
+      conversationId = res.body.conversationId;
       agent
       .post(URL + '/conversations')
       .set('Content-Type', 'application/json')
@@ -102,7 +102,7 @@ describe("Messages", function() {
       })
       .end(function(res){
         expect(res.status).toEqual(200);
-        expect(res.body.conversation._id).toEqual(conversationId);
+        expect(res.body.conversationId).toEqual(conversationId);
         done();
       });
     });
