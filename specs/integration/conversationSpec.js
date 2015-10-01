@@ -73,7 +73,38 @@ describe("Messages", function() {
     })
     .end(function(res){
       expect(res.status).toEqual(200);
+      // make sure conversation id exists gh#80
+      expect(res.body.conversation._id).toBeDefined();
       done();
+    });
+  });
+  it("should keep the same conversation id upon a second message to the same user", function(done) {
+    var conversationId;
+    agent
+    .post(URL + '/conversations')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: user1.token })
+    .send({
+      text: "Hello user2, you seem cool",
+      recipient: user2.id
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body.conversation._id).toBeDefined();
+      conversationId = res.body.conversation._id;
+      agent
+      .post(URL + '/conversations')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: user1.token })
+      .send({
+        text: "Hello user2, you still seem cool so I will message you again",
+        recipient: user2.id
+      })
+      .end(function(res){
+        expect(res.status).toEqual(200);
+        expect(res.body.conversation._id).toEqual(conversationId);
+        done();
+      });
     });
   });
   it("should allow user2 to read all of it's conversations", function(done) {
