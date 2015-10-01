@@ -140,6 +140,7 @@ describe("Messages", function() {
         .query({ access_token: user2.token })
         .end(function(res){
           var conversation = res.body;
+          //console.log(conversation.participants);
           var messages = conversation.messages;
           expect(res.status).toEqual(200);
           // make sure both users are participants of a convo even if other user didn't respond gh#79
