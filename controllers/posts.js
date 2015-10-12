@@ -159,7 +159,8 @@ module.exports.readRelevantPosts = function (req, res, next) {
   Post.readPostsBySearch(options, function(err, posts){
     if (!err){
       var opts = [
-        { path: 'author.userImage', select: 'url' }
+        { path: 'author.userImage', select: 'url' },
+        { path: 'images', select: 'url' }
       ];
       // populate the images of the authors
       Image.populate(posts, opts, function(err, posts){
