@@ -37,7 +37,7 @@ var userSchema = new mongoose.Schema({
   },
   userImage: { type: String, ref: 'Image' },
   profile: {
-    shortDescription: { type: String }
+    shortDescription: { type: String, default: 'Always exploring, always learning.' }
   },
   interests: [
     { type: String } // should match interest.key
