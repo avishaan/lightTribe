@@ -24,7 +24,7 @@ module.exports.readOneProfile = function (req, res, next) {
           userImage: user.userImage,
           lastLogin: Date.now()
         },
-        shortDescription: user.profile.shortDescription,
+        shortDescription: user.profile ? user.profile.description : "",
         interests: user.interests,
       });
     } else {
