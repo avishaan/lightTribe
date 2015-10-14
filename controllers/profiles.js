@@ -22,7 +22,7 @@ module.exports.readOneProfile = function (req, res, next) {
         user: {
           username: user.username,
           userImage: user.userImage,
-          lastLogin: Date.now()
+          lastLogin: (new Date()).toJSON()
         },
         shortDescription: (user.profile && user.profile.shortDescription) ? user.profile.shortDescription : "",
         interests: user.interests,
