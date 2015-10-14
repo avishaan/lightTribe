@@ -143,12 +143,10 @@ module.exports.readOnePost = function (req, res, next) {
       // });
       // populate the userImage before sending the post
       Image
-      .findOne({_id: post.author.userImage})
-      .select('url')
-      .lean()
-      .exec(function(err, userImage){
+      .readImage({ id: post.author.userImage }, function(err, userImage){
         if (!err){
-          post.author.userImage = userImage; //gh #92
+          post.author.userImage = {};
+          post.author.userImage.url = userImage.url; //gh #92
           res.status(200).send(post);
         } else {
           res.status(500).send({
