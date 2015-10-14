@@ -138,7 +138,25 @@ module.exports.readOnePost = function (req, res, next) {
   .lean()
   .exec(function(err, post){
     if (!err) {
-      res.status(200).send(post);
+      // TODO use promises instead of the below image population
+      // Image.populate(post.author, { path: 'userImage', model: 'Image' }, function(err, doc){
+      // });
+      // populate the userImage before sending the post
+      Image
+      .findOne({_id: post.author.userImage})
+      .select('url')
+      .lean()
+      .exec(function(err, userImage){
+        if (!err){
+          post.author.userImage = userImage; //gh #92
+          res.status(200).send(post);
+        } else {
+          res.status(500).send({
+            clientMsg: "Could not populate userImage at that post :(",
+            err: err
+          });
+        }
+      });
     } else {
       res.status(500).send({
         clientMsg: "Could not find that specific post :(",
