@@ -242,6 +242,8 @@ describe("Creating a post", function() {
             var post = res.body;
             expect(post.images[0].url).toBeDefined();
             expect(post.author.username).toBeDefined();
+            expect(post.author.userImage).toBeDefined();
+            expect(post.author.userImage.url).toBeDefined();
             expect(post.author).toBeDefined();
             // get all the users posts and check for image gh #68
             agent
