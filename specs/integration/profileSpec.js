@@ -2,6 +2,7 @@ var agent = require('superagent');
 var config = require("../../config.js");
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
+require('jasmine-expect');
 //var httpMocks = require('node-mocks-http');
 
 var apiVersion = '/v1';
@@ -69,6 +70,7 @@ describe("Reading a user profile", function() {
       expect(profile.user).toBeDefined();
       expect(profile.user.username).toBeDefined();
       expect(profile.user.lastLogin).toBeDefined();
+      expect(profile.user.lastLogin).toBeIso8601();
       expect(profile.user.userImage).toBeDefined();
       expect(profile.user.userImage.url).toBeDefined();
       expect(res.status).toEqual(200);

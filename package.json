@@ -66,6 +66,7 @@
   "devDependencies": {
     "chance": "^0.7.5",
     "istanbul": "^0.3.2",
+    "jasmine-expect": "^1.22.3",
     "jasmine-node": "^1.14.5",
     "rewire": "^2.1.0",
     "socket.io-client": "^1.3.6",
