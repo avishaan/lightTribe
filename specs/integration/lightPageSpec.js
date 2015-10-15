@@ -14,7 +14,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 var post = {
   id: '1234',
   text: 'This is a post description',
-  images: ['uhn43civzs6m1c9uurqvr', 'uhn43civzs6m1c9uurqvj', 'uhn43civzs6m1c9uurqvo'],
+  images: ['558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b', '558d23ce7189b21400bef51b'],
   interests: ['yogaBikram', 'meditationZen'],
   latitude: 37.796096, //San fran, google maps shows lat/lng order
   longitude: -122.418145,
@@ -33,6 +33,7 @@ var post = {
 };
 
 var seedPost;
+var seedImage;
 
 describe("Creating a post", function() {
   // delete the database before each time
@@ -42,6 +43,7 @@ describe("Creating a post", function() {
       expect(err).toEqual(null);
       // seed image so we have it for the user
       fixture.seedImage({}, function(err, image){
+        seedImage = image.toJSON();
         fixture.seedUser({
           username: 'test',
           password: 'test',
@@ -51,6 +53,8 @@ describe("Creating a post", function() {
         }, function(err, user){
           // save the user for later
           seedUser = user;
+          // add the image id into the post
+          post.images = [image._id, image._id, image._id];
           expect(err).toEqual(null);
           done();
         });
@@ -127,10 +131,30 @@ describe("Creating a post", function() {
       expect(res.status).toEqual(200);
       expect(body._id).toBeDefined();
       expect(body.text).toEqual(post.text);
-      expect(body.images).toEqual(post.images);
       expect(body.author).toEqual(seedUser.id);
       expect(body.interests).toEqual(post.interests);
       done();
+    });
+  });
+  it("should have all the post detail", function(done) {
+    // test for gh #95
+    agent
+    .post(URL + '/posts')
+    .set('Content-Type', 'application/json')
+    .send(post)
+    .send({ access_token: seedUser.token })
+    .end(function(res){
+      var body = res.body;
+      expect(res.status).toEqual(200);
+      expect(body._id).toBeDefined();
+      agent
+      .get(URL + '/posts/' + body._id)
+      .send({ access_token: seedUser.token })
+      .end(function(res){
+        var post = res.body;
+        //throw Error();
+        done();
+      });
     });
   });
   it("should return all the posts for a specifc user", function(done) {
