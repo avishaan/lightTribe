@@ -137,9 +137,9 @@ conversationSchema.statics.readOneConversation = function(options, cb) {
   Conversation
   .findOne({ _id: options.conversationId})
   .populate('messages.author')
-  .exec(function(err, conversations){
+  .exec(function(err, conversation){
     if (!err){
-      cb(null, conversations);
+      cb(null, conversation);
     } else {
       // we had some sort of database error
       logger.error(err);
