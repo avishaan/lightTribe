@@ -126,7 +126,7 @@ module.exports.readOnePost = function (req, res, next) {
   logger.info('Read specific post: ' + postId);
   Post
   .findOne({ _id: postId })
-  .select('createDate text author images')
+  .select('createDate text author images lightPage postType')
   .populate({
     path: 'author',
     select: 'username userImage lastLogin _id'
