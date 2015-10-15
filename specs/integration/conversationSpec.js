@@ -3,7 +3,6 @@ var config = require("../../config.js");
 var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
-var Comment = require('../../models/comment.js');
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
@@ -12,6 +11,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 var user1;
 var user2;
+var seedImage;
 
 describe("Messages", function() {
   // delete the database before each time
@@ -19,17 +19,28 @@ describe("Messages", function() {
     fixture
     .deleteDBAsync({})
     .then(function(dbInfo){
-      return fixture.seedUserAsync({});
+      return fixture.seedImageAsync({});
+    })
+    .then(function(image){
+      seedImage = image;
+      return fixture.seedUserAsync({
+        username: "test1",
+        password: "password1",
+        userImage: seedImage._id
+      });
     })
     .then(function(user){
+      user.userImage = seedImage._id;
       // save the user for later
       user1 = user;
       return fixture.seedUserAsync({
         username: "test2",
-        password: "password2"
+        password: "password2",
+        userImage: seedImage._id
       });
     })
     .then(function(user){
+      user.userImage = seedImage._id;
       // save the user for later
       user2 = user;
     })
@@ -150,6 +161,8 @@ describe("Messages", function() {
           expect(conversation._id).toBeDefined();
           expect(messages[0].author).toBeDefined();
           expect(messages[0].author.username).toBeDefined();
+          expect(messages[0].author.userImage).toBeDefined();
+          expect(messages[0].author.userImage.url).toBeDefined();
           done();
         });
       });

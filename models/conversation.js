@@ -2,8 +2,10 @@ var mongoose = require('mongoose');
 var logger = require('./../loggers/logger.js');
 var _ = require('underscore');
 var Message = require('./../models/message.js');
+var User = require('./../models/user.js');
 // get the io instance from the main app.js file so we can share with multiple files
 var io = require('./../app.js').io;
+var async = require('async');
 /*
 |-------------------------------------------------------------
 | Conversation Schema
@@ -137,9 +139,15 @@ conversationSchema.statics.readOneConversation = function(options, cb) {
   Conversation
   .findOne({ _id: options.conversationId})
   .populate('messages.author')
-  .exec(function(err, conversations){
+  .exec(function(err, conversation){
     if (!err){
-      cb(null, conversations);
+      User
+      .populate(conversation.messages, {
+        path: 'author.userImage',
+        model: 'Image'
+      }, function(err, doc){
+        cb(err, conversation);
+      });
     } else {
       // we had some sort of database error
       logger.error(err);
