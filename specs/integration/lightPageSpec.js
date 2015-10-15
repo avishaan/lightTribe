@@ -153,6 +153,21 @@ describe("Creating a post", function() {
       .end(function(res){
         var post = res.body;
         //throw Error();
+        expect(post.author.username).toBeDefined();
+        expect(post.author._id).toBeDefined();
+        expect(post.author.userImage.url).toBeDefined();
+        expect(post.postType).toBeDefined();
+        expect(post.lightPage).toBeDefined();
+        expect(post.lightPage.street).toBeDefined();
+        expect(post.lightPage.country).toBeDefined();
+        expect(post.lightPage.state).toBeDefined();
+        expect(post.lightPage.zip).toBeDefined();
+        expect(post.lightPage.website).toBeDefined();
+        expect(post.lightPage.eventType).toBeDefined();
+        expect(post.lightPage.shortDescription).toBeDefined();
+        expect(post.lightPage.longDescription).toBeDefined();
+        expect(post.lightPage.startDate).toBeDefined();
+        expect(post.lightPage.endDate).toBeDefined();
         done();
       });
     });
