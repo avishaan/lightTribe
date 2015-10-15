@@ -173,7 +173,14 @@ module.exports.readUserFollows = function (req, res, next) {
   .lean()
   .exec(function(err, user){
     if (!err && user){
-      res.status(200).send(user.follows);
+      User
+      .populate(user.follows, {path: 'userImage', model:'Image'}, function(err, follows){
+        if (!err){
+          res.status(200).send(follows);
+        } else {
+          res.status(500).send({ err: err, clientMsg: "Follows not found" });
+        }
+      });
     } else {
       res.status(500).send({ err: err, clientMsg: "Follows not found" });
     }

@@ -29,11 +29,19 @@ describe("A user", function() {
     fixture
     .deleteDBAsync({})
     .then(function(dbInfo){
+      return fixture.seedImageAsync({});
+    })
+    .then(function(image){
+      seedImage = image
+      // attach image to user
+      user1.userImage = seedImage._id
       return fixture.seedUserAsync(user1);
     })
     .then(function(user1){
       // save the user1 for later
       seedUser1 = user1;
+      // attach image to user
+      user2.userImage = seedImage._id
       return fixture.seedUserAsync(user2);
     })
     .then(function(user2){
@@ -93,6 +101,8 @@ describe("A user", function() {
         expect(follows.length).toEqual(1);
         expect(follows[0].username).toEqual(seedUser2.username);
         expect(follows[0].password).not.toBeDefined();
+        expect(follows[0].userImage).toBeDefined();
+        expect(follows[0].userImage.url).toBeDefined(); // gh #93
         expect(follows[0].token).not.toBeDefined();
         done();
       });
