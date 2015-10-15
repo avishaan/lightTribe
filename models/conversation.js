@@ -146,7 +146,6 @@ conversationSchema.statics.readOneConversation = function(options, cb) {
         path: 'author.userImage',
         model: 'Image'
       }, function(err, doc){
-        console.log(err, doc);
         cb(err, conversation);
       });
     } else {
