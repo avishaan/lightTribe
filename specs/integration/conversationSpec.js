@@ -3,7 +3,6 @@ var config = require("../../config.js");
 var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
 var User = require('../../models/user.js');
-var Comment = require('../../models/comment.js');
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
@@ -24,7 +23,11 @@ describe("Messages", function() {
     })
     .then(function(image){
       seedImage = image;
-      return fixture.seedUserAsync({});
+      return fixture.seedUserAsync({
+        username: "test1",
+        password: "password1",
+        userImage: seedImage._id
+      });
     })
     .then(function(user){
       user.userImage = seedImage._id;
@@ -32,7 +35,8 @@ describe("Messages", function() {
       user1 = user;
       return fixture.seedUserAsync({
         username: "test2",
-        password: "password2"
+        password: "password2",
+        userImage: seedImage._id
       });
     })
     .then(function(user){
