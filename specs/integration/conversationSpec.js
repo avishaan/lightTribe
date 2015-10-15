@@ -12,6 +12,7 @@ var URL = config.apiURI + ':' + config.expressPort + "/api" + apiVersion;
 
 var user1;
 var user2;
+var seedImage;
 
 describe("Messages", function() {
   // delete the database before each time
@@ -19,9 +20,14 @@ describe("Messages", function() {
     fixture
     .deleteDBAsync({})
     .then(function(dbInfo){
+      return fixture.seedImageAsync({});
+    })
+    .then(function(image){
+      seedImage = image;
       return fixture.seedUserAsync({});
     })
     .then(function(user){
+      user.userImage = seedImage._id;
       // save the user for later
       user1 = user;
       return fixture.seedUserAsync({
@@ -30,6 +36,7 @@ describe("Messages", function() {
       });
     })
     .then(function(user){
+      user.userImage = seedImage._id;
       // save the user for later
       user2 = user;
     })
@@ -150,6 +157,8 @@ describe("Messages", function() {
           expect(conversation._id).toBeDefined();
           expect(messages[0].author).toBeDefined();
           expect(messages[0].author.username).toBeDefined();
+          expect(messages[0].author.userImage).toBeDefined();
+          expect(messages[0].author.userImage.url).toBeDefined();
           done();
         });
       });
