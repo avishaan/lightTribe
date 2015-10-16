@@ -209,7 +209,7 @@
         }
       }
     },
-    "/v1/categories/events": {
+    "/v1/categories/eventTypes": {
       "get": {
         "x-swagger-router-controller": "categories",
         "operationId": "readAllEventTypes",
@@ -239,7 +239,7 @@
         }
       }
     },
-    "/v1/categories/interests": {
+    "/v1/categories/interestTypes": {
       "get": {
         "x-swagger-router-controller": "categories",
         "operationId": "readAllInterests",

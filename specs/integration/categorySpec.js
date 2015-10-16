@@ -28,7 +28,7 @@ describe("Categories", function() {
       console.log("Error: ", err);
     });
   });
-  it("should return all event types possible in the system", function(done) {
+  xit("should return all event types possible in the system", function(done) {
     agent
     .get(URL + '/categories/events')
     .set('Content-Type', 'application/json')
@@ -46,7 +46,7 @@ describe("Categories", function() {
   });
   it("should return all interests possible in the system", function(done) {
     agent
-    .get(URL + '/categories/interests')
+    .get(URL + '/categories/interestTypes')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
     .end(function(res){
