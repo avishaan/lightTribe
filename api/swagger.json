@@ -1373,6 +1373,10 @@
           "type": "string",
           "example": "This is a very relavent post to me",
           "description": "Text body of the post a user may create"
+        },
+        "author": {
+          "description": "Basic user information",
+          "$ref": "#/definitions/ReadUserForPost"
         }
       },
       "required": ["_id"]
