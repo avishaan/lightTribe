@@ -27,9 +27,9 @@ describe("Categories", function() {
       console.log("Error: ", err);
     });
   });
-  xit("should return all event types possible in the system", function(done) {
+  it("should return all event types possible in the system", function(done) {
     agent
-    .get(URL + '/categories/events')
+    .get(URL + '/categories/eventTypes')
     .set('Content-Type', 'application/json')
     .query({ access_token: seedUser.token })
     .end(function(res){
