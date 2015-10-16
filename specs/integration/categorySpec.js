@@ -1,8 +1,8 @@
 var agent = require('superagent');
 var config = require("../../config.js");
 var Promise = require('bluebird');
-var Interests = require("../../models/interests.js").Interests;
 var fixture = require('./../fixtures/fixture.js');
+var Interests = require('../../models/category.js').Interests;
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
@@ -26,6 +26,22 @@ describe("Categories", function() {
     })
     .caught(function(err){
       console.log("Error: ", err);
+    });
+  });
+  it("should return all event types possible in the system", function(done) {
+    agent
+    .get(URL + '/categories/events')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: seedUser.token })
+    .end(function(res){
+      var interests = res.body;
+      expect(res.status).toEqual(200);
+      expect(interests.length).toBeDefined();
+      expect(interests[0].key).toBeDefined();
+      expect(interests[0].title).toBeDefined();
+      expect(interests[0].description).toBeDefined();
+      expect(interests[0].category).toBeDefined();
+      done();
     });
   });
   it("should return all interests possible in the system", function(done) {
