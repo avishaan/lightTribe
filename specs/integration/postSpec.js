@@ -141,6 +141,8 @@ describe("Creating a post", function() {
         var posts = res.body;
         posts.forEach(function(post){
           expect(post.author._id).toEqual(seedUser.id);
+          expect(post.author.userImage).toBeDefined();
+          expect(post.author.userImage.url).toBeDefined();
         });
         expect(posts.length).not.toEqual(0);
         expect(res.status).toEqual(200);
