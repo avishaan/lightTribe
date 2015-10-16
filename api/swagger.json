@@ -677,7 +677,7 @@
           }
         ],
         "tags": ["conversations"],
-        "description": "Get the conversation id for the passed in user. If no conversation exists return null",
+        "description": "Get the conversation that is ONLY between these two users, not group convo",
         "parameters": [
           {
             "name": "userId",
