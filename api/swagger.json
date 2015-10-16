@@ -670,7 +670,7 @@
     "/v1/users/{userId}/conversations": {
       "get": {
         "x-swagger-router-controller": "conversations",
-        "operationId": "readAllConversationsWithUser",
+        "operationId": "readOneConversationWithUser",
         "security": [
           {
             "tokenAuth": []
