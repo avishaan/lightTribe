@@ -81,6 +81,12 @@
             "schema": {
               "$ref": "#/definitions/UnfollowUser"
             }
+          }, {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
@@ -111,6 +117,12 @@
             "schema": {
               "$ref": "#/definitions/FollowUser"
             }
+          }, {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
