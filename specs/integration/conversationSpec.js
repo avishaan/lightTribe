@@ -73,6 +73,41 @@ describe("Messages", function() {
   //    done();
   //  });
   //});
+  it("should allow user1 to see convo with user2 from 'profile' page", function(done){
+    // gh #100
+    // get the conversation id from a user we haven't messaged yet, be blank
+    agent
+    .get(URL + '/users/' + user2.id + '/conversations')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: user1.token })
+    .end(function(res){
+      expect(res.status).not.toEqual(200);
+      // send user a message
+      agent
+      .post(URL + '/conversations')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: user1.token })
+      .send({
+        text: "Hello user2, you seem cool",
+        recipient: user2.id
+      })
+      .end(function(res){
+        expect(res.status).toEqual(200);
+        expect(res.body.conversationId).toBeDefined();
+        var conversationId = res.body.conversationId;
+        // get the conversation id again from the user we now have messaged, should be populated and match
+        agent
+        .get(URL + '/users/' + user2.id + '/conversations')
+        .set('Content-Type', 'application/json')
+        .query({ access_token: user1.token })
+        .end(function(res){
+          expect(res.status).toEqual(200);
+          expect(res.body.conversationId).toBeDefined();
+          expect(res.body.conversationId).toEqual(conversationId);
+        });
+      });
+    });
+  });
   it("should allow user1 to message user2", function(done) {
     agent
     .post(URL + '/conversations')
