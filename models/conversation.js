@@ -169,9 +169,19 @@ conversationSchema.statics.readAllUserConversations = function(options, cb) {
   .find({ participants: { $in: [options.userId ]}})
   .populate('participants')
   .select('-messages')
+  .lean()
   .exec(function(err, conversations){
     if (!err){
-      cb(null, conversations);
+      async.map(conversations, function(conversation, callback){
+        // populate the userImage for each participant in this convo
+        Conversation
+        .populate(conversation.participants, { path: 'userImage', model: 'Image' },
+        function(err, participants){
+          callback(err, conversations);
+        });
+      }, function(err){
+        cb(err, conversations);
+      });
     } else {
       // we had some sort of database error
       logger.error(err);
