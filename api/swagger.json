@@ -209,6 +209,36 @@
         }
       }
     },
+    "/v1/categories/events": {
+      "get": {
+        "x-swagger-router-controller": "categories",
+        "operationId": "readAllEventTypes",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["categories"],
+        "description": "Get list of possible event types categories and their meta data",
+        "parameters": [
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/categories/interests": {
       "get": {
         "x-swagger-router-controller": "categories",
