@@ -595,7 +595,7 @@
           }
         ],
         "tags": ["conversations"],
-        "description": "Get the messages in a conversation",
+        "description": "Get all the conversations available for the user",
         "parameters": [
           {
             "name": "access_token",
