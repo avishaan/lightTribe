@@ -15,7 +15,7 @@ module.exports.Interests = [{
   category: "Meditation"
 }];
 
-module.exports.Events = [{
+module.exports.EventTypes = [{
   key: "yogaBikram",
   title: "Bikram Yoga",
   description: "Bikram Yoga Description",
