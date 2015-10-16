@@ -209,9 +209,39 @@
         }
       }
     },
+    "/v1/categories/interests": {
+      "get": {
+        "x-swagger-router-controller": "categories",
+        "operationId": "readAllInterests",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["categories"],
+        "description": "Get list of possible interests/categories and their meta data",
+        "parameters": [
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful request."
+          }
+        }
+      }
+    },
     "/v1/interests": {
       "get": {
-        "x-swagger-router-controller": "interests",
+        "x-swagger-router-controller": "categories",
         "operationId": "readAllInterests",
         "security": [
           {
