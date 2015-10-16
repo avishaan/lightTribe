@@ -1696,6 +1696,11 @@
     },
     "ReadUserForMessage": {
       "properties": {
+        "userImage": {
+          "type": "object",
+          "description": "Image information about the user",
+          "$ref": "#/definitions/ImageURL"
+        },
         "username": {
           "type": "string",
           "description": "Username of the user",
