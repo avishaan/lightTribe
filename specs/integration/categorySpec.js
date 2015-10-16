@@ -2,7 +2,6 @@ var agent = require('superagent');
 var config = require("../../config.js");
 var Promise = require('bluebird');
 var fixture = require('./../fixtures/fixture.js');
-var Interests = require('../../models/category.js').Interests;
 //var httpMocks = require('node-mocks-http');
 Promise.promisifyAll(fixture);
 
