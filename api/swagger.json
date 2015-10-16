@@ -667,6 +667,52 @@
         }
       }
     },
+    "/v1/users/{userId}/conversations": {
+      "get": {
+        "x-swagger-router-controller": "conversations",
+        "operationId": "readAllConversationsWithUser",
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "tags": ["conversations"],
+        "description": "Get the conversation id for the passed in user. If no conversation exists return null",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User you want to see the conversation you had with",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "description": "Internal access token",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/401Response"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/ReadOneConversation"
+            }
+          }
+        }
+      }
+    },
     "/v1/conversations/{conversationId}": {
       "get": {
         "x-swagger-router-controller": "conversations",
