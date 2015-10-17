@@ -81,7 +81,7 @@ describe("Messages", function() {
     .set('Content-Type', 'application/json')
     .query({ access_token: user1.token })
     .end(function(res){
-      expect(res.status).not.toEqual(200);
+      expect(res.status).toEqual(200);
       // send user a message
       agent
       .post(URL + '/conversations')
@@ -104,6 +104,7 @@ describe("Messages", function() {
           expect(res.status).toEqual(200);
           expect(res.body.conversationId).toBeDefined();
           expect(res.body.conversationId).toEqual(conversationId);
+          done()
         });
       });
     });
