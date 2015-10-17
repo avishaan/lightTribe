@@ -104,7 +104,7 @@ describe("Messages", function() {
           expect(res.status).toEqual(200);
           expect(res.body.conversationId).toBeDefined();
           expect(res.body.conversationId).toEqual(conversationId);
-          done()
+          done();
         });
       });
     });
