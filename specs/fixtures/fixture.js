@@ -3,7 +3,6 @@ var User = require('./../../models/user.js');
 var Post = require('./../../models/post.js');
 var Image = require('./../../models/image.js');
 var Comment = require('./../../models/comment.js');
-var Conversation = require('./../../models/conversation.js');
 var Report = require('./../../models/report.js');
 var Post = require('./../../models/post.js');
 var async = require('async');
@@ -63,9 +62,9 @@ module.exports.deleteDB = function(options, cb){
       Image.remove({}, function(err, images){
         Comment.remove({}, function(err, comments){
           Report.remove({}, function(err, reports){
-            Conversation.remove({}, function(err, conversations){
+            // Conversation.remove({}, function(err, conversations){ // can't do, EARDD b/c of socket.io
               cb(err, user);
-            });
+            // });
           });
         });
       });
