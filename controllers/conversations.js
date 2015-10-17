@@ -42,6 +42,24 @@ module.exports.createMessageForConversation = function (req, res, next) {
   });
 };
 
+module.exports.readOneConversationWithUser = function(req, res, next) {
+  var user = req.user.id;
+  var recipientId = req.swagger.params.userId.value;
+
+  Conversation.readOneConversationWithUser({
+    recipientId: recipientId
+  }, function(err, conversation){
+    if (!err && conversation) {
+      res.status(200).send(conversation);
+    } else if (!err) {
+      // we didn't find a conversation, don't error let the front end know
+      res.status(200).send({clientMsg: "No conversations with this user exist yet"});
+    } else {
+      res.status(500).send({err: err});
+    }
+  });
+};
+
 module.exports.readOneConversation = function(req, res, next) {
   var user = req.user.id;
   var conversationId = req.swagger.params.conversationId.value;

@@ -127,6 +127,40 @@ conversationSchema.statics.readConversationsBySearch = function(options, cb) {
   });
 };
 /**
+ * Read one conversation with a user based on recipient id
+ * @param {object} options The options for the lookup
+ * @property {string} options.recipientId user id of the user for which you want conversation
+ * @param {function} cb
+ * @property {object} conversation
+ * @property {object} err Passed Error
+ */
+conversationSchema.statics.readOneConversationWithUser = function(options, cb) {
+  // find all conversations where the user is a participant in the conversation
+  Conversation
+  .findOne({ participants: [options.recipientId]})
+  .populate('messages.author')
+  .exec(function(err, conversation){
+    if (!err && conversation
+    && conversation.messages
+    && conversation.messages.length){
+      User
+      .populate(conversation.messages, {
+        path: 'author.userImage',
+        model: 'Image'
+      }, function(err, doc){
+        cb(err, conversation);
+      });
+    } else if (!err){
+      // didn't find a conversation but didn't error, nothing to pass back
+      cb(null, null);
+    } else {
+      // we had some sort of database error
+      logger.error(err);
+      cb({err: err, clientMsg: 'Something broke, try again'}, null);
+    }
+  });
+};
+/**
  * Read one conversation for a user
  * @param {object} options The options for the lookup
  * @property {string} options.conversationId user id of the user for which you want conversations
