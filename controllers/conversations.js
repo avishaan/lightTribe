@@ -43,11 +43,12 @@ module.exports.createMessageForConversation = function (req, res, next) {
 };
 
 module.exports.readOneConversationWithUser = function(req, res, next) {
-  var user = req.user.id;
+  var user = req.user;
   var recipientId = req.swagger.params.userId.value;
 
   Conversation.readOneConversationWithUser({
-    recipientId: recipientId
+    recipientId: recipientId,
+    userId: user.id
   }, function(err, conversation){
     if (!err && conversation) {
       res.status(200).send(conversation);
