@@ -138,11 +138,17 @@ conversationSchema.statics.readConversationsBySearch = function(options, cb) {
 conversationSchema.statics.readOneConversationWithUser = function(options, cb) {
   // find all conversations where the user is a participant in the conversation
   Conversation
-  .findOne({ participants: { "$size": 2, "$in": [options.recipientId, options.userId] }})
+  .findOne({ participants: { "$size": 2, "$all": [options.recipientId, options.userId] }})
   .populate('messages.author')
   .exec(function(err, conversation){
-    if (!err && conversation){
-      cb(err, conversation);
+    if (!err && conversation && conversation.messages){
+      User
+      .populate(conversation.messages, {
+        path: 'author.userImage',
+        model: 'Image'
+      }, function(err, doc){
+        cb(err, conversation);
+      });
     } else if (!err){
       // didn't find a conversation but didn't error, nothing to pass back
       cb(null, null);
