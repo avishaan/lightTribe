@@ -159,6 +159,61 @@ describe("Messages", function() {
       });
     });
   });
+  it("should show both sides of the conversation gh#101", function(done) {
+    var conversationId; // keep id for future comparison
+    agent
+    .post(URL + '/conversations')
+    .set('Content-Type', 'application/json')
+    .query({ access_token: user1.token })
+    .send({
+      text: "Hello user2, you seem cool",
+      recipient: user2.id
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body.conversationId).toBeDefined();
+      conversationId = res.body.conversationId;
+      agent
+      .post(URL + '/conversations')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: user2.token })
+      .send({
+        text: "Hello user1, you also seem cool",
+        recipient: user1.id
+      })
+      .end(function(res){
+        expect(res.status).toEqual(200);
+        // make sure the conversation still remains the same
+        expect(res.body.conversationId).toEqual(conversationId);
+        // make sure both sides of the conversation show up
+        agent
+        .get(URL + '/conversations/' + conversationId)
+        .set('Content-Type', 'application/json')
+        .query({ access_token: user2.token })
+        .end(function(res){
+          var conversation = res.body;
+          //console.log(conversation.participants);
+          var messages = conversation.messages;
+          expect(res.status).toEqual(200);
+          expect(conversation.participants.length).toEqual(2);
+          expect(messages.length).toEqual(2);
+          expect(conversation._id).toBeDefined();
+          // check that both sides of the conversation are included
+          if (messages[0].author._id === user1.id ){
+            // if message 1 is user1, then message 2 should be user 2
+            expect(messages[1].author._id).toEqual(user2.id);
+          } else if (messages[0].author._id === user2.id ) {
+            // if message 1 is user2, then message 2 should be user 1
+            expect(messages[1].author._id).toEqual(user1.id);
+          } else {
+            // there is no such case, something messed up
+            expect(false).toEqual(true);
+          }
+          done();
+        });
+      });
+    });
+  });
   it("should allow user2 to read all of it's conversations", function(done) {
     // first seed the message
     agent
