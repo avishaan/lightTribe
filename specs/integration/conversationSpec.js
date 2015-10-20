@@ -101,9 +101,14 @@ describe("Messages", function() {
         .set('Content-Type', 'application/json')
         .query({ access_token: user1.token })
         .end(function(res){
+          var conversation = res.body;
           expect(res.status).toEqual(200);
-          expect(res.body.conversationId).toBeDefined();
-          expect(res.body.conversationId).toEqual(conversationId);
+          expect(conversation._id).toBeDefined();
+          expect(conversation.messages).toBeDefined();
+          expect(conversation.messages[0].text).toBeDefined();
+          expect(conversation.messages[0].author).toBeDefined();
+          expect(conversation.messages[0].author.userImage).toBeDefined();
+          expect(conversation._id).toEqual(conversationId);
           done();
         });
       });
