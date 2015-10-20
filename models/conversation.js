@@ -62,7 +62,7 @@ conversationSchema.statics.createConversation = function(options, cb) {
   });
   // conversations that already exist? add this message to existing conversation
   Conversation
-  .findOne({participants: convo.participants})
+  .findOne({participants: { "$all": convo.participants }})
   .exec(function(err, foundConvo){
     // check whether we need to create a new convo or save the message to an existing convo
     if (!err && foundConvo){
