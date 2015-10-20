@@ -70,7 +70,7 @@ module.exports = function(){
           api_secret: process.env.cloudinarySecret
         },
         facebook: {
-          clientID: '761889610566980',
+          clientID: '1658513671063290',
           clientSecret: process.env.facebookSecret
         },
         swagger: {
@@ -108,7 +108,7 @@ module.exports = function(){
           api_secret: process.env.cloudinarySecret
         },
         facebook: {
-          clientID: '761889610566980',
+          clientID: '1658513671063290',
           clientSecret: process.env.facebookSecret
         },
         swagger: {
@@ -146,7 +146,7 @@ module.exports = function(){
           api_secret: process.env.cloudinarySecret
         },
         facebook: {
-          clientID: '761889610566980',
+          clientID: '1658513671063290',
           clientSecret: process.env.facebookSecret
         },
         swagger: {
