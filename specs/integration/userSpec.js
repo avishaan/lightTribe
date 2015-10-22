@@ -113,6 +113,7 @@ describe("A user", function() {
       expect(settings.lastLogin).toBeDefined();
       expect(settings.auths[0].name).toBeDefined();
       expect(settings.interests).toBeDefined();
+      expect(settings.shortDescription).toBeDefined();
       //expect(settings.username).toEqual(seedUser.username);
 
       done();
