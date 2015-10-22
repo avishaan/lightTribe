@@ -136,11 +136,13 @@ module.exports.readUserSettings = function (req, res, next) {
   .lean()
   .exec(function(err, user){
     if (!err && user){
+      console.log(user);
       res.status(200).send({
         _id: user._id,
         username: user.username,
         interests: user.interests,
         userImage: user.userImage,
+        shortDescription: user.profile.shortDescription,
         auths: [{
           name: "facebook",
           enabled: true
