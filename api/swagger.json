@@ -1705,6 +1705,11 @@
           "description": "Username of the user",
           "example": "codeHatcher"
         },
+        "shortDescription": {
+          "type": "string",
+          "description": "Short description for the user to fill out",
+          "example": "Always exploring, always learning."
+        },
         "thumbnail": {
           "type": "string",
           "description": "URL of the profile thumbnail",
