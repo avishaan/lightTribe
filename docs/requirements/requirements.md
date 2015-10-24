@@ -133,9 +133,3 @@ Please only look at where the Version column is labeled as "v1". All other requi
 | Future/path evo | user gains badges depending on balance and evo         | v?      | W        | convo with Corame   |
 | Future/path evo | points give achievement or move you away from target   | v?      | W        | convo with Corame   |
 | Future          |                                                        | v?      | W        | convo with Corame   |
-| Future          |                                                        | v?      | W        | convo with Corame   |
-| Future          |                                                        | v?      | W        | convo with Corame   |
-| Future          |                                                        | v?      | W        | convo with Corame   |
-| Future          |                                                        | v?      | W        | convo with Corame   |
-| Future          |                                                        | v?      | W        | convo with Corame   |
-| Future          |                                                        | v?      | W        | convo with Corame   |
