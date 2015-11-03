@@ -439,6 +439,9 @@ userSchema.methods.updateUserSettings = function(options, cb) {
       if (typeof options.shortDescription !== "undefined"){
         user.profile.shortDescription = options.shortDescription;
       }
+      if (typeof options.username !== "undefined"){
+        user.set('username', options.username);
+      }
       if (typeof options.interests !== "undefined"){
         user.set('interests', options.interests);
       }
