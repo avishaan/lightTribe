@@ -82,6 +82,8 @@ Please only look at where the Version column is labeled as "v1". All other requi
 | Messages        | show username when relavent if enough space            | v1      | M        |                     |
 | Messages        | show text body of the conversation                     | v1      | M        |                     |
 | Messages        | show date of the conversation if space exists          | v2      | M        |                     |
+| Invite Users    | invite users via sms/email                             | v1      | M        |                     |
+| Feedback        | get feedback from users                                | v1      | M        |                     |
 | LightPage       | user can enter their name                              | v1      | M        |                     |
 | LightPage       | user can enter address components                      | v1      | M        |                     |
 | LightPage       | user can add website                                   | v1      | M        |                     |
@@ -132,4 +134,5 @@ Please only look at where the Version column is labeled as "v1". All other requi
 | Future/path evo | unforseen hurdles and bonuses on the map               | v?      | W        | convo with Corame   |
 | Future/path evo | user gains badges depending on balance and evo         | v?      | W        | convo with Corame   |
 | Future/path evo | points give achievement or move you away from target   | v?      | W        | convo with Corame   |
+| Future          | groups are users who can admin/edit a page             | v?      | W        | convo with Corame   |
 | Future          |                                                        | v?      | W        | convo with Corame   |
