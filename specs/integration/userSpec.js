@@ -268,4 +268,50 @@ describe("A user", function() {
       });
     });
   });
+  it("should not allow you to change to an existing username", function(done) {
+    // register a new user
+    var user = {
+      username: 'user2',
+      password: 'stillpassword',
+      interests: ['yogaVinyasa']
+    };
+    agent
+    .post(URL + '/users')
+    //.get('http://localhost:3000/api/v1/templates')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: user.username,
+      password: user.password,
+      interests: user.interests
+    })
+    .end(function(res){
+      expect(res.status).toEqual(200);
+      expect(res.body._id).toBeDefined();
+      User
+      .findOne({username: user.username})
+      .exec(function(err, savedUser){
+        var newUsername = user.username;
+        agent
+        .post(URL + '/users/' + seedUser.id)
+        .set('Content-Type', 'application/json')
+        .send({
+          access_token: seedUser.token,
+          username: newUsername
+        })
+        .end(function(res){
+          var settings = res.body;
+          expect(res.status).toEqual(500);
+          // find that user and check the values now
+          User
+          .findOne({ _id: seedUser.id })
+          .lean()
+          .exec(function(err, user){
+            expect(user.username).not.toEqual(newUsername);
+            expect(user.username).toEqual(seedUser.username);
+            done();
+          });
+        });
+      });
+    });
+  });
 });
