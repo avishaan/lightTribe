@@ -245,4 +245,27 @@ describe("A user", function() {
       });
     });
   });
+  it("should be able to change their username", function(done) {
+    var newUsername = "changedUsername";
+    agent
+    .post(URL + '/users/' + seedUser.id)
+    .set('Content-Type', 'application/json')
+    .send({
+      access_token: seedUser.token,
+      username: newUsername
+    })
+    .end(function(res){
+      var settings = res.body;
+      expect(res.status).toEqual(200);
+      // find that user and check the values now
+      User
+      .findOne({ _id: seedUser.id })
+      .lean()
+      .exec(function(err, user){
+        expect(user.username).toEqual(newUsername);
+        seedUser.username = user.username;
+        done();
+      });
+    });
+  });
 });
