@@ -1691,6 +1691,11 @@
             "example": "bikramYoga"
           }
         },
+        "username": {
+          "type": "string",
+          "description": "Updated username",
+          "example": "changedUsername"
+        },
         "shortDescription": {
           "type": "string",
           "description": "Short description of user and/or their services",
