@@ -31,8 +31,8 @@ module.exports = function(){
           api_secret: '9K-IqFmehCD_zwSo8w_FhruOgjw'
         },
         facebook: {
-          clientID: '761889610566980',
-          clientSecret: 'a9ef59fe683dbb0e3e60254f45d9a2f9'
+          clientID: '1658513671063290',
+          clientSecret: '5e0fe3da8d2b4fb85688ab297635abb9'
         },
         swagger: {
           // make sure responses to client are validated automatically against schema
