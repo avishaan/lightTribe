@@ -46,7 +46,7 @@ module.exports.seeds = {
 module.exports.fbUser = {
   username: 'Susan Amhfgfahddcd Schrockescu',
   password: 'test123',
-  fb_access_token: 'CAAXkaM44BvoBAGgQw3nBExwnlGzQm17LFMNDfqgRPcVlXevexvCRhyeqja4xEoKH8mZALZCKWGjOdtVlkNuQui5qcSerXHEJVSEfZBEHOiR7ZCVhceHdwwF82JBQipZBR0jr76LoTeVAZBCT7BhZBtzczQfhGYG5kgajSXWdUmSDuCXbBXXUT9SOAZC4rq2J9uXvyZASxHqNMuwZDZD'
+  fb_access_token: 'CAAXkaM44BvoBAKlTRl8sLYcDsoJbicWEjYRWv2jnpw8aoZBO90K9ERLU8yZBc8XokOk9sGBbVCOz2ZBsnkCZC8Jpi89a6VG9cCZBdzzHNwYBH5E3Tp3ZC1rzQZBM7uAZA8ngCotAfGY3KglEQsPvA5cn61ukwPZAGDgKnD6Rozr5ObgEyN3IH4FkxMzHBNadVSKwRnRSda4yeyx8QJOFyfK8E'
 };
 
 
