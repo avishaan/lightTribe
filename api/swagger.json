@@ -1853,7 +1853,7 @@
         "resource": {
           "description": "The type of resource being reported, ex: 'image'",
           "type": "string",
-          "enum": ["post"]
+          "enum": ["post", "comment", "user", "message"]
         }
       },
       "example": {
