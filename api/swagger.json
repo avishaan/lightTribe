@@ -1414,7 +1414,7 @@
         "key": {
           "type": "string",
           "description": "when the post was created",
-          "example": "2015-03-04T07:36:56.224Z"
+          "example": "yoga"
         },
         "title": {
           "type": "string",
