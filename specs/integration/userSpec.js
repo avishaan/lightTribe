@@ -84,7 +84,7 @@ describe("A user", function() {
       .exec(function(err, savedUser){
         expect(err).toEqual(null);
         expect(savedUser).toBeDefined();
-        expect(savedUser.interests[0]).toEqual('yogaBikram');
+        expect(savedUser.interests[0]).toEqual('yoga');
         done();
       });
     });
