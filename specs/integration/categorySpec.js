@@ -37,11 +37,12 @@ describe("Categories", function() {
       .end(function(res){
         var categories = res.body;
         expect(res.status).toEqual(200);
-        expect(categories.length).toBeDefined();
-        expect(categories[0].key).toBeDefined();
-        expect(categories[0].title).toBeDefined();
-        expect(categories[0].description).toBeDefined();
-        expect(categories[0].category).toBeDefined();
+        categories.forEach(function(category){
+          expect(category.key).toBeDefined();
+          expect(category.title).toBeDefined();
+          expect(category.description).toBeDefined();
+          expect(category.category).toBeDefined();
+        });
         done();
       });
     });
