@@ -16,7 +16,7 @@ var anonUser = {
 
 var seedUser = {};
 
-describe("An anonymous user", function() {
+xdescribe("An anonymous user", function() {
   // delete the database before each time
   beforeEach(function(done){
     fixture.deleteDB(function(err, user){
