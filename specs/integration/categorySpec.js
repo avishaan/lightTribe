@@ -61,6 +61,8 @@ describe("Categories", function() {
           expect(interest.title).toBeDefined();
           expect(interest.description).toBeDefined();
           expect(interest.category).toBeDefined();
+          expect(interest.keywords).toBeDefined();
+          expect(interest.keywords).toBeArray();
         });
         done();
       });
