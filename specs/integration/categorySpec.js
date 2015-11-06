@@ -1,3 +1,4 @@
+require('jasmine-expect');
 var agent = require('superagent');
 var config = require("../../config.js");
 var Promise = require('bluebird');
@@ -90,6 +91,8 @@ describe("Interests", function() {
       expect(interests[0].title).toBeDefined();
       expect(interests[0].description).toBeDefined();
       expect(interests[0].category).toBeDefined();
+      expect(interests[0].keywords).toBeDefined();
+      expect(interests[0].keywords).toBeArray();
       done();
     });
   });
