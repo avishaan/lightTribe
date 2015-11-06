@@ -28,73 +28,41 @@ describe("Categories", function() {
       console.log("Error: ", err);
     });
   });
-  it("should return all event types possible in the system", function(done) {
-    agent
-    .get(URL + '/categories/eventTypes')
-    .set('Content-Type', 'application/json')
-    .query({ access_token: seedUser.token })
-    .end(function(res){
-      var interests = res.body;
-      expect(res.status).toEqual(200);
-      expect(interests.length).toBeDefined();
-      expect(interests[0].key).toBeDefined();
-      expect(interests[0].title).toBeDefined();
-      expect(interests[0].description).toBeDefined();
-      expect(interests[0].category).toBeDefined();
-      done();
-    });
-  });
-  it("should return all interests possible in the system", function(done) {
-    agent
-    .get(URL + '/categories/interestTypes')
-    .set('Content-Type', 'application/json')
-    .query({ access_token: seedUser.token })
-    .end(function(res){
-      var interests = res.body;
-      expect(res.status).toEqual(200);
-      interests.forEach(function(interest){
-        expect(interest.key).toBeDefined();
-        expect(interest.title).toBeDefined();
-        expect(interest.description).toBeDefined();
-        expect(interest.category).toBeDefined();
+  describe("for event types", function() {
+    it("should return all event types possible in the system", function(done) {
+      agent
+      .get(URL + '/categories/eventTypes')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: seedUser.token })
+      .end(function(res){
+        var categories = res.body;
+        expect(res.status).toEqual(200);
+        expect(categories.length).toBeDefined();
+        expect(categories[0].key).toBeDefined();
+        expect(categories[0].title).toBeDefined();
+        expect(categories[0].description).toBeDefined();
+        expect(categories[0].category).toBeDefined();
+        done();
       });
-      done();
     });
   });
-});
-describe("Interests", function() {
-  // delete the database before each time
-  beforeEach(function(done){
-    fixture
-    .deleteDBAsync({})
-    .then(function(dbInfo){
-      return fixture.seedUserAsync();
-    })
-    .then(function(user){
-      // save the user for later
-      seedUser = user;
-      done();
-    })
-    .caught(function(err){
-      console.log("Error: ", err);
-    });
-  });
-  it("should return all interests possible in the system", function(done) {
-    agent
-    .get(URL + '/interests')
-    .set('Content-Type', 'application/json')
-    .query({ access_token: seedUser.token })
-    .end(function(res){
-      var interests = res.body;
-      expect(res.status).toEqual(200);
-      expect(interests.length).toBeDefined();
-      expect(interests[0].key).toBeDefined();
-      expect(interests[0].title).toBeDefined();
-      expect(interests[0].description).toBeDefined();
-      expect(interests[0].category).toBeDefined();
-      expect(interests[0].keywords).toBeDefined();
-      expect(interests[0].keywords).toBeArray();
-      done();
+  describe("for interest types", function() {
+    it("should return all interests possible in the system", function(done) {
+      agent
+      .get(URL + '/categories/interestTypes')
+      .set('Content-Type', 'application/json')
+      .query({ access_token: seedUser.token })
+      .end(function(res){
+        var interests = res.body;
+        expect(res.status).toEqual(200);
+        interests.forEach(function(interest){
+          expect(interest.key).toBeDefined();
+          expect(interest.title).toBeDefined();
+          expect(interest.description).toBeDefined();
+          expect(interest.category).toBeDefined();
+        });
+        done();
+      });
     });
   });
 });
