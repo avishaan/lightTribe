@@ -306,7 +306,13 @@
             "description": "Error"
           },
           "200": {
-            "description": "Successful request."
+            "description": "Successful request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReadOneInterestCategory"
+              }
+            }
           }
         }
       }
@@ -1400,6 +1406,37 @@
         "conversationId": {
           "type": "string",
           "example": "54f44c5d26352b1b9755b12f"
+        }
+      }
+    },
+    "ReadOneInterestCategory": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "when the post was created",
+          "example": "2015-03-04T07:36:56.224Z"
+        },
+        "title": {
+          "type": "string",
+          "example": "This is a very relavent post to me",
+          "description": "Title of the interest category"
+        },
+        "description": {
+          "type": "string",
+          "example": "act, sing, perform and entertain",
+          "description": "More information about the category, may be 2 lines"
+        },
+        "category": {
+          "type": "string",
+          "example": "Yoga",
+          "description": "Category headers for when sub-categories are used in future version"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "example": "yoga, bikram",
+            "description": "Text body of the post a user may create"
+          }
         }
       }
     },
