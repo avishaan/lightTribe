@@ -5,6 +5,12 @@ module.exports.Interests = [{
   category: "NA",
   keywords: ["yoga", "vinyasa", "bikram"]
 }, {
+  key: "yogaBikram",
+  title: "Yoga",
+  description: "Vinyasa, Bikram, and Others",
+  category: "NA",
+  keywords: ["yoga", "vinyasa", "bikram"]
+}, {
   key: "meditation",
   title: "Meditation",
   description: "All types of meditation",

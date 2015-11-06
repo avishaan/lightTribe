@@ -65,7 +65,7 @@ userSchema.pre('save', function(next) {
 userSchema.pre('save', function(next) {
   if (this.isNew){
     if (!this.interests || !this.interests.length){
-      this.interests = ['yogaBikram'];
+      this.interests = ['yoga', 'meditation'];
     }
   }
   return next();
