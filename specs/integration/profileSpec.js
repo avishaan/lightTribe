@@ -67,6 +67,8 @@ describe("Reading a user profile", function() {
     .end(function(res){
       var profile = res.body;
       expect(profile.interests).toBeDefined();
+      expect(profile.interests[0].title).toBeDefined();
+      expect(profile.interests[0].key).toBeDefined();
       expect(profile.user).toBeDefined();
       expect(profile.user.username).toBeDefined();
       expect(profile.user.lastLogin).toBeDefined();
