@@ -52,11 +52,12 @@ describe("Categories", function() {
     .end(function(res){
       var interests = res.body;
       expect(res.status).toEqual(200);
-      expect(interests.length).toBeDefined();
-      expect(interests[0].key).toBeDefined();
-      expect(interests[0].title).toBeDefined();
-      expect(interests[0].description).toBeDefined();
-      expect(interests[0].category).toBeDefined();
+      interests.forEach(function(interest){
+        expect(interest.key).toBeDefined();
+        expect(interest.title).toBeDefined();
+        expect(interest.description).toBeDefined();
+        expect(interest.category).toBeDefined();
+      });
       done();
     });
   });
