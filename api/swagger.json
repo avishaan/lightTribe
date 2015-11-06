@@ -1434,8 +1434,8 @@
         "keywords": {
           "type": "array",
           "items": {
-            "example": "yoga, bikram",
-            "description": "Text body of the post a user may create"
+          "example": "yoga, bikram",
+          "description": "Text body of the post a user may create"
           }
         }
       }
