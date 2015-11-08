@@ -38,6 +38,10 @@ module.exports.readAllCommentsForPost = function (req, res, next) {
     page: page
   })
   .then(function(comments){
+    // populate the images
+    return Comment.populateAsync(comments, { path: 'author.userImage', model: 'Image' });
+  })
+  .then(function(comments){
     res.status(200).send(comments);
   })
   .caught(function(err){

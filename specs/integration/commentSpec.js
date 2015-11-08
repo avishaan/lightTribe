@@ -35,7 +35,16 @@ describe("Comments", function() {
     fixture
     .deleteDBAsync({})
     .then(function(dbInfo){
-      return fixture.seedUserAsync({});
+      return fixture.seedImageAsync({});
+    })
+    .then(function(image){
+      return fixture.seedUserAsync({
+        username: 'test',
+        password: 'test',
+        email: 'test@test.com',
+        interests: ['yogaBikram', 'yogaVinyasa'],
+        userImage: image._id
+      });
     })
     .then(function(user){
       // save the user for later
@@ -111,6 +120,8 @@ describe("Comments", function() {
       expect(comments[0].author.password).not.toBeDefined();
       // make sure it has a date returned gh #51
       expect(comments[0].createDate).toBeDefined();
+      // make sure author image is returned gh #102
+      expect(comments[0].author.userImage.url).toBeDefined();
 
       done();
     });

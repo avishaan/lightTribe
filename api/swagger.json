@@ -1352,10 +1352,10 @@
               "description": "Username of the user",
               "example": "codeHatcher"
             },
-            "thumbnail": {
-              "type": "string",
-              "description": "URL of the profile thumbnail",
-              "example": "http://www.google.com/image.png"
+            "userImage": {
+              "type": "object",
+              "description": "Image information about the user",
+              "$ref": "#/definitions/ImageURL"
             }
           }
         }
