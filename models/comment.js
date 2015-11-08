@@ -116,7 +116,7 @@ commentSchema.statics.readAllCommentsForPost = function(options, cb) {
   .skip((page - 1) * maxResults)
   .populate({
     path: 'author',
-    select: 'username, userImage'
+    select: 'username userImage'
   })
   .exec(function(err, comments){
     if (!err){
