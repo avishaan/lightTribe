@@ -71,7 +71,6 @@ module.exports.readOneProfile = function (req, res, next) {
   ], function(err, results){
     if (!err && results){
       var user = results[0]; // user info in the first results array
-      // TODO: rename these variables as they are not the user interests but rather their post interests
       var categories = results[1]; // user post interest cloud results
       // populate the interests with the full value from the key
       var populatedCategories = populateCategories(categories);
