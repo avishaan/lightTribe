@@ -19,7 +19,7 @@ mongoose.connection.on('error', function (err) {
 Post
 .aggregate([
   // Stage 1
-  {
+{
   $match: {
     author: "56403925678ee66e96c5733c"
   }
