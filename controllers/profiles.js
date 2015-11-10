@@ -82,7 +82,8 @@ module.exports.readOneProfile = function (req, res, next) {
           lastLogin: (new Date()).toJSON()
         },
         shortDescription: (user.profile && user.profile.shortDescription) ? user.profile.shortDescription : "",
-        interests: (populatedCategories.length) ? populatedCategories : []
+        interests: (populatedCategories.length) ? populatedCategories : [],
+        postCategories: (populatedCategories.length) ? populatedCategories : [],
       });
     } else {
       res.status(500).send({ err: err, clientMsg: "User not found!" });
