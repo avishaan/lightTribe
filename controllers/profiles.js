@@ -62,7 +62,9 @@ module.exports.readOneProfile = function (req, res, next) {
       }
     }
     ], function(err, doc){
-      var interests = doc[0].interests;
+      if (doc && doc.length){
+        var interests = doc[0].interests;
+      }
       cb(err, interests);
     });
   }
