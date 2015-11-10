@@ -71,9 +71,10 @@ module.exports.readOneProfile = function (req, res, next) {
   ], function(err, results){
     if (!err && results){
       var user = results[0]; // user info in the first results array
-      var interests = results[1]; // user post interest cloud results
+      // TODO: rename these variables as they are not the user interests but rather their post interests
+      var categories = results[1]; // user post interest cloud results
       // populate the interests with the full value from the key
-      var populatedInterests = populateInterests(interests);
+      var populatedCategories = populateCategories(categories);
       res.status(200).send({
         _id: user._id,
         user: {
@@ -82,7 +83,8 @@ module.exports.readOneProfile = function (req, res, next) {
           lastLogin: (new Date()).toJSON()
         },
         shortDescription: (user.profile && user.profile.shortDescription) ? user.profile.shortDescription : "",
-        interests: (populatedInterests.length) ? populatedInterests : user.interests,
+        interests: (populatedCategories.length) ? populatedCategories : [],
+        postCategories: (populatedCategories.length) ? populatedCategories : [],
       });
     } else {
       res.status(500).send({ err: err, clientMsg: "User not found!" });
@@ -90,14 +92,14 @@ module.exports.readOneProfile = function (req, res, next) {
   });
 
   // populate the interests keys into the complete interest object
-  var populateInterests = function(interests){
-    if (interests && interests.length){
-      var interestObject = interests.map(function(interest){
-        interest.properties = _.findWhere(Interests, { "key": interest.key });
-        return interest;
+  var populateCategories = function(categories){
+    if (categories && categories.length){
+      var categoryObject = categories.map(function(category){
+        category.properties = _.findWhere(Interests, { "key": category.key });
+        return category;
       });
       // filter out all the undefined
-      var cleaned = interestObject.filter(function(n){
+      var cleaned = categoryObject.filter(function(n){
         return n.properties != undefined;
       });
       return cleaned;
