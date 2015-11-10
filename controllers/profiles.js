@@ -1,26 +1,77 @@
 var logger = require('./../loggers/logger.js');
 var async = require('async');
 var User = require('./../models/user.js');
+var Post = require('./../models/post.js');
 var _ = require('underscore');
 var Interests = require('./../models/category.js').Interests;
-
-var Promise = require('bluebird');
 
 module.exports.readOneProfile = function (req, res, next) {
   var userId = req.swagger.params.userId.value;
   logger.info('Lookup profile for user: ' + userId);
-  User
-  .findOne({ _id: userId })
-  .select('-password -token -devices -auths')
-  .populate({
-    path: 'userImage',
-    select: 'url'
-  })
-  .lean()
-  .exec(function(err, user){
-    if (!err && user){
+  async.series([
+    function(cb) {
+    User
+    .findOne({ _id: userId })
+    .select('-password -token -devices -auths')
+    .populate({
+      path: 'userImage',
+      select: 'url'
+    })
+    .lean()
+    .exec(function(err, user){
+      cb(err, user);
+    });
+
+  }, function(cb) {
+    // get the aggregated list of the users interests
+    Post
+    .aggregate([
+      // Stage 1
+    {
+      $match: {
+        author: userId
+      }
+    },
+    {
+      $project: {
+        interests: 1
+      }
+    },
+    {
+      $unwind: "$interests"
+    },
+    {
+      $group: {
+        _id: { key: "$interests" },
+        count: { $sum: 1 }
+
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        key: "$_id.key",
+        count: "$count"
+      }
+    },
+    // put the interests into an array
+    {
+      $group: {
+        _id: null,
+        interests: { $push: { key: "$key", count: "$count" } }
+      }
+    }
+    ], function(err, doc){
+      var interests = doc[0].interests;
+      cb(err, interests);
+    });
+  }
+  ], function(err, results){
+    if (!err && results){
+      var user = results[0]; // user info in the first results array
+      var interests = results[1]; // user post interest cloud results
       // populate the interests with the full value from the key
-      var populatedInterests = populateInterests(user.interests);
+      var populatedInterests = populateInterests(interests);
       res.status(200).send({
         _id: user._id,
         user: {
@@ -37,14 +88,16 @@ module.exports.readOneProfile = function (req, res, next) {
   });
 
   // populate the interests keys into the complete interest object
-  var populateInterests = function(interestKeys){
-    if (interestKeys && interestKeys.length){
-      var interestObject = interestKeys.map(function(key){
-        var obj = _.findWhere(Interests, { "key": key });
-        return obj;
+  var populateInterests = function(interests){
+    if (interests && interests.length){
+      var interestObject = interests.map(function(interest){
+        interest.properties = _.findWhere(Interests, { "key": interest.key });
+        return interest;
       });
       // filter out all the undefined
-      var cleaned = interestObject.filter(function(n){ return n != undefined; });
+      var cleaned = interestObject.filter(function(n){
+        return n.properties != undefined;
+      });
       return cleaned;
     } else {
       return [];
