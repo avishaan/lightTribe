@@ -127,6 +127,8 @@ describe("Reading a user profile", function() {
       .end(function(res){
         var profile = res.body;
         expect(profile.interests).toBeDefined();
+        expect(profile.postCategories.length).toEqual(3);
+        console.log(profile);
         profile.postCategories.forEach(function(postCategory){
           expect(postCategory.properties).toBeDefined();
           expect(postCategory.properties.title).toBeDefined();
