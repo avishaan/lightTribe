@@ -1570,9 +1570,48 @@
           "type": "string",
           "example": "still in initial phase",
           "description": "Post categories along with number of posts of that category"
+        },
+        "postCategories": {
+          "type": "array",
+          "description": "Post categories along with number of posts of that category",
+          "items": {
+            "$ref": "#/definitions/ReadPostCategory"
+          }
         }
       },
       "required": ["_id"]
+    },
+    "ReadPostCategory": {
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "populated post category property details",
+          "$ref": "#/definitions/ReadPostCategoryProperties"
+        },
+        "key": {
+          "description": "key of the interest/category",
+          "type": "string",
+          "example": "yoga"
+        },
+        "count": {
+          "type": "number",
+          "example": "1",
+          "description": "The weight of this category"
+        }
+      }
+    },
+    "ReadPostCategoryProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Yoga"
+        },
+        "description": {
+          "description": "description of the category/interest",
+          "type": "string",
+          "example": "Many different types of yoga styles"
+        }
+      }
     },
     "CreateMessage": {
       "properties": {
