@@ -63,9 +63,9 @@ module.exports.readOneProfile = function (req, res, next) {
     }
     ], function(err, doc){
       if (doc && doc.length){
-        var interests = doc[0].interests;
+        var categories = doc[0].categories;
       }
-      cb(err, interests);
+      cb(err, categories);
     });
   }
   ], function(err, results){
