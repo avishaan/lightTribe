@@ -1585,7 +1585,7 @@
       "properties": {
         "properties": {
           "type": "object",
-          "description": "populated post category property details",
+          "description": "post category details along with the number of times that category appears for the user",
           "$ref": "#/definitions/ReadPostCategoryProperties"
         },
         "key": {
