@@ -97,6 +97,16 @@ describe("Reading a user profile", function() {
         return fixture.seedPostAsync({
           text: 'This is a post description',
           author: seedUser.id,
+          interests: ['meditation', 'yoga', 'dance'],
+          latitude: 37.796096, //San fran, google maps shows lat/lng order
+          longitude: -122.418145,
+          privacy: "public"
+        });
+      })
+      .then(function(post){
+        return fixture.seedPostAsync({
+          text: 'This is a post description',
+          author: seedUser.id,
           interests: ['meditation'],
           latitude: 37.796096, //San fran, google maps shows lat/lng order
           longitude: -122.418145,
